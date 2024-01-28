@@ -1,17 +1,11 @@
-@mixin font($family, $file, $weight) {
-  @font-face {
-    font-family: $family;
-    src: url("~assets/fonts/" + $file + ".woff2") format("woff2");
-    font-weight: $weight;
-  }
-}
+@use "./mixins.scss" as mixins;
 
-@include font("Jost", "Jost-Thin", 100);
-@include font("Jost", "Jost-ExtraLight", 200);
-@include font("Jost", "Jost-Light", 300);
-@include font("Jost", "Jost-Regular", 400);
-@include font("Jost", "Jost-Medium", 500);
-@include font("Jost", "Jost-SemiBold", 600);
-@include font("Jost", "Jost-Bold", 700);
-@include font("Jost", "Jost-ExtraBold", 800);
-@include font("Jost", "Jost-Black", 900);
+@include mixins.font("Jost", "Jost-Thin", 100);
+@include mixins.font("Jost", "Jost-ExtraLight", 200);
+@include mixins.font("Jost", "Jost-Light", 300);
+@include mixins.font("Jost", "Jost-Regular", 400);
+@include mixins.font("Jost", "Jost-Medium", 500);
+@include mixins.font("Jost", "Jost-SemiBold", 600);
+@include mixins.font("Jost", "Jost-Bold", 700);
+@include mixins.font("Jost", "Jost-ExtraBold", 800);
+@include mixins.font("Jost", "Jost-Black", 900);

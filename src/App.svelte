@@ -7,6 +7,7 @@
 <main>
   <h1>{$_("menu.title")}</h1>
   <Button fullWidth>{$_("menu.play")}</Button>
+  <Button fullWidth>{$_("menu.daily")}</Button>
   <Button fullWidth>{$_("menu.settings")}</Button>
 </main>
 

@@ -5,6 +5,8 @@
 <button class:full-width={fullWidth}><slot /></button>
 
 <style lang="scss">
+  @use "../styles/mixins.scss" as mixins;
+
   button {
     border-radius: 0;
     border: 0.125rem var(--primary-color) solid;
@@ -21,5 +23,7 @@
     &.full-width {
       width: 50vw;
     }
+
+    @include mixins.focus;
   }
 </style>

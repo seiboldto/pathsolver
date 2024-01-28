@@ -2,6 +2,7 @@
   "menu": {
     "title": "pathfinder",
     "play": "Play",
+    "daily": "Daily",
     "settings": "Settings"
   }
 }
