@@ -8,10 +8,13 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "lint:ui": "eslint --ext .ts,.tsx src"
   },
   "dependencies": {
     "@tauri-apps/api": "^1.2.0",
+    "eslint": "^8.56.0",
+    "eslint-config-galex": "^4.5.2",
     "svelte-i18n": "^4.0.0"
   },
   "devDependencies": {
