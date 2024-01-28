@@ -1,6 +1,7 @@
 <script lang="ts">
-  import Button from "~components/Button.svelte";
   import { _ } from "svelte-i18n";
+
+  import Button from "~components/Button.svelte";
 </script>
 
 <main>

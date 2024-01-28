@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "tauri": "tauri",
-    "lint:ui": "eslint --ext .ts,.tsx src"
+    "lint:ui": "eslint --ext .ts,.tsx,.svelte src"
   },
   "dependencies": {
     "@tauri-apps/api": "^1.2.0",
@@ -25,6 +25,7 @@
     "sass": "^1.70.0",
     "svelte": "^3.54.0",
     "svelte-check": "^3.0.0",
+    "svelte-eslint-parser": "^0.33.1",
     "svelte-preprocess": "^5.0.0",
     "tslib": "^2.4.1",
     "typescript": "^4.6.4",

@@ -35,7 +35,14 @@ const typescriptOverride = createTypeScriptOverride({
 });
 
 module.exports = createConfig({
-  overrides: [typescriptOverride],
+  overrides: [
+    typescriptOverride,
+    {
+      parser: "svelte-eslint-parser",
+      files: ["*.svelte"],
+      rules: { "import/no-mutable-exports": "off" },
+    },
+  ],
   ignorePatterns: [
     "src/vite-env.d.ts",
     "src-tauri/**/*",
