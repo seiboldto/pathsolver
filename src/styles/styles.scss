@@ -1,0 +1,8 @@
+@import "./fonts.scss";
+@import "./themes.scss";
+
+body {
+  font-family: Jost;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
