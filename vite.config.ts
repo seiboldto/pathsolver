@@ -1,13 +1,20 @@
 import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import sveltePreprocess from "svelte-preprocess";
+import * as path from "path";
 
 const mobile =
   process.env.TAURI_PLATFORM === "android" ||
   process.env.TAURI_PLATFORM === "ios";
 
-// https://vitejs.dev/config/
-export default defineConfig(async () => ({
+export const paths = {
+  "~src": path.resolve(__dirname, "src"),
+  "~assets": path.resolve(__dirname, "src", "assets"),
+  "~components": path.resolve(__dirname, "src", "components"),
+  "~lib": path.resolve(__dirname, "src", "lib"),
+};
+
+export default defineConfig({
   plugins: [
     svelte({
       preprocess: [
@@ -26,6 +33,9 @@ export default defineConfig(async () => ({
     port: 1420,
     strictPort: true,
   },
+  resolve: {
+    alias: paths,
+  },
   // to make use of `TAURI_DEBUG` and other env variables
   // https://tauri.studio/v1/api/config#buildconfig.beforedevcommand
   envPrefix: ["VITE_", "TAURI_"],
@@ -37,4 +47,4 @@ export default defineConfig(async () => ({
     // produce sourcemaps for debug builds
     sourcemap: !!process.env.TAURI_DEBUG,
   },
-}));
+});
