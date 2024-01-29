@@ -6,5 +6,5 @@ body {
   font-family: Jost;
   background-color: var(--background-color);
   color: var(--text-color);
-  font-size: 16px;
+  font-size: calc(16px * var(--scale));
 }

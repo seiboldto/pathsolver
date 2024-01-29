@@ -9,7 +9,7 @@
 
   button {
     border-radius: 0;
-    border: 0.125rem var(--primary-color) solid;
+    border: calc(0.125rem * var(--scale)) var(--primary-color) solid;
     outline: none;
     background-color: var(--background-color);
     cursor: pointer;
@@ -21,7 +21,7 @@
     }
 
     &.full-width {
-      width: 50vw;
+      width: 60vw;
     }
 
     @include mixins.focus;
