@@ -2,7 +2,7 @@
   export let fullWidth = false;
 </script>
 
-<button class:full-width={fullWidth}><slot /></button>
+<button class:full-width={fullWidth} on:click><slot /></button>
 
 <style lang="scss">
   @use "../styles/mixins.scss" as mixins;
