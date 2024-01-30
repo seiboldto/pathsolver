@@ -6,6 +6,9 @@
   --spacing-md: calc(1rem * var(--scale));
   --spacing-lg: calc(1.25rem * var(--scale));
   --spacing-xl: calc(2rem * var(--scale));
+
+  --full-width: 80vw;
+  --side-padding: calc((100vw - var(--full-width)) / 2);
 }
 
 :root {

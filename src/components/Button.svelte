@@ -21,7 +21,7 @@
     }
 
     &.full-width {
-      width: 60vw;
+      width: 100%;
     }
 
     @include mixins.focus;

@@ -21,6 +21,7 @@
       "~lib/*": ["src/lib/*"],
       "~styles/*": ["src/styles/*"],
       "~stores/*": ["src/stores/*"],
+      "~views/*": ["src/views/*"],
       "~components/*": ["src/components/*"]
     }
   },

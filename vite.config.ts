@@ -3,16 +3,13 @@ import { svelte } from "@sveltejs/vite-plugin-svelte";
 import sveltePreprocess from "svelte-preprocess";
 import * as path from "path";
 
-const mobile =
-  process.env.TAURI_PLATFORM === "android" ||
-  process.env.TAURI_PLATFORM === "ios";
-
 export const paths = {
   "~src": path.resolve(__dirname, "src"),
   "~assets": path.resolve(__dirname, "src", "assets"),
   "~styles": path.resolve(__dirname, "src", "styles"),
   "~components": path.resolve(__dirname, "src", "components"),
   "~stores": path.resolve(__dirname, "src", "stores"),
+  "~views": path.resolve(__dirname, "src", "views"),
   "~lib": path.resolve(__dirname, "src", "lib"),
 };
 
