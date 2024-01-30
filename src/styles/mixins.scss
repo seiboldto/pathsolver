@@ -1,8 +1,6 @@
 @mixin focus {
-  &:focus-visible {
-    outline: calc(0.125rem * var(--scale)) solid var(--focus-color);
-    outline-offset: calc(0.125rem * var(--scale));
-  }
+  outline: 0.125rem solid var(--focus-color);
+  outline-offset: 0.125rem;
 }
 
 @mixin font($family, $file, $weight) {

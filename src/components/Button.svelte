@@ -1,18 +1,18 @@
-<script>
-  export let fullWidth = false;
-</script>
-
-<button class:full-width={fullWidth} on:click><slot /></button>
+<button on:click><slot /></button>
 
 <style lang="scss">
   @use "../styles/mixins.scss" as mixins;
 
   button {
     border-radius: 0;
-    border: calc(0.125rem * var(--scale)) var(--primary-color) solid;
+    border: 0.125rem var(--primary-color) solid;
     outline: none;
     background-color: var(--background-color);
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--ui-size);
     padding: var(--spacing-xs) var(--spacing-lg);
 
     &:hover {
@@ -20,10 +20,8 @@
       color: var(--light-text-color);
     }
 
-    &.full-width {
-      width: 100%;
+    &:focus-visible {
+      @include mixins.focus;
     }
-
-    @include mixins.focus;
   }
 </style>

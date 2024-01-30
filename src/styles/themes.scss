@@ -1,14 +1,14 @@
 :root {
-  --scale: 1;
-
-  --spacing-xs: calc(0.625rem * var(--scale));
-  --spacing-sm: calc(0.75rem * var(--scale));
-  --spacing-md: calc(1rem * var(--scale));
-  --spacing-lg: calc(1.25rem * var(--scale));
-  --spacing-xl: calc(2rem * var(--scale));
+  --spacing-xs: 0.625rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.25rem;
+  --spacing-xl: 2rem;
 
   --full-width: 80vw;
   --side-padding: calc((100vw - var(--full-width)) / 2);
+  --ui-size: 2.5rem;
+  --ui-size-sm: 2rem;
 }
 
 :root {

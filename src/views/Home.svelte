@@ -23,7 +23,7 @@
     justify-content: center;
     gap: var(--spacing-xs);
     height: 100vh;
-    width: var(--full-width);
+    width: 100vw;
     padding: 0 var(--side-padding);
   }
 </style>
