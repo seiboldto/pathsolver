@@ -1,4 +1,7 @@
-<button on:click><slot /></button>
+<button on:click
+  ><span><slot /></span>
+  <div class="bg" /></button
+>
 
 <style lang="scss">
   @use "../styles/mixins.scss" as mixins;
@@ -14,10 +17,29 @@
     justify-content: center;
     height: var(--ui-size);
     padding: var(--spacing-xs) var(--spacing-lg);
+    transition: color ease-in-out var(--hover-anim-duration);
+    position: relative;
+
+    span {
+      z-index: 1;
+    }
+
+    .bg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      background-color: var(--primary-color);
+      width: 0%;
+      transition: width ease-out var(--hover-anim-duration);
+    }
 
     &:hover {
-      background-color: var(--primary-color);
       color: var(--light-text-color);
+
+      .bg {
+        width: 100%;
+      }
     }
 
     &:focus-visible {

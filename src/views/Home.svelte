@@ -7,7 +7,12 @@
   import { routerStore } from "~stores/router-store";
 </script>
 
-<main transition:slide={{ easing: expoOut, duration: 500 }}>
+<main
+  transition:slide={{
+    easing: expoOut,
+    duration: 500,
+  }}
+>
   <h1>{$_("menu.title")}</h1>
   <Button>{$_("menu.play")}</Button>
   <Button>{$_("menu.daily")}</Button>

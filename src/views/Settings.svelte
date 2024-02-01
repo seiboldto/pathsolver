@@ -9,10 +9,15 @@
   import { settingsStore } from "~stores/settings-store";
 </script>
 
-<main transition:slide={{ easing: expoOut, duration: 500 }}>
+<main
+  transition:slide={{
+    easing: expoOut,
+    duration: 500,
+  }}
+>
   <h1>{$_("menu.settings")}</h1>
-  <Checkbox bind:checked={$settingsStore.menuTransitions}
-    >{$_("menu.transitions")}</Checkbox
+  <Checkbox bind:checked={$settingsStore.hoverAnimations}
+    >{$_("menu.hover-animations")}</Checkbox
   >
   <Button on:click={() => routerStore.set({ route: "home" })}
     >{$_("menu.back")}</Button
