@@ -10,6 +10,7 @@ export const paths = {
   "~components": path.resolve(__dirname, "src", "components"),
   "~stores": path.resolve(__dirname, "src", "stores"),
   "~views": path.resolve(__dirname, "src", "views"),
+  "~models": path.resolve(__dirname, "src", "models"),
   "~lib": path.resolve(__dirname, "src", "lib"),
 };
 

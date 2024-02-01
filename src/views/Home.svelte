@@ -1,20 +1,19 @@
 <script lang="ts">
-  import { expoOut } from "svelte/easing";
-  import { slide } from "svelte/transition";
   import { _ } from "svelte-i18n";
 
   import Button from "~components/Button.svelte";
   import { routerStore } from "~stores/router-store";
 </script>
 
-<main
-  transition:slide={{
-    easing: expoOut,
-    duration: 500,
-  }}
->
+<main>
   <h1>{$_("menu.title")}</h1>
-  <Button>{$_("menu.play")}</Button>
+  <Button
+    on:click={() =>
+      routerStore.set({
+        route: "loader",
+        level: { type: "daily", date: new Date() },
+      })}>{$_("menu.play")}</Button
+  >
   <Button>{$_("menu.daily")}</Button>
   <Button on:click={() => routerStore.set({ route: "settings" })}
     >{$_("menu.settings")}</Button

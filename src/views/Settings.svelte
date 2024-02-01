@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { expoOut } from "svelte/easing";
-  import { slide } from "svelte/transition";
   import { _ } from "svelte-i18n";
 
   import Button from "~components/Button.svelte";
@@ -9,12 +7,7 @@
   import { settingsStore } from "~stores/settings-store";
 </script>
 
-<main
-  transition:slide={{
-    easing: expoOut,
-    duration: 500,
-  }}
->
+<main>
   <h1>{$_("menu.settings")}</h1>
   <Checkbox bind:checked={$settingsStore.hoverAnimations}
     >{$_("menu.hover-animations")}</Checkbox

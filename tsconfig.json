@@ -14,7 +14,7 @@
      */
     "allowJs": true,
     "checkJs": true,
-    "isolatedModules": true,
+    "isolatedModules": true,"importsNotUsedAsValues": "remove",
     "paths": {
       "~src/*": ["src/*"],
       "~assets/*": ["src/assets/*"],
@@ -22,6 +22,7 @@
       "~styles/*": ["src/styles/*"],
       "~stores/*": ["src/stores/*"],
       "~views/*": ["src/views/*"],
+      "~models/*": ["src/models/*"],
       "~components/*": ["src/components/*"]
     }
   },
