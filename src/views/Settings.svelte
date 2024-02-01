@@ -3,7 +3,7 @@
 
   import Button from "~components/Button.svelte";
   import Checkbox from "~components/Checkbox.svelte";
-  import { routerStore } from "~stores/router-store";
+  import { navigate } from "~stores/router-store";
   import { settingsStore } from "~stores/settings-store";
 </script>
 
@@ -12,8 +12,7 @@
   <Checkbox bind:checked={$settingsStore.hoverAnimations}
     >{$_("menu.hover-animations")}</Checkbox
   >
-  <Button on:click={() => routerStore.set({ route: "home" })}
-    >{$_("menu.back")}</Button
+  <Button on:click={() => navigate({ route: "home" })}>{$_("menu.back")}</Button
   >
 </main>
 

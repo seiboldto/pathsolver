@@ -2,20 +2,20 @@
   import { _ } from "svelte-i18n";
 
   import Button from "~components/Button.svelte";
-  import { routerStore } from "~stores/router-store";
+  import { navigate } from "~stores/router-store";
 </script>
 
 <main>
   <h1>{$_("menu.title")}</h1>
   <Button
     on:click={() =>
-      routerStore.set({
+      navigate({
         route: "loader",
         level: { type: "daily", date: new Date() },
       })}>{$_("menu.play")}</Button
   >
   <Button>{$_("menu.daily")}</Button>
-  <Button on:click={() => routerStore.set({ route: "settings" })}
+  <Button on:click={() => navigate({ route: "settings" })}
     >{$_("menu.settings")}</Button
   >
 </main>

@@ -4,7 +4,7 @@
 
   import type { LevelType } from "~models/level";
   import Button from "~components/Button.svelte";
-  import { routerStore } from "~stores/router-store";
+  import { navigate } from "~stores/router-store";
 
   export let level: LevelType;
 
@@ -30,8 +30,7 @@
     {/each}
   {:else}<h1>§Oh no!</h1>
     <p>§Something went wrong.</p>
-    <Button on:click={() => routerStore.set({ route: "home" })}>§Back</Button
-    >{/if}
+    <Button on:click={() => navigate({ route: "home" })}>§Back</Button>{/if}
 </main>
 
 <style lang="scss">
