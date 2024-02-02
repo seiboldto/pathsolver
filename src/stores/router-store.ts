@@ -4,7 +4,7 @@ import { type LevelType } from "~models/level";
 
 type Router =
   | {
-      route: "home" | "settings";
+      route: "home" | "settings" | "play";
     }
   | {
       route: "loader";

@@ -3,6 +3,7 @@
   import Home from "~views/Home.svelte";
   import Settings from "~views/Settings.svelte";
   import Loader from "./views/Loader.svelte";
+  import Play from "./views/Play.svelte";
 </script>
 
 {#if $router.route === "home"}
@@ -13,4 +14,7 @@
 {/if}
 {#if $router.route === "loader"}
   <Loader level={$router.level} />
+{/if}
+{#if $router.route === "play"}
+  <Play />
 {/if}

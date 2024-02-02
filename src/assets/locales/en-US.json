@@ -5,6 +5,9 @@
     "daily": "Daily",
     "settings": "Settings",
     "back": "Back",
-    "hover-animations": "Hover Animations"
+    "hover-animations": "Hover Animations",
+    "difficulty-normal": "Normal",
+    "difficulty-hard": "Hard",
+    "difficulty-extreme": "Extreme"
   }
 }
