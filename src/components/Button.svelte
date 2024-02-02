@@ -1,7 +1,4 @@
-<button on:click
-  ><span><slot /></span>
-  <div class="bg" /></button
->
+<button on:click><slot /> </button>
 
 <style lang="scss">
   @use "../styles/mixins.scss" as mixins;
@@ -20,26 +17,9 @@
     transition: color ease-in-out var(--hover-anim-duration);
     position: relative;
 
-    span {
-      z-index: 1;
-    }
-
-    .bg {
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      background-color: var(--primary-color);
-      width: 0%;
-      transition: width ease-out var(--hover-anim-duration);
-    }
-
     &:hover {
       color: var(--light-text-color);
-
-      .bg {
-        width: 100%;
-      }
+      background-color: var(--primary-color);
     }
 
     &:focus-visible {

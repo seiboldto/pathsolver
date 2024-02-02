@@ -9,8 +9,8 @@
 
 <main>
   <h1>{$_("menu.settings")}</h1>
-  <Checkbox bind:checked={$settingsStore.hoverAnimations}
-    >{$_("menu.hover-animations")}</Checkbox
+  <Checkbox bind:checked={$settingsStore.menuTransitions}
+    >{$_("menu.transitions")}</Checkbox
   >
   <Button on:click={() => navigate({ route: "home" })}>{$_("menu.back")}</Button
   >
