@@ -2,18 +2,27 @@
   import { _ } from "svelte-i18n";
 
   import Button from "~components/Button.svelte";
+  import { DIFFICULTIES } from "~models/difficulties";
   import { navigate } from "~stores/router-store";
 
-  const difficulties = ["normal", "hard", "extreme"];
+  let activeDifficulty = DIFFICULTIES[0].id;
 </script>
 
 <main>
   <h1>{$_("menu.play")}</h1>
-  {#each difficulties as d}
-    <div class="difficulty">
-      <Button>{$_(`menu.difficulty-${d}`)}</Button>
-    </div>
-  {/each}
+  <div class="tabs">
+    {#each DIFFICULTIES as d}
+      <div class="tab-btn">
+        <Button
+          fullWidth
+          active={activeDifficulty === d.id}
+          on:click={() => (activeDifficulty = d.id)}
+          >{$_(`menu.difficulty-${d.id}`)}</Button
+        >
+      </div>
+    {/each}
+  </div>
+  <Button>{$_("menu.play")}</Button>
   <Button on:click={() => navigate({ route: "home" })}>{$_("menu.back")}</Button
   >
 </main>
@@ -29,8 +38,12 @@
     padding: 0 var(--side-padding);
   }
 
-  .difficulty {
+  .tabs {
     display: flex;
-    flex-direction: column;
+    gap: var(--spacing-xs);
+
+    .tab-btn {
+      flex-basis: 100%;
+    }
   }
 </style>

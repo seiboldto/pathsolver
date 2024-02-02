@@ -1,4 +1,9 @@
-<button on:click><slot /> </button>
+<script>
+  export let active = false;
+  export let fullWidth = false;
+</script>
+
+<button on:click class:active class:full-width={fullWidth}><slot /> </button>
 
 <style lang="scss">
   @use "../styles/mixins.scss" as mixins;
@@ -17,7 +22,12 @@
     transition: color ease-in-out var(--hover-anim-duration);
     position: relative;
 
-    &:hover {
+    &.full-width {
+      width: 100%;
+    }
+
+    &:hover,
+    &.active {
       color: var(--light-text-color);
       background-color: var(--primary-color);
     }
