@@ -3,6 +3,7 @@
 
   import Button from "~components/Button.svelte";
   import Checkbox from "~components/Checkbox.svelte";
+  import Divider from "~src/components/Divider.svelte";
   import { navigate } from "~stores/router-store";
   import { settingsStore } from "~stores/settings-store";
 </script>
@@ -12,6 +13,7 @@
   <Checkbox bind:checked={$settingsStore.menuTransitions}
     >{$_("menu.transitions")}</Checkbox
   >
+  <Divider />
   <Button on:click={() => navigate({ route: "home" })}>{$_("menu.back")}</Button
   >
 </main>

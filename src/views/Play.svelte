@@ -3,6 +3,7 @@
 
   import Button from "~components/Button.svelte";
   import { DIFFICULTIES } from "~models/difficulties";
+  import Divider from "~src/components/Divider.svelte";
   import { navigate } from "~stores/router-store";
 
   let activeDifficulty = DIFFICULTIES[0].id;
@@ -23,6 +24,7 @@
     {/each}
   </div>
   <Button>{$_("menu.play")}</Button>
+  <Divider />
   <Button on:click={() => navigate({ route: "home" })}>{$_("menu.back")}</Button
   >
 </main>
