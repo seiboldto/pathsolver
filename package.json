@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "tauri": "tauri",
-    "lint:ui": "eslint --ext .ts,.tsx,.svelte src"
+    "lint:ui": "eslint --ext .ts,.tsx,.svelte src",
+    "lint:rust": "cd src-tauri && cargo clippy -- -W clippy::pedantic",
+    "test:rust": "cd src-tauri && cargo test"
   },
   "dependencies": {
     "@tauri-apps/api": "^1.2.0",
