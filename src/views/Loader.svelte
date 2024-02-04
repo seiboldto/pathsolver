@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { _ } from "svelte-i18n";
 
   import type { LevelType } from "~models/level";
   import Button from "~components/Button.svelte";
@@ -26,7 +25,7 @@
 <main class:has-error={hasError}>
   {#if !hasError}
     {#each loadingBars as l}
-      <div class="bar" style={`--anim-delay: ${l * 100}ms`} />
+      <div class="bar" style:--anim-delay={l * 100} />
     {/each}
   {:else}<h1>§Oh no!</h1>
     <p>§Something went wrong.</p>

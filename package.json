@@ -16,8 +16,6 @@
   },
   "dependencies": {
     "@tauri-apps/api": "^1.2.0",
-    "eslint": "^8.56.0",
-    "eslint-config-galex": "^4.5.2",
     "svelte-i18n": "^4.0.0"
   },
   "devDependencies": {
@@ -25,10 +23,17 @@
     "@tauri-apps/cli": "^1.2.2",
     "@tsconfig/svelte": "^3.0.0",
     "@types/node": "^18.7.10",
+    "@typescript-eslint/eslint-plugin": "^6.20.0",
+    "@typescript-eslint/parser": "^6.20.0",
+    "eslint": "^8.56.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-svelte": "^2.35.1",
+    "prettier": "^3.2.5",
+    "prettier-plugin-svelte": "^3.1.2",
     "sass": "^1.70.0",
-    "svelte": "^3.54.0",
+    "svelte": "^3.59.2",
     "svelte-check": "^3.0.0",
-    "svelte-eslint-parser": "^0.33.1",
     "svelte-preprocess": "^5.0.0",
     "tslib": "^2.4.1",
     "typescript": "^4.6.4",

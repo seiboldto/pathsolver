@@ -1,13 +1,14 @@
 import "./styles/styles.scss";
+import App from "./App.svelte";
 import "~lib/i18n";
 
-import App from "./App.svelte";
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const target = document.querySelector("#app")!;
 
 const app = new App({
-  target: document.querySelector("#app"),
+  target,
 });
 
-// eslint-disable-next-line import/no-default-export
 export default app;
 
 /*

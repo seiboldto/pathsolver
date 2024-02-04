@@ -2,6 +2,7 @@
   import { router } from "~stores/router-store";
   import Home from "~views/Home.svelte";
   import Settings from "~views/Settings.svelte";
+
   import Loader from "./views/Loader.svelte";
   import Play from "./views/Play.svelte";
 </script>

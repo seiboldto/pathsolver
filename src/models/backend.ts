@@ -6,6 +6,10 @@ type Backend = {
 
 const wasmBackend: Backend = {
   loadLevel: async (levelType) => {
+    await new Promise<void>((r) => {
+      console.log(levelType);
+      r();
+    });
     return;
   },
 };
