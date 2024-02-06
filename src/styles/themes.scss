@@ -5,11 +5,10 @@
   --spacing-lg: 1.25rem;
   --spacing-xl: 2rem;
 
-  --full-width: 80vw;
-  --side-padding: calc((100vw - var(--full-width)) / 2);
   --ui-size: 2.5rem;
   --ui-size-sm: 2rem;
-
+  --ui-width: min(15rem, 80vw);
+  --side-padding: calc((100vw - var(--ui-width)) / 2);
   --hover-anim-duration: 250ms;
   --hover-anim-easing: cubic-bezier(0, 0, 0, 1);
 }
