@@ -15,6 +15,7 @@
     "test:rust": "cd src-tauri && cargo test"
   },
   "dependencies": {
+    "@tabler/icons-svelte": "^2.47.0",
     "@tauri-apps/api": "^1.2.0",
     "svelte-i18n": "^4.0.0"
   },

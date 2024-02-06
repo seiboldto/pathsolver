@@ -1,5 +1,3 @@
-export type LevelType = null;
-
 export type Level = {
   board: Board;
   path: Path[];

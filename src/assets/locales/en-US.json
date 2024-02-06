@@ -3,11 +3,6 @@
     "title": "pathfinder",
     "play": "Play",
     "daily": "Daily",
-    "settings": "Settings",
-    "back": "Back",
-    "transitions": "Menu Transitions",
-    "difficulty-normal": "Normal",
-    "difficulty-hard": "Hard",
-    "difficulty-extreme": "Extreme"
+    "settings": "Settings"
   }
 }

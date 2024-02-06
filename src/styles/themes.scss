@@ -9,15 +9,20 @@
   --side-padding: calc((100vw - var(--full-width)) / 2);
   --ui-size: 2.5rem;
   --ui-size-sm: 2rem;
+
+  --hover-anim-duration: 250ms;
+  --hover-anim-easing: cubic-bezier(0, 0, 0, 1);
 }
 
 :root {
   --background-color: #eeeeee;
 
   --text-color: #222831;
-  --light-text-color: #eeeeee;
-  --dimmed-color: #838fa3;
+  --border-color: #ced4da;
 
-  --primary-color: #3fc1c9;
+  --primary-color: #228be6;
+  --primary-border-color: #1c7ed6;
+  --primary-border-color-active: #1767ad;
+
   --focus-color: #1971c2;
 }

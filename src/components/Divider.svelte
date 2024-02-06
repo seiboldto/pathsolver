@@ -2,7 +2,7 @@
 
 <style lang="scss">
   hr {
-    border-top: 0.125rem solid var(--dimmed-color);
+    border-top: 0.125rem solid var(--border-color);
     margin: 0;
   }
 </style>
