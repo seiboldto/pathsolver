@@ -11,7 +11,6 @@
   <span class="text"><slot /></span>
   <div class="bg" />
   <div class="hover-anim" />
-  <div class="dimming-overlay" />
 </button>
 
 <style lang="scss">
@@ -20,8 +19,7 @@
   button {
     --background-z-index: 1;
     --hover-anim-z-index: 2;
-    --dimming-overlay-z-index: 3;
-    --content-z-index: 4;
+    --content-z-index: 3;
 
     border: none;
     outline: none;
@@ -69,15 +67,6 @@
       z-index: var(--hover-anim-z-index);
     }
 
-    .dimming-overlay {
-      position: absolute;
-      inset: 0;
-      background-color: black;
-      opacity: 0;
-      z-index: var(--dimming-overlay-z-index);
-      pointer-events: none;
-    }
-
     &:hover {
       color: white;
 
@@ -99,8 +88,9 @@
     }
 
     &:active {
-      .dimming-overlay {
-        opacity: 0.1;
+      .hover-anim {
+        background-color: var(--primary-border-color);
+        border-color: var(--primary-border-color-active);
       }
     }
 
