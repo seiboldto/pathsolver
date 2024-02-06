@@ -1756,6 +1756,7 @@ dependencies = [
 name = "pathfinder-levels"
 version = "0.1.0"
 dependencies = [
+ "serde",
  "wasm-bindgen",
  "wee_alloc",
 ]
@@ -3210,6 +3211,8 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b1223296a201415c7fad14792dbefaace9bd52b62d33453ade1c5b5f07555406"
 dependencies = [
  "cfg-if 1.0.0",
+ "serde",
+ "serde_json",
  "wasm-bindgen-macro",
 ]
 

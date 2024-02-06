@@ -38,6 +38,7 @@
     "tslib": "^2.4.1",
     "typescript": "^4.6.4",
     "vite": "^4.0.0",
-    "vite-plugin-wasm-pack": "^0.1.12"
+    "vite-plugin-wasm-pack": "^0.1.12",
+    "wasm-pack": "^0.12.1"
   }
 }
