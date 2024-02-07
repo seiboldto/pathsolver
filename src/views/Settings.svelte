@@ -1,21 +1,15 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
-  import {
-    IconCalendarEvent,
-    IconPlayerPlay,
-    IconSettings,
-  } from "@tabler/icons-svelte";
+  import { IconArrowLeft } from "@tabler/icons-svelte";
 
   import { navigate } from "~stores/router-store";
   import Button from "~components/Button.svelte";
 </script>
 
 <main>
-  <h1>{$_("menu.title")}</h1>
-  <Button icon={IconPlayerPlay}>{$_("menu.play")}</Button>
-  <Button icon={IconCalendarEvent}>{$_("menu.daily")}</Button>
-  <Button on:click={() => navigate({ route: "settings" })} icon={IconSettings}
-    >{$_("menu.settings")}</Button
+  <h1>{$_("menu.settings")}</h1>
+  <Button on:click={() => navigate({ route: "home" })} icon={IconArrowLeft}
+    >{$_("menu.back")}</Button
   >
 </main>
 
