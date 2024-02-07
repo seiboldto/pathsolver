@@ -1,12 +1,14 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import { IconArrowLeft } from "@tabler/icons-svelte";
+  import { slide } from "svelte/transition";
+  import { expoOut } from "svelte/easing";
 
   import { navigate } from "~stores/router-store";
   import Button from "~components/Button.svelte";
 </script>
 
-<main>
+<main transition:slide={{ easing: expoOut }}>
   <h1>{$_("menu.settings")}</h1>
   <Button on:click={() => navigate({ route: "home" })} icon={IconArrowLeft}
     >{$_("menu.back")}</Button
@@ -22,5 +24,6 @@
     height: 100vh;
     width: 100vw;
     padding: 0 var(--side-padding);
+    animation-duration: var(--menu-transition-duration) !important;
   }
 </style>
