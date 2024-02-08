@@ -1,11 +1,15 @@
 <script lang="ts">
+  import { IconCheck } from "@tabler/icons-svelte";
+
   export let checked: boolean;
 </script>
 
 <label>
   <slot />
   <input type="checkbox" bind:checked />
-  <span></span>
+  <span>
+    <IconCheck class="checkbox-icon" stroke={3} />
+  </span>
 </label>
 
 <style lang="scss">
@@ -17,6 +21,7 @@
     position: relative;
     height: var(--ui-size-sm);
     cursor: pointer;
+    user-select: none;
 
     &:has(> input:focus-visible) {
       @include mixins.focus;
@@ -38,28 +43,61 @@
     right: 0;
     height: var(--ui-size-sm);
     width: var(--ui-size-sm);
-    border: 0.125rem var(--primary-color) solid;
+    border: 0.125rem var(--border-color) solid;
+    background-color: var(--background-color);
     pointer-events: none;
+    color: white;
 
-    &::after {
-      content: "";
+    :global(.checkbox-icon) {
       position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transform-origin: top left;
       visibility: hidden;
-      left: 0.5rem;
-      top: 0.1rem;
-      width: 0.5rem;
-      height: 1rem;
-      border: solid white;
-      border-width: 0 0.2rem 0.2rem 0;
-      transform: rotate(45deg);
     }
   }
 
-  input:checked + span {
-    background-color: var(--primary-color);
+  input:not(:checked) {
+    &:hover + span {
+      border-color: var(--primary-color);
+    }
+
+    &:active + span {
+      background-color: var(--background-color-dark);
+      border-color: var(--primary-border-color);
+    }
   }
 
-  input:checked + span::after {
-    visibility: visible;
+  input:checked {
+    + span {
+      background-color: var(--primary-color);
+      border-color: var(--primary-border-color);
+
+      :global(.checkbox-icon) {
+        visibility: visible;
+        animation: check-anim var(--hover-anim-duration)
+          var(--hover-anim-easing);
+      }
+    }
+
+    &:hover + span {
+      border-color: var(--primary-border-color-active);
+    }
+
+    &:active + span {
+      border-color: var(--primary-border-color-active);
+      background-color: var(--primary-border-color);
+    }
+  }
+
+  @keyframes check-anim {
+    0% {
+      scale: 200%;
+    }
+
+    100% {
+      scale: 100%;
+    }
   }
 </style>

@@ -7,7 +7,6 @@ type Settings = {
 export const settingsStore = writable<Settings>({ menuTransitions: true });
 
 settingsStore.subscribe((store) => {
-  console.log(store);
   document.documentElement.style.setProperty(
     "--menu-transition-duration",
     store.menuTransitions ? "300ms" : "0ms",

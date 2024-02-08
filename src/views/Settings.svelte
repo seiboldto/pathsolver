@@ -6,10 +6,15 @@
 
   import { navigate } from "~stores/router-store";
   import Button from "~components/Button.svelte";
+  import Checkbox from "~components/Checkbox.svelte";
+  import { settingsStore } from "~stores/settings-store";
 </script>
 
 <main transition:slide={{ easing: expoOut }}>
   <h1>{$_("menu.settings")}</h1>
+  <Checkbox bind:checked={$settingsStore.menuTransitions}
+    >{$_("menu.transitions")}</Checkbox
+  >
   <Button on:click={() => navigate({ route: "home" })} icon={IconArrowLeft}
     >{$_("menu.back")}</Button
   >

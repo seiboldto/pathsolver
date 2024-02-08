@@ -6,7 +6,7 @@
   --spacing-xl: 2rem;
 
   --ui-size: 2.5rem;
-  --ui-size-sm: 2rem;
+  --ui-size-sm: 1.75rem;
   --ui-width: min(15rem, 80vw);
   --side-padding: calc((100vw - var(--ui-width)) / 2);
   --hover-anim-duration: 250ms;
@@ -15,6 +15,7 @@
 
 :root {
   --background-color: #eeeeee;
+  --background-color-dark: #d4d4d4;
 
   --text-color: #222831;
   --border-color: #ced4da;
