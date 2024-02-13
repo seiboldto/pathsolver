@@ -11,8 +11,5 @@ serde = { version = "1.0", features = ["derive"] }
 wasm-bindgen = { version = "0.2.63", features = ["serde-serialize"] }
 wee_alloc = { version = "0.4.5", optional = true }
 
-[profile.release]
-opt-level = "s"
-
 [features]
 default = []
