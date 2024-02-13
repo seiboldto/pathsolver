@@ -1,8 +1,10 @@
-use wasm_bindgen::prelude::*;
+//! Library crate for generating a pathfinder level.
+
+pub mod error;
+mod operation;
 
 #[cfg(feature = "wee_alloc")]
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
-#[wasm_bindgen]
-pub fn generate_level() {}
+pub use operation::{Operation, OperationKind};

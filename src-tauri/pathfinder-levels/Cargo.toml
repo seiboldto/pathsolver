@@ -10,6 +10,11 @@ crate-type = ["cdylib", "rlib"]
 serde = { version = "1.0", features = ["derive"] }
 wasm-bindgen = { version = "0.2.63", features = ["serde-serialize"] }
 wee_alloc = { version = "0.4.5", optional = true }
+thiserror = "1.0"
+strum = { version = "0.26", features = ["derive"] }
+
+[dev-dependencies]
+test-case = "3.3.1"
 
 [features]
 default = []
