@@ -43,7 +43,7 @@ export default defineConfig({
     sourcemap: !!process.env.TAURI_DEBUG,
   },
   test: {
-    includeSource: ["src/**/*.ts"],
+    includeSource: ["src/**/*.test.ts"],
     exclude: ["node_modules"],
     clearMocks: true,
     coverage: {
