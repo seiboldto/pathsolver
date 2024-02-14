@@ -12,6 +12,7 @@ pub struct Operation {
 ///
 /// Note that all operations should have an [arity](https://en.wikipedia.org/wiki/Arity) of two.
 #[derive(Debug, Display, Copy, Clone, PartialEq, Eq)]
+#[wasm_bindgen::prelude::wasm_bindgen]
 pub enum OperationKind {
     Addition,
     Subtraction,

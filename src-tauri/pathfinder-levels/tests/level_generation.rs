@@ -1,6 +1,7 @@
-use pathfinder_levels::generate_level;
+use pathfinder_levels::{generate_level, Difficulty};
 
 #[test]
 fn it_generates_levels() {
-    generate_level("seed");
+    let difficulty = Difficulty::new(3, Vec::new());
+    generate_level("seed", difficulty);
 }
