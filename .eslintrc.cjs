@@ -49,6 +49,7 @@ module.exports = {
         "newlines-between": "always",
       },
     ],
+    "import/no-duplicates": "off",
   },
   overrides: [
     {

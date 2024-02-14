@@ -46,5 +46,9 @@ export default defineConfig({
     includeSource: ["src/**/*.ts"],
     exclude: ["node_modules"],
     clearMocks: true,
+    coverage: {
+      provider: "istanbul",
+      include: ["src/*"],
+    },
   },
 });
