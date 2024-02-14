@@ -14,6 +14,7 @@ export const paths = {
   "~views": path.resolve(__dirname, "src", "views"),
   "~models": path.resolve(__dirname, "src", "models"),
   "~lib": path.resolve(__dirname, "src", "lib"),
+  "~levels": path.resolve(__dirname, "src", "levels"),
 };
 
 export default defineConfig({

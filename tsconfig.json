@@ -18,6 +18,7 @@
       "~stores/*": ["src/stores/*"],
       "~views/*": ["src/views/*"],
       "~models/*": ["src/models/*"],
+      "~levels/*": ["src/levels/*"],
       "~components/*": ["src/components/*"]
     },
     "types": ["vitest/importMeta"]
