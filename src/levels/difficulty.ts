@@ -14,7 +14,13 @@ import { type OperationKind } from "./operation";
  * | Extreme | 4          | + (65%) - (20%) * (10%) / (5%) |
  */
 export class Difficulty {
+  /** Size of the board.
+   * Note that this is **not** the amount of nodes, which would be `boardSize * boardSize`.
+   */
   public boardSize: number;
+  /**
+   * Key-Value Store of the distributions of all operations, normalized to 100.
+   */
   public operationDistribution: Record<OperationKind, number>;
 
   constructor(

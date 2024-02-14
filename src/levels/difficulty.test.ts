@@ -56,7 +56,7 @@ describe("Difficulty", () => {
     const operations: Partial<Record<OperationKind, number>> = {};
 
     const difficulty = Difficulty.extreme();
-    const rng = prand.xorshift128plus(0);
+    const rng = prand.xoroshiro128plus(0);
 
     for (let i = 0; i < N; i++) {
       const op = difficulty.getRandomOperation(rng);
