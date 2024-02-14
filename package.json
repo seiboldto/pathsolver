@@ -18,6 +18,7 @@
   "dependencies": {
     "@tabler/icons-svelte": "^2.47.0",
     "@tauri-apps/api": "^1.2.0",
+    "pure-rand": "^6.0.4",
     "svelte-i18n": "^4.0.0"
   },
   "devDependencies": {
