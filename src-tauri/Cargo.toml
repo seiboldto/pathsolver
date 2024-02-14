@@ -2,9 +2,4 @@
 resolver = "2"
 members=[
     "pathfinder-app",
-    "pathfinder-levels"
 ]
-
-
-[profile.release.package.pathfinder-levels]
-opt-level = "s"
