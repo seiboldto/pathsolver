@@ -12,7 +12,8 @@
     "tauri": "tauri",
     "lint:ui": "eslint --ext .ts,.tsx,.svelte src",
     "lint:rust": "cd src-tauri && cargo clippy -- -W clippy::pedantic",
-    "test:rust": "cd src-tauri && cargo test"
+    "test:rust": "cd src-tauri && cargo test",
+    "docs:rust": "cd src-tauri && cargo doc --no-deps"
   },
   "dependencies": {
     "@tabler/icons-svelte": "^2.47.0",
