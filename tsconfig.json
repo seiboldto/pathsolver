@@ -19,7 +19,8 @@
       "~views/*": ["src/views/*"],
       "~models/*": ["src/models/*"],
       "~components/*": ["src/components/*"]
-    }
+    },
+    "types": ["vitest/importMeta"]
   },
   "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte"],
   "references": [{ "path": "./tsconfig.node.json" }]

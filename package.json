@@ -9,9 +9,10 @@
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "tauri": "tauri",
-    "lint:ui": "eslint --ext .ts,.tsx,.svelte src",
+    "lint:js": "eslint --ext .ts,.tsx,.svelte src",
     "lint:rust": "cd src-tauri && cargo clippy -- -W clippy::pedantic",
     "test:rust": "cd src-tauri && cargo test",
+    "test:js": "vitest",
     "docs:rust": "cd src-tauri && cargo doc --no-deps"
   },
   "dependencies": {
@@ -38,6 +39,7 @@
     "svelte-preprocess": "^5.0.0",
     "tslib": "^2.4.1",
     "typescript": "^4.6.4",
-    "vite": "^4.0.0"
+    "vite": "^4.0.4",
+    "vitest": "^0.26.3"
   }
 }
