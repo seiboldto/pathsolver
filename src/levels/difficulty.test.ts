@@ -8,11 +8,13 @@ describe("Difficulty", () => {
   it.each<{
     difficulty: "normal" | "hard" | "extreme";
     boardSize: number;
+    maxPathLength: number;
     operationDistribution: Record<OperationKind, number>;
   }>([
     {
       difficulty: "normal",
       boardSize: 3,
+      maxPathLength: 4,
       operationDistribution: {
         addition: 70,
         subtraction: 30,
@@ -23,6 +25,7 @@ describe("Difficulty", () => {
     {
       difficulty: "hard",
       boardSize: 3,
+      maxPathLength: 4,
       operationDistribution: {
         addition: 65,
         subtraction: 25,
@@ -33,6 +36,7 @@ describe("Difficulty", () => {
     {
       difficulty: "extreme",
       boardSize: 4,
+      maxPathLength: 5,
       operationDistribution: {
         addition: 65,
         subtraction: 20,
@@ -42,9 +46,10 @@ describe("Difficulty", () => {
     },
   ])(
     "returns the correct $difficulty preset",
-    ({ difficulty, boardSize, operationDistribution }) => {
+    ({ difficulty, boardSize, operationDistribution, maxPathLength }) => {
       const d = Difficulty[difficulty]();
       expect(d.boardSize).toEqual(boardSize);
+      expect(d.maxPathLength).toEqual(maxPathLength);
       expect(d.operationDistribution).toEqual(operationDistribution);
     },
   );

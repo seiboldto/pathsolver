@@ -7,11 +7,11 @@ import { type OperationKind } from "./operation";
  * To create a custom difficulty, use the constructor.
  * Otherwise, you can use a predefined preset.
  *
- * | ID      | Board Size | Operation Distribution         |
- * |---------|------------|--------------------------------|
- * | Normal  | 3          | + (70%) - (30%)                |
- * | Hard    | 3          | + (65%) - (25%) * (10%)        |
- * | Extreme | 4          | + (65%) - (20%) * (10%) / (5%) |
+ * | ID      | Board Size | Operation Distribution         | Max Path Length |
+ * |---------|------------|--------------------------------|-----------------|
+ * | Normal  | 3          | + (70%) - (30%)                | 4               |
+ * | Hard    | 3          | + (65%) - (25%) * (10%)        | 4               |
+ * | Extreme | 4          | + (65%) - (20%) * (10%) / (5%) | 5               |
  */
 export class Difficulty {
   /** Size of the board.
@@ -22,12 +22,16 @@ export class Difficulty {
    * Key-Value Store of the distributions of all operations, normalized to 100.
    */
   public operationDistribution: Record<OperationKind, number>;
+  /** Maximum length of a path. */
+  public maxPathLength: number;
 
   constructor(
     boardSize: number,
+    maxPathLength: number,
     operationDistribution: Partial<Record<OperationKind, number>>,
   ) {
     this.boardSize = boardSize;
+    this.maxPathLength = maxPathLength;
 
     const weightsSum = Object.values(operationDistribution).reduce(
       (a, b) => a + b,
@@ -79,14 +83,14 @@ export class Difficulty {
    * Preset normal difficulty.
    */
   static normal(): Difficulty {
-    return new Difficulty(3, { addition: 70, subtraction: 30 });
+    return new Difficulty(3, 4, { addition: 70, subtraction: 30 });
   }
 
   /**
    * Preset hard difficulty.
    */
   static hard(): Difficulty {
-    return new Difficulty(3, {
+    return new Difficulty(3, 4, {
       addition: 65,
       subtraction: 25,
       multiplication: 10,
@@ -97,7 +101,7 @@ export class Difficulty {
    * Preset extreme difficulty.
    */
   static extreme(): Difficulty {
-    return new Difficulty(4, {
+    return new Difficulty(4, 5, {
       addition: 65,
       subtraction: 20,
       multiplication: 10,
