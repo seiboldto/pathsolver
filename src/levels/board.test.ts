@@ -48,4 +48,21 @@ describe("Board", () => {
       expect(board.simulatedNodes[i]).toEqual(0);
     });
   });
+
+  it("returns the correct neighbours of remaining nodes", () => {
+    const board = new Board(Difficulty.normal(), prand.xoroshiro128plus(0));
+    const path = new Path([1, 0, 3], 0);
+    board.applyPathAndCompress(path);
+
+    const neighbourIndices = board.neighbourIndicesOfRemainingNodes();
+    const expectedNeighbourIndices = {
+      2: [5],
+      4: [5, 7],
+      5: [2, 8, 4],
+      6: [7],
+      7: [4, 8, 6],
+      8: [5, 7],
+    };
+    expect(neighbourIndices).toEqual(expectedNeighbourIndices);
+  });
 });

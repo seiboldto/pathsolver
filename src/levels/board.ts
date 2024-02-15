@@ -40,6 +40,41 @@ export class Board {
   }
 
   /**
+   * For all remaining nodes, get a list of non-empty neighbour indices.
+   * @returns A key-value store where the key is the index of a non-empty node and the value is an array of all non-empty neighbour indices, starting at the top and going clockwise.
+   */
+  public neighbourIndicesOfRemainingNodes(): Record<number, number[]> {
+    const remainingIndices = this.simulatedNodes
+      .map((n, i) => (n === 0 ? null : i))
+      .filter<number>((n): n is number => n !== null);
+
+    const neighbourIndices: Record<number, number[]> = {};
+
+    const { boardSize } = this.difficulty;
+    for (const index of remainingIndices) {
+      const neighbours: number[] = [];
+
+      const top = index - boardSize;
+      const bottom = index + boardSize;
+      const left = index - 1;
+      const right = index + 1;
+      const isIndexFilled = (i: number) => this.simulatedNodes[i] !== 0;
+      const row = Math.trunc(index / boardSize);
+      const column = index % boardSize;
+
+      if (row > 0 && isIndexFilled(top)) neighbours.push(top);
+      if (column !== boardSize - 1 && isIndexFilled(right))
+        neighbours.push(right);
+      if (row < boardSize - 1 && isIndexFilled(bottom)) neighbours.push(bottom);
+      if (column !== 0 && isIndexFilled(left)) neighbours.push(left);
+
+      neighbourIndices[index] = neighbours;
+    }
+
+    return neighbourIndices;
+  }
+
+  /**
    * Calculates the index of the edge between two nodes.
    * @param i1 - The index of the first node
    * @param i2 - The index of the second node
