@@ -30,7 +30,16 @@ export class Board {
     this.edges = edges;
   }
 
-  public static fromDifficulty(difficulty: Difficulty, rng: RandomGenerator) {
+  /**
+   * Generates a random board.
+   * @param difficulty - The current difficulty.
+   * @param rng - A random generator instance
+   * @returns A board instance.
+   */
+  public static fromDifficulty(
+    difficulty: Difficulty,
+    rng: RandomGenerator,
+  ): Board {
     const nodes = Array.from({ length: Math.pow(difficulty.boardSize, 2) }).map(
       () => prand.unsafeUniformIntDistribution(1, 9, rng),
     );
@@ -97,6 +106,30 @@ export class Board {
       const verticalDifference = Math.pow(boardSize, 2) - boardSize;
       return lower + verticalDifference;
     }
+  }
+
+  /**
+   * Evalute a path of indices, given the current boards state.
+   * This function should only be used when you are sure that a path only includes valid operations.
+   * @param indices - The path to evaluate.
+   * @returns The result of the path.
+   */
+  public evaluateIndices(indices: number[]): number {
+    let expectedResult: number = this.simulatedNodes[indices[0]];
+    for (let i = 1; i < indices.length; i++) {
+      const index = indices[i];
+      const prevIndex = indices[i - 1];
+
+      const edgeIndex = this.indexOfEdgeBetween(index, prevIndex);
+      const operation = this.edges[edgeIndex];
+      const result = operation.apply(
+        expectedResult,
+        this.simulatedNodes[index],
+      ) as number;
+      expectedResult = result;
+    }
+
+    return expectedResult;
   }
 
   /**

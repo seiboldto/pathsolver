@@ -54,7 +54,9 @@ export class Path {
   ): GenerationResult<Path> {
     const neighbourIndicesOfRemainingNodes =
       board.neighbourIndicesOfRemainingNodes();
-    const remainingIndices = Object.keys(neighbourIndicesOfRemainingNodes);
+    const remainingIndices = Object.keys(neighbourIndicesOfRemainingNodes).map(
+      (k) => parseInt(k),
+    );
 
     const firstIndex = prand.unsafeUniformIntDistribution(
       0,
@@ -62,8 +64,8 @@ export class Path {
       rng,
     );
 
-    const indices = [firstIndex];
-    let result = board.simulatedNodes[firstIndex];
+    const indices = [remainingIndices[firstIndex]];
+    let result = board.simulatedNodes[remainingIndices[firstIndex]];
 
     while (indices.length !== length) {
       const last = indices[indices.length - 1];
@@ -87,7 +89,8 @@ export class Path {
 
       const edgeIndex = board.indexOfEdgeBetween(last, next);
       const operation = board.edges[edgeIndex];
-      const newResult = operation.apply(result, board.nodes[next]);
+
+      const newResult = operation.apply(result, board.simulatedNodes[next]);
 
       if (newResult instanceof GenerationError) return newResult;
       result = newResult;

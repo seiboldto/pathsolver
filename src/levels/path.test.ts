@@ -34,22 +34,11 @@ describe("Paths", () => {
 
     const board = Board.fromDifficulty(Difficulty.normal(), rng);
     const path = Path.getPath(board, 3, rng) as Path;
-    const neighbours = board.neighbourIndicesOfRemainingNodes();
 
     expect(path).not.toBeInstanceOf(GenerationError);
     expect(path.indices).toHaveLength(3);
 
-    let expectedResult: number = board.nodes[path.indices[0]];
-    for (let i = 1; i < path.indices.length; i++) {
-      const index = path.indices[i];
-      const prevIndex = path.indices[i - 1];
-      expect(neighbours[index]).toContain(prevIndex);
-
-      const edgeIndex = board.indexOfEdgeBetween(index, prevIndex);
-      const operation = board.edges[edgeIndex];
-      const result = operation.apply(expectedResult, board.nodes[index]);
-      if (typeof result === "number") expectedResult = result;
-    }
+    const expectedResult = board.evaluateIndices(path.indices);
 
     expect(expectedResult).toEqual(path.result);
   });
