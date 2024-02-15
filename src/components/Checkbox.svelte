@@ -1,12 +1,18 @@
 <script lang="ts">
   import { IconCheck } from "@tabler/icons-svelte";
 
+  import { settingsStore } from "~stores/settings-store";
+
   export let checked: boolean;
 </script>
 
 <label>
   <slot />
-  <input type="checkbox" bind:checked />
+  <input
+    type="checkbox"
+    bind:checked
+    class:hover-animations={$settingsStore.hoverAnimations}
+  />
   <span>
     <IconCheck class="checkbox-icon" stroke={3} />
   </span>
@@ -58,7 +64,7 @@
     }
   }
 
-  input:not(:checked) {
+  input.hover-animations:not(:checked) {
     &:hover + span {
       border-color: var(--primary-color);
     }
@@ -81,11 +87,11 @@
       }
     }
 
-    &:hover + span {
+    &.hover-animations:hover + span {
       border-color: var(--primary-border-color-active);
     }
 
-    &:active + span {
+    &.hover-animations:active + span {
       border-color: var(--primary-border-color-active);
       background-color: var(--primary-border-color);
     }

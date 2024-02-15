@@ -2,11 +2,16 @@
   import type { Icon } from "@tabler/icons-svelte";
   import type { ComponentType } from "svelte";
 
+  import { settingsStore } from "~stores/settings-store";
+
   export let fullWidth = false;
   export let icon: ComponentType<Icon>;
 </script>
 
-<button on:click class:full-width={fullWidth}
+<button
+  on:click
+  class:full-width={fullWidth}
+  class:hover-animations={$settingsStore.hoverAnimations}
   ><div class="icon"><svelte:component this={icon} /></div>
   <span class="text"><slot /></span>
   <div class="bg" />
@@ -67,7 +72,7 @@
       z-index: var(--hover-anim-z-index);
     }
 
-    &:hover {
+    &.hover-animations:hover {
       color: white;
 
       .icon {
@@ -87,7 +92,7 @@
       }
     }
 
-    &:active {
+    &.hover-animations:active {
       .hover-anim {
         background-color: var(--primary-border-color);
         border-color: var(--primary-border-color-active);
