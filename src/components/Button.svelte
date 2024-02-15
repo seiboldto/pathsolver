@@ -5,14 +5,18 @@
   import { settingsStore } from "~stores/settings-store";
 
   export let fullWidth = false;
-  export let icon: ComponentType<Icon>;
+  export let icon: ComponentType<Icon> | null = null;
 </script>
 
 <button
   on:click
   class:full-width={fullWidth}
   class:hover-animations={$settingsStore.hoverAnimations}
-  ><div class="icon"><svelte:component this={icon} /></div>
+  class:without-icon={icon === null}
+>
+  {#if icon}
+    <div class="icon"><svelte:component this={icon} /></div>
+  {/if}
   <span class="text"><slot /></span>
   <div class="bg" />
   <div class="hover-anim" />
@@ -52,6 +56,13 @@
       z-index: var(--content-z-index);
     }
 
+    &.without-icon {
+      justify-content: center;
+      .text {
+        position: unset;
+      }
+    }
+
     .bg {
       position: absolute;
       background-color: var(--background-color);
@@ -80,7 +91,7 @@
         transform: translateX(-50%);
       }
 
-      .text {
+      &:not(.without-icon) .text {
         left: calc(50% + var(--spacing-xs) + 2rem);
         transform: translateX(-50%);
         opacity: 0;
