@@ -15,6 +15,9 @@
   <Checkbox bind:checked={$settingsStore.menuTransitions}
     >{$_("menu.transitions")}</Checkbox
   >
+  <Checkbox bind:checked={$settingsStore.hoverAnimations}
+    >{$_("menu.hover-anims")}</Checkbox
+  >
   <Button on:click={() => navigate({ route: "home" })} icon={IconArrowLeft}
     >{$_("menu.back")}</Button
   >
