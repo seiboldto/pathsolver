@@ -1,6 +1,8 @@
 import prand, { type RandomGenerator } from "pure-rand";
 
 import { type Difficulty } from "./difficulty";
+import { GenerationError, type GenerationResult } from "./error";
+import { type Board } from "./board";
 
 export class Path {
   /** The indices this path touches. */
@@ -43,5 +45,54 @@ export class Path {
     }
 
     return pathLengths;
+  }
+
+  public static getPath(
+    board: Board,
+    length: number,
+    rng: RandomGenerator,
+  ): GenerationResult<Path> {
+    const neighbourIndicesOfRemainingNodes =
+      board.neighbourIndicesOfRemainingNodes();
+    const remainingIndices = Object.keys(neighbourIndicesOfRemainingNodes);
+
+    const firstIndex = prand.unsafeUniformIntDistribution(
+      0,
+      remainingIndices.length - 1,
+      rng,
+    );
+
+    const indices = [firstIndex];
+    let result = board.simulatedNodes[firstIndex];
+
+    while (indices.length !== length) {
+      const last = indices[indices.length - 1];
+      const neighbours = neighbourIndicesOfRemainingNodes[last];
+
+      const filtered = neighbours.filter((n) => !indices.includes(n));
+      if (filtered.length === 0)
+        return new GenerationError({
+          id: "no-possible-paths",
+          length,
+          nodes: board.simulatedNodes,
+        });
+
+      const random = prand.unsafeUniformIntDistribution(
+        0,
+        filtered.length - 1,
+        rng,
+      );
+      const next = filtered[random];
+      indices.push(next);
+
+      const edgeIndex = board.indexOfEdgeBetween(last, next);
+      const operation = board.edges[edgeIndex];
+      const newResult = operation.apply(result, board.nodes[next]);
+
+      if (newResult instanceof GenerationError) return newResult;
+      result = newResult;
+    }
+
+    return new Path(indices, result);
   }
 }

@@ -7,7 +7,10 @@ import { Path } from "./path";
 
 describe("Board", () => {
   it("generates a board correctly", () => {
-    const board = new Board(Difficulty.hard(), prand.xoroshiro128plus(0));
+    const board = Board.fromDifficulty(
+      Difficulty.hard(),
+      prand.xoroshiro128plus(0),
+    );
 
     expect(board.difficulty).toEqual(Difficulty.hard());
 
@@ -34,12 +37,18 @@ describe("Board", () => {
     [4, 7, 10],
     [5, 8, 11],
   ])("it calculates the edge index between %i and %i", (i1, i2, expected) => {
-    const board = new Board(Difficulty.hard(), prand.xoroshiro128plus(0));
+    const board = Board.fromDifficulty(
+      Difficulty.hard(),
+      prand.xoroshiro128plus(0),
+    );
     expect(board.indexOfEdgeBetween(i1, i2)).toEqual(expected);
   });
 
   it("applies paths and compress the board correctly", () => {
-    const board = new Board(Difficulty.extreme(), prand.xoroshiro128plus(0));
+    const board = Board.fromDifficulty(
+      Difficulty.extreme(),
+      prand.xoroshiro128plus(0),
+    );
     const path = new Path([4, 5, 1, 2, 3, 7, 11, 10], 0);
     board.applyPathAndCompress(path);
 
@@ -50,18 +59,21 @@ describe("Board", () => {
   });
 
   it("returns the correct neighbours of remaining nodes", () => {
-    const board = new Board(Difficulty.normal(), prand.xoroshiro128plus(0));
+    const board = Board.fromDifficulty(
+      Difficulty.normal(),
+      prand.xoroshiro128plus(0),
+    );
     const path = new Path([1, 0, 3], 0);
     board.applyPathAndCompress(path);
 
     const neighbourIndices = board.neighbourIndicesOfRemainingNodes();
     const expectedNeighbourIndices = {
-      2: [5],
-      4: [5, 7],
-      5: [2, 8, 4],
-      6: [7],
-      7: [4, 8, 6],
-      8: [5, 7],
+      "2": [5],
+      "4": [5, 7],
+      "5": [2, 8, 4],
+      "6": [7],
+      "7": [4, 8, 6],
+      "8": [5, 7],
     };
     expect(neighbourIndices).toEqual(expectedNeighbourIndices);
   });

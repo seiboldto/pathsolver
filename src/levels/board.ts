@@ -23,32 +23,38 @@ export class Board {
    */
   public simulatedNodes: number[];
 
-  constructor(difficulty: Difficulty, rng: RandomGenerator) {
+  constructor(difficulty: Difficulty, nodes: number[], edges: Operation[]) {
     this.difficulty = difficulty;
-    this.nodes = Array.from({ length: Math.pow(difficulty.boardSize, 2) }).map(
+    this.nodes = nodes;
+    this.simulatedNodes = [...nodes];
+    this.edges = edges;
+  }
+
+  public static fromDifficulty(difficulty: Difficulty, rng: RandomGenerator) {
+    const nodes = Array.from({ length: Math.pow(difficulty.boardSize, 2) }).map(
       () => prand.unsafeUniformIntDistribution(1, 9, rng),
     );
 
-    this.simulatedNodes = [...this.nodes];
-
     const edgeCount =
       2 * Math.pow(difficulty.boardSize, 2) - 2 * difficulty.boardSize;
-    this.edges = Array.from({ length: edgeCount }).map(() => {
+    const edges = Array.from({ length: edgeCount }).map(() => {
       const op = difficulty.getRandomOperation(rng);
       return new Operation(op);
     });
+
+    return new Board(difficulty, nodes, edges);
   }
 
   /**
    * For all remaining nodes, get a list of non-empty neighbour indices.
    * @returns A key-value store where the key is the index of a non-empty node and the value is an array of all non-empty neighbour indices, starting at the top and going clockwise.
    */
-  public neighbourIndicesOfRemainingNodes(): Record<number, number[]> {
+  public neighbourIndicesOfRemainingNodes(): Record<string, number[]> {
     const remainingIndices = this.simulatedNodes
       .map((n, i) => (n === 0 ? null : i))
       .filter<number>((n): n is number => n !== null);
 
-    const neighbourIndices: Record<number, number[]> = {};
+    const neighbourIndices: Record<string, number[]> = {};
 
     const { boardSize } = this.difficulty;
     for (const index of remainingIndices) {
@@ -68,7 +74,7 @@ export class Board {
       if (row < boardSize - 1 && isIndexFilled(bottom)) neighbours.push(bottom);
       if (column !== 0 && isIndexFilled(left)) neighbours.push(left);
 
-      neighbourIndices[index] = neighbours;
+      neighbourIndices[index.toString()] = neighbours;
     }
 
     return neighbourIndices;
