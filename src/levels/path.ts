@@ -8,6 +8,11 @@ export class Path {
   /** The result of the path. */
   public result: number = 5;
 
+  constructor(indices: number[], result: number) {
+    this.indices = indices;
+    this.result = result;
+  }
+
   /**
    * Generates random path lengths to fill out the board.
    * @param difficulty - The current difficulty.

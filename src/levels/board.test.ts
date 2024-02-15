@@ -3,6 +3,7 @@ import prand from "pure-rand";
 
 import { Board } from "./board";
 import { Difficulty } from "./difficulty";
+import { Path } from "./path";
 
 describe("Board", () => {
   it("generates a board correctly", () => {
@@ -35,5 +36,16 @@ describe("Board", () => {
   ])("it calculates the edge index between %i and %i", (i1, i2, expected) => {
     const board = new Board(Difficulty.hard(), prand.xoroshiro128plus(0));
     expect(board.indexOfEdgeBetween(i1, i2)).toEqual(expected);
+  });
+
+  it("applies paths and compress the board correctly", () => {
+    const board = new Board(Difficulty.extreme(), prand.xoroshiro128plus(0));
+    const path = new Path([4, 5, 1, 2, 3, 7, 11, 10], 0);
+    board.applyPathAndCompress(path);
+
+    const expectedEmptyIndices = [0, 1, 2, 3, 5, 6, 7, 11];
+    expectedEmptyIndices.forEach((i) => {
+      expect(board.simulatedNodes[i]).toEqual(0);
+    });
   });
 });
