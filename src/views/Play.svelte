@@ -6,16 +6,29 @@
 
   import Button from "~components/Button.svelte";
   import { navigate } from "~stores/router-store";
+  import { PRESET_DIFFICULTIES } from "~src/levels";
+  import { persistentStore } from "~src/stores/persistent-store";
 </script>
 
 <main transition:slide={{ easing: expoOut }}>
   <h1>§Play</h1>
+  <div class="tabs-list">
+    {#each PRESET_DIFFICULTIES as difficulty}
+      <div class="tab-btn">
+        <Button
+          fullWidth
+          on:click={() => ($persistentStore.ui.selectedDifficulty = difficulty)}
+          >{$_(`play.difficulty-${difficulty}`)}</Button
+        >
+      </div>
+    {/each}
+  </div>
   <Button on:click={() => navigate({ route: "home" })} icon={IconArrowLeft}
     >{$_("menu.back")}</Button
   >
 </main>
 
-<style>
+<style lang="scss">
   main {
     display: flex;
     flex-direction: column;
@@ -25,5 +38,14 @@
     width: 100vw;
     padding: 0 var(--side-padding);
     animation-duration: var(--menu-transition-duration) !important;
+  }
+
+  .tabs-list {
+    display: flex;
+    gap: var(--spacing-xs);
+
+    .tab-btn {
+      flex-basis: 100%;
+    }
   }
 </style>

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { IconCheck } from "@tabler/icons-svelte";
 
-  import { settingsStore } from "~stores/settings-store";
+  import { persistentStore } from "~src/stores/persistent-store";
 
   export let checked: boolean;
 </script>
@@ -11,7 +11,7 @@
   <input
     type="checkbox"
     bind:checked
-    class:hover-animations={$settingsStore.hoverAnimations}
+    class:hover-animations={$persistentStore.settings.hoverAnimations}
   />
   <span>
     <IconCheck class="checkbox-icon" stroke={3} />

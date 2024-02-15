@@ -2,7 +2,7 @@
   import type { Icon } from "@tabler/icons-svelte";
   import type { ComponentType } from "svelte";
 
-  import { settingsStore } from "~stores/settings-store";
+  import { persistentStore } from "~src/stores/persistent-store";
 
   export let fullWidth = false;
   export let icon: ComponentType<Icon> | null = null;
@@ -11,7 +11,7 @@
 <button
   on:click
   class:full-width={fullWidth}
-  class:hover-animations={$settingsStore.hoverAnimations}
+  class:hover-animations={$persistentStore.settings.hoverAnimations}
   class:without-icon={icon === null}
 >
   {#if icon}

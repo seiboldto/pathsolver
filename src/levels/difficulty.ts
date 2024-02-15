@@ -2,6 +2,9 @@ import prand, { type RandomGenerator } from "pure-rand";
 
 import { type OperationKind } from "./operation";
 
+export const PRESET_DIFFICULTIES = ["normal", "hard", "extreme"] as const;
+export type PresetDifficulty = (typeof PRESET_DIFFICULTIES)[number];
+
 /** Defines the difficulty of a level.
  *
  * To create a custom difficulty, use the constructor.
@@ -24,6 +27,13 @@ export class Difficulty {
   public operationDistribution: Record<OperationKind, number>;
   /** Maximum length of a path. */
   public maxPathLength: number;
+
+  /** Preset Difficulties */
+  public static presets: Record<PresetDifficulty, Difficulty> = {
+    normal: Difficulty.normal(),
+    hard: Difficulty.hard(),
+    extreme: Difficulty.extreme(),
+  };
 
   constructor(
     boardSize: number,
