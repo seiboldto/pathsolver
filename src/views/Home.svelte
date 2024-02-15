@@ -14,7 +14,9 @@
 
 <main transition:slide={{ easing: expoOut }}>
   <h1>{$_("menu.title")}</h1>
-  <Button icon={IconPlayerPlay}>{$_("menu.play")}</Button>
+  <Button on:click={() => navigate({ route: "play" })} icon={IconPlayerPlay}
+    >{$_("menu.play")}</Button
+  >
   <Button icon={IconCalendarEvent}>{$_("menu.daily")}</Button>
   <Button on:click={() => navigate({ route: "settings" })} icon={IconSettings}
     >{$_("menu.settings")}</Button
