@@ -5,6 +5,7 @@
   import { IconArrowLeft } from "@tabler/icons-svelte";
 
   import Button from "~components/Button.svelte";
+  import ToggleButton from "~components/ToggleButton.svelte";
   import { navigate } from "~stores/router-store";
   import { PRESET_DIFFICULTIES } from "~src/levels";
   import { persistentStore } from "~src/stores/persistent-store";
@@ -15,10 +16,11 @@
   <div class="tabs-list">
     {#each PRESET_DIFFICULTIES as difficulty}
       <div class="tab-btn">
-        <Button
+        <ToggleButton
           fullWidth
           on:click={() => ($persistentStore.ui.selectedDifficulty = difficulty)}
-          >{$_(`play.difficulty-${difficulty}`)}</Button
+          active={$persistentStore.ui.selectedDifficulty === difficulty}
+          >{$_(`play.difficulty-${difficulty}`)}</ToggleButton
         >
       </div>
     {/each}
