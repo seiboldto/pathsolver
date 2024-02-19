@@ -2,17 +2,33 @@
   import { slide } from "svelte/transition";
   import { _ } from "svelte-i18n";
   import { expoOut } from "svelte/easing";
-  import { IconArrowLeft } from "@tabler/icons-svelte";
+  import { IconArrowLeft, IconPlayerPlay } from "@tabler/icons-svelte";
 
+  import {
+    Difficulty,
+    PRESET_DIFFICULTIES,
+    generateRandomLevel,
+  } from "~src/levels";
   import Button from "~components/Button.svelte";
   import ToggleButton from "~components/ToggleButton.svelte";
   import { navigate } from "~stores/router-store";
-  import { PRESET_DIFFICULTIES } from "~src/levels";
-  import { persistentStore } from "~src/stores/persistent-store";
+  import { persistentStore } from "~stores/persistent-store";
+  import Divider from "~components/Divider.svelte";
+
+  const playLevel = () => {
+    const difficulty =
+      Difficulty.presets[$persistentStore.ui.selectedDifficulty];
+
+    const level = generateRandomLevel(difficulty);
+    navigate({
+      route: "level",
+      level,
+    });
+  };
 </script>
 
 <main transition:slide={{ easing: expoOut }}>
-  <h1>§Play</h1>
+  <h1>{$_("menu.play")}</h1>
   <div class="tabs-list">
     {#each PRESET_DIFFICULTIES as difficulty}
       <div class="tab-btn">
@@ -25,6 +41,8 @@
       </div>
     {/each}
   </div>
+  <Button on:click={playLevel} icon={IconPlayerPlay}>{$_("menu.play")}</Button>
+  <Divider />
   <Button on:click={() => navigate({ route: "home" })} icon={IconArrowLeft}
     >{$_("menu.back")}</Button
   >
