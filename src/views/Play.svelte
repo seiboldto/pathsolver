@@ -1,7 +1,5 @@
 <script lang="ts">
-  import { slide } from "svelte/transition";
   import { _ } from "svelte-i18n";
-  import { expoOut } from "svelte/easing";
   import { IconArrowLeft, IconPlayerPlay } from "@tabler/icons-svelte";
 
   import {
@@ -14,6 +12,7 @@
   import { navigate } from "~stores/router-store";
   import { persistentStore } from "~stores/persistent-store";
   import Divider from "~components/Divider.svelte";
+  import Screen from "~src/components/Screen.svelte";
 
   const playLevel = () => {
     const difficulty =
@@ -27,7 +26,7 @@
   };
 </script>
 
-<main transition:slide={{ easing: expoOut }}>
+<Screen>
   <h1>{$_("menu.play")}</h1>
   <div class="tabs-list">
     {#each PRESET_DIFFICULTIES as difficulty}
@@ -46,20 +45,9 @@
   <Button on:click={() => navigate({ route: "home" })} icon={IconArrowLeft}
     >{$_("menu.back")}</Button
   >
-</main>
+</Screen>
 
 <style lang="scss">
-  main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: var(--spacing-xs);
-    height: 100vh;
-    width: 100vw;
-    padding: 0 var(--side-padding);
-    animation-duration: var(--menu-transition-duration) !important;
-  }
-
   .tabs-list {
     display: flex;
     gap: var(--spacing-xs);
