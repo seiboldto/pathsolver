@@ -109,6 +109,16 @@ export class Board {
   }
 
   /**
+   * Returns the edge between two nodes.
+   *  @param i1 - The index of the first node
+   * @param i2 - The index of the second node
+   * @returns The edge between i1 and i2
+   */
+  public edgeBetween(i1: number, i2: number): Operation {
+    return this.edges[this.indexOfEdgeBetween(i1, i2)];
+  }
+
+  /**
    * Evalute a path of indices, given the current boards state.
    * This function should only be used when you are sure that a path only includes valid operations.
    * @param indices - The path to evaluate.
@@ -120,8 +130,7 @@ export class Board {
       const index = indices[i];
       const prevIndex = indices[i - 1];
 
-      const edgeIndex = this.indexOfEdgeBetween(index, prevIndex);
-      const operation = this.edges[edgeIndex];
+      const operation = this.edgeBetween(index, prevIndex);
       const result = operation.apply(
         expectedResult,
         this.simulatedNodes[index],

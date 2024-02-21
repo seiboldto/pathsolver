@@ -87,8 +87,7 @@ export class Path {
       const next = filtered[random];
       indices.push(next);
 
-      const edgeIndex = board.indexOfEdgeBetween(last, next);
-      const operation = board.edges[edgeIndex];
+      const operation = board.edgeBetween(last, next);
 
       const newResult = operation.apply(result, board.simulatedNodes[next]);
 
