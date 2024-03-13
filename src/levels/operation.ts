@@ -12,7 +12,7 @@ export type OperationKind =
   | "division";
 
 export class Operation {
-  private kind: OperationKind;
+  public kind: OperationKind;
 
   /**
    * Creates a new operation.
