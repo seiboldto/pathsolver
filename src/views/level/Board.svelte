@@ -13,6 +13,7 @@
   }));
 
   let edges = board.edges;
+  console.log(edges);
 </script>
 
 <div class="nodes" style:--grid-size={boardSize}>
@@ -30,6 +31,15 @@
       <Operation kind={edge.kind} />
     </div>
   {/each}
+  {#each edges.slice(edges.length / 2).entries() as [i, edge]}
+    <div
+      class="edge vertical"
+      style:--row={Math.floor(i / boardSize)}
+      style:--column={i % boardSize}
+    >
+      <Operation kind={edge.kind} />
+    </div>
+  {/each}
 </div>
 
 <style lang="scss">
@@ -43,7 +53,6 @@
     width: var(--ui-width);
     height: var(--ui-width);
     position: relative;
-    background-color: rgba(0, 0, 0, 0.2);
 
     .node {
       position: absolute;
@@ -76,6 +85,17 @@
         );
         left: calc(
           var(--node-size) + (var(--gap-size) / 2) + var(--column) *
+            (var(--gap-size) + var(--node-size))
+        );
+      }
+
+      &.vertical {
+        top: calc(
+          var(--node-size) + (var(--gap-size) / 2) + var(--row) *
+            (var(--gap-size) + var(--node-size))
+        );
+        left: calc(
+          var(--node-size) / 2 + var(--column) *
             (var(--gap-size) + var(--node-size))
         );
       }
