@@ -1,26 +1,27 @@
 <script lang="ts">
+  import { onMount, onDestroy } from "svelte";
+
   import { type Board } from "~src/levels";
+  import { resetSelectedIndices } from "~src/stores/level-store";
 
   import Operation from "./Operation.svelte";
+  import Node from "./Node.svelte";
 
   export let board: Board;
-  let boardSize = board.difficulty.boardSize;
+  const { boardSize } = board.difficulty;
+  const { edges } = board;
 
-  let nodes = board.nodes.map((n, i) => ({
-    value: n,
-    row: Math.floor(i / boardSize),
-    column: i % boardSize,
-  }));
+  const handleMouseUp = () => {
+    resetSelectedIndices();
+  };
 
-  let edges = board.edges;
-  console.log(edges);
+  onMount(() => document.addEventListener("mouseup", handleMouseUp));
+  onDestroy(() => document.removeEventListener("mouseup", handleMouseUp));
 </script>
 
 <div class="nodes" style:--grid-size={boardSize}>
-  {#each nodes as node}
-    <div class="node" style:--row={node.row} style:--column={node.column}>
-      {node.value}
-    </div>
+  {#each board.nodes.entries() as [i, node]}
+    <Node value={node} index={i} {boardSize} />
   {/each}
   {#each edges.slice(0, edges.length / 2).entries() as [i, edge]}
     <div
@@ -53,25 +54,6 @@
     width: var(--ui-width);
     height: var(--ui-width);
     position: relative;
-
-    .node {
-      position: absolute;
-      top: calc(var(--row) * var(--gap-size) + (var(--row) * var(--node-size)));
-      left: calc(
-        var(--column) * var(--gap-size) + (var(--column) * var(--node-size))
-      );
-      background-color: var(--background-color);
-      width: var(--node-size);
-      height: var(--node-size);
-      border: 0.125rem solid var(--border-color);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      user-select: none;
-      cursor: pointer;
-
-      transition: top var(--hover-anim-duration) var(--hover-anim-easing);
-    }
 
     .edge {
       position: absolute;
