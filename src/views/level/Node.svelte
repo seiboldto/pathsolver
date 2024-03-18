@@ -5,6 +5,7 @@
   export let index: number;
   export let value: number;
   export let boardSize: number;
+  let cantAddToPath = false;
 
   $: active = $levelStore.selectedNodeIndices.includes(index);
 
@@ -16,20 +17,23 @@
   };
 
   const handleMouseEnter = () => {
-    if ($levelStore.selectedNodeIndices.length === 0) return;
+    const { length } = $levelStore.selectedNodeIndices;
+    if (length === 0 || $levelStore.selectedNodeIndices.includes(index)) return;
 
-    const lastNodeIndex =
-      $levelStore.selectedNodeIndices[
-        $levelStore.selectedNodeIndices.length - 1
-      ];
+    const lastNodeIndex = $levelStore.selectedNodeIndices[length - 1];
     const lastRow = Math.floor(lastNodeIndex / boardSize);
     const lastColumn = lastNodeIndex % boardSize;
     const difference = Math.abs(lastRow - row) + Math.abs(lastColumn - column);
 
-    if (difference > 1) return;
+    if (difference > 1) {
+      cantAddToPath = true;
+      return;
+    }
 
     addIndexToSelected(index);
   };
+
+  const handleMouseLeave = () => (cantAddToPath = false);
 </script>
 
 <button
@@ -38,8 +42,10 @@
   style:--column={column}
   class:hover-animations={$persistentStore.settings.hoverAnimations}
   class:active
+  class:invalid={cantAddToPath}
   on:mousedown={handleMouseDown}
   on:mouseenter={handleMouseEnter}
+  on:mouseleave={handleMouseLeave}
 >
   {value}
 </button>
@@ -63,8 +69,12 @@
 
     transition: top var(--hover-anim-duration) var(--hover-anim-easing);
 
-    &.hover-animations:hover {
+    &.hover-animations:hover:not(.invalid) {
       border-color: var(--primary-border-color);
+    }
+
+    &.invalid {
+      border-color: var(--error-color);
     }
 
     &.active {
