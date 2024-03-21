@@ -9,4 +9,7 @@
 
 <Screen>
   <Board board={level.board} />
+  {#each level.paths as path}
+    {path.result},
+  {/each}
 </Screen>

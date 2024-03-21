@@ -14,9 +14,9 @@
 
   const handleMouseUp = () => {
     if ($levelStore.selectedNodeIndices.length > 1) {
-      // nodes = nodes.filter(
-      //   (_, i) => !$levelStore.selectedNodeIndices.includes(i),
-      // );
+      nodes = nodes.filter(
+        (_, i) => !$levelStore.selectedNodeIndices.includes(i),
+      );
     }
     resetSelectedIndices();
   };
@@ -32,7 +32,7 @@
       const prevIndex = $levelStore.selectedNodeIndices[i - 1];
 
       const operation = board.edgeBetween(index, prevIndex);
-      const result = operation.apply(value, board.nodes[index]) as number;
+      const result = operation.apply(value, board.nodes[index]);
       value = result;
     }
   }
