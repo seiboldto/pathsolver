@@ -11,14 +11,6 @@ describe("Arithmetic Operations", () => {
     expect(result).toBeInstanceOf(GenerationError);
   });
 
-  it("returns an error on divisions returning less than one", () => {
-    const op = new Operation("division");
-    const result = op.apply(1, 5) as GenerationError;
-
-    expect(result).toBeInstanceOf(GenerationError);
-    expect(result.id()).toEqual("invalid-division");
-  });
-
   it.each<{ kind: OperationKind; n1: number; n2: number; expected: number }>([
     { kind: "addition", n1: 5, n2: 1, expected: 6 },
     { kind: "subtraction", n1: 5, n2: 1, expected: 4 },

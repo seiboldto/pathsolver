@@ -134,7 +134,7 @@ export class Board {
       const result = operation.apply(
         expectedResult,
         this.simulatedNodes[index],
-      ) as number;
+      );
       expectedResult = result;
     }
 

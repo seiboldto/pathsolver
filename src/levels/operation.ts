@@ -1,5 +1,3 @@
-import { type GenerationResult, GenerationError } from "./error";
-
 /**
  * Available operations to apply.
  *
@@ -27,27 +25,19 @@ export class Operation {
    * @param n2 - The second number
    * @returns The result of the operation
    */
-  public apply(n1: number, n2: number): GenerationResult<number> {
-    let result: number;
+  public apply(n1: number, n2: number): number {
     switch (this.kind) {
       case "addition":
-        result = n1 + n2;
-        break;
+        return n1 + n2;
+
       case "subtraction":
-        result = n1 - n2;
-        break;
+        return n1 - n2;
+
       case "multiplication":
-        result = n1 * n2;
-        break;
+        return n1 * n2;
+
       case "division":
-        result = Math.trunc(n1 / n2);
-
-        if (result == 0 || n2 === 1)
-          return new GenerationError({ id: "invalid-division", n1, n2 });
-
-        break;
+        return Math.trunc(n1 / n2);
     }
-
-    return result;
   }
 }

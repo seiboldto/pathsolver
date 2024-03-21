@@ -89,10 +89,14 @@ export class Path {
 
       const operation = board.edgeBetween(last, next);
 
-      const newResult = operation.apply(result, board.simulatedNodes[next]);
+      if (operation.kind === "division") {
+        const n1 = board.simulatedNodes[last];
+        const n2 = board.simulatedNodes[next];
+        if (n2 > n1 || n2 === 1)
+          return new GenerationError({ id: "invalid-division", n1, n2 });
+      }
 
-      if (newResult instanceof GenerationError) return newResult;
-      result = newResult;
+      result = operation.apply(result, board.simulatedNodes[next]);
     }
 
     return new Path(indices, result);
