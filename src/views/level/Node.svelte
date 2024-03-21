@@ -1,36 +1,36 @@
 <script lang="ts">
+  import type { Node } from "~src/model/Node";
   import { addIndexToSelected, levelStore } from "~src/stores/level-store";
   import { persistentStore } from "~src/stores/persistent-store";
 
-  export let index: number;
-  export let value: number;
+  export let node: Node;
+  export let active: boolean;
   export let boardSize: number;
   let cantAddToPath = false;
 
-  $: active = $levelStore.selectedNodeIndices.includes(index);
-
-  const row = Math.floor(index / boardSize);
-  const column = index % boardSize;
+  $: active = $levelStore.selectedNodeIndices.includes(node.index);
 
   const handleMouseDown = () => {
-    addIndexToSelected(index);
+    addIndexToSelected(node.index);
   };
 
   const handleMouseEnter = () => {
     const { length } = $levelStore.selectedNodeIndices;
-    if (length === 0 || $levelStore.selectedNodeIndices.includes(index)) return;
+    if (length === 0 || $levelStore.selectedNodeIndices.includes(node.index))
+      return;
 
     const lastNodeIndex = $levelStore.selectedNodeIndices[length - 1];
     const lastRow = Math.floor(lastNodeIndex / boardSize);
     const lastColumn = lastNodeIndex % boardSize;
-    const difference = Math.abs(lastRow - row) + Math.abs(lastColumn - column);
+    const difference =
+      Math.abs(lastRow - node.row) + Math.abs(lastColumn - node.column);
 
     if (difference > 1) {
       cantAddToPath = true;
       return;
     }
 
-    addIndexToSelected(index);
+    addIndexToSelected(node.index);
   };
 
   const handleMouseLeave = () => (cantAddToPath = false);
@@ -38,8 +38,8 @@
 
 <button
   class="node"
-  style:--row={row}
-  style:--column={column}
+  style:--row={node.row}
+  style:--column={node.column}
   class:hover-animations={$persistentStore.settings.hoverAnimations}
   class:active
   class:invalid={cantAddToPath}
@@ -47,7 +47,7 @@
   on:mouseenter={handleMouseEnter}
   on:mouseleave={handleMouseLeave}
 >
-  {value}
+  {node.value}
 </button>
 
 <style lang="scss">

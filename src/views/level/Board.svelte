@@ -10,13 +10,18 @@
   export let board: Board;
   const { boardSize } = board.difficulty;
   const { edges } = board;
-  let nodes = board.nodes;
+  $: nodes = board.nodes.map((n, i) => ({
+    value: n,
+    row: Math.floor(i / boardSize),
+    column: i % boardSize,
+    index: i,
+  }));
 
   const handleMouseUp = () => {
     if ($levelStore.selectedNodeIndices.length > 1) {
-      nodes = nodes.filter(
-        (_, i) => !$levelStore.selectedNodeIndices.includes(i),
-      );
+      // nodes = nodes.filter(
+      //   (_, i) => !$levelStore.selectedNodeIndices.includes(i),
+      // );
     }
     resetSelectedIndices();
   };
@@ -26,7 +31,12 @@
 
   let value = 0;
   $: {
-    value = nodes[$levelStore.selectedNodeIndices[0]];
+    if ($levelStore.selectedNodeIndices.length === 0) {
+      value = 0;
+      break $;
+    }
+
+    value = nodes[$levelStore.selectedNodeIndices[0]].value;
     for (let i = 1; i < $levelStore.selectedNodeIndices.length; i++) {
       const index = $levelStore.selectedNodeIndices[i];
       const prevIndex = $levelStore.selectedNodeIndices[i - 1];
@@ -40,7 +50,11 @@
 
 <div class="nodes" style:--grid-size={boardSize}>
   {#each nodes.entries() as [i, node]}
-    <Node value={node} index={i} {boardSize} />
+    <Node
+      {node}
+      {boardSize}
+      active={$levelStore.selectedNodeIndices.includes(i)}
+    />
   {/each}
   {#each edges.slice(0, edges.length / 2).entries() as [i, edge]}
     <div

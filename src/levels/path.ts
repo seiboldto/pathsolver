@@ -99,6 +99,10 @@ export class Path {
       result = operation.apply(result, board.simulatedNodes[next]);
     }
 
+    if (result === 0) {
+      return new GenerationError({ id: "zero-result" });
+    }
+
     return new Path(indices, result);
   }
 }
