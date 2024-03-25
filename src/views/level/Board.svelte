@@ -4,7 +4,6 @@
 
   import { type Board } from "~src/levels";
   import { levelStore, resetSelectedNodes } from "~src/stores/level-store";
-  import { type Node as INode } from "~src/model/Node";
 
   import Operation from "./Operation.svelte";
   import Node from "./Node.svelte";
@@ -12,7 +11,7 @@
   export let board: Board;
   const { boardSize } = board.difficulty;
   const { edges } = board;
-  $: nodes = board.nodes.map<INode | null>((n, i) => ({
+  $: nodes = board.nodes.map((n, i) => ({
     value: n,
     row: Math.floor(i / boardSize),
     column: i % boardSize,
@@ -21,7 +20,25 @@
 
   const handleMouseUp = () => {
     if ($levelStore.selectedNodes.length > 1) {
-      console.log($levelStore.selectedNodes);
+      nodes = nodes.filter(
+        ({ id }) => !$levelStore.selectedNodes.some((n) => n.id === id),
+      );
+
+      for (let column = 0; column < boardSize; column++) {
+        const nodesInColumn = nodes
+          .filter((n) => n?.column === column)
+          .toSorted((a, b) => b.row - a.row);
+        for (const node of nodesInColumn) {
+          let lowestEmptyRow = node.row;
+          while (
+            lowestEmptyRow + 1 < boardSize &&
+            !nodesInColumn.some((n) => n.row === lowestEmptyRow + 1)
+          ) {
+            lowestEmptyRow++;
+          }
+          node.row = lowestEmptyRow;
+        }
+      }
     }
     resetSelectedNodes();
   };
@@ -53,9 +70,9 @@
 
 <div class="nodes" style:--grid-size={boardSize}>
   {#each nodes as node}
-    {#if node}
+    {#key node.id}
       <Node {node} />
-    {/if}
+    {/key}
   {/each}
   {#each edges.slice(0, edges.length / 2).entries() as [i, edge]}
     <div
