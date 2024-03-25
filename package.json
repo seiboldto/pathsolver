@@ -19,13 +19,15 @@
     "@tabler/icons-svelte": "^2.47.0",
     "@tauri-apps/api": "^1.2.0",
     "pure-rand": "^6.0.4",
-    "svelte-i18n": "^4.0.0"
+    "svelte-i18n": "^4.0.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.0.2",
     "@tauri-apps/cli": "^1.2.2",
     "@tsconfig/svelte": "^5.0.2",
     "@types/node": "^18.7.10",
+    "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",
     "@vitest/coverage-istanbul": "^1.2.2",

@@ -1,8 +1,10 @@
 <script lang="ts">
   import { onMount, onDestroy } from "svelte";
+  import { v4 as uuid } from "uuid";
 
   import { type Board } from "~src/levels";
-  import { levelStore, resetSelectedIndices } from "~src/stores/level-store";
+  import { levelStore, resetSelectedNodes } from "~src/stores/level-store";
+  import { type Node as INode } from "~src/model/Node";
 
   import Operation from "./Operation.svelte";
   import Node from "./Node.svelte";
@@ -10,20 +12,18 @@
   export let board: Board;
   const { boardSize } = board.difficulty;
   const { edges } = board;
-  $: nodes = board.nodes.map((n, i) => ({
+  $: nodes = board.nodes.map<INode | null>((n, i) => ({
     value: n,
     row: Math.floor(i / boardSize),
     column: i % boardSize,
-    index: i,
+    id: uuid(),
   }));
 
   const handleMouseUp = () => {
-    if ($levelStore.selectedNodeIndices.length > 1) {
-      // nodes = nodes.filter(
-      //   (_, i) => !$levelStore.selectedNodeIndices.includes(i),
-      // );
+    if ($levelStore.selectedNodes.length > 1) {
+      console.log($levelStore.selectedNodes);
     }
-    resetSelectedIndices();
+    resetSelectedNodes();
   };
 
   onMount(() => document.addEventListener("mouseup", handleMouseUp));
@@ -31,30 +31,31 @@
 
   let value = 0;
   $: {
-    if ($levelStore.selectedNodeIndices.length === 0) {
+    if ($levelStore.selectedNodes.length === 0) {
       value = 0;
       break $;
     }
 
-    value = nodes[$levelStore.selectedNodeIndices[0]].value;
-    for (let i = 1; i < $levelStore.selectedNodeIndices.length; i++) {
-      const index = $levelStore.selectedNodeIndices[i];
-      const prevIndex = $levelStore.selectedNodeIndices[i - 1];
+    value = $levelStore.selectedNodes[0].value;
+    for (let i = 1; i < $levelStore.selectedNodes.length; i++) {
+      const node = $levelStore.selectedNodes[i];
+      const prevNode = $levelStore.selectedNodes[i - 1];
 
-      const operation = board.edgeBetween(index, prevIndex);
-      const result = operation.apply(value, board.nodes[index]);
+      const operation = board.edgeBetween(
+        node.row * boardSize + node.column,
+        prevNode.row * boardSize + prevNode.column,
+      );
+      const result = operation.apply(value, node.value);
       value = result;
     }
   }
 </script>
 
 <div class="nodes" style:--grid-size={boardSize}>
-  {#each nodes.entries() as [i, node]}
-    <Node
-      {node}
-      {boardSize}
-      active={$levelStore.selectedNodeIndices.includes(i)}
-    />
+  {#each nodes as node}
+    {#if node}
+      <Node {node} />
+    {/if}
   {/each}
   {#each edges.slice(0, edges.length / 2).entries() as [i, edge]}
     <div

@@ -1,36 +1,32 @@
 <script lang="ts">
   import type { Node } from "~src/model/Node";
-  import { addIndexToSelected, levelStore } from "~src/stores/level-store";
+  import { selectNode, levelStore } from "~src/stores/level-store";
   import { persistentStore } from "~src/stores/persistent-store";
 
   export let node: Node;
-  export let active: boolean;
-  export let boardSize: number;
   let cantAddToPath = false;
 
-  $: active = $levelStore.selectedNodeIndices.includes(node.index);
+  $: active = $levelStore.selectedNodes.some((n) => n.id === node.id);
 
   const handleMouseDown = () => {
-    addIndexToSelected(node.index);
+    selectNode(node);
   };
 
   const handleMouseEnter = () => {
-    const { length } = $levelStore.selectedNodeIndices;
-    if (length === 0 || $levelStore.selectedNodeIndices.includes(node.index))
-      return;
+    const { length } = $levelStore.selectedNodes;
+    if (length === 0 || active) return;
 
-    const lastNodeIndex = $levelStore.selectedNodeIndices[length - 1];
-    const lastRow = Math.floor(lastNodeIndex / boardSize);
-    const lastColumn = lastNodeIndex % boardSize;
+    const lastNode = $levelStore.selectedNodes[length - 1];
     const difference =
-      Math.abs(lastRow - node.row) + Math.abs(lastColumn - node.column);
+      Math.abs(lastNode.row - node.row) +
+      Math.abs(lastNode.column - node.column);
 
     if (difference > 1) {
       cantAddToPath = true;
       return;
     }
 
-    addIndexToSelected(node.index);
+    selectNode(node);
   };
 
   const handleMouseLeave = () => (cantAddToPath = false);

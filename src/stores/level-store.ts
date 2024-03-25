@@ -1,16 +1,17 @@
 import { writable } from "svelte/store";
 
+import { type Node } from "~src/model/Node";
+
 type LevelStore = {
-  selectedNodeIndices: number[];
+  selectedNodes: Node[];
 };
 
-export const levelStore = writable<LevelStore>({ selectedNodeIndices: [] });
+export const levelStore = writable<LevelStore>({ selectedNodes: [] });
 
-export const addIndexToSelected = (index: number) => {
+export const selectNode = (node: Node) => {
   levelStore.update((prev) => ({
-    selectedNodeIndices: [...prev.selectedNodeIndices, index],
+    selectedNodes: [...prev.selectedNodes, node],
   }));
 };
 
-export const resetSelectedIndices = () =>
-  levelStore.set({ selectedNodeIndices: [] });
+export const resetSelectedNodes = () => levelStore.set({ selectedNodes: [] });
