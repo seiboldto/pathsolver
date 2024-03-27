@@ -1,3 +1,6 @@
+import { IconPlayerPlay } from "@tabler/icons-react";
+
+import { Button } from "./components";
 import { useRouterStore } from "./stores/router-store";
 
 export function App() {
@@ -6,9 +9,12 @@ export function App() {
 
   return (
     <>
-      <button onClick={() => navigate({ location: "settings" })}>
-        Settings
-      </button>
+      <Button
+        onClick={() => navigate({ location: "settings" })}
+        icon={IconPlayerPlay}
+      >
+        Play
+      </Button>
       <p>{route.location}</p>
     </>
   );
