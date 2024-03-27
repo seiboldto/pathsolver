@@ -1,3 +1,93 @@
 .button {
+  --background-z-index: 1;
+  --hover-anim-z-index: 2;
+  --content-z-index: 3;
+
   border: none;
+  outline: none;
+  background-color: var(--border-color);
+  cursor: pointer;
+  height: var(--ui-size);
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .icon {
+    position: absolute;
+    left: var(--spacing-xs);
+    transition: left var(--hover-anim-duration) var(--hover-anim-easing);
+    z-index: var(--content-z-index);
+    display: flex;
+  }
+
+  .text {
+    position: absolute;
+    left: calc(var(--spacing-xs) + 2rem);
+    transition: left var(--hover-anim-duration) var(--hover-anim-easing),
+      opacity calc(var(--hover-anim-duration) / 2) var(--hover-anim-easing);
+    z-index: var(--content-z-index);
+  }
+
+  &.withoutIcon {
+    justify-content: center;
+    .text {
+      position: unset;
+    }
+  }
+
+  .bg {
+    position: absolute;
+    background-color: var(--background-color);
+    inset: 0.125rem;
+    z-index: var(--background-z-index);
+  }
+
+  .hoverAnim {
+    position: absolute;
+    background-color: var(--primary-color);
+    border: 0.125rem solid var(--primary-border-color);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 100%;
+    visibility: hidden;
+    transition: right var(--hover-anim-duration) var(--hover-anim-easing);
+    z-index: var(--hover-anim-z-index);
+  }
+
+  &.withHoverAnimations:hover {
+    color: white;
+
+    .icon {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &:not(.withoutIcon) .text {
+      left: calc(50% + var(--spacing-xs) + 2rem);
+      transform: translateX(-50%);
+      opacity: 0;
+    }
+
+    .hoverAnim {
+      right: 0;
+      visibility: visible;
+    }
+  }
+
+  &.withHoverAnimations:active {
+    .hoverAnim {
+      background-color: var(--primary-border-color);
+      border-color: var(--primary-border-color-active);
+    }
+  }
+
+  &.fullWidth {
+    width: 100%;
+  }
+
+  &:focus-visible {
+    outline: 0.125rem solid var(--focus-color);
+    outline-offset: 0.125rem;
+  }
 }
