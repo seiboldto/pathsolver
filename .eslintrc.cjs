@@ -23,7 +23,12 @@ module.exports = {
       "@typescript-eslint/parser": [".ts", ".tsx"],
     },
   },
-  ignorePatterns: ["dist", ".eslintrc.cjs", "vite.config.ts"],
+  ignorePatterns: [
+    "dist",
+    ".eslintrc.cjs",
+    "vite.config.ts",
+    "postcss.config.cjs",
+  ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     project: "./tsconfig.json",

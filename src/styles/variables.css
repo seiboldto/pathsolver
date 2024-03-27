@@ -1,0 +1,29 @@
+:root {
+  --spacing-xs: 0.625rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.25rem;
+  --spacing-xl: 2rem;
+
+  --ui-size: 2.5rem;
+  --ui-size-sm: 1.75rem;
+  --ui-width: min(15rem, 80vw);
+  --side-padding: calc((100vw - var(--ui-width)) / 2);
+  --hover-anim-easing: cubic-bezier(0, 0, 0, 1);
+}
+
+:root {
+  --background-color: hsl(0, 0%, 93%);
+  --background-color-dark: hsl(0, 0%, 83%);
+
+  --text-color: hsl(216, 18%, 16%);
+  --border-color: hsl(210, 14%, 83%);
+
+  --primary-color: hsl(208, 80%, 52%);
+  --primary-border-color: hsl(208, 77%, 47%);
+  --primary-border-color-active: hsl(208, 77%, 38%);
+
+  --error-color: hsl(0, 72%, 57%);
+
+  --focus-color: hsl(209, 77%, 43%);
+}

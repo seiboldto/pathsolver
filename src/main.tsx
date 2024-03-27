@@ -1,3 +1,6 @@
+import "normalize.css";
+import "./styles/styles.css";
+
 import * as React from "react";
 import { createRoot } from "react-dom/client";
 

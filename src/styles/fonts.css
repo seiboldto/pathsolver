@@ -1,0 +1,17 @@
+@define-mixin font $font-family, $file, $weight {
+  @font-face {
+    font-family: "Jost";
+    src: url("~src/assets/fonts/$(file).woff2") format("woff2");
+    font-weight: $weight;
+  }
+}
+
+@mixin font Jost, Jost-Thin, 100;
+@mixin font Jost, Jost-ExtraLight, 200;
+@mixin font Jost, Jost-Light, 300;
+@mixin font Jost, Jost-Regular, 400;
+@mixin font Jost, Jost-Medium, 500;
+@mixin font Jost, Jost-SemiBold, 600;
+@mixin font Jost, Jost-Bold, 700;
+@mixin font Jost, Jost-ExtraBold, 800;
+@mixin font Jost, Jost-Black, 900;

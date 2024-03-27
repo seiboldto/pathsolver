@@ -9,7 +9,7 @@ export function App() {
       <button onClick={() => navigate({ location: "settings" })}>
         Settings
       </button>
-      <pre>{route.location}</pre>
+      <p>{route.location}</p>
     </>
   );
 }
