@@ -63,20 +63,7 @@ if (import.meta.vitest) {
         );
 
         for (const path of level.paths) {
-          let expectedResult = board.simulatedNodes[path.indices[0]];
-          for (let i = 1; i < path.indices.length; i++) {
-            const index = path.indices[i];
-            const prevIndex = path.indices[i - 1];
-
-            const operation =
-              board.edges[board.indexOfEdgeBetween(index, prevIndex)];
-            const result = operation.apply(
-              expectedResult,
-              board.simulatedNodes[index]
-            );
-            expectedResult = result;
-          }
-          expect(path.result).toEqual(expectedResult);
+          expect(path.result).toEqual(path.evaluatePath(board));
 
           board.applyPathAndCompress(path);
         }

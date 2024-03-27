@@ -17,9 +17,31 @@ export class Path {
   }
 
   /**
+   * Apply a path to a given board state and evaluate it.
+   * @param board - The board state.
+   * @returns The result of the path.
+   */
+  public evaluatePath(board: Board): number {
+    let expectedResult = board.simulatedNodes[this.indices[0]];
+    for (let i = 1; i < this.indices.length; i++) {
+      const index = this.indices[i];
+      const prevIndex = this.indices[i - 1];
+
+      const operation = board.edges[board.indexOfEdgeBetween(index, prevIndex)];
+      const result = operation.apply(
+        expectedResult,
+        board.simulatedNodes[index]
+      );
+      expectedResult = result;
+    }
+
+    return expectedResult;
+  }
+
+  /**
    * Generates random path lengths to fill out the board.
    * @param difficulty - The current difficulty.
-   * @param rng - A random generator instance
+   * @param rng - A random generator instance.
    * @returns A list of path lengths.
    */
   public static getRandomPathLenghts(
@@ -132,6 +154,18 @@ if (import.meta.vitest) {
     }
   );
 
+  it("evaluates a path correctly", () => {
+    const nodes = Array.from<number>({ length: 9 }).fill(1);
+    const edges = Array.from<Operation>({ length: 12 }).fill(
+      new Operation("addition")
+    );
+
+    const board = new Board(Difficulty.normal(), nodes, edges);
+
+    const path = new Path([0, 1, 2], 3);
+    expect(path.evaluatePath(board)).toEqual(3);
+  });
+
   it("generates a connected path of the correct length", () => {
     const rng = prand.xoroshiro128plus(0);
 
@@ -141,20 +175,7 @@ if (import.meta.vitest) {
     expect(path).not.toBeInstanceOf(GenerationError);
     expect(path.indices).toHaveLength(3);
 
-    let expectedResult = board.simulatedNodes[path.indices[0]];
-    for (let i = 1; i < path.indices.length; i++) {
-      const index = path.indices[i];
-      const prevIndex = path.indices[i - 1];
-
-      const operation = board.edges[board.indexOfEdgeBetween(index, prevIndex)];
-      const result = operation.apply(
-        expectedResult,
-        board.simulatedNodes[index]
-      );
-      expectedResult = result;
-    }
-
-    expect(expectedResult).toEqual(path.result);
+    expect(path.evaluatePath(board)).toEqual(path.result);
   });
 
   it("returns an error if no solutions exist", () => {
