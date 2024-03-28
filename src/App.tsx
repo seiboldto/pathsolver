@@ -1,9 +1,8 @@
 import { Suspense } from "react";
 
-import { useSettingsSideEffects } from "./hooks/use-settings-side-effects";
-import { Home } from "./screens/Home";
-import { Settings } from "./screens/Settings";
-import { useRouterStore } from "./stores/router-store";
+import { useSettingsSideEffects } from "~src/hooks";
+import { Home, Settings } from "~src/screens";
+import { useRouterStore } from "~src/stores";
 
 export function App() {
   useSettingsSideEffects();

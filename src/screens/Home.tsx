@@ -6,7 +6,7 @@ import {
 import { useTranslation } from "react-i18next";
 
 import { Button, Screen } from "~src/components";
-import { useRouterStore } from "~src/stores/router-store";
+import { useRouterStore } from "~src/stores";
 
 export function Home() {
   const { t } = useTranslation();

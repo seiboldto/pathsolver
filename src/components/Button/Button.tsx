@@ -1,7 +1,7 @@
 import { type Icon, type IconProps } from "@tabler/icons-react";
 import { clsx } from "clsx";
 
-import { useSettingsStore } from "~src/stores/settings-store";
+import { useSettingsStore } from "~src/stores";
 
 import classes from "./Button.module.css";
 

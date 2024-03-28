@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { useSettingsStore } from "~src/stores/settings-store";
+import { useSettingsStore } from "~src/stores";
 
 export const useSettingsSideEffects = () => {
   const settings = useSettingsStore.use.settings();
