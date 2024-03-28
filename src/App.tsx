@@ -19,6 +19,8 @@ export function App() {
             duration: 0.3,
             ease: (t) => (t === 1.0 ? t : 1.0 - Math.pow(2.0, -10.0 * t)),
           }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
           {route.location === "home" && <Home />}
