@@ -1,7 +1,7 @@
 import {
+  IconAdjustmentsHorizontal,
   IconArrowLeft,
   IconPlayerPlay,
-  IconSettings,
 } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
 
@@ -47,7 +47,7 @@ export function Difficulty() {
           active={selectedDifficulty.type === "custom"}
           onClick={() => selectCustomDifficulty()}
         >
-          <IconSettings />
+          <IconAdjustmentsHorizontal />
         </ToggleButton>
       </Group>
       <Button icon={IconPlayerPlay}>{t("menu.play")}</Button>
