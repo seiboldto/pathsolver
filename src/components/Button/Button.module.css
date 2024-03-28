@@ -26,6 +26,8 @@
     transition: left var(--hover-anim-duration) var(--hover-anim-easing),
       opacity calc(var(--hover-anim-duration) / 2) var(--hover-anim-easing);
     z-index: var(--content-z-index);
+    display: flex;
+    align-items: center;
   }
 
   &.withoutIcon {
@@ -85,5 +87,9 @@
   &:focus-visible {
     outline: 0.125rem solid var(--focus-color);
     outline-offset: 0.125rem;
+  }
+
+  &.square {
+    max-width: var(--ui-size);
   }
 }

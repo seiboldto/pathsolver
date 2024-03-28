@@ -10,11 +10,16 @@ export type ButtonProps = {
   icon?: React.ForwardRefExoticComponent<
     Omit<IconProps, "ref"> & React.RefAttributes<Icon>
   >;
-  fullWidth?: boolean;
   children: React.ReactNode;
+  square?: boolean;
 };
 
-export function Button({ onClick, icon, children }: ButtonProps): JSX.Element {
+export function Button({
+  onClick,
+  icon,
+  children,
+  square,
+}: ButtonProps): JSX.Element {
   const { enableHoverAnimations } = useSettingsStore.use.settings();
 
   const Icon = icon || null;
@@ -25,6 +30,7 @@ export function Button({ onClick, icon, children }: ButtonProps): JSX.Element {
       className={clsx(
         classes.button,
         icon === undefined && classes.withoutIcon,
+        square && classes.square,
         enableHoverAnimations && classes.withHoverAnimations
       )}
     >
