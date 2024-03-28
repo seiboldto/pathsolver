@@ -1,3 +1,3 @@
-export { Difficulty } from "./Difficulty";
-export { Home } from "./Home";
-export { Settings } from "./Settings";
+export { DifficultyScreen as Difficulty } from "./Difficulty";
+export { HomeScreen as Home } from "./Home";
+export { SettingsScreen as Settings } from "./Settings";

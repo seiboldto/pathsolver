@@ -13,10 +13,14 @@ import {
   Title,
   ToggleButton,
 } from "~src/components";
-import { PRESET_DIFFICULTIES } from "~src/levels";
+import {
+  Difficulty,
+  generateRandomLevel,
+  PRESET_DIFFICULTIES,
+} from "~src/levels";
 import { useRouterStore, useUiStore } from "~src/stores";
 
-export function Difficulty() {
+export function DifficultyScreen() {
   const { t } = useTranslation();
 
   const { navigate } = useRouterStore.use.actions();
@@ -25,6 +29,18 @@ export function Difficulty() {
   const selectedDifficulty = useUiStore.use.selectedDifficulty();
   const { selectPresetDifficulty, selectCustomDifficulty } =
     useUiStore.use.actions();
+
+  const handlePlayClick = () => {
+    // TODO: Implement custom difficulties
+    if (selectedDifficulty.type === "custom")
+      return alert("Not implemented yet.");
+
+    const selectedDifficultyPreset = selectedDifficulty.difficulty;
+    const difficulty = Difficulty.presets[selectedDifficultyPreset];
+    const level = generateRandomLevel(difficulty);
+
+    navigate({ location: "level", level });
+  };
 
   return (
     <Screen>
@@ -50,7 +66,9 @@ export function Difficulty() {
           <IconAdjustmentsHorizontal />
         </ToggleButton>
       </Group>
-      <Button icon={IconPlayerPlay}>{t("menu.play")}</Button>
+      <Button icon={IconPlayerPlay} onClick={handlePlayClick}>
+        {t("menu.play")}
+      </Button>
       <Divider />
       <Button icon={IconArrowLeft} onClick={navigateToHome}>
         {t("menu.back")}
