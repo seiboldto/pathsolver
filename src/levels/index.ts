@@ -1,2 +1,6 @@
-export { Difficulty, PRESET_DIFFICULTIES } from "./difficulty";
+export {
+  Difficulty,
+  PRESET_DIFFICULTIES,
+  type PresetDifficulty,
+} from "./difficulty";
 export { generateLevelFromDate, generateRandomLevel } from "./generator";

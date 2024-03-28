@@ -3,7 +3,7 @@ import prand, { type RandomGenerator } from "pure-rand";
 import { OPERATION_KINDS, type OperationKind } from "./operation";
 
 export const PRESET_DIFFICULTIES = ["normal", "hard", "extreme"] as const;
-type PresetDifficulty = (typeof PRESET_DIFFICULTIES)[number];
+export type PresetDifficulty = (typeof PRESET_DIFFICULTIES)[number];
 
 /** Defines the difficulty of a level.
  *

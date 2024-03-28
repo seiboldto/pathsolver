@@ -14,7 +14,7 @@ import {
   ToggleButton,
 } from "~src/components";
 import { PRESET_DIFFICULTIES } from "~src/levels";
-import { useRouterStore } from "~src/stores";
+import { useRouterStore, useUiStore } from "~src/stores";
 
 export function Difficulty() {
   const { t } = useTranslation();
@@ -22,16 +22,31 @@ export function Difficulty() {
   const { navigate } = useRouterStore.use.actions();
   const navigateToHome = () => navigate({ location: "home" });
 
+  const selectedDifficulty = useUiStore.use.selectedDifficulty();
+  const { selectPresetDifficulty, selectCustomDifficulty } =
+    useUiStore.use.actions();
+
   return (
     <Screen>
       <Title>{t("difficulty.title")}</Title>
       <Group>
         {PRESET_DIFFICULTIES.map((d) => (
-          <ToggleButton key={d} active={d === "normal"}>
+          <ToggleButton
+            key={d}
+            active={
+              selectedDifficulty.type === "preset" &&
+              selectedDifficulty.difficulty === d
+            }
+            onClick={() => selectPresetDifficulty(d)}
+          >
             {t(`difficulty.${d}`)}
           </ToggleButton>
         ))}
-        <ToggleButton square>
+        <ToggleButton
+          square
+          active={selectedDifficulty.type === "custom"}
+          onClick={() => selectCustomDifficulty()}
+        >
           <IconSettings />
         </ToggleButton>
       </Group>
