@@ -2,15 +2,9 @@ import { v4 as uuid } from "uuid";
 import { create } from "zustand";
 
 import { type Board } from "~src/levels";
+import { type Node } from "~src/models";
 
 import { createSelectors } from "./store-utils";
-
-type Node = {
-  value: number;
-  row: number;
-  column: number;
-  id: string;
-};
 
 type LevelStore = {
   nodes: Node[];

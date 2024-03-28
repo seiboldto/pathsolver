@@ -1,0 +1,22 @@
+.node {
+  position: absolute;
+  top: calc(var(--row) * var(--gap-size) + (var(--row) * var(--node-size)));
+  left: calc(
+    var(--column) * var(--gap-size) + (var(--column) * var(--node-size))
+  );
+  background-color: var(--background-color);
+  width: var(--node-size);
+  height: var(--node-size);
+  border: 0.125rem solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  cursor: pointer;
+
+  transition: top var(--hover-anim-duration) var(--hover-anim-easing);
+
+  &.withHoverAnimations:hover {
+    border-color: var(--primary-border-color);
+  }
+}
