@@ -1,5 +1,6 @@
 import "normalize.css";
 import "./styles/styles.css";
+import "./lib/i18next";
 
 import * as React from "react";
 import { createRoot } from "react-dom/client";
