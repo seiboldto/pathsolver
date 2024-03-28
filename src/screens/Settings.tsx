@@ -1,7 +1,7 @@
 import { IconArrowLeft } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
 
-import { Button, Screen } from "~src/components";
+import { Button, Screen, Title } from "~src/components";
 import { useRouterStore } from "~src/stores";
 
 export function Settings() {
@@ -12,7 +12,7 @@ export function Settings() {
 
   return (
     <Screen>
-      <h1>{t("settings.title")}</h1>
+      <Title>{t("settings.title")}</Title>
       <Button icon={IconArrowLeft} onClick={navigateToHome}>
         {t("menu.back")}
       </Button>

@@ -5,7 +5,7 @@ import {
 } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
 
-import { Button, Screen } from "~src/components";
+import { Button, Screen, Title } from "~src/components";
 import { useRouterStore } from "~src/stores";
 
 export function Home() {
@@ -17,7 +17,7 @@ export function Home() {
 
   return (
     <Screen>
-      <h1>{t("menu.title")}</h1>
+      <Title>{t("menu.title")}</Title>
       <Button icon={IconPlayerPlay} onClick={navigateToDifficulty}>
         {t("menu.play")}
       </Button>

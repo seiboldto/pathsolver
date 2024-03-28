@@ -1,7 +1,18 @@
-import { IconArrowLeft, IconPlayerPlay } from "@tabler/icons-react";
+import {
+  IconArrowLeft,
+  IconPlayerPlay,
+  IconSettings,
+} from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
 
-import { Button, Divider, Screen, ToggleButton } from "~src/components";
+import {
+  Button,
+  Divider,
+  Group,
+  Screen,
+  Title,
+  ToggleButton,
+} from "~src/components";
 import { PRESET_DIFFICULTIES } from "~src/levels";
 import { useRouterStore } from "~src/stores";
 
@@ -13,12 +24,17 @@ export function Difficulty() {
 
   return (
     <Screen>
-      <h1>{t("difficulty.title")}</h1>
-      {PRESET_DIFFICULTIES.map((d) => (
-        <ToggleButton key={d} active={d === "normal"}>
-          {t(`difficulty.${d}`)}
+      <Title>{t("difficulty.title")}</Title>
+      <Group>
+        {PRESET_DIFFICULTIES.map((d) => (
+          <ToggleButton key={d} active={d === "normal"}>
+            {t(`difficulty.${d}`)}
+          </ToggleButton>
+        ))}
+        <ToggleButton square>
+          <IconSettings />
         </ToggleButton>
-      ))}
+      </Group>
       <Button icon={IconPlayerPlay}>{t("menu.play")}</Button>
       <Divider />
       <Button icon={IconArrowLeft} onClick={navigateToHome}>
