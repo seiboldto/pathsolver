@@ -6,5 +6,13 @@
     "settings": "Settings",
     "back": "Back"
   },
-  "settings": {}
+  "difficulty": {
+    "title": "difficulty",
+    "normal": "Normal",
+    "hard": "Hard",
+    "extreme": "Extreme"
+  },
+  "settings": {
+    "title": "settings"
+  }
 }

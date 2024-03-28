@@ -13,11 +13,14 @@ export function Home() {
 
   const { navigate } = useRouterStore.use.actions();
   const navigateToSettings = () => navigate({ location: "settings" });
+  const navigateToDifficulty = () => navigate({ location: "difficulty" });
 
   return (
     <Screen>
       <h1>{t("menu.title")}</h1>
-      <Button icon={IconPlayerPlay}>{t("menu.play")}</Button>
+      <Button icon={IconPlayerPlay} onClick={navigateToDifficulty}>
+        {t("menu.play")}
+      </Button>
       <Button icon={IconCalendarEvent}>{t("menu.daily")}</Button>
       <Button icon={IconSettings} onClick={navigateToSettings}>
         {t("menu.settings")}

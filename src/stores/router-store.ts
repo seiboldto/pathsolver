@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 import { createSelectors } from "./store-utils";
 
-type Route = { location: "home" | "settings" };
+type Route = { location: "home" | "settings" | "difficulty" };
 type RouterStore = {
   route: Route;
   actions: {

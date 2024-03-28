@@ -12,7 +12,7 @@ export function Settings() {
 
   return (
     <Screen>
-      <h1>{t("menu.settings")}</h1>
+      <h1>{t("settings.title")}</h1>
       <Button icon={IconArrowLeft} onClick={navigateToHome}>
         {t("menu.back")}
       </Button>
