@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { type Level } from "~src/levels";
 import { useRouterStore } from "~src/stores";
 
-export const useLevel = (): Level => {
+export const useGeneratedLevel = (): Level => {
   const route = useRouterStore.use.route();
   const cachedLevel = useRef<Level | null>(null);
 

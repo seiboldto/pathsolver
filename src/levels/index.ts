@@ -1,3 +1,4 @@
+export { type Board } from "./board";
 export {
   Difficulty,
   PRESET_DIFFICULTIES,

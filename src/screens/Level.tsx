@@ -1,14 +1,22 @@
 import { IconHome } from "@tabler/icons-react";
+import { useEffect } from "react";
 
 import { Button, Group, Screen } from "~src/components";
-import { useLevel } from "~src/hooks";
+import { useGeneratedLevel } from "~src/hooks";
 import { useRouterStore } from "~src/stores";
+import { useLevelStore } from "~src/stores/level-store";
 
 export function LevelScreen(): JSX.Element {
-  const level = useLevel();
+  const level = useGeneratedLevel();
 
   const { navigate } = useRouterStore.use.actions();
   const navigateToHome = () => navigate({ location: "home" });
+
+  const { setInitialNodes } = useLevelStore.use.actions();
+
+  useEffect(() => {
+    setInitialNodes(level.board);
+  }, [level, setInitialNodes]);
 
   return (
     <Screen>
@@ -17,7 +25,6 @@ export function LevelScreen(): JSX.Element {
           <IconHome />
         </Button>
       </Group>
-      {level.paths[0].result}
     </Screen>
   );
 }
