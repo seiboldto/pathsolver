@@ -1,0 +1,42 @@
+.toggleButton {
+  border: 0.125rem solid var(--border-color);
+  outline: none;
+  background-color: var(--bg-color);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--ui-size);
+
+  &.active {
+    color: white;
+    background-color: var(--primary-color);
+    border-color: var(--primary-border-color);
+  }
+
+  &.withHoverAnimations {
+    &:hover {
+      border-color: var(--primary-color);
+    }
+
+    &:active {
+      border-color: var(--primary-border-color);
+      background-color: var(--background-color-dark);
+    }
+
+    &.active:hover {
+      border-color: var(--primary-border-color-active);
+    }
+
+    &.active:active {
+      border-color: var(--primary-border-color-active);
+      background-color: var(--primary-border-color);
+    }
+  }
+
+  &:focus-visible {
+    outline: 0.125rem solid var(--focus-color);
+    outline-offset: 0.125rem;
+  }
+}

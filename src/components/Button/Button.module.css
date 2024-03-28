@@ -7,7 +7,7 @@
   outline: none;
   background-color: var(--border-color);
   cursor: pointer;
-  height: var(--ui-size);
+  min-height: var(--ui-size);
   position: relative;
   display: flex;
   align-items: center;
@@ -80,10 +80,6 @@
       background-color: var(--primary-border-color);
       border-color: var(--primary-border-color-active);
     }
-  }
-
-  &.fullWidth {
-    width: 100%;
   }
 
   &:focus-visible {

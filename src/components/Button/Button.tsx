@@ -14,12 +14,7 @@ export type ButtonProps = {
   children: React.ReactNode;
 };
 
-export function Button({
-  onClick,
-  icon,
-  fullWidth,
-  children,
-}: ButtonProps): JSX.Element {
+export function Button({ onClick, icon, children }: ButtonProps): JSX.Element {
   const { enableHoverAnimations } = useSettingsStore.use.settings();
 
   const Icon = icon || null;
@@ -30,7 +25,6 @@ export function Button({
       className={clsx(
         classes.button,
         icon === undefined && classes.withoutIcon,
-        fullWidth && classes.fullWidth,
         enableHoverAnimations && classes.withHoverAnimations
       )}
     >
