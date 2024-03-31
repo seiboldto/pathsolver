@@ -1,8 +1,8 @@
 .selectedValue {
   background-color: var(--border-color);
   align-self: center;
-  width: var(--ui-size-lg);
-  height: var(--ui-size-lg);
+  width: var(--ui-size);
+  height: var(--ui-size);
   display: flex;
   align-items: center;
   justify-content: center;
