@@ -29,6 +29,11 @@ export function Node({ node }: NodeProps): JSX.Element {
     if (selectedNodes.length === 0) return;
     if (isActive) return;
 
+    if (selectedNodes.length === board.difficulty.maxPathLength) {
+      setIsInvalidPath(true);
+      return;
+    }
+
     const lastNode = selectedNodes[selectedNodes.length - 1];
     const difference =
       Math.abs(lastNode.row - node.row) +
