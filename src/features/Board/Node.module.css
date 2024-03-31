@@ -16,7 +16,17 @@
 
   transition: top var(--hover-anim-duration) var(--hover-anim-easing);
 
-  &.withHoverAnimations:hover {
+  &.withHoverAnimations:hover:not(.invalid) {
     border-color: var(--primary-border-color);
+  }
+
+  &.invalid {
+    border-color: var(--error-color);
+  }
+
+  &.active {
+    border-color: var(--primary-border-color);
+    background-color: var(--primary-color);
+    color: white;
   }
 }

@@ -1,5 +1,6 @@
 import { IconDivide, IconMinus, IconPlus, IconX } from "@tabler/icons-react";
 import { clsx } from "clsx";
+import { useEffect } from "react";
 
 import { useGeneratedLevel } from "~src/hooks";
 import { type OperationKind } from "~src/levels";
@@ -18,9 +19,17 @@ const operationIcons: Record<OperationKind, JSX.Element> = {
 export function Board(): JSX.Element {
   const generatedLevel = useGeneratedLevel();
   const nodes = useLevelStore.use.nodes();
+  const { resetSelectedNodes } = useLevelStore.use.actions();
 
   const { boardSize } = generatedLevel.board.difficulty;
   const { edges } = generatedLevel.board;
+
+  useEffect(() => {
+    const handleMouseUp = () => resetSelectedNodes();
+
+    window.addEventListener("mouseup", handleMouseUp);
+    return () => window.removeEventListener("mouseup", handleMouseUp);
+  }, [resetSelectedNodes]);
 
   return (
     <div

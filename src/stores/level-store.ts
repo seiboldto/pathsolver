@@ -8,13 +8,17 @@ import { createSelectors } from "./store-utils";
 
 type LevelStore = {
   nodes: Node[];
+  selectedNodes: Node[];
   actions: {
     setInitialNodes: (board: Board) => void;
+    selectNode: (node: Node) => void;
+    resetSelectedNodes: () => void;
   };
 };
 
-const levelStore = create<LevelStore>((set) => ({
+const levelStore = create<LevelStore>((set, get) => ({
   nodes: [],
+  selectedNodes: [],
   actions: {
     setInitialNodes: (board) =>
       set({
@@ -24,7 +28,11 @@ const levelStore = create<LevelStore>((set) => ({
           row: Math.floor(i / board.difficulty.boardSize),
           column: i % board.difficulty.boardSize,
         })),
+        selectedNodes: [],
       }),
+    selectNode: (node) =>
+      set({ selectedNodes: [...get().selectedNodes, node] }),
+    resetSelectedNodes: () => set({ selectedNodes: [] }),
   },
 }));
 
