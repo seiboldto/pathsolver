@@ -1,0 +1,10 @@
+.selectedValue {
+  background-color: var(--border-color);
+  align-self: center;
+  width: var(--ui-size-lg);
+  height: var(--ui-size-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}

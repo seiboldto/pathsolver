@@ -2,7 +2,7 @@ import { IconHome } from "@tabler/icons-react";
 import { useEffect } from "react";
 
 import { Button, Group, Screen } from "~src/components";
-import { Board } from "~src/features";
+import { Board, LevelFooter } from "~src/features";
 import { useGeneratedLevel } from "~src/hooks";
 import { useLevelStore, useRouterStore } from "~src/stores";
 
@@ -19,13 +19,14 @@ export function LevelScreen(): JSX.Element {
   }, [generatedLevel, setInitialNodes]);
 
   return (
-    <Screen>
+    <Screen gap="xl">
       <Group>
         <Button square onClick={navigateToHome}>
           <IconHome />
         </Button>
       </Group>
       <Board />
+      <LevelFooter />
     </Screen>
   );
 }

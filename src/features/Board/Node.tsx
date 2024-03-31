@@ -1,6 +1,7 @@
 import { clsx } from "clsx";
 import { useState } from "react";
 
+import { useGeneratedLevel } from "~src/hooks";
 import { Node as INode } from "~src/models";
 import { useLevelStore, useSettingsStore } from "~src/stores";
 
@@ -14,13 +15,14 @@ export function Node({ node }: NodeProps): JSX.Element {
   const [isInvalidPath, setIsInvalidPath] = useState(false);
 
   const { enableHoverAnimations } = useSettingsStore.use.settings();
+  const { board } = useGeneratedLevel();
 
   const { selectNode } = useLevelStore.use.actions();
   const selectedNodes = useLevelStore.use.selectedNodes();
   const isActive = selectedNodes.includes(node);
 
   const handleMouseDown = () => {
-    selectNode(node);
+    selectNode(node, board);
   };
 
   const handleMouseEnter = () => {
@@ -37,7 +39,7 @@ export function Node({ node }: NodeProps): JSX.Element {
       return;
     }
 
-    selectNode(node);
+    selectNode(node, board);
   };
 
   const handleMouseLeave = () => setIsInvalidPath(false);
