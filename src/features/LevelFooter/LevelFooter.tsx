@@ -15,25 +15,27 @@ export function LevelFooter(): JSX.Element {
 
   return (
     <div className={classes.levelFooter}>
-      <div className={classes.selectedValue}>
-        <motion.span
-          key={selectedNodes.length}
-          initial={{ scale: 1.3 }}
-          animate={{ scale: 1 }}
-        >
-          {selectedValue}
-        </motion.span>
-      </div>
-      <div className={classes.dots}>
-        {Array.from({ length: maxPathLength }, (_, i) => (
-          <div
-            key={i}
-            className={clsx(
-              classes.dot,
-              i < selectedNodes.length && classes.selected
-            )}
-          />
-        ))}
+      <div className={classes.selectedInfo}>
+        <div className={classes.selectedValue}>
+          <motion.span
+            key={selectedNodes.length}
+            initial={{ scale: 1.3 }}
+            animate={{ scale: 1 }}
+          >
+            {selectedValue}
+          </motion.span>
+        </div>
+        <div className={classes.dots}>
+          {Array.from({ length: maxPathLength }, (_, i) => (
+            <div
+              key={i}
+              className={clsx(
+                classes.dot,
+                i < selectedNodes.length && classes.selected
+              )}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

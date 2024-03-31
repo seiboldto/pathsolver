@@ -4,28 +4,35 @@
   align-items: center;
   gap: var(--spacing-xs);
 
-  .selectedValue {
-    background-color: var(--border-color);
-    width: var(--ui-size);
-    height: var(--ui-size);
+  .selectedInfo {
     display: flex;
+    width: 100%;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-  }
 
-  .dots {
-    display: flex;
-    gap: var(--spacing-xs);
-
-    .dot {
-      width: 0.5rem;
-      height: 0.5rem;
-      border-radius: 50%;
+    .selectedValue {
       background-color: var(--border-color);
+      width: var(--ui-size);
+      height: var(--ui-size);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
 
-      &.selected {
-        background-color: var(--primary-color);
+    .dots {
+      display: flex;
+      gap: var(--spacing-xs);
+
+      .dot {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background-color: var(--border-color);
+
+        &.selected {
+          background-color: var(--primary-color);
+        }
       }
     }
   }
