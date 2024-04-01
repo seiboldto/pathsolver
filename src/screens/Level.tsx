@@ -1,4 +1,4 @@
-import { IconHome } from "@tabler/icons-react";
+import { IconHome, IconRefresh } from "@tabler/icons-react";
 import { useEffect } from "react";
 
 import { Button, Group, Screen } from "~src/components";
@@ -18,11 +18,17 @@ export function LevelScreen(): JSX.Element {
     setInitialState(generatedLevel.board, generatedLevel.paths);
   }, [generatedLevel, setInitialState]);
 
+  const handleResetClick = () =>
+    setInitialState(generatedLevel.board, generatedLevel.paths);
+
   return (
     <Screen gap="xl">
       <Group>
         <Button square onClick={navigateToHome}>
           <IconHome />
+        </Button>
+        <Button square onClick={handleResetClick}>
+          <IconRefresh />
         </Button>
       </Group>
       <Board />

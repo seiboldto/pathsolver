@@ -19,17 +19,17 @@ const operationIcons: Record<OperationKind, JSX.Element> = {
 export function Board(): JSX.Element {
   const generatedLevel = useGeneratedLevel();
   const nodes = useLevelStore.use.nodes();
-  const { resetSelectedNodes } = useLevelStore.use.actions();
+  const { removeSelectedNodes } = useLevelStore.use.actions();
 
   const { boardSize } = generatedLevel.board.difficulty;
   const { edges } = generatedLevel.board;
 
   useEffect(() => {
-    const handleMouseUp = () => resetSelectedNodes();
+    const handleMouseUp = () => removeSelectedNodes();
 
     window.addEventListener("mouseup", handleMouseUp);
     return () => window.removeEventListener("mouseup", handleMouseUp);
-  }, [resetSelectedNodes]);
+  }, [removeSelectedNodes]);
 
   return (
     <div
