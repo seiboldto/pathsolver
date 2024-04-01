@@ -12,11 +12,11 @@ export function LevelScreen(): JSX.Element {
   const { navigate } = useRouterStore.use.actions();
   const navigateToHome = () => navigate({ location: "home" });
 
-  const { setInitialNodes } = useLevelStore.use.actions();
+  const { setInitialState } = useLevelStore.use.actions();
 
   useEffect(() => {
-    setInitialNodes(generatedLevel.board);
-  }, [generatedLevel, setInitialNodes]);
+    setInitialState(generatedLevel.board, generatedLevel.paths);
+  }, [generatedLevel, setInitialState]);
 
   return (
     <Screen gap="xl">

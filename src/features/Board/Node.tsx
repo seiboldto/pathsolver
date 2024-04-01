@@ -1,5 +1,4 @@
 import { clsx } from "clsx";
-import { useState } from "react";
 
 import { useGeneratedLevel } from "~src/hooks";
 import { Node as INode } from "~src/models";
@@ -12,14 +11,14 @@ type NodeProps = {
 };
 
 export function Node({ node }: NodeProps): JSX.Element {
-  const [isInvalidPath, setIsInvalidPath] = useState(false);
-
   const { enableHoverAnimations } = useSettingsStore.use.settings();
   const { board } = useGeneratedLevel();
 
-  const { selectNode } = useLevelStore.use.actions();
+  const { selectNode, resetInvalidNode, setInvalidNode } =
+    useLevelStore.use.actions();
   const selectedNodes = useLevelStore.use.selectedNodes();
   const isActive = selectedNodes.includes(node);
+  const invalidNodeID = useLevelStore.use.invalidNodeID();
 
   const handleMouseDown = () => {
     selectNode(node, board);
@@ -30,7 +29,7 @@ export function Node({ node }: NodeProps): JSX.Element {
     if (isActive) return;
 
     if (selectedNodes.length === board.difficulty.maxPathLength) {
-      setIsInvalidPath(true);
+      setInvalidNode(node.id);
       return;
     }
 
@@ -40,14 +39,14 @@ export function Node({ node }: NodeProps): JSX.Element {
       Math.abs(lastNode.column - node.column);
 
     if (difference > 1) {
-      setIsInvalidPath(true);
+      setInvalidNode(node.id);
       return;
     }
 
     selectNode(node, board);
   };
 
-  const handleMouseLeave = () => setIsInvalidPath(false);
+  const handleMouseLeave = () => resetInvalidNode();
 
   return (
     <button
@@ -58,7 +57,7 @@ export function Node({ node }: NodeProps): JSX.Element {
       className={clsx(
         classes.node,
         isActive && classes.active,
-        isInvalidPath && classes.invalid,
+        invalidNodeID === node.id && classes.invalid,
         enableHoverAnimations && classes.withHoverAnimations
       )}
       style={

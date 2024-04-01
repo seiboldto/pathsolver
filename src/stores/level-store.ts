@@ -1,8 +1,8 @@
 import { v4 as uuid } from "uuid";
 import { create } from "zustand";
 
-import { type Board } from "~src/levels";
-import { type Node } from "~src/models";
+import { type Board, type Path as GeneratedPath } from "~src/levels";
+import { type Node, type Path } from "~src/models";
 
 import { createSelectors } from "./store-utils";
 
@@ -10,10 +10,14 @@ type LevelStore = {
   nodes: Node[];
   selectedNodes: Node[];
   selectedValue: number;
+  invalidNodeID: string | null;
+  paths: Path[];
   actions: {
-    setInitialNodes: (board: Board) => void;
+    setInitialState: (board: Board, paths: GeneratedPath[]) => void;
     selectNode: (node: Node, board: Board) => void;
     resetSelectedNodes: () => void;
+    setInvalidNode: (id: string) => void;
+    resetInvalidNode: () => void;
   };
 };
 
@@ -21,8 +25,10 @@ const levelStore = create<LevelStore>((set, get) => ({
   nodes: [],
   selectedNodes: [],
   selectedValue: 0,
+  invalidNodeID: null,
+  paths: [],
   actions: {
-    setInitialNodes: (board) =>
+    setInitialState: (board, paths) =>
       set({
         nodes: board.nodes.map((n, i) => ({
           value: n,
@@ -32,6 +38,12 @@ const levelStore = create<LevelStore>((set, get) => ({
         })),
         selectedNodes: [],
         selectedValue: 0,
+        paths: paths.map((p) => ({
+          id: p.indices.join(","),
+          indices: p.indices,
+          result: p.result,
+          completed: false,
+        })),
       }),
     selectNode: (node, board) => {
       const prevSelectedNodes = get().selectedNodes;
@@ -55,6 +67,8 @@ const levelStore = create<LevelStore>((set, get) => ({
       set({ selectedNodes, selectedValue });
     },
     resetSelectedNodes: () => set({ selectedNodes: [], selectedValue: 0 }),
+    setInvalidNode: (id) => set({ invalidNodeID: id }),
+    resetInvalidNode: () => set({ invalidNodeID: null }),
   },
 }));
 
