@@ -11,6 +11,7 @@ type LevelStore = {
   selectedNodes: Node[];
   selectedValue: number;
   invalidNodeID: string | null;
+  boardSize: number;
   paths: Path[];
   actions: {
     setInitialState: (board: Board, paths: GeneratedPath[]) => void;
@@ -26,6 +27,7 @@ const levelStore = create<LevelStore>((set, get) => ({
   selectedNodes: [],
   selectedValue: 0,
   invalidNodeID: null,
+  boardSize: 0,
   paths: [],
   actions: {
     setInitialState: (board, paths) =>
@@ -44,6 +46,7 @@ const levelStore = create<LevelStore>((set, get) => ({
           result: p.result,
           completed: false,
         })),
+        boardSize: board.difficulty.boardSize,
       }),
     selectNode: (node, board) => {
       const prevSelectedNodes = get().selectedNodes;
@@ -67,9 +70,34 @@ const levelStore = create<LevelStore>((set, get) => ({
       set({ selectedNodes, selectedValue });
     },
     removeSelectedNodes: () => {
-      const { selectedNodes, nodes } = get();
+      const { selectedNodes, nodes, boardSize } = get();
 
-      const newNodes = nodes.filter((n) => !selectedNodes.includes(n));
+      // TODO: Only allow if correct result
+      if (selectedNodes.length <= 1) {
+        return set({ selectedNodes: [], selectedValue: 0 });
+      }
+
+      const newNodes: Node[] = [];
+      for (let column = 0; column < boardSize; column++) {
+        const nodesInColum = nodes
+          .filter((n) => n.column === column && !selectedNodes.includes(n))
+          .sort((a, b) => b.row - a.row);
+
+        for (const { id, row, column, value } of nodesInColum) {
+          let lowestPossibleRow = row;
+          while (
+            lowestPossibleRow + 1 < boardSize &&
+            !newNodes.some(
+              (n) => n.column === column && n.row === lowestPossibleRow + 1
+            )
+          ) {
+            lowestPossibleRow++;
+          }
+
+          newNodes.push({ id, row: lowestPossibleRow, column, value });
+        }
+      }
+
       set({ selectedNodes: [], selectedValue: 0, nodes: newNodes });
     },
     setInvalidNode: (id) => set({ invalidNodeID: id }),
