@@ -1,4 +1,5 @@
 import { clsx } from "clsx";
+import { useEffect } from "react";
 
 import { useGeneratedLevel } from "~src/hooks";
 import { Node as INode } from "~src/models";
@@ -18,7 +19,9 @@ export function Node({ node }: NodeProps): JSX.Element {
     useLevelStore.use.actions();
   const selectedNodes = useLevelStore.use.selectedNodes();
   const isActive = selectedNodes.includes(node);
+
   const invalidNodeID = useLevelStore.use.invalidNodeID();
+  const isInvalid = invalidNodeID === node.id;
 
   const handleMouseDown = () => {
     selectNode(node, board);
@@ -47,6 +50,9 @@ export function Node({ node }: NodeProps): JSX.Element {
   };
 
   const handleMouseLeave = () => resetInvalidNode();
+  useEffect(() => {
+    if (selectedNodes.length === 0 && isInvalid) resetInvalidNode();
+  }, [selectedNodes.length, isInvalid, resetInvalidNode]);
 
   return (
     <button
@@ -57,7 +63,7 @@ export function Node({ node }: NodeProps): JSX.Element {
       className={clsx(
         classes.node,
         isActive && classes.active,
-        invalidNodeID === node.id && classes.invalid,
+        isInvalid && classes.invalid,
         enableHoverAnimations && classes.withHoverAnimations
       )}
       style={
