@@ -11,6 +11,8 @@ export function LevelFooter(): JSX.Element {
   const selectedNodes = useLevelStore.use.selectedNodes();
   const paths = useLevelStore.use.paths();
 
+  const invalidNodeID = useLevelStore.use.invalidNodeID();
+
   return (
     <div className={classes.levelFooter}>
       <div className={classes.selectedInfo}>
@@ -23,11 +25,17 @@ export function LevelFooter(): JSX.Element {
             {selectedValue}
           </motion.span>
         </div>
-        <div className={classes.dots}>
+        <motion.div
+          className={classes.dots}
+          variants={{
+            shake: { x: [4, -4, 0], transition: { duration: 0.3 } },
+          }}
+          animate={invalidNodeID ? "shake" : "initial"}
+        >
           {selectedNodes.map((_, i) => (
             <div key={i} className={classes.dot} />
           ))}
-        </div>
+        </motion.div>
       </div>
       <div className={classes.paths}>
         {paths.map((p, i) => (
