@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import { expect, it } from "vitest";
 
 import DAILYS_FIXTURE from "../__tests__/fixtures/dailys.json";
@@ -39,6 +41,16 @@ it("generates unique and stable levels for each day", async () => {
     generatedLevels.add(level);
   }
 
-  expect(generatedLevels.size).toEqual(ITERATIONS);
-  expect(Array.from(generatedLevels)).toEqual(DAILYS_FIXTURE);
+  // const shouldUpdateSnapshot = true;
+  const shouldUpdateSnapshot = false;
+  if (shouldUpdateSnapshot) {
+    fs.writeFileSync(
+      path.join(__dirname, "..", "__tests__", "fixtures", "dailys.json"),
+      JSON.stringify(Array.from(generatedLevels))
+    );
+    expect(true).toEqual(false);
+  } else {
+    expect(generatedLevels.size).toEqual(ITERATIONS);
+    expect(Array.from(generatedLevels)).toEqual(DAILYS_FIXTURE);
+  }
 });

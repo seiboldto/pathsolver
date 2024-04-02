@@ -10,11 +10,11 @@ export type PresetDifficulty = (typeof PRESET_DIFFICULTIES)[number];
  * To create a custom difficulty, use the constructor.
  * Otherwise, you can use a predefined preset.
  *
- * | ID      | Board Size | Operation Distribution         | Max Path Length |
- * |---------|------------|--------------------------------|-----------------|
- * | Normal  | 3          | + (70%) - (30%)                | 4               |
- * | Hard    | 3          | + (65%) - (25%) * (10%)        | 4               |
- * | Extreme | 4          | + (65%) - (20%) * (10%) / (5%) | 5               |
+ * | ID      | Board Size | Operation Distribution         | Max Path Length | Max Path Count |
+ * |---------|------------|--------------------------------|-----------------|----------------|
+ * | Normal  | 3          | + (70%) - (30%)                | 4               | 3              |
+ * | Hard    | 3          | + (65%) - (25%) * (10%)        | 4               | 4              |
+ * | Extreme | 4          | + (65%) - (20%) * (10%) / (5%) | 5               | Unlimited      |
  */
 export class Difficulty {
   /** Size of the board.
@@ -27,6 +27,8 @@ export class Difficulty {
   public operationDistribution: Record<OperationKind, number>;
   /** Maximum length of a path. */
   public maxPathLength: number;
+  /** Maximum path count. */
+  public maxPathCount: number;
 
   /** Preset Difficulties */
   public static presets: Record<PresetDifficulty, Difficulty> = {
@@ -38,10 +40,12 @@ export class Difficulty {
   constructor(
     boardSize: number,
     maxPathLength: number,
+    maxPathCount: number,
     operationDistribution: Partial<Record<OperationKind, number>>
   ) {
     this.boardSize = boardSize;
     this.maxPathLength = maxPathLength;
+    this.maxPathCount = maxPathCount;
 
     const weightsSum = Object.values(operationDistribution).reduce(
       (a, b) => a + b,
@@ -93,14 +97,14 @@ export class Difficulty {
    * Preset normal difficulty.
    */
   static normal(): Difficulty {
-    return new Difficulty(3, 4, { addition: 70, subtraction: 30 });
+    return new Difficulty(3, 4, 3, { addition: 70, subtraction: 30 });
   }
 
   /**
    * Preset hard difficulty.
    */
   static hard(): Difficulty {
-    return new Difficulty(3, 4, {
+    return new Difficulty(3, 4, 4, {
       addition: 65,
       subtraction: 25,
       multiplication: 10,
@@ -111,7 +115,7 @@ export class Difficulty {
    * Preset extreme difficulty.
    */
   static extreme(): Difficulty {
-    return new Difficulty(4, 5, {
+    return new Difficulty(4, 5, Infinity, {
       addition: 65,
       subtraction: 20,
       multiplication: 10,
@@ -124,7 +128,7 @@ if (import.meta.vitest) {
   const { it, expect } = import.meta.vitest;
 
   it("normalizes the weight distribution", () => {
-    const difficulty = new Difficulty(3, 3, {
+    const difficulty = new Difficulty(3, 3, 3, {
       addition: 50,
       subtraction: 200,
       multiplication: 50,

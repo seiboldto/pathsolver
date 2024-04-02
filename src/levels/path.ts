@@ -47,7 +47,7 @@ export class Path {
   public static getRandomPathLenghts(
     difficulty: Difficulty,
     rng: RandomGenerator
-  ): number[] {
+  ): GenerationResult<number[]> {
     const nodeCount = Math.pow(difficulty.boardSize, 2);
 
     const pathLengths = [];
@@ -66,6 +66,13 @@ export class Path {
         sum += length;
       }
     }
+
+    if (pathLengths.length > difficulty.maxPathCount)
+      return new GenerationError({
+        id: "max-path-count",
+        count: difficulty.maxPathCount,
+        actual: pathLengths.length,
+      });
 
     return pathLengths;
   }
@@ -142,7 +149,11 @@ if (import.meta.vitest) {
     (_name, difficulty) => {
       const rng = prand.xoroshiro128plus(0);
 
-      const pathLengths = Path.getRandomPathLenghts(difficulty, rng);
+      const pathLengths = Path.getRandomPathLenghts(
+        difficulty,
+        rng
+      ) as number[];
+      expect(pathLengths.length).toBeLessThanOrEqual(difficulty.maxPathCount);
 
       const sum = pathLengths.reduce((a, b) => a + b, 0);
       expect(sum).toEqual(Math.pow(difficulty.boardSize, 2));
@@ -153,6 +164,16 @@ if (import.meta.vitest) {
       });
     }
   );
+
+  it("returns an error if too many paths are generated", () => {
+    const rng = prand.xoroshiro128plus(0);
+
+    const difficulty = new Difficulty(3, 3, 1, { addition: 100 });
+
+    const error = Path.getRandomPathLenghts(difficulty, rng) as GenerationError;
+    expect(error).toBeInstanceOf(GenerationError);
+    expect(error.id()).toEqual("max-path-count");
+  });
 
   it("evaluates a path correctly", () => {
     const nodes = Array.from<number>({ length: 9 }).fill(1);
@@ -211,7 +232,7 @@ if (import.meta.vitest) {
       new Operation("subtraction")
     );
 
-    const difficulty = new Difficulty(3, 3, { addition: 100 });
+    const difficulty = new Difficulty(3, 3, Infinity, { addition: 100 });
     const board = new Board(difficulty, nodes, edges);
 
     const error = Path.getPath(board, 2, rng) as GenerationError;

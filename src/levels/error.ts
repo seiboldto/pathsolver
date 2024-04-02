@@ -5,7 +5,8 @@ type GenerationErrorKind =
       n2: number;
     }
   | { id: "no-possible-paths"; length: number; nodes: number[] }
-  | { id: "zero-result" };
+  | { id: "zero-result" }
+  | { id: "max-path-count"; count: number; actual: number };
 
 /**
  * Errors that can occur while generating a level.
@@ -34,6 +35,8 @@ export class GenerationError extends Error {
         } on the board \`${kind.nodes.join(" ")}\``;
       case "zero-result":
         return "0 is not allowed as a path result.";
+      case "max-path-count":
+        return `Exceeded the maximum path count of ${kind.count} with ${kind.actual} paths.`;
     }
   }
 }

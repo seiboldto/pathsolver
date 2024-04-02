@@ -35,6 +35,8 @@ export class Level {
     const paths: Path[] = [];
 
     const pathLengths = Path.getRandomPathLenghts(difficulty, rng);
+    if (pathLengths instanceof GenerationError) return pathLengths;
+
     for (const length of pathLengths) {
       const path = Path.getPath(board, length, rng);
       if (path instanceof GenerationError) return path;
