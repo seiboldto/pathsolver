@@ -40,9 +40,7 @@ export function Board(): JSX.Element {
         } as React.CSSProperties
       }
     >
-      {nodes.map((n) => (
-        <Node node={n} key={n.id} />
-      ))}
+      {nodes.map((n) => n && <Node node={n} key={n.id} />)}
       {edges.map((edge, i) => {
         const isHorizontal = i < edges.length / 2;
         const boardSizeOffset = isHorizontal ? 1 : 0;

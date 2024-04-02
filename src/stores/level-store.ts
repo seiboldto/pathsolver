@@ -7,7 +7,7 @@ import { type Node, type Path } from "~src/models";
 import { createSelectors } from "./store-utils";
 
 type LevelStore = {
-  nodes: Node[];
+  nodes: (Node | null)[];
   selectedNodes: Node[];
   selectedValue: number;
   invalidNodeID: string | null;
@@ -77,24 +77,28 @@ const levelStore = create<LevelStore>((set, get) => ({
         return set({ selectedNodes: [], selectedValue: 0 });
       }
 
-      const newNodes: Node[] = [];
-      for (let column = 0; column < boardSize; column++) {
-        const nodesInColum = nodes
-          .filter((n) => n.column === column && !selectedNodes.includes(n))
-          .sort((a, b) => b.row - a.row);
+      const newNodes: (Node | null)[] = nodes.map((n) =>
+        n && !selectedNodes.includes(n) ? n : null
+      );
 
-        for (const { id, row, column, value } of nodesInColum) {
+      for (let row = boardSize - 2; row >= 0; row--) {
+        for (let column = 0; column < boardSize; column++) {
+          const node = newNodes.find(
+            (n) => n && n.column === column && n.row === row
+          );
+          if (!node) continue;
+
           let lowestPossibleRow = row;
           while (
             lowestPossibleRow + 1 < boardSize &&
             !newNodes.some(
-              (n) => n.column === column && n.row === lowestPossibleRow + 1
+              (n) => n && n.column === column && n.row === lowestPossibleRow + 1
             )
           ) {
             lowestPossibleRow++;
           }
 
-          newNodes.push({ id, row: lowestPossibleRow, column, value });
+          node.row = lowestPossibleRow;
         }
       }
 
