@@ -1,4 +1,5 @@
-import { IconChevronRight } from "@tabler/icons-react";
+import { IconCheck, IconChevronRight } from "@tabler/icons-react";
+import { clsx } from "clsx";
 import { motion } from "framer-motion";
 import { Fragment } from "react";
 
@@ -9,7 +10,9 @@ import classes from "./LevelFooter.module.css";
 export function LevelFooter(): JSX.Element {
   const selectedValue = useLevelStore.use.selectedValue();
   const selectedNodes = useLevelStore.use.selectedNodes();
+
   const paths = useLevelStore.use.paths();
+  const currentPathIndex = useLevelStore.use.currentPathIndex();
 
   const invalidNodeID = useLevelStore.use.invalidNodeID();
 
@@ -40,7 +43,16 @@ export function LevelFooter(): JSX.Element {
       <div className={classes.paths}>
         {paths.map((p, i) => (
           <Fragment key={p.id}>
-            <div className={classes.path}>{p.result}</div>
+            <div
+              className={clsx(
+                classes.path,
+                i < currentPathIndex && classes.completed,
+                i === currentPathIndex && classes.active
+              )}
+            >
+              {i < currentPathIndex ? <IconCheck /> : p.result}
+            </div>
+
             {i < paths.length - 1 && <IconChevronRight />}
           </Fragment>
         ))}

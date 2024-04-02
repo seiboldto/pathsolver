@@ -13,6 +13,7 @@ type LevelStore = {
   invalidNodeID: string | null;
   boardSize: number;
   paths: Path[];
+  currentPathIndex: number;
   actions: {
     setInitialState: (board: Board, paths: GeneratedPath[]) => void;
     selectNode: (node: Node, board: Board) => void;
@@ -29,6 +30,7 @@ const levelStore = create<LevelStore>((set, get) => ({
   invalidNodeID: null,
   boardSize: 0,
   paths: [],
+  currentPathIndex: 0,
   actions: {
     setInitialState: (board, paths) =>
       set({
@@ -44,8 +46,9 @@ const levelStore = create<LevelStore>((set, get) => ({
           id: p.indices.join(","),
           indices: p.indices,
           result: p.result,
-          completed: false,
+          state: "completed",
         })),
+        currentPathIndex: 0,
         boardSize: board.difficulty.boardSize,
       }),
     selectNode: (node, board) => {
@@ -70,10 +73,18 @@ const levelStore = create<LevelStore>((set, get) => ({
       set({ selectedNodes, selectedValue });
     },
     removeSelectedNodes: () => {
-      const { selectedNodes, nodes, boardSize } = get();
+      const {
+        selectedNodes,
+        nodes,
+        boardSize,
+        paths,
+        currentPathIndex,
+        selectedValue,
+      } = get();
 
-      // TODO: Only allow if correct result
-      if (selectedNodes.length <= 1) {
+      const currentPath = paths[currentPathIndex];
+      // TODO: Show user error
+      if (selectedNodes.length <= 1 || selectedValue !== currentPath.result) {
         return set({ selectedNodes: [], selectedValue: 0 });
       }
 
@@ -102,7 +113,12 @@ const levelStore = create<LevelStore>((set, get) => ({
         }
       }
 
-      set({ selectedNodes: [], selectedValue: 0, nodes: newNodes });
+      set({
+        selectedNodes: [],
+        selectedValue: 0,
+        nodes: newNodes,
+        currentPathIndex: currentPathIndex + 1,
+      });
     },
     setInvalidNode: (id) => set({ invalidNodeID: id }),
     resetInvalidNode: () => set({ invalidNodeID: null }),

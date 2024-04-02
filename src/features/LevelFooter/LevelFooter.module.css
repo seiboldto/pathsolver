@@ -43,6 +43,15 @@
       align-items: center;
       justify-content: center;
       border-radius: 50%;
+
+      &.completed {
+        background-color: var(--primary-color);
+        border-color: var(--primary-border-color);
+      }
+
+      &.active {
+        border-color: var(--primary-border-color);
+      }
     }
   }
 }
