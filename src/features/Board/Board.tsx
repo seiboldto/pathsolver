@@ -19,17 +19,28 @@ const operationIcons: Record<OperationKind, JSX.Element> = {
 export function Board(): JSX.Element {
   const generatedLevel = useGeneratedLevel();
   const nodes = useLevelStore.use.nodes();
-  const { removeSelectedNodes } = useLevelStore.use.actions();
+  const { removeSelectedNodes, resetSelected } = useLevelStore.use.actions();
 
   const { boardSize } = generatedLevel.board.difficulty;
   const { edges } = generatedLevel.board;
 
   useEffect(() => {
-    const handleMouseUp = () => removeSelectedNodes();
+    const handleMouseUp = () => {
+      const { selectedNodes, selectedValue, paths, currentPathIndex } =
+        useLevelStore.getState();
+      const currentPath = paths[currentPathIndex];
+
+      if (selectedNodes.length <= 1 || selectedValue !== currentPath.result) {
+        resetSelected();
+        return;
+      }
+
+      removeSelectedNodes();
+    };
 
     window.addEventListener("mouseup", handleMouseUp);
     return () => window.removeEventListener("mouseup", handleMouseUp);
-  }, [removeSelectedNodes]);
+  }, [removeSelectedNodes, resetSelected]);
 
   return (
     <div
