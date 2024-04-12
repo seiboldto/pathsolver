@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-xl);
 
   .selectedInfo {
     display: flex;
@@ -11,8 +11,6 @@
     align-items: center;
 
     .selectedValue {
-      width: var(--ui-size);
-      height: var(--ui-size);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -34,6 +32,7 @@
   .paths {
     display: flex;
     align-items: center;
+    gap: var(--spacing-xs);
 
     .path {
       width: var(--ui-size);
@@ -42,15 +41,43 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 50%;
+      transition: transform var(--anim-easing) var(--anim-duration);
+      position: relative;
+      transform: translateY(var(--spacing-xs));
+
+      .pathResult {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .pathCheck {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(200%);
+        opacity: 0;
+        transition: transform var(--anim-easing) var(--anim-duration);
+      }
 
       &.completed {
         background-color: var(--primary-color);
         border-color: var(--primary-border-color);
+
+        .pathResult {
+          opacity: 0;
+        }
+
+        .pathCheck {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(100%);
+        }
       }
 
       &.active {
         border-color: var(--primary-border-color);
+        transform: translateY(0);
       }
     }
   }

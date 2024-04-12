@@ -1,7 +1,6 @@
-import { IconCheck, IconChevronRight } from "@tabler/icons-react";
+import { IconCheck } from "@tabler/icons-react";
 import { clsx } from "clsx";
 import { motion } from "framer-motion";
-import { Fragment } from "react";
 
 import { useLevelStore } from "~src/stores";
 
@@ -31,7 +30,7 @@ export function LevelFooter(): JSX.Element {
         <motion.div
           className={classes.dots}
           variants={{
-            shake: { x: [4, -4, 0], transition: { duration: 0.3 } },
+            shake: { x: [4, -4, 0], transition: { duration: 0.2 } },
           }}
           animate={invalidNodeID ? "shake" : "initial"}
         >
@@ -42,19 +41,17 @@ export function LevelFooter(): JSX.Element {
       </div>
       <div className={classes.paths}>
         {paths.map((p, i) => (
-          <Fragment key={p.id}>
-            <div
-              className={clsx(
-                classes.path,
-                i < currentPathIndex && classes.completed,
-                i === currentPathIndex && classes.active
-              )}
-            >
-              {i < currentPathIndex ? <IconCheck /> : p.result}
-            </div>
-
-            {i < paths.length - 1 && <IconChevronRight />}
-          </Fragment>
+          <div
+            key={p.id}
+            className={clsx(
+              classes.path,
+              i < currentPathIndex && classes.completed,
+              i === currentPathIndex && classes.active
+            )}
+          >
+            <span className={classes.pathResult}>{p.result}</span>
+            <IconCheck className={classes.pathCheck} />
+          </div>
         ))}
       </div>
     </div>

@@ -14,7 +14,7 @@
   user-select: none;
   cursor: pointer;
 
-  transition: top var(--hover-anim-duration) var(--hover-anim-easing);
+  transition: top var(--hover-anim-duration) var(--anim-easing);
 
   &.withHoverAnimations:hover:not(.invalid) {
     border-color: var(--primary-border-color);

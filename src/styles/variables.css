@@ -10,7 +10,9 @@
   --ui-size-sm: 1.75rem;
   --ui-width: min(18rem, 80vw);
   --side-padding: calc((100vw - var(--ui-width)) / 2);
-  --hover-anim-easing: cubic-bezier(0, 0, 0, 1);
+
+  --anim-duration: 0.2s;
+  --anim-easing: cubic-bezier(0, 0, 0, 1);
 }
 
 :root {

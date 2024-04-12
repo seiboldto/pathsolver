@@ -15,7 +15,7 @@
   .icon {
     position: absolute;
     left: var(--spacing-xs);
-    transition: left var(--hover-anim-duration) var(--hover-anim-easing);
+    transition: left var(--hover-anim-duration) var(--anim-easing);
     z-index: var(--content-z-index);
     display: flex;
   }
@@ -23,8 +23,8 @@
   .text {
     position: absolute;
     left: calc(var(--spacing-xs) + 2rem);
-    transition: left var(--hover-anim-duration) var(--hover-anim-easing),
-      opacity calc(var(--hover-anim-duration) / 2) var(--hover-anim-easing);
+    transition: left var(--hover-anim-duration) var(--anim-easing),
+      opacity calc(var(--hover-anim-duration) / 2) var(--anim-easing);
     z-index: var(--content-z-index);
     display: flex;
     align-items: center;
@@ -53,7 +53,7 @@
     left: 0;
     right: 100%;
     visibility: hidden;
-    transition: right var(--hover-anim-duration) var(--hover-anim-easing);
+    transition: right var(--hover-anim-duration) var(--anim-easing);
     z-index: var(--hover-anim-z-index);
   }
 
