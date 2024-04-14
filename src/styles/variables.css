@@ -25,6 +25,7 @@
   --primary-color: hsl(208, 80%, 52%);
   --primary-border-color: hsl(208, 77%, 47%);
   --primary-border-color-active: hsl(208, 77%, 38%);
+  --text-on-primary-color: white;
 
   --error-color: hsl(0, 72%, 57%);
 
@@ -42,6 +43,7 @@
     --primary-color: hsl(208, 80%, 42%);
     --primary-border-color: hsl(208, 77%, 37%);
     --primary-border-color-active: hsl(208, 77%, 28%);
+    --text-on-primary-color: white;
 
     --error-color: hsl(0, 72%, 47%);
 

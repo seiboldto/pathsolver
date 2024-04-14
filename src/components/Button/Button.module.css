@@ -58,7 +58,7 @@
   }
 
   &.withHoverAnimations:hover {
-    color: white;
+    color: var(--text-on-primary-color);
 
     .icon {
       left: 50%;

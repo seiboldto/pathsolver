@@ -27,6 +27,6 @@
   &.active {
     border-color: var(--primary-border-color);
     background-color: var(--primary-color);
-    color: white;
+    color: var(--text-on-primary-color);
   }
 }

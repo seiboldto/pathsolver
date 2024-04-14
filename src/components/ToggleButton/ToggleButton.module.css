@@ -10,7 +10,7 @@
   min-height: var(--ui-size);
 
   &.active {
-    color: white;
+    color: var(--text-on-primary-color);
     background-color: var(--primary-color);
     border-color: var(--primary-border-color);
   }
