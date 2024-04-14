@@ -1,6 +1,5 @@
 import { IconDivide, IconMinus, IconPlus, IconX } from "@tabler/icons-react";
 import { clsx } from "clsx";
-import { AnimatePresence, motion } from "framer-motion";
 import { useEffect } from "react";
 
 import { useGeneratedLevel } from "~src/hooks";
@@ -55,38 +54,31 @@ export function Board(): JSX.Element {
       }
     >
       {nodes.map((n) => n && <Node node={n} key={n.id} />)}
-      <AnimatePresence>
-        {edges.map((edge, i) => {
-          if (!edge) return null;
+      {edges.map((edge, i) => {
+        if (!edge) return null;
 
-          const isHorizontal = i < edges.length / 2;
-          const boardSizeOffset = isHorizontal ? 1 : 0;
-          const index = isHorizontal ? i : i - edges.length / 2;
+        const isHorizontal = i < edges.length / 2;
+        const boardSizeOffset = isHorizontal ? 1 : 0;
+        const index = isHorizontal ? i : i - edges.length / 2;
 
-          return (
-            <motion.div
-              transition={{ delay: i * 0.03 }}
-              exit={{
-                opacity: 0,
-                transform: "translate(-50%,-50%) scale(0.1)",
-              }}
-              key={edge.id}
-              className={clsx(
-                classes.edge,
-                isHorizontal ? classes.horizontal : classes.vertical
-              )}
-              style={
-                {
-                  "--row": Math.floor(index / (boardSize - boardSizeOffset)),
-                  "--column": index % (boardSize - boardSizeOffset),
-                } as React.CSSProperties
-              }
-            >
-              {operationIcons[edge.operation.kind]}
-            </motion.div>
-          );
-        })}
-      </AnimatePresence>
+        return (
+          <div
+            key={edge.id}
+            className={clsx(
+              classes.edge,
+              isHorizontal ? classes.horizontal : classes.vertical
+            )}
+            style={
+              {
+                "--row": Math.floor(index / (boardSize - boardSizeOffset)),
+                "--column": index % (boardSize - boardSizeOffset),
+              } as React.CSSProperties
+            }
+          >
+            {operationIcons[edge.operation.kind]}
+          </div>
+        );
+      })}
     </div>
   );
 }
