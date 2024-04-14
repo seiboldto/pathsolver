@@ -105,8 +105,8 @@ export class Difficulty {
    */
   static hard(): Difficulty {
     return new Difficulty(3, 4, 4, {
-      addition: 65,
-      subtraction: 25,
+      addition: 50,
+      subtraction: 40,
       multiplication: 10,
     });
   }
