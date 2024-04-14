@@ -70,7 +70,7 @@ export function Board(): JSX.Element {
                 opacity: 0,
                 transform: "translate(-50%,-50%) scale(0.1)",
               }}
-              key={i}
+              key={edge.id}
               className={clsx(
                 classes.edge,
                 isHorizontal ? classes.horizontal : classes.vertical
