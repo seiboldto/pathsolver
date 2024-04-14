@@ -6,5 +6,5 @@ export {
 } from "./difficulty";
 export { generateLevelFromDate, generateRandomLevel } from "./generator";
 export { type Level } from "./level";
-export { type OperationKind } from "./operation";
+export { type Operation, type OperationKind } from "./operation";
 export { type Path } from "./path";

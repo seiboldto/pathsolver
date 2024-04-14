@@ -19,10 +19,11 @@ const operationIcons: Record<OperationKind, JSX.Element> = {
 export function Board(): JSX.Element {
   const generatedLevel = useGeneratedLevel();
   const nodes = useLevelStore.use.nodes();
-  const { removeSelectedNodes, resetSelected } = useLevelStore.use.actions();
+  const edges = useLevelStore.use.edges();
+  const { removeSelectedNodes, resetSelected, removeUnconnectedEdges } =
+    useLevelStore.use.actions();
 
   const { boardSize } = generatedLevel.board.difficulty;
-  const { edges } = generatedLevel.board;
 
   useEffect(() => {
     const handleMouseUp = () => {
@@ -36,11 +37,12 @@ export function Board(): JSX.Element {
       }
 
       removeSelectedNodes();
+      removeUnconnectedEdges();
     };
 
     window.addEventListener("mouseup", handleMouseUp);
     return () => window.removeEventListener("mouseup", handleMouseUp);
-  }, [removeSelectedNodes, resetSelected]);
+  }, [removeSelectedNodes, resetSelected, removeUnconnectedEdges]);
 
   return (
     <div
@@ -53,6 +55,8 @@ export function Board(): JSX.Element {
     >
       {nodes.map((n) => n && <Node node={n} key={n.id} />)}
       {edges.map((edge, i) => {
+        if (!edge) return null;
+
         const isHorizontal = i < edges.length / 2;
         const boardSizeOffset = isHorizontal ? 1 : 0;
         const index = isHorizontal ? i : i - edges.length / 2;
@@ -71,7 +75,7 @@ export function Board(): JSX.Element {
               } as React.CSSProperties
             }
           >
-            {operationIcons[edge.kind]}
+            {operationIcons[edge.operation.kind]}
           </div>
         );
       })}
