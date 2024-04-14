@@ -64,6 +64,7 @@
       &.completed {
         background-color: var(--primary-color);
         border-color: var(--primary-border-color);
+        color: white;
 
         .pathResult {
           opacity: 0;
