@@ -16,6 +16,7 @@
     "title": "settings",
     "theme": "Theme",
     "theme-light": "Light",
-    "theme-dark": "Dark"
+    "theme-dark": "Dark",
+    "hover-animations": "Hover Animations"
   }
 }

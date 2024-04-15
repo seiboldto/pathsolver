@@ -1,7 +1,7 @@
 import { IconArrowLeft } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
 
-import { Button, Screen, Title, ToggleInput } from "~src/components";
+import { Button, Checkbox, Screen, Title, ToggleInput } from "~src/components";
 import { SelectData } from "~src/models";
 import { useRouterStore, useSettingsStore } from "~src/stores";
 
@@ -10,7 +10,7 @@ export function SettingsScreen() {
 
   const { navigate } = useRouterStore.use.actions();
   const navigateToHome = () => navigate({ location: "home" });
-  const { theme } = useSettingsStore.use.settings();
+  const settings = useSettingsStore.use.settings();
   const { updateSettings } = useSettingsStore.use.actions();
 
   const themes: SelectData<"light" | "dark"> = [
@@ -24,8 +24,13 @@ export function SettingsScreen() {
       <ToggleInput
         label={t("settings.theme")}
         data={themes}
-        value={theme}
+        value={settings.theme}
         onChange={(value) => updateSettings("theme", value)}
+      />
+      <Checkbox
+        label={t("settings.hover-animations")}
+        checked={settings.enableHoverAnimations}
+        onChange={(value) => updateSettings("enableHoverAnimations", value)}
       />
       <Button icon={IconArrowLeft} onClick={navigateToHome}>
         {t("menu.back")}

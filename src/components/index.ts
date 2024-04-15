@@ -1,4 +1,5 @@
 export { Button } from "./Button/Button";
+export { Checkbox } from "./Checkbox/Checkbox";
 export { Divider } from "./Divider/Divider";
 export { Group } from "./Group/Group";
 export { Screen } from "./Screen/Screen";
