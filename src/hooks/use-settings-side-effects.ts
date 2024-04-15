@@ -11,4 +11,13 @@ export const useSettingsSideEffects = () => {
       settings.enableHoverAnimations ? "250ms" : "0ms"
     );
   }, [settings.enableHoverAnimations]);
+
+  useEffect(() => {
+    const oldTheme = [...document.body.classList.values()].find((t) =>
+      t.startsWith("theme-")
+    );
+    if (oldTheme !== undefined) document.body.classList.remove(oldTheme);
+
+    document.body.classList.add(`theme-${settings.theme}`);
+  }, [settings.theme]);
 };

@@ -13,6 +13,9 @@
     "extreme": "Extreme"
   },
   "settings": {
-    "title": "settings"
+    "title": "settings",
+    "theme": "Theme",
+    "theme-light": "Light",
+    "theme-dark": "Dark"
   }
 }

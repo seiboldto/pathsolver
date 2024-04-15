@@ -16,23 +16,23 @@
 }
 
 :root {
-  --background-color: hsl(0, 0%, 93%);
-  --background-color-dark: hsl(0, 0%, 83%);
+  body.theme-light {
+    --background-color: hsl(0, 0%, 93%);
+    --background-color-dark: hsl(0, 0%, 83%);
 
-  --text-color: hsl(216, 18%, 16%);
-  --border-color: hsl(210, 14%, 83%);
+    --text-color: hsl(216, 18%, 16%);
+    --border-color: hsl(210, 14%, 83%);
 
-  --primary-color: hsl(208, 80%, 52%);
-  --primary-border-color: hsl(208, 77%, 47%);
-  --primary-border-color-active: hsl(208, 77%, 38%);
-  --text-on-primary-color: white;
+    --primary-color: hsl(208, 80%, 52%);
+    --primary-border-color: hsl(208, 77%, 47%);
+    --primary-border-color-active: hsl(208, 77%, 38%);
+    --text-on-primary-color: white;
 
-  --error-color: hsl(0, 72%, 57%);
+    --error-color: hsl(0, 72%, 57%);
 
-  --focus-color: hsl(209, 77%, 43%);
-}
+    --focus-color: hsl(209, 77%, 43%);
+  }
 
-:root {
   body.theme-dark {
     --background-color: hsl(216, 18%, 16%);
     --background-color-dark: hsl(216, 18%, 6%);
