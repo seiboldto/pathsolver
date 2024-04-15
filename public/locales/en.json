@@ -17,6 +17,7 @@
     "theme": "Theme",
     "theme-light": "Light",
     "theme-dark": "Dark",
-    "hover-animations": "Hover Animations"
+    "hover-animations": "Hover Animations",
+    "menu-transitions": "Menu Transitions"
   }
 }

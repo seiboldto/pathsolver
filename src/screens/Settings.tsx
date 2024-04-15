@@ -32,6 +32,12 @@ export function SettingsScreen() {
         checked={settings.enableHoverAnimations}
         onChange={(value) => updateSettings("enableHoverAnimations", value)}
       />
+      {/* TODO: Make menu transitions optional */}
+      <Checkbox
+        label={t("settings.menu-transitions")}
+        checked={settings.enableMenuTransitions}
+        onChange={(value) => updateSettings("enableMenuTransitions", value)}
+      />
       <Button icon={IconArrowLeft} onClick={navigateToHome}>
         {t("menu.back")}
       </Button>

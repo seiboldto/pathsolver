@@ -26,6 +26,7 @@ export function Checkbox({
       )}
     >
       {label}
+      {/* TODO: Find out why this errors */}
       <input
         type="checkbox"
         checked={checked}

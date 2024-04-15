@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   position: relative;
-  min-height: var(--ui-size);
+  min-height: var(--checkbox-size);
   cursor: pointer;
   user-select: none;
 
