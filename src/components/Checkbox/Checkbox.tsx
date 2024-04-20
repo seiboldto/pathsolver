@@ -26,11 +26,10 @@ export function Checkbox({
       )}
     >
       {label}
-      {/* TODO: Find out why this errors */}
       <input
         type="checkbox"
         checked={checked}
-        onClick={() => onChange(!checked)}
+        onChange={() => onChange(!checked)}
       />
       <span>
         <IconCheck className={classes.check} />
