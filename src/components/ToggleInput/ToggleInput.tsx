@@ -14,17 +14,19 @@ export function ToggleInput<T extends string>({
   onChange,
 }: ToggleInputProps<T>): JSX.Element {
   return (
-    <Group>
+    <>
       <label>{label}</label>
-      {data.map((item) => (
-        <ToggleButton
-          key={item.value}
-          active={value === item.value}
-          onClick={() => onChange(item.value)}
-        >
-          {item.label}
-        </ToggleButton>
-      ))}
-    </Group>
+      <Group>
+        {data.map((item) => (
+          <ToggleButton
+            key={item.value}
+            active={value === item.value}
+            onClick={() => onChange(item.value)}
+          >
+            {item.label}
+          </ToggleButton>
+        ))}
+      </Group>
+    </>
   );
 }
