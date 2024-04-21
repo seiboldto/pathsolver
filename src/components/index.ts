@@ -3,6 +3,7 @@ export { Checkbox } from "./Checkbox/Checkbox";
 export { Divider } from "./Divider/Divider";
 export { Group } from "./Group/Group";
 export { Screen } from "./Screen/Screen";
+export { Select } from "./Select/Select";
 export { Title } from "./Title/Title";
 export { ToggleButton } from "./ToggleButton/ToggleButton";
 export { ToggleInput } from "./ToggleInput/ToggleInput";

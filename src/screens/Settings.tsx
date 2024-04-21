@@ -1,12 +1,22 @@
 import { IconArrowLeft } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
 
-import { Button, Checkbox, Screen, Title, ToggleInput } from "~src/components";
+import {
+  Button,
+  Checkbox,
+  Screen,
+  Select,
+  Title,
+  ToggleInput,
+} from "~src/components";
+import { LANGUAGES } from "~src/lib";
 import { SelectData } from "~src/models";
 import { useRouterStore, useSettingsStore } from "~src/stores";
 
+const languages = LANGUAGES.map((l) => ({ label: l.name, value: l.locale }));
+
 export function SettingsScreen() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { navigate } = useRouterStore.use.actions();
   const navigateToHome = () => navigate({ location: "home" });
@@ -21,6 +31,12 @@ export function SettingsScreen() {
   return (
     <Screen>
       <Title>{t("settings.title")}</Title>
+      <Select
+        label={t("settings.language")}
+        data={languages}
+        value={i18n.language}
+        onChange={(l) => i18n.changeLanguage(l)}
+      ></Select>
       <ToggleInput
         label={t("settings.theme")}
         data={themes}

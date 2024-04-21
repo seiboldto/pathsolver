@@ -5,5 +5,20 @@
     "daily": "Täglich",
     "settings": "Einstellungen",
     "back": "Zurück"
+  },
+  "difficulty": {
+    "title": "schwierigkeit",
+    "normal": "Normal",
+    "hard": "Schwer",
+    "extreme": "Extrem"
+  },
+  "settings": {
+    "title": "einstellungen",
+    "language": "Sprache",
+    "theme": "Farbschema",
+    "theme-light": "Hell",
+    "theme-dark": "Dunkel",
+    "hover-animations": "Hover-Animationen",
+    "menu-transitions": "Menü-Übergänge"
   }
 }

@@ -91,5 +91,6 @@
 
   &.square {
     max-width: var(--ui-size);
+    min-width: var(--ui-size);
   }
 }
