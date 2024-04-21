@@ -16,7 +16,7 @@ import { useRouterStore, useSettingsStore } from "~src/stores";
 const languages = LANGUAGES.map((l) => ({ label: l.name, value: l.locale }));
 
 export function SettingsScreen() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const { navigate } = useRouterStore.use.actions();
   const navigateToHome = () => navigate({ location: "home" });
@@ -34,8 +34,8 @@ export function SettingsScreen() {
       <Select
         label={t("settings.language")}
         data={languages}
-        value={i18n.language}
-        onChange={(l) => i18n.changeLanguage(l)}
+        value={settings.language}
+        onChange={(value) => updateSettings("language", value)}
       ></Select>
       <ToggleInput
         label={t("settings.theme")}

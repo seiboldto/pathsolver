@@ -1,9 +1,11 @@
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 import { useSettingsStore } from "~src/stores";
 
 export const useSettingsSideEffects = () => {
   const settings = useSettingsStore.use.settings();
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     document.documentElement.style.setProperty(
@@ -20,4 +22,8 @@ export const useSettingsSideEffects = () => {
 
     document.body.classList.add(`theme-${settings.theme}`);
   }, [settings.theme]);
+
+  useEffect(() => {
+    i18n.changeLanguage(settings.language);
+  }, [i18n, settings.language]);
 };
