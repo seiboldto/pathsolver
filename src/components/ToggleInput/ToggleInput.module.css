@@ -18,4 +18,8 @@
       user-select: none;
     }
   }
+
+  &.square {
+    max-width: var(--ui-size);
+  }
 }

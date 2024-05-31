@@ -5,7 +5,14 @@ import {
 } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
 
-import { Button, Divider, Screen, Title, ToggleInput } from "~src/components";
+import {
+  Button,
+  Divider,
+  Screen,
+  Title,
+  ToggleInput,
+  type ToggleInputItemProps,
+} from "~src/components";
 import { Difficulty, generateRandomLevel } from "~src/levels";
 import {
   SELECTABLE_DIFFICULTIES,
@@ -14,10 +21,11 @@ import {
 } from "~src/models";
 import { useRouterStore, useUiStore } from "~src/stores";
 
-const difficulties: SelectData<SelectableDifficulty> =
+const difficulties: SelectData<SelectableDifficulty, ToggleInputItemProps> =
   SELECTABLE_DIFFICULTIES.map((d) => ({
     value: d,
     label: d === "custom" ? <IconAdjustmentsHorizontal /> : undefined,
+    square: d === "custom",
   }));
 
 export function DifficultyScreen() {

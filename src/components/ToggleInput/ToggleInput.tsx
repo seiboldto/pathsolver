@@ -10,9 +10,13 @@ import toggleButtonClasses from "../ToggleButton/ToggleButton.module.css";
 import classes from "./ToggleInput.module.css";
 
 type ToggleInputProps<T> = InputProps & {
-  data: SelectData<T>;
+  data: SelectData<T, ToggleInputItemProps>;
   value: string;
   onChange: (value: T) => void;
+};
+
+export type ToggleInputItemProps = {
+  square: boolean;
 };
 
 export function ToggleInput<T extends string>({
@@ -31,7 +35,10 @@ export function ToggleInput<T extends string>({
       <label>{label}</label>
       <Group>
         {data.map((item) => (
-          <div key={item.value} className={classes.control}>
+          <div
+            key={item.value}
+            className={clsx(classes.control, item.square && classes.square)}
+          >
             <input
               type="radio"
               name={id}

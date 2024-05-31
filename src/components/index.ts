@@ -7,3 +7,4 @@ export { Select } from "./Select/Select";
 export { Title } from "./Title/Title";
 export { ToggleButton } from "./ToggleButton/ToggleButton";
 export { ToggleInput } from "./ToggleInput/ToggleInput";
+export { type ToggleInputItemProps } from "./ToggleInput/ToggleInput";

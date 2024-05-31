@@ -3,7 +3,7 @@ export type InputProps = {
   i18nPrefix?: string;
 };
 
-export type SelectData<T> = {
+export type SelectData<T, P = object> = ({
   label?: React.ReactNode;
   value: T;
-}[];
+} & P)[];
