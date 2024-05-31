@@ -1,4 +1,5 @@
 import { clsx } from "clsx";
+import { useTranslation } from "react-i18next";
 
 import { Group } from "~src/components";
 import { useId } from "~src/hooks";
@@ -19,9 +20,11 @@ export function ToggleInput<T extends string>({
   data,
   value,
   onChange,
+  i18nPrefix,
 }: ToggleInputProps<T>): JSX.Element {
   const id = useId("toggle-input");
   const { enableHoverAnimations } = useSettingsStore.use.settings();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -33,7 +36,7 @@ export function ToggleInput<T extends string>({
               type="radio"
               name={id}
               id={`${id}-${item.value}`}
-              value={item.label}
+              value={item.value}
               onChange={() => onChange(item.value)}
               checked={item.value === value}
               className={classes.input}
@@ -46,7 +49,9 @@ export function ToggleInput<T extends string>({
                 enableHoverAnimations && toggleButtonClasses.withHoverAnimations
               )}
             >
-              {item.label}
+              {item.label === undefined
+                ? t(i18nPrefix + item.value)
+                : item.label}
             </label>
           </div>
         ))}

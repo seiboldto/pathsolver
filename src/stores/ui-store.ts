@@ -1,29 +1,20 @@
 import { create } from "zustand";
 
-import { PresetDifficulty } from "~src/levels";
+import { type SelectableDifficulty } from "~src/models";
 
 import { createSelectors } from "./store-utils";
 
 type UiStore = {
-  selectedDifficulty:
-    | { type: "preset"; difficulty: PresetDifficulty }
-    | { type: "custom" };
+  selectedDifficulty: SelectableDifficulty;
   actions: {
-    selectPresetDifficulty: (difficulty: PresetDifficulty) => void;
-    selectCustomDifficulty: () => void;
+    selectDifficulty: (difficulty: SelectableDifficulty) => void;
   };
 };
 
 const uiStore = create<UiStore>((set) => ({
-  selectedDifficulty: {
-    type: "preset",
-    difficulty: "normal",
-  },
+  selectedDifficulty: "normal",
   actions: {
-    selectPresetDifficulty: (difficulty) =>
-      set({ selectedDifficulty: { type: "preset", difficulty } }),
-    selectCustomDifficulty: () =>
-      set({ selectedDifficulty: { type: "custom" } }),
+    selectDifficulty: (difficulty) => set({ selectedDifficulty: difficulty }),
   },
 }));
 

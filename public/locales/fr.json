@@ -8,6 +8,7 @@
   },
   "difficulty": {
     "title": "§difficulty",
+    "choose": "§Choose Difficulty",
     "normal": "§Normal",
     "hard": "§Hard",
     "extreme": "§Extreme"

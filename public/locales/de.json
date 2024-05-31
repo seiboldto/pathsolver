@@ -8,6 +8,7 @@
   },
   "difficulty": {
     "title": "schwierigkeit",
+    "choose": "Schwierigkeit auswählen",
     "normal": "Normal",
     "hard": "Schwer",
     "extreme": "Extrem"

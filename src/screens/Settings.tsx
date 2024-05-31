@@ -13,7 +13,12 @@ import { LANGUAGES } from "~src/lib";
 import { SelectData } from "~src/models";
 import { useRouterStore, useSettingsStore } from "~src/stores";
 
-const languages = LANGUAGES.map((l) => ({ label: l.name, value: l.locale }));
+const languages: SelectData<(typeof LANGUAGES)[number]["locale"]> =
+  LANGUAGES.map((l) => ({ label: l.name, value: l.locale }));
+const themes: SelectData<"light" | "dark"> = [
+  { value: "light" },
+  { value: "dark" },
+];
 
 export function SettingsScreen() {
   const { t } = useTranslation();
@@ -22,11 +27,6 @@ export function SettingsScreen() {
   const navigateToHome = () => navigate({ location: "home" });
   const settings = useSettingsStore.use.settings();
   const { updateSettings } = useSettingsStore.use.actions();
-
-  const themes: SelectData<"light" | "dark"> = [
-    { value: "light", label: t("settings.theme-light") },
-    { value: "dark", label: t("settings.theme-dark") },
-  ];
 
   return (
     <Screen>
@@ -42,6 +42,7 @@ export function SettingsScreen() {
         data={themes}
         value={settings.theme}
         onChange={(value) => updateSettings("theme", value)}
+        i18nPrefix="settings.theme-"
       />
       <Checkbox
         label={t("settings.hover-animations")}

@@ -1,4 +1,5 @@
 import { IconCaretLeftFilled, IconCaretRightFilled } from "@tabler/icons-react";
+import { useTranslation } from "react-i18next";
 
 import { Button } from "~src/components";
 import type { InputProps, SelectData } from "~src/models";
@@ -16,7 +17,10 @@ export function Select<T extends string>({
   data,
   value,
   onChange,
+  i18nPrefix,
 }: SelectProps<T>): JSX.Element {
+  const { t } = useTranslation();
+
   const handleNext = () => selectByIndex((i) => i + 1);
   const handlePrev = () => selectByIndex((i) => i - 1);
 
@@ -34,7 +38,7 @@ export function Select<T extends string>({
     onChange(data[wrappedIndex].value);
   };
 
-  const selected = data.find((d) => d.value === value);
+  const selected = data.find((d) => d.value === value)!;
 
   return (
     <>
@@ -43,7 +47,9 @@ export function Select<T extends string>({
         <Button square onClick={handlePrev}>
           <IconCaretLeftFilled />
         </Button>
-        {selected?.label}
+        {selected.label === undefined
+          ? t(i18nPrefix + selected.value)
+          : selected.label}
         <Button square onClick={handleNext}>
           <IconCaretRightFilled />
         </Button>
