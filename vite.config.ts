@@ -7,6 +7,10 @@ import path from "path";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  server: {
+    host: "127.0.0.1",
+    port: 5173,
+  },
   define: {
     "import.meta.vitest": undefined,
   },
@@ -17,7 +21,7 @@ export default defineConfig({
   },
   test: {
     includeSource: ["src/**/*.ts"],
-    exclude: ["node_modules", "dist"],
+    exclude: ["node_modules", "dist", "src/__tests__/e2e/**/*"],
     clearMocks: true,
   },
 });

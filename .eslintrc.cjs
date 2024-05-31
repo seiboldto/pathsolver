@@ -28,6 +28,7 @@ module.exports = {
     ".eslintrc.cjs",
     "vite.config.ts",
     "postcss.config.cjs",
+    "playwright.config.ts",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
