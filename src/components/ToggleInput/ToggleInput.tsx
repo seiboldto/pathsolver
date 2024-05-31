@@ -16,7 +16,7 @@ type ToggleInputProps<T> = InputProps & {
 };
 
 export type ToggleInputItemProps = {
-  square: boolean;
+  square?: boolean;
 };
 
 export function ToggleInput<T extends string>({
