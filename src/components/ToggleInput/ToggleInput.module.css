@@ -1,0 +1,21 @@
+.control {
+  position: relative;
+
+  .input {
+    height: 0;
+    width: 0;
+    position: absolute;
+    overflow: hidden;
+    white-space: nowrap;
+    opacity: 0;
+
+    &:focus-visible + label {
+      outline: 0.125rem solid var(--focus-color);
+      outline-offset: 0.125rem;
+    }
+
+    & + label {
+      user-select: none;
+    }
+  }
+}
