@@ -50,18 +50,7 @@
 
       .check {
         visibility: visible;
-        animation: check-anim var(--hover-anim-duration) var(--anim-easing);
       }
-    }
-  }
-
-  @keyframes check-anim {
-    0% {
-      scale: 200%;
-    }
-
-    100% {
-      scale: 100%;
     }
   }
 
