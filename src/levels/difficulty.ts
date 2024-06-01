@@ -14,7 +14,7 @@ export type PresetDifficulty = (typeof PRESET_DIFFICULTIES)[number];
  * |---------|------------|--------------------------------|-----------------|----------------|
  * | Normal  | 3          | + (70%) - (30%)                | 4               | 3              |
  * | Hard    | 3          | + (65%) - (25%) * (10%)        | 4               | 4              |
- * | Extreme | 4          | + (65%) - (20%) * (10%) / (5%) | 5               | Unlimited      |
+ * | Extreme | 4          | + (65%) - (20%) * (10%) / (5%) | 5               | 8              |
  */
 export class Difficulty {
   /** Size of the board.
@@ -115,7 +115,7 @@ export class Difficulty {
    * Preset extreme difficulty.
    */
   static extreme(): Difficulty {
-    return new Difficulty(4, 5, Infinity, {
+    return new Difficulty(4, 5, 8, {
       addition: 65,
       subtraction: 20,
       multiplication: 10,

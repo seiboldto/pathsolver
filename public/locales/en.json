@@ -12,7 +12,11 @@
     "normal": "Normal",
     "hard": "Hard",
     "extreme": "Extreme",
-    "custom": "Custom"
+    "custom": "Custom",
+    "boardSize": "<0>Board Size</0> {{boardSize}} × {{boardSize}}",
+    "pathLength": "<0>Path Length</0> {{min}} − {{max}}",
+    "pathCount": "<0>Path Count</0> {{min}} − {{max}}",
+    "pathCount_same": "<0>Path Count</0> {{min}}"
   },
   "settings": {
     "title": "settings",
