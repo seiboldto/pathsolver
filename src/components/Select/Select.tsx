@@ -29,8 +29,11 @@ export function Select<T extends string>({
 
   const handleNext = () => selectByIndex((i) => i + 1);
   const handlePrev = () => selectByIndex((i) => i - 1);
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowLeft" || e.key === "ArrowDown") handlePrev();
+    if (e.key === "ArrowRight" || e.key === "ArrowUp") handleNext();
+  };
 
-  // TODO: Keyboard interaction
   const currentIndex = data.findIndex((d) => d.value === value);
   const selectByIndex = (computeIndex: (index: number) => number): void => {
     const nextIndex = computeIndex(currentIndex);
@@ -63,6 +66,7 @@ export function Select<T extends string>({
           <IconCaretLeftFilled />
         </Button>
         <div
+          onKeyDown={handleKeyDown}
           className={classes.selected}
           tabIndex={0}
           role="spinbutton"
