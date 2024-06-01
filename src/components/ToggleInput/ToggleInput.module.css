@@ -52,11 +52,11 @@
         background-color: var(--background-color-dark);
       }
 
-      &.active:hover {
+      &[data-active="true"]:hover {
         border-color: var(--primary-border-color-active);
       }
 
-      &.active:active {
+      &[data-active="true"]:active {
         border-color: var(--primary-border-color-active);
         background-color: var(--primary-border-color);
       }
