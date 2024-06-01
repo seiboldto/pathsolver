@@ -1,8 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { LANGUAGES } from "~src/lib";
-
 import { createSelectors } from "./store-utils";
 
 type SettingsStore = {
@@ -16,7 +14,6 @@ type SettingsStore = {
 };
 
 type Settings = {
-  language: (typeof LANGUAGES)[number]["locale"];
   theme: "light" | "dark";
   enableHoverAnimations: boolean;
   enableMenuTransitions: boolean;
@@ -27,7 +24,6 @@ const settingsStore = create(
   persist<SettingsStore, [], [], Pick<SettingsStore, "settings">>(
     (set, get) => ({
       settings: {
-        language: "en",
         theme: "light",
         enableHoverAnimations: true,
         enableMenuTransitions: true,

@@ -21,7 +21,7 @@ const themes: SelectData<"light" | "dark"> = [
 ];
 
 export function SettingsScreen() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { navigate } = useRouterStore.use.actions();
   const navigateToHome = () => navigate({ location: "home" });
@@ -34,8 +34,8 @@ export function SettingsScreen() {
       <Select
         label={t("settings.language")}
         data={languages}
-        value={settings.language}
-        onChange={(value) => updateSettings("language", value)}
+        value={i18n.language}
+        onChange={(value) => i18n.changeLanguage(value)}
       ></Select>
       <ToggleInput
         label={t("settings.theme")}

@@ -24,6 +24,6 @@ export const useSettingsSideEffects = () => {
   }, [settings.theme]);
 
   useEffect(() => {
-    i18n.changeLanguage(settings.language);
-  }, [i18n, settings.language]);
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language]);
 };
