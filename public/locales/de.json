@@ -11,7 +11,8 @@
     "choose": "Schwierigkeit auswählen",
     "normal": "Normal",
     "hard": "Schwer",
-    "extreme": "Extrem"
+    "extreme": "Extrem",
+    "custom": "Benutzerdefiniert"
   },
   "settings": {
     "title": "einstellungen",

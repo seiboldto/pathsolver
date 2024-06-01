@@ -11,7 +11,8 @@
     "choose": "Choose Difficulty",
     "normal": "Normal",
     "hard": "Hard",
-    "extreme": "Extreme"
+    "extreme": "Extreme",
+    "custom": "Custom"
   },
   "settings": {
     "title": "settings",

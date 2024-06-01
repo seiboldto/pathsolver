@@ -55,6 +55,7 @@ export function ToggleInput<T extends string>({
                 item.value === value && toggleButtonClasses.active,
                 enableHoverAnimations && toggleButtonClasses.withHoverAnimations
               )}
+              aria-label={item.square ? t(i18nPrefix + item.value) : undefined}
             >
               {item.label === undefined
                 ? t(i18nPrefix + item.value)
