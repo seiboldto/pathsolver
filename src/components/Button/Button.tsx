@@ -1,5 +1,4 @@
 import { type Icon, type IconProps } from "@tabler/icons-react";
-import { clsx } from "clsx";
 
 import classes from "./Button.module.css";
 
@@ -22,11 +21,9 @@ export function Button({
   return (
     <button
       onClick={onClick}
-      className={clsx(
-        classes.button,
-        icon === undefined && classes.withoutIcon,
-        square && classes.square
-      )}
+      className={classes.button}
+      data-square={square}
+      data-icon={icon !== undefined}
       {...props}
     >
       {Icon && (

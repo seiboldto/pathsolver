@@ -1,4 +1,3 @@
-import { clsx } from "clsx";
 import { useTranslation } from "react-i18next";
 
 import { Group } from "~src/components";
@@ -35,7 +34,8 @@ export function ToggleInput<T extends string>({
         {data.map((item) => (
           <div
             key={item.value}
-            className={clsx(classes.control, item.square && classes.square)}
+            className={classes.control}
+            data-square={item.square === true}
           >
             <input
               type="radio"
@@ -48,10 +48,8 @@ export function ToggleInput<T extends string>({
             ></input>
             <label
               htmlFor={`${id}-${item.value}`}
-              className={clsx(
-                classes.toggleButton,
-                item.value === value && classes.active
-              )}
+              className={classes.toggleButton}
+              data-active={item.value === value}
               aria-label={item.square ? t(i18nPrefix + item.value) : undefined}
             >
               {item.label === undefined

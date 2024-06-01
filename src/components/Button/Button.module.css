@@ -32,7 +32,7 @@
     align-items: center;
   }
 
-  &.withoutIcon {
+  &[data-icon="false"] {
     justify-content: center;
     .text {
       position: unset;
@@ -68,7 +68,7 @@
         transform: translateX(-50%);
       }
 
-      &:not(.withoutIcon) .text {
+      &[data-icon="true"] .text {
         left: calc(50% + var(--spacing-xs) + 2rem);
         transform: translateX(-50%);
         opacity: 0;
@@ -93,7 +93,7 @@
     outline-offset: 0.125rem;
   }
 
-  &.square {
+  &[data-square="true"] {
     max-width: var(--ui-size);
     min-width: var(--ui-size);
   }

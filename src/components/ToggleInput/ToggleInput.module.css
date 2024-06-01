@@ -21,7 +21,7 @@
     }
   }
 
-  &.square {
+  &[data-square="true"] {
     max-width: var(--ui-size);
   }
 
@@ -36,7 +36,7 @@
     justify-content: center;
     min-height: var(--ui-size);
 
-    &.active {
+    &[data-active="true"] {
       color: var(--text-on-primary-color);
       background-color: var(--primary-color);
       border-color: var(--primary-border-color);
