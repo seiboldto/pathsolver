@@ -22,5 +22,9 @@
     "theme-dark": "Dark",
     "hover-animations": "Hover Animations",
     "menu-transitions": "Menu Transitions"
+  },
+  "ui": {
+    "next": "Next",
+    "prev": "Previous"
   }
 }

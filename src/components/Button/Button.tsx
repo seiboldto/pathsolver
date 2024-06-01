@@ -5,12 +5,10 @@ import { useSettingsStore } from "~src/stores";
 
 import classes from "./Button.module.css";
 
-export type ButtonProps = {
-  onClick?: () => void;
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   icon?: React.ForwardRefExoticComponent<
     Omit<IconProps, "ref"> & React.RefAttributes<Icon>
   >;
-  children: React.ReactNode;
   square?: boolean;
 };
 
@@ -19,6 +17,7 @@ export function Button({
   icon,
   children,
   square,
+  ...props
 }: ButtonProps): JSX.Element {
   const { enableHoverAnimations } = useSettingsStore.use.settings();
 
@@ -33,6 +32,7 @@ export function Button({
         square && classes.square,
         enableHoverAnimations && classes.withHoverAnimations
       )}
+      {...props}
     >
       {Icon && (
         <div className={classes.icon}>

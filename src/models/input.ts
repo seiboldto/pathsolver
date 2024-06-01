@@ -4,6 +4,5 @@ export type InputProps = {
 };
 
 export type SelectData<T, P = object> = ({
-  label?: React.ReactNode;
   value: T;
 } & P)[];

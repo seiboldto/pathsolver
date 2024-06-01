@@ -15,8 +15,9 @@ type ToggleInputProps<T> = InputProps & {
   onChange: (value: T) => void;
 };
 
-export type ToggleInputItemProps = {
+type ToggleInputItemProps = {
   square?: boolean;
+  label?: React.ReactNode;
 };
 
 export function ToggleInput<T extends string>({
