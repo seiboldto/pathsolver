@@ -1,8 +1,6 @@
 import { type Icon, type IconProps } from "@tabler/icons-react";
 import { clsx } from "clsx";
 
-import { useSettingsStore } from "~src/stores";
-
 import classes from "./Button.module.css";
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -19,8 +17,6 @@ export function Button({
   square,
   ...props
 }: ButtonProps): JSX.Element {
-  const { enableHoverAnimations } = useSettingsStore.use.settings();
-
   const Icon = icon || null;
 
   return (
@@ -29,8 +25,7 @@ export function Button({
       className={clsx(
         classes.button,
         icon === undefined && classes.withoutIcon,
-        square && classes.square,
-        enableHoverAnimations && classes.withHoverAnimations
+        square && classes.square
       )}
       {...props}
     >

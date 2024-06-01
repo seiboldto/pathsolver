@@ -1,8 +1,6 @@
 import { IconCheck } from "@tabler/icons-react";
-import { clsx } from "clsx";
 
 import { type InputProps } from "~src/models";
-import { useSettingsStore } from "~src/stores";
 
 import classes from "./Checkbox.module.css";
 
@@ -16,15 +14,8 @@ export function Checkbox({
   checked,
   onChange,
 }: CheckboxProps): JSX.Element {
-  const { enableHoverAnimations } = useSettingsStore.use.settings();
-
   return (
-    <label
-      className={clsx(
-        classes.checkbox,
-        enableHoverAnimations && classes.withHoverAnimations
-      )}
-    >
+    <label className={classes.checkbox}>
       {label}
       <input
         type="checkbox"

@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { Group } from "~src/components";
 import { useId } from "~src/hooks";
 import type { InputProps, SelectData } from "~src/models";
-import { useSettingsStore } from "~src/stores";
 
 import classes from "./ToggleInput.module.css";
 
@@ -27,7 +26,6 @@ export function ToggleInput<T extends string>({
   i18nPrefix,
 }: ToggleInputProps<T>): JSX.Element {
   const id = useId("toggle-input");
-  const { enableHoverAnimations } = useSettingsStore.use.settings();
   const { t } = useTranslation();
 
   return (
@@ -52,8 +50,7 @@ export function ToggleInput<T extends string>({
               htmlFor={`${id}-${item.value}`}
               className={clsx(
                 classes.toggleButton,
-                item.value === value && classes.active,
-                enableHoverAnimations && classes.withHoverAnimations
+                item.value === value && classes.active
               )}
               aria-label={item.square ? t(i18nPrefix + item.value) : undefined}
             >

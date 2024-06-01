@@ -11,7 +11,7 @@
   --ui-width: min(18rem, 80vw);
   --side-padding: calc((100vw - var(--ui-width)) / 2);
 
-  --anim-duration: 0.2s;
+  --anim-duration: 0.25s;
   --anim-easing: cubic-bezier(0, 0, 0, 1);
 }
 

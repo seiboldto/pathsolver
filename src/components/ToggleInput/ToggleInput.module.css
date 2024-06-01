@@ -1,3 +1,5 @@
+@import "../../styles/mixins.css";
+
 .control {
   position: relative;
 
@@ -40,7 +42,7 @@
       border-color: var(--primary-border-color);
     }
 
-    &.withHoverAnimations {
+    @mixin hoverAnimations {
       &:hover {
         border-color: var(--primary-color);
       }

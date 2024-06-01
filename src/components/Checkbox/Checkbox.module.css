@@ -1,3 +1,5 @@
+@import "../../styles/mixins.css";
+
 .checkbox {
   --checkbox-size: var(--ui-size-sm);
 
@@ -54,26 +56,28 @@
     }
   }
 
-  &.withHoverAnimations:hover {
-    input:not(:checked) {
-      + span {
-        border-color: var(--primary-color);
+  @mixin hoverAnimations {
+    &:hover {
+      input:not(:checked) {
+        + span {
+          border-color: var(--primary-color);
+        }
+
+        &:active + span {
+          background-color: var(--background-color-dark);
+          border-color: var(--primary-border-color);
+        }
       }
 
-      &:active + span {
-        background-color: var(--background-color-dark);
-        border-color: var(--primary-border-color);
-      }
-    }
+      input:checked {
+        + span {
+          border-color: var(--primary-border-color-active);
+        }
 
-    input:checked {
-      + span {
-        border-color: var(--primary-border-color-active);
-      }
-
-      &:active + span {
-        border-color: var(--primary-border-color-active);
-        background-color: var(--primary-border-color);
+        &:active + span {
+          border-color: var(--primary-border-color-active);
+          background-color: var(--primary-border-color);
+        }
       }
     }
   }

@@ -1,3 +1,5 @@
+@import "../../styles/mixins.css";
+
 .button {
   --background-z-index: 1;
   --hover-anim-z-index: 2;
@@ -15,7 +17,7 @@
   .icon {
     position: absolute;
     left: var(--spacing-xs);
-    transition: left var(--hover-anim-duration) var(--anim-easing);
+    transition: left var(--anim-duration) var(--anim-easing);
     z-index: var(--content-z-index);
     display: flex;
   }
@@ -23,8 +25,8 @@
   .text {
     position: absolute;
     left: calc(var(--spacing-xs) + 2rem);
-    transition: left var(--hover-anim-duration) var(--anim-easing),
-      opacity calc(var(--hover-anim-duration) / 2) var(--anim-easing);
+    transition: left var(--anim-duration) var(--anim-easing),
+      opacity calc(var(--anim-duration) / 2) var(--anim-easing);
     z-index: var(--content-z-index);
     display: flex;
     align-items: center;
@@ -53,34 +55,36 @@
     left: 0;
     right: 100%;
     visibility: hidden;
-    transition: right var(--hover-anim-duration) var(--anim-easing);
+    transition: right var(--anim-duration) var(--anim-easing);
     z-index: var(--hover-anim-z-index);
   }
 
-  &.withHoverAnimations:hover {
-    color: var(--text-on-primary-color);
+  @mixin hoverAnimations {
+    &:hover {
+      color: var(--text-on-primary-color);
 
-    .icon {
-      left: 50%;
-      transform: translateX(-50%);
+      .icon {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      &:not(.withoutIcon) .text {
+        left: calc(50% + var(--spacing-xs) + 2rem);
+        transform: translateX(-50%);
+        opacity: 0;
+      }
+
+      .hoverAnim {
+        right: 0;
+        visibility: visible;
+      }
     }
 
-    &:not(.withoutIcon) .text {
-      left: calc(50% + var(--spacing-xs) + 2rem);
-      transform: translateX(-50%);
-      opacity: 0;
-    }
-
-    .hoverAnim {
-      right: 0;
-      visibility: visible;
-    }
-  }
-
-  &.withHoverAnimations:active {
-    .hoverAnim {
-      background-color: var(--primary-border-color);
-      border-color: var(--primary-border-color-active);
+    &:active {
+      .hoverAnim {
+        background-color: var(--primary-border-color);
+        border-color: var(--primary-border-color-active);
+      }
     }
   }
 

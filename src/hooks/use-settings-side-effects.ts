@@ -8,9 +8,9 @@ export const useSettingsSideEffects = () => {
   const { i18n } = useTranslation();
 
   useEffect(() => {
-    document.documentElement.style.setProperty(
-      "--hover-anim-duration",
-      settings.enableHoverAnimations ? "250ms" : "0ms"
+    document.body.toggleAttribute(
+      "data-hover-animations",
+      settings.enableHoverAnimations
     );
   }, [settings.enableHoverAnimations]);
 
