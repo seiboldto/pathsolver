@@ -6,7 +6,6 @@ import { useId } from "~src/hooks";
 import type { InputProps, SelectData } from "~src/models";
 import { useSettingsStore } from "~src/stores";
 
-import toggleButtonClasses from "../ToggleButton/ToggleButton.module.css";
 import classes from "./ToggleInput.module.css";
 
 type ToggleInputProps<T> = InputProps & {
@@ -52,9 +51,9 @@ export function ToggleInput<T extends string>({
             <label
               htmlFor={`${id}-${item.value}`}
               className={clsx(
-                toggleButtonClasses.toggleButton,
-                item.value === value && toggleButtonClasses.active,
-                enableHoverAnimations && toggleButtonClasses.withHoverAnimations
+                classes.toggleButton,
+                item.value === value && classes.active,
+                enableHoverAnimations && classes.withHoverAnimations
               )}
               aria-label={item.square ? t(i18nPrefix + item.value) : undefined}
             >
