@@ -55,7 +55,7 @@ export function Select<T extends string>({
 
   return (
     <>
-      <label htmlFor={id}>{label}</label>
+      <label id={id}>{label}</label>
       <div className={classes.select}>
         <Button
           square
