@@ -70,7 +70,7 @@ test("supports changing settings and persists them", async ({ page }) => {
   await expect(light).toBeChecked();
   await expect(dark).not.toBeChecked();
 
-  await page.getByText("Dark").click();
+  await light.press("ArrowRight");
   await expect(dark).toBeChecked();
   await expect(light).not.toBeChecked();
   await expect(page.locator("body")).toHaveClass("theme-dark");
