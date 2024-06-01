@@ -19,12 +19,20 @@ type Settings = {
   enableMenuTransitions: boolean;
 };
 
-// TODO: Create settings based on user preferences
+const getDefaultSettings = (): Pick<Settings, "theme"> => {
+  // TODO: Disable hover animations on mobile
+  const theme = window?.matchMedia("(prefers-color-scheme: dark)")?.matches
+    ? "dark"
+    : "light";
+
+  return { theme };
+};
+
 const settingsStore = create(
   persist<SettingsStore, [], [], Pick<SettingsStore, "settings">>(
     (set, get) => ({
       settings: {
-        theme: "light",
+        ...getDefaultSettings(),
         enableHoverAnimations: true,
         enableMenuTransitions: true,
       },
