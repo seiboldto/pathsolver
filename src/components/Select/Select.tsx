@@ -1,7 +1,7 @@
 import { IconCaretLeftFilled, IconCaretRightFilled } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
 
-import { Button } from "~src/components";
+import { Button, Tooltip } from "~src/components";
 import { useId } from "~src/hooks";
 import type { InputProps, SelectData } from "~src/models";
 
@@ -57,14 +57,11 @@ export function Select<T extends string>({
     <>
       <label id={id}>{label}</label>
       <div className={classes.select}>
-        <Button
-          square
-          onClick={handlePrev}
-          tabIndex={-1}
-          aria-label={t("ui.prev")}
-        >
-          <IconCaretLeftFilled />
-        </Button>
+        <Tooltip label={t("ui.prev")}>
+          <Button square onClick={handlePrev} tabIndex={-1}>
+            <IconCaretLeftFilled />
+          </Button>
+        </Tooltip>
         <div
           onKeyDown={handleKeyDown}
           className={classes.selected}
@@ -76,14 +73,11 @@ export function Select<T extends string>({
         >
           {selectedLabel}
         </div>
-        <Button
-          square
-          onClick={handleNext}
-          tabIndex={-1}
-          aria-label={t("ui.next")}
-        >
-          <IconCaretRightFilled />
-        </Button>
+        <Tooltip label={t("ui.next")}>
+          <Button square onClick={handleNext} tabIndex={-1}>
+            <IconCaretRightFilled />
+          </Button>
+        </Tooltip>
       </div>
     </>
   );

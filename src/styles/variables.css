@@ -28,6 +28,9 @@
     --primary-border-color-active: hsl(208, 77%, 38%);
     --text-on-primary-color: white;
 
+    --tooltip-color: hsl(216, 18%, 16%);
+    --tooltip-text-color: #fff;
+
     --error-color: hsl(0, 72%, 57%);
 
     --focus-color: hsl(209, 77%, 43%);
@@ -44,6 +47,9 @@
     --primary-border-color: hsl(208, 77%, 37%);
     --primary-border-color-active: hsl(208, 77%, 28%);
     --text-on-primary-color: white;
+
+    --tooltip-color: hsl(210, 16%, 93%);
+    --tooltip-text-color: black;
 
     --error-color: hsl(0, 72%, 47%);
 

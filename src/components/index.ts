@@ -7,3 +7,5 @@ export { Screen } from "./Screen/Screen";
 export { Select } from "./Select/Select";
 export { Title } from "./Title/Title";
 export { ToggleInput } from "./ToggleInput/ToggleInput";
+export { Tooltip } from "./Tooltip/Tooltip";
+export { Wrap } from "./Wrap/Wrap";
