@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
-import { OperationIcon } from "~src/components";
+import { OperationIcon, Tooltip } from "~src/components";
 import { Difficulty, type PresetDifficulty } from "~src/levels";
 import { OPERATION_KINDS } from "~src/levels/operation";
 
@@ -51,19 +51,32 @@ export function DifficultyInfo({
       <span>{t("difficulty.operations")}</span>
       <div className={classes.distribution}>
         {operations.map(([op, value]) => (
-          <div
+          <Tooltip
             key={op}
-            className={classes.progress}
-            style={{ "--progress-width": `${value}%` }}
-            role="progressbar"
-            aria-valuemax={100}
-            aria-valuemin={0}
-            aria-valuenow={value}
-            aria-valuetext={`${value}%`}
-            aria-label={t(`operations.${op}`)}
+            label={t("difficulty.operation-percentage", {
+              operation: t(`operations.${op}`),
+              percentage: value / 100,
+              formatParams: {
+                percentage: {
+                  style: "percent",
+                  maximumFractionDigits: 2,
+                },
+              },
+            })}
           >
-            <OperationIcon kind={op} />
-          </div>
+            <div
+              className={classes.progress}
+              style={{ "--progress-width": `${value}%` }}
+              role="progressbar"
+              aria-valuemax={100}
+              aria-valuemin={0}
+              aria-valuenow={value}
+              aria-valuetext={`${value}%`}
+              aria-label={t(`operations.${op}`)}
+            >
+              <OperationIcon kind={op} />
+            </div>
+          </Tooltip>
         ))}
       </div>
     </>

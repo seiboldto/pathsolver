@@ -17,7 +17,8 @@
     "pathLength": "<0>Path Length</0> {{min}} − {{max}}",
     "pathCount": "<0>Path Count</0> {{min}} − {{max}}",
     "pathCount_same": "<0>Path Count</0> {{min}}",
-    "operations": "Operations"
+    "operations": "Operations",
+    "operation-percentage": "{{operation}} - {{percentage, number}}"
   },
   "settings": {
     "title": "settings",
