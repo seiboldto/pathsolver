@@ -1,0 +1,23 @@
+.distribution {
+  height: var(--ui-size-sm);
+  border: 0.125rem solid var(--border-color);
+  display: flex;
+
+  .progress {
+    width: var(--progress-width);
+    user-select: none;
+    position: relative;
+
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 1rem;
+    }
+
+    &:not(:last-child) {
+      border-right: 0.125rem solid var(--border-color);
+    }
+  }
+}

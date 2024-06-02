@@ -16,7 +16,8 @@
     "boardSize": "<0>Board Size</0> {{boardSize}} × {{boardSize}}",
     "pathLength": "<0>Path Length</0> {{min}} − {{max}}",
     "pathCount": "<0>Path Count</0> {{min}} − {{max}}",
-    "pathCount_same": "<0>Path Count</0> {{min}}"
+    "pathCount_same": "<0>Path Count</0> {{min}}",
+    "operations": "Operations"
   },
   "settings": {
     "title": "settings",
@@ -30,5 +31,11 @@
   "ui": {
     "next": "Next",
     "prev": "Previous"
+  },
+  "operations": {
+    "addition": "Addition",
+    "subtraction": "Subtraction",
+    "multiplication": "Multiplication",
+    "division": "Division"
   }
 }
