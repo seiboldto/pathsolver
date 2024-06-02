@@ -1,6 +1,6 @@
 .distribution {
   height: var(--ui-size-sm);
-  border: 0.125rem solid var(--border-color);
+  background-color: var(--border-color);
   display: flex;
 
   .progress {
@@ -17,7 +17,7 @@
     }
 
     &:not(:last-child) {
-      border-right: 0.125rem solid var(--border-color);
+      border-right: 0.125rem solid var(--background-color);
     }
   }
 }

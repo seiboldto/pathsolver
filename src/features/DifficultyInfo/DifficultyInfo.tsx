@@ -48,7 +48,7 @@ export function DifficultyInfo({
         values={pathCount}
         context={pathCount.min === pathCount.max ? "same" : undefined}
       />
-      <span>{t("difficulty.operations")}</span>
+      <span>{t("difficulty.operation-distribution")}</span>
       <div className={classes.distribution}>
         {operations.map(([op, value]) => (
           <Tooltip
