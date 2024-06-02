@@ -12,6 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.26.16",
     "@tabler/icons-react": "^3.1.0",
     "clsx": "^2.1.0",
     "i18next": "^23.10.1",
