@@ -9,10 +9,12 @@ test("supports navigation to and from settings", async ({ page }) => {
   const settings = page.getByRole("heading", { name: "settings" });
   await expect(pathfinder).not.toBeAttached();
   await expect(settings).toBeVisible();
+  await expect(page).toHaveURL("/settings");
 
   await page.getByRole("button", { name: "Back" }).click();
   await expect(pathfinder).toBeVisible();
   await expect(settings).not.toBeAttached();
+  await expect(page).toHaveURL("/");
 });
 
 test.describe("sets default values for user settings", () => {
@@ -48,8 +50,7 @@ test.describe("handles invalid preconfigured user settings", () => {
 });
 
 test("supports changing settings and persists them", async ({ page }) => {
-  await page.goto("/");
-  await page.getByRole("button", { name: "Settings" }).click();
+  await page.goto("/settings");
 
   const title = page.getByRole("heading", { name: "settings" });
 
@@ -78,5 +79,5 @@ test("supports changing settings and persists them", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "light" });
   await page.reload();
   await expect(page.locator("body")).toHaveClass("theme-dark");
-  await expect(page.getByRole("button", { name: "Settings" })).toBeVisible();
+  await expect(title).toBeVisible();
 });
