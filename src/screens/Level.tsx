@@ -1,11 +1,11 @@
 import { IconHome, IconRefresh } from "@tabler/icons-react";
+import { useLocation } from "wouter";
 
 import { Button, Group, Screen } from "~src/components";
-import { useRouterStore } from "~src/stores";
 
 export function LevelScreen(): JSX.Element {
-  const { navigate } = useRouterStore.use.actions();
-  const navigateToHome = () => navigate({ location: "home" });
+  const [, setLocation] = useLocation();
+  const navigateToHome = () => setLocation("/");
 
   return (
     <Screen gap="xl">

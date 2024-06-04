@@ -4,12 +4,13 @@ import {
   IconPlayerPlay,
 } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "wouter";
 
 import { Button, Divider, Screen, Title, ToggleInput } from "~src/components";
 import { DifficultyInfo } from "~src/features";
 import { Difficulty, generateRandomLevel } from "~src/levels";
 import { SELECTABLE_DIFFICULTIES } from "~src/models";
-import { useRouterStore, useUiStore } from "~src/stores";
+import { useUiStore } from "~src/stores";
 
 const difficulties = SELECTABLE_DIFFICULTIES.map((d) => ({
   value: d,
@@ -20,8 +21,8 @@ const difficulties = SELECTABLE_DIFFICULTIES.map((d) => ({
 export function DifficultyScreen() {
   const { t } = useTranslation();
 
-  const { navigate } = useRouterStore.use.actions();
-  const navigateToHome = () => navigate({ location: "home" });
+  const [, setLocation] = useLocation();
+  const navigateToHome = () => setLocation("/");
 
   const selectedDifficulty = useUiStore.use.selectedDifficulty();
   const { selectDifficulty } = useUiStore.use.actions();
@@ -32,8 +33,9 @@ export function DifficultyScreen() {
 
     const difficulty = Difficulty.presets[selectedDifficulty];
     const level = generateRandomLevel(difficulty);
+    console.log(level);
 
-    navigate({ location: "level", level });
+    setLocation("/level");
   };
 
   return (

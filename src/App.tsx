@@ -1,20 +1,31 @@
 import { Suspense } from "react";
+import { Redirect, Route, Switch } from "wouter";
 
 import { useSettingsSideEffects } from "~src/hooks";
 import { Difficulty, Home, Level, Settings } from "~src/screens";
-import { useRouterStore } from "~src/stores";
 
 export function App() {
   useSettingsSideEffects();
 
-  const route = useRouterStore.use.route();
-
   return (
     <Suspense>
-      {route.location === "home" && <Home />}
-      {route.location === "settings" && <Settings />}
-      {route.location === "difficulty" && <Difficulty />}
-      {route.location === "level" && <Level />}
+      <Switch>
+        <Route path="/">
+          <Home />
+        </Route>
+        <Route path="/settings">
+          <Settings />
+        </Route>
+        <Route path="/difficulty">
+          <Difficulty />
+        </Route>
+        <Route path="/level">
+          <Level />
+        </Route>
+        <Route>
+          <Redirect to="/" replace />
+        </Route>
+      </Switch>
     </Suspense>
   );
 }

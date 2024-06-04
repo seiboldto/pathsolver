@@ -1,5 +1,6 @@
 import { IconArrowLeft } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "wouter";
 
 import {
   Button,
@@ -11,7 +12,7 @@ import {
 } from "~src/components";
 import { LANGUAGES } from "~src/lib";
 import { SelectData } from "~src/models";
-import { useRouterStore, useSettingsStore } from "~src/stores";
+import { useSettingsStore } from "~src/stores";
 
 const languages: SelectData<(typeof LANGUAGES)[number]["locale"]> =
   LANGUAGES.map((l) => ({ label: l.name, value: l.locale }));
@@ -23,8 +24,9 @@ const themes: SelectData<"light" | "dark"> = [
 export function SettingsScreen() {
   const { t, i18n } = useTranslation();
 
-  const { navigate } = useRouterStore.use.actions();
-  const navigateToHome = () => navigate({ location: "home" });
+  const [, setLocation] = useLocation();
+  const navigateToHome = () => setLocation("/");
+
   const settings = useSettingsStore.use.settings();
   const { updateSettings } = useSettingsStore.use.actions();
 

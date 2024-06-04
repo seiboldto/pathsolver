@@ -4,16 +4,16 @@ import {
   IconSettings,
 } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "wouter";
 
 import { Button, Screen, Title } from "~src/components";
-import { useRouterStore } from "~src/stores";
 
 export function HomeScreen() {
   const { t } = useTranslation();
 
-  const { navigate } = useRouterStore.use.actions();
-  const navigateToSettings = () => navigate({ location: "settings" });
-  const navigateToDifficulty = () => navigate({ location: "difficulty" });
+  const [, setLocation] = useLocation();
+  const navigateToSettings = () => setLocation("/settings");
+  const navigateToDifficulty = () => setLocation("/difficulty");
 
   return (
     <Screen>
