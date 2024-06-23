@@ -48,7 +48,7 @@ export class Path {
     difficulty: Difficulty,
     rng: RandomGenerator
   ): GenerationResult<number[]> {
-    const nodeCount = Math.pow(difficulty.boardSize, 2);
+    const nodeCount = Math.pow(difficulty.options.boardSize, 2);
 
     const pathLengths = [];
     let sum = 0;
@@ -59,7 +59,7 @@ export class Path {
       while (sum < nodeCount) {
         const length = prand.unsafeUniformIntDistribution(
           2,
-          difficulty.maxPathLength,
+          difficulty.options.maxPathLength,
           rng
         );
         pathLengths.push(length);
@@ -67,10 +67,10 @@ export class Path {
       }
     }
 
-    if (pathLengths.length > difficulty.maxPathCount)
+    if (pathLengths.length > difficulty.options.maxPathCount)
       return new GenerationError({
         id: "max-path-count",
-        count: difficulty.maxPathCount,
+        count: difficulty.options.maxPathCount,
         actual: pathLengths.length,
       });
 
@@ -152,14 +152,16 @@ if (import.meta.vitest) {
         difficulty,
         rng
       ) as number[];
-      expect(pathLengths.length).toBeLessThanOrEqual(difficulty.maxPathCount);
+      expect(pathLengths.length).toBeLessThanOrEqual(
+        difficulty.options.maxPathCount
+      );
 
       const sum = pathLengths.reduce((a, b) => a + b, 0);
-      expect(sum).toEqual(Math.pow(difficulty.boardSize, 2));
+      expect(sum).toEqual(Math.pow(difficulty.options.boardSize, 2));
 
       pathLengths.forEach((l) => {
         expect(l).toBeGreaterThanOrEqual(2);
-        expect(l).toBeLessThanOrEqual(difficulty.maxPathLength);
+        expect(l).toBeLessThanOrEqual(difficulty.options.maxPathLength);
       });
     }
   );
@@ -167,7 +169,17 @@ if (import.meta.vitest) {
   it("returns an error if too many paths are generated", () => {
     const rng = prand.xoroshiro128plus(0);
 
-    const difficulty = new Difficulty(3, 3, 1, { addition: 100 });
+    const difficulty = new Difficulty({
+      boardSize: 3,
+      maxPathLength: 3,
+      maxPathCount: 1,
+      operationDistribution: {
+        addition: 100,
+        subtraction: 0,
+        multiplication: 0,
+        division: 0,
+      },
+    });
 
     const error = Path.getRandomPathLenghts(difficulty, rng) as GenerationError;
     expect(error).toBeInstanceOf(GenerationError);
@@ -231,7 +243,17 @@ if (import.meta.vitest) {
       new Operation("subtraction")
     );
 
-    const difficulty = new Difficulty(3, 3, Infinity, { addition: 100 });
+    const difficulty = new Difficulty({
+      boardSize: 3,
+      maxPathCount: 3,
+      maxPathLength: 3,
+      operationDistribution: {
+        addition: 100,
+        subtraction: 0,
+        division: 0,
+        multiplication: 0,
+      },
+    });
     const board = new Board(difficulty, nodes, edges);
 
     const error = Path.getPath(board, 2, rng) as GenerationError;

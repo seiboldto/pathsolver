@@ -40,12 +40,13 @@ export class Board {
     difficulty: Difficulty,
     rng: RandomGenerator
   ): Board {
-    const nodes = Array.from({ length: Math.pow(difficulty.boardSize, 2) }).map(
-      () => prand.unsafeUniformIntDistribution(1, 9, rng)
+    const { boardSize } = difficulty.options;
+
+    const nodes = Array.from({ length: Math.pow(boardSize, 2) }).map(() =>
+      prand.unsafeUniformIntDistribution(1, 9, rng)
     );
 
-    const edgeCount =
-      2 * Math.pow(difficulty.boardSize, 2) - 2 * difficulty.boardSize;
+    const edgeCount = 2 * Math.pow(boardSize, 2) - 2 * boardSize;
     const edges = Array.from({ length: edgeCount }).map(() => {
       const op = difficulty.getRandomOperation(rng);
       return new Operation(op);
@@ -65,7 +66,7 @@ export class Board {
 
     const neighbourIndices: Record<string, number[]> = {};
 
-    const { boardSize } = this.difficulty;
+    const { boardSize } = this.difficulty.options;
     for (const index of remainingIndices) {
       const neighbours: number[] = [];
 
@@ -97,7 +98,7 @@ export class Board {
    */
   public indexOfEdgeBetween(i1: number, i2: number): number {
     const lower = Math.min(i1, i2);
-    const { boardSize } = this.difficulty;
+    const { boardSize } = this.difficulty.options;
 
     if (Math.abs(i1 - i2) === 1) {
       const row = Math.trunc(i1 / boardSize);
@@ -118,7 +119,7 @@ export class Board {
       path.indices.includes(i) ? 0 : n
     );
 
-    const { boardSize } = this.difficulty;
+    const { boardSize } = this.difficulty.options;
     for (let column = 0; column < boardSize; column++) {
       for (let row = boardSize - 2; row >= 0; row--) {
         let index = row * boardSize + column;
