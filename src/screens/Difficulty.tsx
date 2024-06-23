@@ -30,7 +30,7 @@ export function DifficultyScreen() {
     // TODO: Implement custom difficulties
     if (selectedDifficulty === "custom") return alert("Not implemented yet.");
 
-    const difficulty = Difficulty.presets[selectedDifficulty];
+    const difficulty = Difficulty[selectedDifficulty]();
     const level = generateRandomLevel(difficulty);
     console.log(level);
 

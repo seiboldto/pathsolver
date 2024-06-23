@@ -20,13 +20,6 @@ export type DifficultyOptions = {
 export class Difficulty {
   public options: DifficultyOptions;
 
-  /** Preset Difficulties */
-  public static presets: Record<PresetDifficulty, Difficulty> = {
-    normal: Difficulty.normal(),
-    hard: Difficulty.hard(),
-    extreme: Difficulty.extreme(),
-  };
-
   constructor({
     boardSize,
     maxPathCount,
@@ -166,7 +159,7 @@ if (import.meta.vitest) {
       const N = 1000;
       const DELTA = N / 10 / 2;
 
-      const difficulty = Difficulty.presets[preset];
+      const difficulty = Difficulty[preset]();
       const operations: Partial<Record<OperationKind, number>> = {};
       const rng = prand.xoroshiro128plus(0);
 
