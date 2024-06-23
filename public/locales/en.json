@@ -12,13 +12,7 @@
     "normal": "Normal",
     "hard": "Hard",
     "extreme": "Extreme",
-    "custom": "Custom",
-    "boardSize": "<0>Board Size</0> {{boardSize}} × {{boardSize}}",
-    "pathLength": "<0>Path Length</0> {{min}} − {{max}}",
-    "pathCount": "<0>Path Count</0> {{min}} − {{max}}",
-    "pathCount_same": "<0>Path Count</0> {{min}}",
-    "operation-distribution": "Operation Distribution",
-    "operation-percentage": "{{operation}} - {{percentage, number}}"
+    "custom": "Custom"
   },
   "settings": {
     "title": "settings",
@@ -38,5 +32,9 @@
     "subtraction": "Subtraction",
     "multiplication": "Multiplication",
     "division": "Division"
+  },
+  "game": {
+    "restart": "Restart",
+    "undo": "Undo"
   }
 }

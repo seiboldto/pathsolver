@@ -7,7 +7,6 @@ import { useTranslation } from "react-i18next";
 import { useLocation } from "wouter";
 
 import { Button, Divider, Screen, Title, ToggleInput } from "~src/components";
-import { DifficultyInfo } from "~src/features";
 import { Difficulty, generateRandomLevel } from "~src/levels";
 import { SELECTABLE_DIFFICULTIES } from "~src/models";
 import { useUiStore } from "~src/stores";
@@ -48,9 +47,6 @@ export function DifficultyScreen() {
         onChange={(v) => selectDifficulty(v)}
         i18nPrefix="difficulty."
       />
-      {selectedDifficulty !== "custom" && (
-        <DifficultyInfo selectedDifficulty={selectedDifficulty} />
-      )}
       <Button icon={IconPlayerPlay} onClick={handlePlayClick}>
         {t("menu.play")}
       </Button>
