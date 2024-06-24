@@ -13,7 +13,7 @@ export function LevelScreen(): JSX.Element {
 
   const activeLevelState = useLevelStore.use.activeLevelState();
   if (activeLevelState === null) {
-    return <Redirect to="/" />;
+    return <Redirect to="/" replace />;
   }
 
   return (
