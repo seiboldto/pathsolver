@@ -9,7 +9,7 @@ import { useLocation } from "wouter";
 import { Button, Divider, Screen, Title, ToggleInput } from "~src/components";
 import { Difficulty, generateRandomLevel } from "~src/levels";
 import { SELECTABLE_DIFFICULTIES } from "~src/models";
-import { useUiStore } from "~src/stores";
+import { useLevelStore, useUiStore } from "~src/stores";
 
 const difficulties = SELECTABLE_DIFFICULTIES.map((d) => ({
   value: d,
@@ -26,6 +26,8 @@ export function DifficultyScreen() {
   const selectedDifficulty = useUiStore.use.selectedDifficulty();
   const { selectDifficulty } = useUiStore.use.actions();
 
+  const { setActiveLevel } = useLevelStore.use.actions();
+
   const handlePlayClick = () => {
     // TODO: Implement custom difficulties
     if (selectedDifficulty === "custom") return alert("Not implemented yet.");
@@ -35,6 +37,7 @@ export function DifficultyScreen() {
     console.log(level);
 
     setLocation("/level");
+    setActiveLevel(level);
   };
 
   return (

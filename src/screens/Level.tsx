@@ -1,14 +1,20 @@
 import { IconArrowBack, IconHome, IconRefresh } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "wouter";
+import { Redirect, useLocation } from "wouter";
 
 import { Button, Group, Screen, Tooltip } from "~src/components";
+import { useLevelStore } from "~src/stores";
 
 export function LevelScreen(): JSX.Element {
   const { t } = useTranslation();
 
   const [, setLocation] = useLocation();
   const navigateToHome = () => setLocation("/");
+
+  const activeLevelState = useLevelStore.use.activeLevelState();
+  if (activeLevelState === null) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <Screen gap="xl">
@@ -28,6 +34,7 @@ export function LevelScreen(): JSX.Element {
             <IconArrowBack />
           </Button>
         </Tooltip>
+        {activeLevelState.level.paths.join(",")}
       </Group>
     </Screen>
   );
