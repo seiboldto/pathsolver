@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 import type { Level } from "~src/levels";
-import { type LevelState, transformNodes } from "~src/models";
+import { type LevelState, transformEdges, transformNodes } from "~src/models";
 
 import { createSelectors } from "./store-utils";
 
@@ -18,7 +18,11 @@ const levelStore = create<LevelStore>((set) => ({
   actions: {
     setActiveLevel: (level) =>
       set({
-        activeLevelState: { level, nodes: transformNodes(level.board) },
+        activeLevelState: {
+          level,
+          nodes: transformNodes(level.board),
+          edges: transformEdges(level.board),
+        },
       }),
     setActiveLevelState: (state) => set({ activeLevelState: state }),
   },

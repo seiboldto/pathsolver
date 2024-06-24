@@ -1,7 +1,6 @@
 .board {
   width: 100%;
   aspect-ratio: 1 / 1;
-  background-color: lightblue;
   position: relative;
 
   --node-size: var(--ui-size);
@@ -16,5 +15,32 @@
 
     left: calc(var(--column) * (var(--node-size) + var(--node-gap)));
     top: calc(var(--row) * (var(--node-size) + var(--node-gap)));
+  }
+
+  .edge {
+    position: absolute;
+    display: flex;
+    transform: translate(-50%, -50%);
+
+    &[data-orientation="horizontal"] {
+      top: calc(
+        var(--node-size) / 2 + var(--row) * (var(--node-gap) + var(--node-size))
+      );
+      left: calc(
+        var(--node-size) + (var(--node-gap) / 2) + var(--column) *
+          (var(--node-gap) + var(--node-size))
+      );
+    }
+
+    &[data-orientation="vertical"] {
+      top: calc(
+        var(--node-size) + (var(--node-gap) / 2) + var(--row) *
+          (var(--node-gap) + var(--node-size))
+      );
+      left: calc(
+        var(--node-size) / 2 + var(--column) *
+          (var(--node-gap) + var(--node-size))
+      );
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { v4 as uuid } from "uuid";
 
-import type { Board, Level } from "~src/levels";
+import type { Board, Level, OperationKind } from "~src/levels";
 
 type Node = {
   id: string;
@@ -9,9 +9,18 @@ type Node = {
   value: number;
 };
 
+type Edge = {
+  id: string;
+  row: number;
+  column: number;
+  orientation: "horizontal" | "vertical";
+  operation: OperationKind;
+};
+
 export type LevelState = {
   level: Level;
   nodes: Node[];
+  edges: Edge[];
 };
 
 export const transformNodes = (board: Board): Node[] => {
@@ -22,4 +31,21 @@ export const transformNodes = (board: Board): Node[] => {
     column: i % boardSize,
     value: n,
   }));
+};
+
+export const transformEdges = (board: Board): Edge[] => {
+  return board.edges.map((e, i) => {
+    const isHorizontal = i < board.edges.length / 2;
+    const boardSize =
+      board.difficulty.options.boardSize - (isHorizontal ? 1 : 0);
+    const index = isHorizontal ? i : i - board.edges.length / 2;
+
+    return {
+      id: uuid(),
+      row: Math.trunc(index / boardSize),
+      column: index % boardSize,
+      orientation: isHorizontal ? "horizontal" : "vertical",
+      operation: e.kind,
+    };
+  });
 };
