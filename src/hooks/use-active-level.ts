@@ -4,7 +4,8 @@ export const useActiveLevel = () => {
   const activeLevelState = useLevelStore.use.activeLevelState();
   if (activeLevelState === null)
     throw new Error("useActiveLevel may only be used on the `Level` screen.");
-  const { level } = activeLevelState;
+  const { nodes, level } = activeLevelState;
+  const { boardSize } = level.board.difficulty.options;
 
-  return { level };
+  return { nodes, boardSize };
 };

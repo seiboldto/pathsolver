@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Redirect, useLocation } from "wouter";
 
 import { Button, Group, Screen, Tooltip } from "~src/components";
+import { GameBoard } from "~src/features";
 import { useLevelStore } from "~src/stores";
 
 export function LevelScreen(): JSX.Element {
@@ -34,8 +35,8 @@ export function LevelScreen(): JSX.Element {
             <IconArrowBack />
           </Button>
         </Tooltip>
-        {activeLevelState.level.paths.join(",")}
       </Group>
+      <GameBoard />
     </Screen>
   );
 }
