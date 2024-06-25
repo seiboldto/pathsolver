@@ -6,7 +6,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+
+  .arrow {
+    width: calc(2 * var(--node-size));
+    height: var(--node-size);
+    position: absolute;
+    fill: var(--primary-border-color);
+    z-index: -1;
+
+    &[data-direction="right"] {
+      transform: translateX(-3px);
+    }
+
+    &[data-direction="left"] {
+      transform: translateX(3px) rotate(180deg);
+    }
+
+    &[data-direction="up"] {
+      transform: translateY(3px) rotate(270deg);
+    }
+
+    &[data-direction="down"] {
+      transform: translateY(-3px) rotate(90deg);
+    }
+  }
 
   &[data-selected="true"] {
     background-color: var(--primary-color);

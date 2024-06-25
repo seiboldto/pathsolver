@@ -35,7 +35,8 @@ export function GameEdge({ edge }: GameEdgeProps): JSX.Element {
   const { t } = useTranslation();
 
   const Icon = OPERATION_ICONS[operation.kind];
-  const { isEdgeSelected } = useActiveLevel();
+  const { getEdgeState } = useActiveLevel();
+  const state = getEdgeState(edge);
 
   return (
     <div
@@ -44,9 +45,50 @@ export function GameEdge({ edge }: GameEdgeProps): JSX.Element {
       data-orientation={orientation}
       style={cssVars({ row, column })}
       aria-label={t(`game.operations.${operation.kind}`)}
-      data-selected={isEdgeSelected(edge)}
+      data-selected={state !== "idle"}
     >
       <Icon size={18} />
+      {state !== "idle" && <Arrow direction={state} />}
     </div>
+  );
+}
+
+type ArrowProps = {
+  direction: "right" | "left" | "up" | "down";
+};
+
+function Arrow({ direction }: ArrowProps): JSX.Element {
+  const INNER_WIDTH = 30;
+  const ARROW_WIDTH = 30;
+
+  const width = 200;
+  const height = 100;
+
+  const innerLeft = (width - INNER_WIDTH) / 2;
+  const innerRight = innerLeft + INNER_WIDTH + 0;
+
+  const arrow1Left = innerLeft - ARROW_WIDTH;
+  const arrow2Right = innerRight + ARROW_WIDTH;
+
+  return (
+    <svg
+      className={classes.arrow}
+      data-direction={direction}
+      viewBox={`0 0 ${width} ${height}`}
+    >
+      <path
+        d={`M ${arrow1Left} 0 L ${innerLeft} ${
+          height / 2
+        } L ${arrow1Left} ${height} L ${innerLeft} ${height} L ${innerLeft} 0`}
+      />
+      <path
+        d={`M ${innerLeft} 0 L ${innerLeft} ${height} L ${innerRight} ${height} L ${innerRight} 0`}
+      />
+      <path
+        d={`M ${innerRight} 0 L ${arrow2Right} ${
+          height / 2
+        } L ${innerRight} ${height} `}
+      />
+    </svg>
   );
 }
