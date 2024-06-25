@@ -29,6 +29,13 @@
   },
   "game": {
     "restart": "Restart",
-    "undo": "Undo"
+    "undo": "Undo",
+    "node-label": "Row {{number}} Column {{column}}",
+    "operations": {
+      "addition": "Addition",
+      "subtraction": "Subtraction",
+      "multiplication": "Multiplication",
+      "division": "Division"
+    }
   }
 }
