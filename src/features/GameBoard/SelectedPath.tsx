@@ -13,29 +13,30 @@ export function SelectedPath({
   nodeRefs,
   selectedNodes,
 }: SelectedPathProps): JSX.Element {
-  const path = useMemo(() => {
+  const svg = useMemo(() => {
     if (selectedNodes.length < 1) return null;
-
-    //TODO Update to typescript 5.5 to fix this
-    const buttons = selectedNodes.map(
-      (n) => nodeRefs[n.id].current as HTMLButtonElement
-    );
 
     const getXYFromButton = (button: HTMLButtonElement) => {
       const { offsetLeft: x, offsetTop: y } = button;
       const middleOffset = button.offsetWidth / 2;
-      return x + middleOffset + " " + (y + middleOffset);
+      return { x: x + middleOffset, y: y + middleOffset };
     };
 
-    const [start, ...rest] = buttons;
-    const lines = rest.map((b) => "L " + getXYFromButton(b)).join(" ");
+    //TODO Update to typescript 5.5 to fix this
+    const buttons = selectedNodes
+      .map((n) => nodeRefs[n.id].current as HTMLButtonElement)
+      .map((b) => getXYFromButton(b));
 
-    return "M " + getXYFromButton(start) + lines;
+    const [start, ...rest] = buttons;
+    const lines = rest.map((b) => "L " + b.x + " " + b.y).join(" ");
+    const path = "M " + start.x + " " + start.y + lines;
+
+    return { path };
   }, [selectedNodes, nodeRefs]);
 
   return (
     <svg className={classes.svg} height="100%" width="100%">
-      <g>{path && <path d={path} />}</g>
+      <g>{svg && <path d={svg.path} />}</g>
     </svg>
   );
 }
