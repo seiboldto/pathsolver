@@ -29,15 +29,6 @@
       border-color: var(--primary-border-color);
       background-color: var(--background-color-dark);
     }
-
-    &[data-node-state="selected"]:hover {
-      border-color: var(--primary-border-color-active);
-    }
-
-    &[data-node-state="selected"]:active {
-      border-color: var(--primary-border-color-active);
-      background-color: var(--primary-border-color);
-    }
   }
   &[data-node-state="invalid"] {
     border-color: var(--error-color);
