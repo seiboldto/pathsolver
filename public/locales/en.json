@@ -27,12 +27,6 @@
     "next": "Next",
     "prev": "Previous"
   },
-  "operations": {
-    "addition": "Addition",
-    "subtraction": "Subtraction",
-    "multiplication": "Multiplication",
-    "division": "Division"
-  },
   "game": {
     "restart": "Restart",
     "undo": "Undo"
