@@ -10,7 +10,7 @@ type GameNodeProps = {
 
 export function GameNode({ node }: GameNodeProps): JSX.Element {
   const { value, row, column } = node;
-  const { selectNode, isNodeSelected } = useActiveLevel();
+  const { selectNode, resetInvalidNode, getNodeState } = useActiveLevel();
 
   const handlePointerDown = (e: React.PointerEvent<HTMLButtonElement>) => {
     e.currentTarget.releasePointerCapture(e.pointerId);
@@ -21,14 +21,18 @@ export function GameNode({ node }: GameNodeProps): JSX.Element {
     selectNode(node, "sequential");
   };
 
+  const nodeState = getNodeState(node);
+
   return (
     <button
       onPointerDown={handlePointerDown}
       onPointerEnter={handlePointerEnter}
+      onPointerLeave={resetInvalidNode}
+      onPointerUp={resetInvalidNode}
       className={classes.node}
       style={cssVars({ row, column })}
       tabIndex={-1}
-      data-selected={isNodeSelected(node)}
+      data-node-state={nodeState}
     >
       {value}
     </button>

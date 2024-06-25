@@ -13,30 +13,33 @@
   background-color: var(--bg-color);
   cursor: pointer;
 
-  &[data-selected="true"] {
+  &[data-node-state="selected"] {
     color: var(--text-on-primary-color);
     background-color: var(--primary-color);
     border-color: var(--primary-border-color);
   }
 
   @mixin hoverAnimations {
-    &:hover {
+    &[data-node-state="idle"]:hover {
       border-color: var(--primary-color);
     }
 
-    &:active {
+    &[data-node-state="idle"]:active {
       border-color: var(--primary-border-color);
       background-color: var(--background-color-dark);
     }
 
-    &[data-selected="true"]:hover {
+    &[data-node-state="selected"]:hover {
       border-color: var(--primary-border-color-active);
     }
 
-    &[data-selected="true"]:active {
+    &[data-node-state="selected"]:active {
       border-color: var(--primary-border-color-active);
       background-color: var(--primary-border-color);
     }
+  }
+  &[data-node-state="invalid"] {
+    border-color: var(--error-color);
   }
 
   &:focus-visible {

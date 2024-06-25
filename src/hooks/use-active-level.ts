@@ -13,7 +13,7 @@ export const useActiveLevel = () => {
   const { setActiveLevelState } = useLevelStore.use.actions();
   if (activeLevelState === null)
     throw new Error("useActiveLevel may only be used on the `Level` screen.");
-  const { nodes, level, edges, selectedNodes } = activeLevelState;
+  const { nodes, level, edges, selectedNodes, invalidNode } = activeLevelState;
   const { boardSize, maxPathLength } = level.board.difficulty.options;
 
   const applySelectedNodes = useCallback(() => {
@@ -24,9 +24,16 @@ export const useActiveLevel = () => {
     });
   }, [setActiveLevelState]);
 
+  const resetInvalidNode = () =>
+    setActiveLevelState(() => ({ invalidNode: null }));
+
   const selectNode = (node: Node, type: "initial" | "sequential") => {
     setActiveLevelState(({ selectedNodes }) => {
-      if (!canNodeBeSelected(selectedNodes, node, type)) return {};
+      const isSelectable = canNodeBeSelected(selectedNodes, node, type);
+      console.log(isSelectable);
+
+      if (isSelectable === "ignore") return {};
+      if (isSelectable === "not-selectable") return { invalidNode: node };
 
       return {
         selectedNodes: [...selectedNodes, node],
@@ -34,31 +41,35 @@ export const useActiveLevel = () => {
     });
   };
 
-  const isNodeSelected = (node: Node) => selectedNodes.includes(node);
+  const getNodeState = (node: Node): "idle" | "selected" | "invalid" => {
+    if (invalidNode?.id === node.id) return "invalid";
+    if (selectedNodes.includes(node)) return "selected";
+    return "idle";
+  };
   const canNodeBeSelected = (
     selectedNodes: Node[],
     node: Node,
     type: "initial" | "sequential"
-  ): boolean => {
+  ): "ignore" | "not-selectable" | "selectable" => {
     const lastNode = selectedNodes[selectedNodes.length - 1];
 
-    // Disallow selection if max path length is reached
-    if (selectedNodes.length === maxPathLength) return false;
-
-    // Disallow only single initial selection on mobile
-    if (type === "initial" && lastNode) return false;
+    // Disallow node to be selected multiple times
+    if (type === "sequential" && selectedNodes.includes(node)) return "ignore";
 
     // Disallow selection on simple hover
-    if (type === "sequential" && !lastNode) return false;
+    if (type === "sequential" && !lastNode) return "ignore";
+
+    // Disallow selection if max path length is reached
+    if (selectedNodes.length === maxPathLength) return "not-selectable";
+
+    // Disallow only single initial selection on mobile
+    if (type === "initial" && lastNode) return "not-selectable";
 
     // Disallow non-adjacent selection
     if (type === "sequential" && !areNodesAdjacent(node, lastNode))
-      return false;
+      return "not-selectable";
 
-    // Disallow node to be selected multiple times
-    if (type === "sequential" && selectedNodes.includes(node)) return false;
-
-    return true;
+    return "selectable";
   };
 
   return {
@@ -66,7 +77,8 @@ export const useActiveLevel = () => {
     edges,
     boardSize,
     selectNode,
-    isNodeSelected,
+    getNodeState,
     applySelectedNodes,
+    resetInvalidNode,
   };
 };

@@ -22,6 +22,7 @@ export type LevelState = {
   nodes: Node[];
   edges: Edge[];
   selectedNodes: Node[];
+  invalidNode: Node | null;
 };
 
 export const transformNodes = (board: Board): Node[] => {
