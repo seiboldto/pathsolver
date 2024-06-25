@@ -30,8 +30,6 @@ export const useActiveLevel = () => {
   const selectNode = (node: Node, type: "initial" | "sequential") => {
     setActiveLevelState(({ selectedNodes }) => {
       const isSelectable = canNodeBeSelected(selectedNodes, node, type);
-      console.log(isSelectable);
-
       if (isSelectable === "ignore") return {};
       if (isSelectable === "not-selectable") return { invalidNode: node };
 
