@@ -5,6 +5,7 @@
 
   --node-size: var(--ui-size);
   --node-gap: calc(
-    (100% - (var(--board-size) * var(--node-size))) / (var(--board-size) - 1)
+    (var(--ui-width) - (var(--board-size) * var(--node-size))) /
+      (var(--board-size) - 1)
   );
 }

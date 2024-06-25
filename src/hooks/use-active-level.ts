@@ -100,30 +100,9 @@ export const useActiveLevel = () => {
     return "selectable";
   };
 
-  const getEdgeState = (
-    edge: Edge
-  ): "idle" | "right" | "left" | "up" | "down" => {
-    if (!selectedEdges.includes(edge)) return "idle";
-
-    if (edge.orientation === "horizontal") {
-      const left = selectedNodes.findIndex(
-        (n) => n.row === edge.row && n.column === edge.column
-      );
-      const right = selectedNodes.findIndex(
-        (n) => n.row === edge.row && n.column === edge.column + 1
-      );
-
-      return left > right ? "left" : "right";
-    }
-
-    const up = selectedNodes.findIndex(
-      (n) => n.row === edge.row && n.column === edge.column
-    );
-    const down = selectedNodes.findIndex(
-      (n) => n.row === edge.row + 1 && n.column === edge.column
-    );
-
-    return up > down ? "up" : "down";
+  const getEdgeState = (edge: Edge): "idle" | "selected" => {
+    if (selectedEdges.includes(edge)) return "selected";
+    return "idle";
   };
 
   return {
