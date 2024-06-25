@@ -17,19 +17,15 @@
   &[data-node-state="selected"] {
     color: var(--text-on-primary-color);
     background-color: var(--primary-color);
-    border-color: var(--primary-border-color);
+    border-color: var(--primary-color);
   }
 
   @mixin hoverAnimations {
     &[data-node-state="idle"]:hover {
       border-color: var(--primary-color);
     }
-
-    &[data-node-state="idle"]:active {
-      border-color: var(--primary-border-color);
-      background-color: var(--background-color-dark);
-    }
   }
+
   &[data-node-state="invalid"] {
     border-color: var(--error-color);
   }

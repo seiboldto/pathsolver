@@ -9,6 +9,7 @@ import {
 import { type ForwardRefExoticComponent, type RefAttributes } from "react";
 import { useTranslation } from "react-i18next";
 
+import { useActiveLevel } from "~src/hooks";
 import { OperationKind } from "~src/levels";
 import { cssVars } from "~src/lib";
 import { type Edge } from "~src/models";
@@ -34,6 +35,7 @@ export function GameEdge({ edge }: GameEdgeProps): JSX.Element {
   const { t } = useTranslation();
 
   const Icon = OPERATION_ICONS[operation.kind];
+  const { isEdgeSelected } = useActiveLevel();
 
   return (
     <div
@@ -42,6 +44,7 @@ export function GameEdge({ edge }: GameEdgeProps): JSX.Element {
       data-orientation={orientation}
       style={cssVars({ row, column })}
       aria-label={t(`game.operations.${operation.kind}`)}
+      data-selected={isEdgeSelected(edge)}
     >
       <Icon size={18} />
     </div>

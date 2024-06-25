@@ -26,13 +26,14 @@ export const useActiveLevel = () => {
   const { setActiveLevelState } = useLevelStore.use.actions();
   if (activeLevelState === null)
     throw new Error("useActiveLevel may only be used on the `Level` screen.");
-  const { nodes, level, edges, selectedNodes, selectedValue, invalidNode } =
+
+  const { nodes, level, edges, selectedNodes, selectedEdges, invalidNode } =
     activeLevelState;
   const { boardSize, maxPathLength } = level.board.difficulty.options;
 
   const applySelectedNodes = useCallback(() => {
     setActiveLevelState(() => {
-      return { selectedNodes: [], selectedValue: null };
+      return { selectedNodes: [], selectedValue: null, selectedEdges: [] };
     });
   }, [setActiveLevelState]);
 
@@ -40,26 +41,31 @@ export const useActiveLevel = () => {
     setActiveLevelState(() => ({ invalidNode: null }));
 
   const selectNode = (node: Node, type: "initial" | "sequential") => {
-    setActiveLevelState(({ selectedNodes, edges, selectedValue }) => {
-      const isSelectable = canNodeBeSelected(selectedNodes, node, type);
-      if (isSelectable === "ignore") return {};
-      if (isSelectable === "not-selectable") return { invalidNode: node };
+    setActiveLevelState(
+      ({ selectedNodes, edges, selectedValue, selectedEdges }) => {
+        const isSelectable = canNodeBeSelected(selectedNodes, node, type);
+        if (isSelectable === "ignore") return {};
+        if (isSelectable === "not-selectable") return { invalidNode: node };
 
-      let newSelectedValue = node.value;
-      if (selectedValue !== null) {
-        const edge = getEdgeBetweenNodes(
-          edges,
-          node,
-          selectedNodes[selectedNodes.length - 1]
-        );
-        newSelectedValue = edge.operation.apply(selectedValue, node.value);
+        let newSelectedValue = node.value;
+        let newSelectedEdges = selectedEdges;
+        if (selectedValue !== null) {
+          const edge = getEdgeBetweenNodes(
+            edges,
+            node,
+            selectedNodes[selectedNodes.length - 1]
+          );
+          newSelectedValue = edge.operation.apply(selectedValue, node.value);
+          newSelectedEdges = [...selectedEdges, edge];
+        }
+
+        return {
+          selectedNodes: [...selectedNodes, node],
+          selectedEdges: newSelectedEdges,
+          selectedValue: newSelectedValue,
+        };
       }
-
-      return {
-        selectedNodes: [...selectedNodes, node],
-        selectedValue: newSelectedValue,
-      };
-    });
+    );
   };
 
   const getNodeState = (node: Node): "idle" | "selected" | "invalid" => {
@@ -67,6 +73,7 @@ export const useActiveLevel = () => {
     if (selectedNodes.includes(node)) return "selected";
     return "idle";
   };
+
   const canNodeBeSelected = (
     selectedNodes: Node[],
     node: Node,
@@ -93,13 +100,14 @@ export const useActiveLevel = () => {
     return "selectable";
   };
 
+  const isEdgeSelected = (edge: Edge) => selectedEdges.includes(edge);
+
   return {
     nodes,
     edges,
     boardSize,
-    selectedValue,
-    selectedNodes,
     selectNode,
+    isEdgeSelected,
     getNodeState,
     applySelectedNodes,
     resetInvalidNode,

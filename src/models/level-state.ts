@@ -22,6 +22,7 @@ export type LevelState = {
   nodes: Node[];
   edges: Edge[];
   selectedNodes: Node[];
+  selectedEdges: Edge[];
   selectedValue: number | null;
   invalidNode: Node | null;
 };
