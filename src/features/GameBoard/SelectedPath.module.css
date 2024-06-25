@@ -1,0 +1,10 @@
+.svg {
+  position: absolute;
+  pointer-events: none;
+
+  g {
+    stroke-width: 0.8rem;
+    stroke: var(--primary-color);
+    fill: none;
+  }
+}

@@ -9,8 +9,9 @@
   top: calc(var(--row) * (var(--node-size) + var(--node-gap)));
 
   border: 0.125rem solid var(--border-color);
+  background-color: var(--background-color);
   outline: none;
-  background-color: var(--bg-color);
+  background-color: var(--background-color);
   cursor: pointer;
 
   &[data-node-state="selected"] {

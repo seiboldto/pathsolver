@@ -74,6 +74,7 @@ export const useActiveLevel = () => {
     nodes,
     edges,
     boardSize,
+    selectedNodes,
     selectNode,
     getNodeState,
     applySelectedNodes,
