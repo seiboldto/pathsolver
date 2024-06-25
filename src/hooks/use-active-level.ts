@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { type Node } from "~src/models";
+import { type Edge, type Node } from "~src/models";
 import { useLevelStore } from "~src/stores";
 
 const areNodesAdjacent = (n1: Node, n2: Node) => {
@@ -8,19 +8,31 @@ const areNodesAdjacent = (n1: Node, n2: Node) => {
   return distance === 1;
 };
 
+const getEdgeBetweenNodes = (edges: Edge[], n1: Node, n2: Node): Edge => {
+  const orientation = n1.row === n2.row ? "horizontal" : "vertical";
+  const { row, column } =
+    orientation === "horizontal"
+      ? { row: n1.row, column: Math.min(n1.column, n2.column) }
+      : { row: Math.min(n1.row, n2.row), column: n1.column };
+
+  const edge = edges.find(
+    (e) => e.row === row && e.column === column && e.orientation === orientation
+  );
+  return edge!;
+};
+
 export const useActiveLevel = () => {
   const activeLevelState = useLevelStore.use.activeLevelState();
   const { setActiveLevelState } = useLevelStore.use.actions();
   if (activeLevelState === null)
     throw new Error("useActiveLevel may only be used on the `Level` screen.");
-  const { nodes, level, edges, selectedNodes, invalidNode } = activeLevelState;
+  const { nodes, level, edges, selectedNodes, selectedValue, invalidNode } =
+    activeLevelState;
   const { boardSize, maxPathLength } = level.board.difficulty.options;
 
   const applySelectedNodes = useCallback(() => {
-    setActiveLevelState(({ selectedNodes }) => {
-      console.log(selectedNodes.length);
-
-      return { selectedNodes: [] };
+    setActiveLevelState(() => {
+      return { selectedNodes: [], selectedValue: null };
     });
   }, [setActiveLevelState]);
 
@@ -28,13 +40,24 @@ export const useActiveLevel = () => {
     setActiveLevelState(() => ({ invalidNode: null }));
 
   const selectNode = (node: Node, type: "initial" | "sequential") => {
-    setActiveLevelState(({ selectedNodes }) => {
+    setActiveLevelState(({ selectedNodes, edges, selectedValue }) => {
       const isSelectable = canNodeBeSelected(selectedNodes, node, type);
       if (isSelectable === "ignore") return {};
       if (isSelectable === "not-selectable") return { invalidNode: node };
 
+      let newSelectedValue = node.value;
+      if (selectedValue !== null) {
+        const edge = getEdgeBetweenNodes(
+          edges,
+          node,
+          selectedNodes[selectedNodes.length - 1]
+        );
+        newSelectedValue = edge.operation.apply(selectedValue, node.value);
+      }
+
       return {
         selectedNodes: [...selectedNodes, node],
+        selectedValue: newSelectedValue,
       };
     });
   };
@@ -74,6 +97,7 @@ export const useActiveLevel = () => {
     nodes,
     edges,
     boardSize,
+    selectedValue,
     selectedNodes,
     selectNode,
     getNodeState,

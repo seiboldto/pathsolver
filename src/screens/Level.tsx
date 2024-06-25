@@ -37,6 +37,7 @@ export function LevelScreen(): JSX.Element {
         </Tooltip>
       </Group>
       <GameBoard />
+      {activeLevelState.selectedValue ?? 0}
     </Screen>
   );
 }

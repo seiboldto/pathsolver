@@ -9,13 +9,14 @@ import {
 import { type ForwardRefExoticComponent, type RefAttributes } from "react";
 import { useTranslation } from "react-i18next";
 
+import { OperationKind } from "~src/levels";
 import { cssVars } from "~src/lib";
 import { type Edge } from "~src/models";
 
 import classes from "./GameEdge.module.css";
 
 const OPERATION_ICONS: Record<
-  Edge["operation"],
+  OperationKind,
   ForwardRefExoticComponent<Omit<IconProps, "ref"> & RefAttributes<Icon>>
 > = {
   addition: IconPlus,
@@ -32,7 +33,7 @@ export function GameEdge({ edge }: GameEdgeProps): JSX.Element {
   const { id, operation, orientation, row, column } = edge;
   const { t } = useTranslation();
 
-  const Icon = OPERATION_ICONS[operation];
+  const Icon = OPERATION_ICONS[operation.kind];
 
   return (
     <div
@@ -40,7 +41,7 @@ export function GameEdge({ edge }: GameEdgeProps): JSX.Element {
       className={classes.edge}
       data-orientation={orientation}
       style={cssVars({ row, column })}
-      aria-label={t(`game.operations.${operation}`)}
+      aria-label={t(`game.operations.${operation.kind}`)}
     >
       <Icon size={18} />
     </div>

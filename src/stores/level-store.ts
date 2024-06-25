@@ -25,6 +25,7 @@ const levelStore = create<LevelStore>((set, get) => ({
           nodes: transformNodes(level.board),
           edges: transformEdges(level.board),
           selectedNodes: [],
+          selectedValue: null,
           invalidNode: null,
         },
       });
