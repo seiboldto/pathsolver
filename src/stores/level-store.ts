@@ -9,22 +9,34 @@ type LevelStore = {
   activeLevelState: LevelState | null;
   actions: {
     setActiveLevel: (level: Level) => void;
-    setActiveLevelState: (state: LevelState) => void;
+    setActiveLevelState: (
+      func: (prev: LevelState) => Partial<LevelState>
+    ) => void;
   };
 };
 
-const levelStore = create<LevelStore>((set) => ({
+const levelStore = create<LevelStore>((set, get) => ({
   activeLevelState: null,
   actions: {
-    setActiveLevel: (level) =>
+    setActiveLevel: (level) => {
       set({
         activeLevelState: {
           level,
           nodes: transformNodes(level.board),
           edges: transformEdges(level.board),
+          selectedNodes: [],
         },
-      }),
-    setActiveLevelState: (state) => set({ activeLevelState: state }),
+      });
+    },
+    setActiveLevelState: (func) => {
+      const prev = get().activeLevelState;
+      if (prev === null)
+        throw new Error("activeLevel may only be used on the Level screen.");
+
+      set({
+        activeLevelState: { ...prev, ...func(prev) },
+      });
+    },
   },
 }));
 

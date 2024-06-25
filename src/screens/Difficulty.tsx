@@ -34,10 +34,9 @@ export function DifficultyScreen() {
 
     const difficulty = Difficulty[selectedDifficulty]();
     const level = generateRandomLevel(difficulty);
-    console.log(level);
 
-    setLocation("/level");
     setActiveLevel(level);
+    setLocation("/level");
   };
 
   return (

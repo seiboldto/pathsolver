@@ -1,0 +1,46 @@
+@import "../../styles/mixins.css";
+
+.node {
+  height: var(--node-size);
+  width: var(--node-size);
+  position: absolute;
+
+  left: calc(var(--column) * (var(--node-size) + var(--node-gap)));
+  top: calc(var(--row) * (var(--node-size) + var(--node-gap)));
+
+  border: 0.125rem solid var(--border-color);
+  outline: none;
+  background-color: var(--bg-color);
+  cursor: pointer;
+
+  &[data-selected="true"] {
+    color: var(--text-on-primary-color);
+    background-color: var(--primary-color);
+    border-color: var(--primary-border-color);
+  }
+
+  @mixin hoverAnimations {
+    &:hover {
+      border-color: var(--primary-color);
+    }
+
+    &:active {
+      border-color: var(--primary-border-color);
+      background-color: var(--background-color-dark);
+    }
+
+    &[data-selected="true"]:hover {
+      border-color: var(--primary-border-color-active);
+    }
+
+    &[data-selected="true"]:active {
+      border-color: var(--primary-border-color-active);
+      background-color: var(--primary-border-color);
+    }
+  }
+
+  &:focus-visible {
+    outline: 0.125rem solid var(--focus-color);
+    outline-offset: 0.125rem;
+  }
+}

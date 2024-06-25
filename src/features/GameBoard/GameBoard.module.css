@@ -8,15 +8,6 @@
     (100% - (var(--board-size) * var(--node-size))) / (var(--board-size) - 1)
   );
 
-  .node {
-    height: var(--node-size);
-    width: var(--node-size);
-    position: absolute;
-
-    left: calc(var(--column) * (var(--node-size) + var(--node-gap)));
-    top: calc(var(--row) * (var(--node-size) + var(--node-gap)));
-  }
-
   .edge {
     position: absolute;
     display: flex;

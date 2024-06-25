@@ -2,14 +2,14 @@ import { v4 as uuid } from "uuid";
 
 import type { Board, Level, OperationKind } from "~src/levels";
 
-type Node = {
+export type Node = {
   id: string;
   row: number;
   column: number;
   value: number;
 };
 
-type Edge = {
+export type Edge = {
   id: string;
   row: number;
   column: number;
@@ -21,6 +21,7 @@ export type LevelState = {
   level: Level;
   nodes: Node[];
   edges: Edge[];
+  selectedNodes: Node[];
 };
 
 export const transformNodes = (board: Board): Node[] => {

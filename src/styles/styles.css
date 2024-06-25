@@ -21,6 +21,7 @@ body {
   color: var(--text-color);
   font-size: 16px;
   overflow: hidden;
+  touch-action: none;
 }
 
 button {
