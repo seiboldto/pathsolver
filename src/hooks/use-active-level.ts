@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { type Edge, type Node } from "~src/models";
+import { type Edge, type LevelState, type Node } from "~src/models";
 import { useLevelStore } from "~src/stores";
 
 const areNodesAdjacent = (n1: Node, n2: Node) => {
@@ -21,6 +21,37 @@ const getEdgeBetweenNodes = (edges: Edge[], n1: Node, n2: Node): Edge => {
   return edge!;
 };
 
+const removeSelectedNodes = (state: LevelState): Node[] => {
+  const { nodes, selectedNodes } = state;
+  if (selectedNodes.length <= 1) return nodes;
+
+  const key = (n: Pick<Node, "row" | "column">): `${number}-${number}` =>
+    `${n.row}-${n.column}`;
+
+  const newNodes = new Map(nodes.map((n) => [key(n), n]));
+  selectedNodes.forEach((n) => newNodes.delete(key(n)));
+
+  const { boardSize } = state.level.board.difficulty.options;
+  for (let column = 0; column < boardSize; column++) {
+    for (let row = boardSize - 2; row >= 0; row--) {
+      const node = newNodes.get(key({ row, column }));
+      if (!node) continue;
+
+      let lowestPossibleRow = row;
+      while (!newNodes.has(key({ row: lowestPossibleRow + 1, column }))) {
+        if (lowestPossibleRow + 1 === boardSize) break;
+        lowestPossibleRow++;
+      }
+
+      node.row = lowestPossibleRow;
+      newNodes.delete(key({ row, column }));
+      newNodes.set(key(node), node);
+    }
+  }
+
+  return Array.from(newNodes.values());
+};
+
 export const useActiveLevel = () => {
   const activeLevelState = useLevelStore.use.activeLevelState();
   const { setActiveLevelState } = useLevelStore.use.actions();
@@ -32,8 +63,14 @@ export const useActiveLevel = () => {
   const { boardSize, maxPathLength } = level.board.difficulty.options;
 
   const applySelectedNodes = useCallback(() => {
-    setActiveLevelState(() => {
-      return { selectedNodes: [], selectedValue: null, selectedEdges: [] };
+    setActiveLevelState((prev) => {
+      const nodes = removeSelectedNodes(prev);
+      return {
+        selectedNodes: [],
+        selectedValue: null,
+        selectedEdges: [],
+        nodes,
+      };
     });
   }, [setActiveLevelState]);
 
