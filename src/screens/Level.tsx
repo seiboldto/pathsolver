@@ -13,9 +13,12 @@ export function LevelScreen(): JSX.Element {
   const navigateToHome = () => setLocation("/");
 
   const activeLevelState = useLevelStore.use.activeLevelState();
+  const { setActiveLevel } = useLevelStore.use.actions();
   if (activeLevelState === null) {
     return <Redirect to="/" replace />;
   }
+
+  const handleRestart = () => setActiveLevel(activeLevelState.level);
 
   return (
     <Screen gap="xl">
@@ -26,7 +29,7 @@ export function LevelScreen(): JSX.Element {
           </Button>
         </Tooltip>
         <Tooltip label={t("game.restart")}>
-          <Button square>
+          <Button square onClick={handleRestart}>
             <IconRefresh />
           </Button>
         </Tooltip>
