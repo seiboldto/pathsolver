@@ -36,6 +36,16 @@
       "multiplication": "Multiplication",
       "division": "Division"
     },
-    "selected-value": "Selected Value"
+    "selected-value": "Selected Value",
+    "objectives": {
+      "title": "Objectives",
+      "pending": "Pending Objective",
+      "completed": "Completed Objective",
+      "active": "Active Objective",
+      "index_ordinal_one": "{{count}}st Objective",
+      "index_ordinal_two": "{{count}}nd Objective",
+      "index_ordinal_few": "{{count}}rd Objective",
+      "index_ordinal_other": "{{count}}th Objective"
+    }
   }
 }
