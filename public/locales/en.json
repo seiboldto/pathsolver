@@ -30,12 +30,12 @@
   "game": {
     "restart": "Restart",
     "undo": "Undo",
-    "node-label": "Row {{number}} Column {{column}}",
     "operations": {
       "addition": "Addition",
       "subtraction": "Subtraction",
       "multiplication": "Multiplication",
       "division": "Division"
-    }
+    },
+    "selected-value": "Selected Value"
   }
 }

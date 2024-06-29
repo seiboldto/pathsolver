@@ -93,8 +93,15 @@ export const useActiveLevel = () => {
   if (activeLevelState === null)
     throw new Error("useActiveLevel may only be used on the `Level` screen.");
 
-  const { nodes, level, edges, selectedNodes, selectedEdges, invalidNode } =
-    activeLevelState;
+  const {
+    nodes,
+    level,
+    edges,
+    selectedNodes,
+    selectedEdges,
+    invalidNode,
+    selectedValue,
+  } = activeLevelState;
   const { boardSize, maxPathLength } = level.board.difficulty.options;
 
   const applySelectedNodes = useCallback(() => {
@@ -182,10 +189,17 @@ export const useActiveLevel = () => {
     return "idle";
   };
 
+  const selection = {
+    value: selectedValue,
+    count: selectedNodes.length,
+    isInvalid: invalidNode !== null,
+  };
+
   return {
     nodes,
     edges,
     boardSize,
+    selection,
     selectNode,
     getEdgeState,
     getNodeState,
