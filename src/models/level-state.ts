@@ -7,7 +7,6 @@ export type Node = {
   row: number;
   column: number;
   value: number;
-  visible: boolean;
 };
 
 export type Edge = {
@@ -20,8 +19,8 @@ export type Edge = {
 
 export type LevelState = {
   level: Level;
-  nodes: Node[];
-  edges: Edge[];
+  nodes: (Node | null)[];
+  edges: (Edge | null)[];
   selectedNodes: Node[];
   selectedEdges: Edge[];
   selectedValue: number | null;
@@ -35,7 +34,6 @@ export const transformNodes = (board: Board): Node[] => {
     row: Math.trunc(i / boardSize),
     column: i % boardSize,
     value: n,
-    visible: true,
   }));
 };
 

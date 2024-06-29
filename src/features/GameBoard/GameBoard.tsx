@@ -18,12 +18,8 @@ export function GameBoard(): JSX.Element {
 
   return (
     <div className={classes.board} style={cssVars({ boardSize })}>
-      {edges.map((edge) => (
-        <GameEdge key={edge.id} edge={edge} />
-      ))}
-      {nodes.map(
-        (node) => node.visible && <GameNode key={node.id} node={node} />
-      )}
+      {edges.map((edge) => edge && <GameEdge key={edge.id} edge={edge} />)}
+      {nodes.map((node) => node && <GameNode key={node.id} node={node} />)}
     </div>
   );
 }

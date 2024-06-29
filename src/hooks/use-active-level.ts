@@ -8,7 +8,11 @@ const areNodesAdjacent = (n1: Node, n2: Node) => {
   return distance === 1;
 };
 
-const getEdgeBetweenNodes = (edges: Edge[], n1: Node, n2: Node): Edge => {
+const getEdgeBetweenNodes = (
+  edges: (Edge | null)[],
+  n1: Node,
+  n2: Node
+): Edge => {
   const orientation = n1.row === n2.row ? "horizontal" : "vertical";
   const { row, column } =
     orientation === "horizontal"
@@ -16,42 +20,47 @@ const getEdgeBetweenNodes = (edges: Edge[], n1: Node, n2: Node): Edge => {
       : { row: Math.min(n1.row, n2.row), column: n1.column };
 
   const edge = edges.find(
-    (e) => e.row === row && e.column === column && e.orientation === orientation
+    (e) =>
+      e && e.row === row && e.column === column && e.orientation === orientation
   );
   return edge!;
 };
 
-const removeSelectedNodes = (state: LevelState): Node[] => {
+const removeSelectedNodes = (state: LevelState): (Node | null)[] => {
   const { nodes, selectedNodes } = state;
-  if (selectedNodes.length <= 1) return nodes;
 
   const newNodes = nodes.map((n) =>
-    selectedNodes.includes(n) ? { ...n, visible: false } : n
+    n && selectedNodes.includes(n) ? null : n
   );
 
   const findNode = ({ row, column }: Pick<Node, "row" | "column">) =>
-    newNodes.find((n) => n.row === row && n.column === column);
+    newNodes.find((n) => n && n.row === row && n.column === column);
 
   const { boardSize } = state.level.board.difficulty.options;
   for (let column = 0; column < boardSize; column++) {
     for (let row = boardSize - 2; row >= 0; row--) {
       const node = findNode({ row, column });
-      if (!node || !node.visible) continue;
+      if (!node) continue;
 
       let lowestPossibleRow = row;
-      while (lowestPossibleRow < boardSize) {
+      while (!findNode({ row: lowestPossibleRow + 1, column })) {
         if (lowestPossibleRow + 1 === boardSize) break;
-        const lowerNode = findNode({ row: lowestPossibleRow + 1, column });
-        if (lowerNode === undefined || lowerNode.visible === false)
-          lowestPossibleRow++;
-        else break;
-      }
 
+        lowestPossibleRow++;
+      }
       node.row = lowestPossibleRow;
     }
   }
 
   return newNodes;
+};
+
+const removeTrailingEdges = (
+  nodes: (Node | null)[],
+  state: LevelState
+): (Edge | null)[] => {
+  const { boardSize } = state.level.board.difficulty.options;
+  return state.edges;
 };
 
 export const useActiveLevel = () => {
@@ -66,12 +75,17 @@ export const useActiveLevel = () => {
 
   const applySelectedNodes = useCallback(() => {
     setActiveLevelState((prev) => {
+      if (prev.selectedNodes.length <= 1)
+        return { selectedNodes: [], selectedValue: null };
+
       const nodes = removeSelectedNodes(prev);
+      const edges = removeTrailingEdges(nodes, prev);
       return {
         selectedNodes: [],
         selectedValue: null,
         selectedEdges: [],
         nodes,
+        edges,
       };
     });
   }, [setActiveLevelState]);
