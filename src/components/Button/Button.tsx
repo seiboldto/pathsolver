@@ -8,11 +8,12 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     Omit<IconProps, "ref"> & React.RefAttributes<Icon>
   >;
   square?: boolean;
+  disabled?: boolean;
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   function Button(
-    { onClick, icon, children, square, ...props }: ButtonProps,
+    { onClick, icon, children, square, disabled, ...props }: ButtonProps,
     ref
   ): JSX.Element {
     const Icon = icon || null;
@@ -25,6 +26,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         data-square={square}
         data-icon={icon !== undefined}
         {...props}
+        disabled={disabled === true}
       >
         {Icon && (
           <div className={classes.icon}>

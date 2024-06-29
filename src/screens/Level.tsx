@@ -19,6 +19,7 @@ export function LevelScreen(): JSX.Element {
   }
 
   const handleRestart = () => setActiveLevel(activeLevelState.level);
+  const handleUndo = () => console.log("hey");
 
   return (
     <Screen gap="xl">
@@ -34,7 +35,7 @@ export function LevelScreen(): JSX.Element {
           </Button>
         </Tooltip>
         <Tooltip label={t("game.undo")}>
-          <Button square>
+          <Button square disabled onClick={handleUndo}>
             <IconArrowBack />
           </Button>
         </Tooltip>

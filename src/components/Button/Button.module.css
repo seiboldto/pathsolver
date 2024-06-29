@@ -60,7 +60,7 @@
   }
 
   @mixin hoverAnimations {
-    &:hover {
+    &:not([disabled]):hover {
       color: var(--text-on-primary-color);
 
       .icon {
@@ -96,5 +96,13 @@
   &[data-square="true"] {
     max-width: var(--ui-size);
     min-width: var(--ui-size);
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+
+    .bg {
+      background-color: var(--border-color);
+    }
   }
 }
