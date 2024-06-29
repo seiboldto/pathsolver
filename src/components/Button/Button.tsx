@@ -28,14 +28,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
         disabled={disabled === true}
       >
-        {Icon && (
-          <div className={classes.icon}>
-            <Icon height={18} />
-          </div>
-        )}
-        <span className={classes.text}>{children}</span>
-        <div className={classes.bg} />
-        <div className={classes.hoverAnim} />
+        {Icon && <Icon height={18} />}
+        <span className={classes.content}>{children}</span>
       </button>
     );
   }
