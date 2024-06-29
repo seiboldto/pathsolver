@@ -7,6 +7,7 @@
 
   left: calc(var(--column) * (var(--node-size) + var(--node-gap)));
   top: calc(var(--row) * (var(--node-size) + var(--node-gap)));
+  transition: top var(--anim-duration) var(--anim-easing);
 
   border: 0.125rem solid var(--border-color);
   background-color: var(--background-color);

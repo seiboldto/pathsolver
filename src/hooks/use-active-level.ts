@@ -25,31 +25,33 @@ const removeSelectedNodes = (state: LevelState): Node[] => {
   const { nodes, selectedNodes } = state;
   if (selectedNodes.length <= 1) return nodes;
 
-  const key = (n: Pick<Node, "row" | "column">): `${number}-${number}` =>
-    `${n.row}-${n.column}`;
+  const newNodes = nodes.map((n) =>
+    selectedNodes.includes(n) ? { ...n, visible: false } : n
+  );
 
-  const newNodes = new Map(nodes.map((n) => [key(n), n]));
-  selectedNodes.forEach((n) => newNodes.delete(key(n)));
+  const findNode = ({ row, column }: Pick<Node, "row" | "column">) =>
+    newNodes.find((n) => n.row === row && n.column === column);
 
   const { boardSize } = state.level.board.difficulty.options;
   for (let column = 0; column < boardSize; column++) {
     for (let row = boardSize - 2; row >= 0; row--) {
-      const node = newNodes.get(key({ row, column }));
-      if (!node) continue;
+      const node = findNode({ row, column });
+      if (!node || !node.visible) continue;
 
       let lowestPossibleRow = row;
-      while (!newNodes.has(key({ row: lowestPossibleRow + 1, column }))) {
+      while (lowestPossibleRow < boardSize) {
         if (lowestPossibleRow + 1 === boardSize) break;
-        lowestPossibleRow++;
+        const lowerNode = findNode({ row: lowestPossibleRow + 1, column });
+        if (lowerNode === undefined || lowerNode.visible === false)
+          lowestPossibleRow++;
+        else break;
       }
 
       node.row = lowestPossibleRow;
-      newNodes.delete(key({ row, column }));
-      newNodes.set(key(node), node);
     }
   }
 
-  return Array.from(newNodes.values());
+  return newNodes;
 };
 
 export const useActiveLevel = () => {

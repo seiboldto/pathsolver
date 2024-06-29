@@ -7,6 +7,7 @@ export type Node = {
   row: number;
   column: number;
   value: number;
+  visible: boolean;
 };
 
 export type Edge = {
@@ -34,6 +35,7 @@ export const transformNodes = (board: Board): Node[] => {
     row: Math.trunc(i / boardSize),
     column: i % boardSize,
     value: n,
+    visible: true,
   }));
 };
 

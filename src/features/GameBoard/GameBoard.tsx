@@ -21,9 +21,9 @@ export function GameBoard(): JSX.Element {
       {edges.map((edge) => (
         <GameEdge key={edge.id} edge={edge} />
       ))}
-      {nodes.map((node) => (
-        <GameNode key={node.id} node={node} />
-      ))}
+      {nodes.map(
+        (node) => node.visible && <GameNode key={node.id} node={node} />
+      )}
     </div>
   );
 }
