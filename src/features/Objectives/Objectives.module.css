@@ -5,13 +5,24 @@
 
   .objective {
     border: 0.125rem solid var(--border-color);
+    height: calc(var(--ui-size) / 2);
     flex: 1 1 0px;
     display: flex;
     align-items: center;
     justify-content: center;
 
+    svg {
+      height: 130%;
+    }
+
     &[data-state="active"] {
       border-color: var(--primary-color);
+    }
+
+    &[data-state="completed"] {
+      border-color: var(--primary-border-color);
+      background-color: var(--primary-color);
+      color: white;
     }
   }
 }

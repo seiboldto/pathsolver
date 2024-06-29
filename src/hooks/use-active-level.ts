@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import { v4 as uuid } from "uuid";
 
 import {
   type Edge,
@@ -113,8 +114,11 @@ export const useActiveLevel = () => {
 
   const applySelectedNodes = useCallback(() => {
     setActiveLevelState((prev) => {
-      if (prev.selectedNodes.length <= 1)
-        return { selectedNodes: [], selectedValue: null };
+      const { value } = prev.objectives[prev.activeObjectiveIndex];
+      const { selectedValue } = prev;
+
+      if (prev.selectedNodes.length <= 1 || value !== selectedValue)
+        return { selectedNodes: [], selectedValue: null, selectedEdges: [] };
 
       const nodes = removeSelectedNodes(prev);
       const edges = removeTrailingEdges(nodes, prev);
@@ -124,6 +128,7 @@ export const useActiveLevel = () => {
         selectedEdges: [],
         nodes,
         edges,
+        activeObjectiveIndex: prev.activeObjectiveIndex + 1,
       };
     });
   }, [setActiveLevelState]);
@@ -206,6 +211,7 @@ export const useActiveLevel = () => {
 
   const selection = {
     value: selectedValue,
+    key: uuid(),
     count: selectedNodes.length,
     isInvalid: invalidNode !== null,
   };

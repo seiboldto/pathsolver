@@ -8,18 +8,20 @@ export function SelectedInfo(): JSX.Element {
   const { selection } = useActiveLevel();
   const { t } = useTranslation();
 
+  const selectedValue = selection.value ?? 0;
+
   return (
     <div className={classes.selectedInfo}>
       <span
-        key={selection.value}
+        key={selectedValue}
         className={classes.value}
         aria-label={t("game.selected-value")}
         aria-live="polite"
       >
-        {selection.value ?? 0}
+        {selectedValue}
       </span>
       <div
-        key={selection.count}
+        key={selection.key}
         data-invalid={selection.isInvalid}
         className={classes.dots}
       >
