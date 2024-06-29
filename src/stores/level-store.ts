@@ -1,7 +1,12 @@
 import { create } from "zustand";
 
 import type { Level } from "~src/levels";
-import { type LevelState, transformEdges, transformNodes } from "~src/models";
+import {
+  type LevelState,
+  transformEdges,
+  transformNodes,
+  transformObjectives,
+} from "~src/models";
 
 import { createSelectors } from "./store-utils";
 
@@ -24,6 +29,8 @@ const levelStore = create<LevelStore>((set, get) => ({
           level,
           nodes: transformNodes(level.board),
           edges: transformEdges(level.board),
+          objectives: transformObjectives(level.paths),
+          activeObjectiveIndex: 0,
           selectedNodes: [],
           selectedEdges: [],
           selectedValue: null,

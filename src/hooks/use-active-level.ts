@@ -1,6 +1,11 @@
 import { useCallback } from "react";
 
-import { type Edge, type LevelState, type Node } from "~src/models";
+import {
+  type Edge,
+  type LevelState,
+  type Node,
+  type Objective,
+} from "~src/models";
 import { useLevelStore } from "~src/stores";
 
 const areNodesAdjacent = (n1: Node, n2: Node) => {
@@ -101,6 +106,8 @@ export const useActiveLevel = () => {
     selectedEdges,
     invalidNode,
     selectedValue,
+    objectives,
+    activeObjectiveIndex,
   } = activeLevelState;
   const { boardSize, maxPathLength } = level.board.difficulty.options;
 
@@ -189,6 +196,14 @@ export const useActiveLevel = () => {
     return "idle";
   };
 
+  const getObjectiveState = (
+    objective: Objective
+  ): "active" | "completed" | "pending" => {
+    if (objective.index === activeObjectiveIndex) return "active";
+    if (objective.index < activeObjectiveIndex) return "completed";
+    return "pending";
+  };
+
   const selection = {
     value: selectedValue,
     count: selectedNodes.length,
@@ -200,6 +215,8 @@ export const useActiveLevel = () => {
     edges,
     boardSize,
     selection,
+    objectives,
+    getObjectiveState,
     selectNode,
     getEdgeState,
     getNodeState,

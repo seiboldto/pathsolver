@@ -1,2 +1,3 @@
 export { GameBoard } from "./GameBoard/GameBoard";
-export { GameInfo } from "./GameInfo/GameInfo";
+export { Objectives } from "./Objectives/Objectives";
+export { SelectedInfo } from "./SelectedInfo/SelectedInfo";

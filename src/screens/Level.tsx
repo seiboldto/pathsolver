@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Redirect, useLocation } from "wouter";
 
 import { Button, Group, Screen, Tooltip } from "~src/components";
-import { GameBoard, GameInfo } from "~src/features";
+import { GameBoard, Objectives, SelectedInfo } from "~src/features";
 import { useLevelStore } from "~src/stores";
 
 export function LevelScreen(): JSX.Element {
@@ -22,7 +22,7 @@ export function LevelScreen(): JSX.Element {
   const handleUndo = () => console.log("hey");
 
   return (
-    <Screen gap="xl">
+    <Screen gap="md">
       <Group>
         <Tooltip label={t("menu.back")}>
           <Button square onClick={navigateToHome}>
@@ -40,8 +40,9 @@ export function LevelScreen(): JSX.Element {
           </Button>
         </Tooltip>
       </Group>
+      <Objectives />
       <GameBoard />
-      <GameInfo />
+      <SelectedInfo />
     </Screen>
   );
 }

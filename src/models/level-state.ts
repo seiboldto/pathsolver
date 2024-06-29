@@ -1,6 +1,6 @@
 import { v4 as uuid } from "uuid";
 
-import type { Board, Level, Operation } from "~src/levels";
+import type { Board, Level, Operation, Path } from "~src/levels";
 
 export type Node = {
   id: string;
@@ -17,10 +17,19 @@ export type Edge = {
   operation: Operation;
 };
 
+export type Objective = {
+  id: string;
+  index: number;
+  path: number[];
+  value: number;
+};
+
 export type LevelState = {
   level: Level;
   nodes: (Node | null)[];
   edges: (Edge | null)[];
+  objectives: Objective[];
+  activeObjectiveIndex: number;
   selectedNodes: Node[];
   selectedEdges: Edge[];
   selectedValue: number | null;
@@ -52,4 +61,13 @@ export const transformEdges = (board: Board): Edge[] => {
       operation: e,
     };
   });
+};
+
+export const transformObjectives = (paths: Path[]): Objective[] => {
+  return paths.map((p, i) => ({
+    id: uuid(),
+    index: i,
+    path: p.indices,
+    value: p.result,
+  }));
 };
