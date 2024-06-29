@@ -60,7 +60,31 @@ const removeTrailingEdges = (
   state: LevelState
 ): (Edge | null)[] => {
   const { boardSize } = state.level.board.difficulty.options;
-  return state.edges;
+
+  const emptyNodeIndices = new Set(
+    Array.from({ length: nodes.length }, (_, i) => i)
+  );
+  nodes.forEach(
+    (n) => n && emptyNodeIndices.delete(n.row * boardSize + n.column)
+  );
+
+  const unconnectedEdges = new Set<number>();
+  for (const index of emptyNodeIndices) {
+    const row = Math.trunc(index / boardSize);
+    const column = index % boardSize;
+
+    const edgeCount = 2 * boardSize * boardSize - 2 * boardSize;
+    const top = row !== 0 ? index + edgeCount / 2 - boardSize : null;
+    const bottom = row !== boardSize - 1 ? index + edgeCount / 2 : null;
+    const left = column !== 0 ? index - (row + 1) : null;
+    const right = column !== boardSize - 1 ? index - row : null;
+
+    [top, bottom, left, right].forEach(
+      (edge) => edge !== null && unconnectedEdges.add(edge)
+    );
+  }
+
+  return state.edges.map((e, i) => (unconnectedEdges.has(i) ? null : e));
 };
 
 export const useActiveLevel = () => {
