@@ -1,0 +1,9 @@
+.gameButtons {
+  display: flex;
+  justify-content: space-between;
+
+  .levelControls {
+    display: flex;
+    gap: var(--spacing-xs);
+  }
+}

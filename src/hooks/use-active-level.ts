@@ -95,7 +95,7 @@ const removeTrailingEdges = (
 
 export const useActiveLevel = () => {
   const activeLevelState = useLevelStore.use.activeLevelState();
-  const { setActiveLevelState } = useLevelStore.use.actions();
+  const { setActiveLevelState, setActiveLevel } = useLevelStore.use.actions();
   if (activeLevelState === null)
     throw new Error("useActiveLevel may only be used on the `Level` screen.");
 
@@ -201,6 +201,12 @@ export const useActiveLevel = () => {
     return "idle";
   };
 
+  const getLevelControlsState = (): "disabled" | "enabled" =>
+    activeObjectiveIndex === 0 ? "disabled" : "enabled";
+  const restartLevel = () => {
+    setActiveLevel(level);
+  };
+
   const getObjectiveState = (
     objective: Objective
   ): "active" | "completed" | "pending" => {
@@ -228,5 +234,7 @@ export const useActiveLevel = () => {
     getNodeState,
     applySelectedNodes,
     resetInvalidNode,
+    restartLevel,
+    getLevelControlsState,
   };
 };
