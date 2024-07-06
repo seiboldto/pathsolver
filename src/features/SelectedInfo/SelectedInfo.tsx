@@ -11,7 +11,11 @@ export function SelectedInfo(): JSX.Element {
   const selectedValue = selection.value ?? 0;
 
   return (
-    <div className={classes.selectedInfo}>
+    <div
+      className={classes.selectedInfo}
+      data-hidden={selection.value === null}
+      aria-hidden={selection.value === null}
+    >
       <span
         key={selectedValue}
         className={classes.value}

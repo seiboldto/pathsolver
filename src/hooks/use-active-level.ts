@@ -201,8 +201,12 @@ export const useActiveLevel = () => {
     return "idle";
   };
 
-  const getLevelControlsState = (): "disabled" | "enabled" =>
-    activeObjectiveIndex === 0 ? "disabled" : "enabled";
+  const getGameState = (): "waiting" | "playing" | "won" => {
+    if (activeObjectiveIndex === 0) return "waiting";
+    if (activeObjectiveIndex === objectives.length) return "won";
+    return "playing";
+  };
+
   const restartLevel = () => {
     setActiveLevel(level);
   };
@@ -235,6 +239,6 @@ export const useActiveLevel = () => {
     applySelectedNodes,
     resetInvalidNode,
     restartLevel,
-    getLevelControlsState,
+    getGameState,
   };
 };

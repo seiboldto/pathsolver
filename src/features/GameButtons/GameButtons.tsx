@@ -11,30 +11,32 @@ export function GameButtons(): JSX.Element {
   const [, setLocation] = useLocation();
   const navigateToHome = () => setLocation("/");
 
-  const { restartLevel, getLevelControlsState } = useActiveLevel();
+  const { restartLevel, getGameState } = useActiveLevel();
 
   const handleUndo = () => {
     // TODO: Implement undo
     alert("Not implemented yet");
   };
 
-  const disabled = getLevelControlsState() === "disabled";
+  const gameState = getGameState();
+  const disableLevelButtons = gameState !== "playing";
+  const disableHomeButton = gameState === "won";
 
   return (
     <div className={classes.gameButtons}>
       <Tooltip label={t("menu.back")}>
-        <Button square onClick={navigateToHome}>
+        <Button square disabled={disableHomeButton} onClick={navigateToHome}>
           <IconHome />
         </Button>
       </Tooltip>
       <div className={classes.levelControls}>
         <Tooltip label={t("game.restart")}>
-          <Button square disabled={disabled} onClick={restartLevel}>
+          <Button square disabled={disableLevelButtons} onClick={restartLevel}>
             <IconRefresh />
           </Button>
         </Tooltip>
         <Tooltip label={t("game.undo")}>
-          <Button square disabled={disabled} onClick={handleUndo}>
+          <Button square disabled={disableLevelButtons} onClick={handleUndo}>
             <IconArrowBack />
           </Button>
         </Tooltip>

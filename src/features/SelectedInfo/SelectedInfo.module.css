@@ -3,6 +3,10 @@
   align-items: center;
   justify-content: space-between;
 
+  &[data-hidden="true"] {
+    visibility: hidden;
+  }
+
   .value {
     transform: scale(1.5);
     animation: value var(--anim-duration) var(--anim-easing) forwards;
