@@ -2,6 +2,11 @@ import { v4 as uuid } from "uuid";
 
 import type { Board, Level, Operation, Path } from "~src/levels";
 
+export type Coords = {
+  row: number;
+  column: number;
+};
+
 export type Node = {
   id: string;
   row: number;
@@ -20,7 +25,7 @@ export type Edge = {
 export type Objective = {
   id: string;
   index: number;
-  path: number[];
+  path: Coords[];
   value: number;
 };
 
@@ -53,21 +58,33 @@ export const transformEdges = (board: Board): Edge[] => {
       board.difficulty.options.boardSize - (isHorizontal ? 1 : 0);
     const index = isHorizontal ? i : i - board.edges.length / 2;
 
+    const { row, column } = transformIndex(index, boardSize);
+
     return {
       id: uuid(),
-      row: Math.trunc(index / boardSize),
-      column: index % boardSize,
+      row,
+      column,
       orientation: isHorizontal ? "horizontal" : "vertical",
       operation: e,
     };
   });
 };
 
-export const transformObjectives = (paths: Path[]): Objective[] => {
+export const transformObjectives = (
+  paths: Path[],
+  board: Board
+): Objective[] => {
+  const { boardSize } = board.difficulty.options;
+
   return paths.map((p, i) => ({
     id: uuid(),
     index: i,
-    path: p.indices,
+    path: p.indices.map((i) => transformIndex(i, boardSize)),
     value: p.result,
   }));
 };
+
+const transformIndex = (index: number, boardSize: number): Coords => ({
+  row: Math.trunc(index / boardSize),
+  column: index % boardSize,
+});

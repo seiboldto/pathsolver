@@ -29,7 +29,7 @@ const levelStore = create<LevelStore>((set, get) => ({
           level,
           nodes: transformNodes(level.board),
           edges: transformEdges(level.board),
-          objectives: transformObjectives(level.paths),
+          objectives: transformObjectives(level.paths, level.board),
           activeObjectiveIndex: 0,
           selectedNodes: [],
           selectedEdges: [],

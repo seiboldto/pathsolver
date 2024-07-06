@@ -1,4 +1,9 @@
-import { IconArrowBack, IconHome, IconRefresh } from "@tabler/icons-react";
+import {
+  IconArrowBack,
+  IconBulb,
+  IconHome,
+  IconRefresh,
+} from "@tabler/icons-react";
 import { t } from "i18next";
 import { useLocation } from "wouter";
 
@@ -18,25 +23,37 @@ export function GameButtons(): JSX.Element {
     alert("Not implemented yet");
   };
 
+  const handleHint = () => {
+    // TODO: Implement hint
+    alert("Not implemented yet");
+  };
+
   const gameState = getGameState();
-  const disableLevelButtons = gameState !== "playing";
-  const disableHomeButton = gameState === "won";
+  const disableRightButtons = gameState !== "playing";
+  const disableLeftButtons = gameState === "won";
 
   return (
     <div className={classes.gameButtons}>
-      <Tooltip label={t("menu.back")}>
-        <Button square disabled={disableHomeButton} onClick={navigateToHome}>
-          <IconHome />
-        </Button>
-      </Tooltip>
+      <div>
+        <Tooltip label={t("game.exit")}>
+          <Button square disabled={disableLeftButtons} onClick={navigateToHome}>
+            <IconHome />
+          </Button>
+        </Tooltip>
+        <Tooltip label={t("game.hint")}>
+          <Button square disabled={disableLeftButtons} onClick={handleHint}>
+            <IconBulb />
+          </Button>
+        </Tooltip>
+      </div>
       <div className={classes.levelControls}>
         <Tooltip label={t("game.restart")}>
-          <Button square disabled={disableLevelButtons} onClick={restartLevel}>
+          <Button square disabled={disableRightButtons} onClick={restartLevel}>
             <IconRefresh />
           </Button>
         </Tooltip>
         <Tooltip label={t("game.undo")}>
-          <Button square disabled={disableLevelButtons} onClick={handleUndo}>
+          <Button square disabled={disableRightButtons} onClick={handleUndo}>
             <IconArrowBack />
           </Button>
         </Tooltip>

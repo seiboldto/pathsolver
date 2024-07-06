@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
 
-  .levelControls {
+  > div {
     display: flex;
     gap: var(--spacing-xs);
   }
