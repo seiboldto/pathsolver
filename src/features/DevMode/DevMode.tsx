@@ -36,25 +36,28 @@ export function DevMode() {
   const disableLevelCheats = location !== "/level";
 
   return (
-    <div className={classes.devMode}>
-      <Tooltip label={t("dev-mode.title")}>
-        <Button square onClick={toggleDeveloperMode}>
-          <IconCode />
-        </Button>
-      </Tooltip>
-      {isDeveloperMode && (
-        <>
-          <Tooltip label={t("dev-mode.print-objectives")}>
-            <Button
-              square
-              onClick={handlePrintObjectives}
-              disabled={disableLevelCheats}
-            >
-              <IconBulb />
-            </Button>
-          </Tooltip>
-        </>
-      )}
-    </div>
+    <>
+      <div className={classes.devBar}>
+        <Tooltip label={t("dev-mode.title")}>
+          <Button square onClick={toggleDeveloperMode}>
+            <IconCode />
+          </Button>
+        </Tooltip>
+        {isDeveloperMode && (
+          <>
+            <Tooltip label={t("dev-mode.print-objectives")}>
+              <Button
+                square
+                onClick={handlePrintObjectives}
+                disabled={disableLevelCheats}
+              >
+                <IconBulb />
+              </Button>
+            </Tooltip>
+          </>
+        )}
+      </div>
+      {isDeveloperMode && <div className={classes.devIndicator} />}
+    </>
   );
 }

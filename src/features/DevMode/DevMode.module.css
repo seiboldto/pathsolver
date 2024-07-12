@@ -1,4 +1,4 @@
-.devMode {
+.devBar {
   position: absolute;
   bottom: var(--spacing-md);
   left: var(--spacing-md);
@@ -6,4 +6,11 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
+}
+
+.devIndicator {
+  position: absolute;
+  border: 0.5rem solid var(--primary-color);
+  pointer-events: none;
+  inset: 0;
 }
