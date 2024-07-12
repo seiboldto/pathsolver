@@ -8,13 +8,19 @@ import { GameEdge } from "./GameEdge";
 import { GameNode } from "./GameNode";
 
 export function GameBoard(): JSX.Element {
-  const { nodes, edges, boardSize, applySelectedNodes } = useActiveLevel();
+  const { nodes, edges, boardSize, applySelectedNodes, getGameState } =
+    useActiveLevel();
+
+  const gameState = getGameState();
 
   useEffect(() => {
-    document.addEventListener("pointerup", applySelectedNodes);
+    if (gameState !== "won") {
+      document.addEventListener("pointerup", applySelectedNodes);
 
-    return () => document.removeEventListener("pointerup", applySelectedNodes);
-  }, [applySelectedNodes]);
+      return () =>
+        document.removeEventListener("pointerup", applySelectedNodes);
+    }
+  }, [applySelectedNodes, gameState]);
 
   return (
     <div className={classes.board} style={cssVars({ boardSize })}>

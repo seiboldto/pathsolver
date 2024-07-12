@@ -114,9 +114,6 @@ export const useActiveLevel = () => {
 
   const applySelectedNodes = useCallback(() => {
     setActiveLevelState((prev) => {
-      // TODO: Remove this
-      if (prev.activeObjectiveIndex === prev.objectives.length) return {};
-
       const { value } = prev.objectives[prev.activeObjectiveIndex];
       const { selectedValue } = prev;
 
