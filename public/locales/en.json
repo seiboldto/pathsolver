@@ -6,8 +6,9 @@
     "settings": "Settings",
     "back": "Back"
   },
-  "developer-mode": {
-    "title": "Developer Mode"
+  "dev-mode": {
+    "title": "Developer Mode",
+    "print-objectives": "Print Objectives"
   },
   "difficulty": {
     "title": "difficulty",
