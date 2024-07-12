@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { Redirect, Route, Switch } from "wouter";
 
+import { DevMode } from "~src/features";
 import { useSettingsSideEffects } from "~src/hooks";
 import { Difficulty, Home, Level, Settings } from "~src/screens";
 
@@ -26,6 +27,7 @@ export function App() {
           <Redirect to="/" replace />
         </Route>
       </Switch>
+      {import.meta.env.MODE === "development" && <DevMode />}
     </Suspense>
   );
 }

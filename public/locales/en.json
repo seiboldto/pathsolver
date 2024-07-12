@@ -6,6 +6,9 @@
     "settings": "Settings",
     "back": "Back"
   },
+  "developer-mode": {
+    "title": "Developer Mode"
+  },
   "difficulty": {
     "title": "difficulty",
     "choose": "Choose Difficulty",
