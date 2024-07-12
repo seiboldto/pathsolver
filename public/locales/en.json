@@ -1,22 +1,17 @@
 {
-  "menu": {
+  "home": {
     "title": "pathfinder",
     "play": "Play",
-    "daily": "Daily",
     "settings": "Settings",
-    "back": "Back"
+    "choose-difficulty": "Choose Difficulty",
+    "difficulty-normal": "Normal",
+    "difficulty-hard": "Hard",
+    "difficulty-extreme": "Extreme",
+    "difficulty-custom": "Custom"
   },
   "dev-mode": {
     "title": "Developer Mode",
     "print-objectives": "Print Objectives"
-  },
-  "difficulty": {
-    "title": "difficulty",
-    "choose": "Choose Difficulty",
-    "normal": "Normal",
-    "hard": "Hard",
-    "extreme": "Extreme",
-    "custom": "Custom"
   },
   "settings": {
     "title": "settings",
@@ -25,7 +20,8 @@
     "theme-light": "Light",
     "theme-dark": "Dark",
     "hover-animations": "Hover Animations",
-    "menu-transitions": "Menu Transitions"
+    "menu-transitions": "Menu Transitions",
+    "back": "Back"
   },
   "ui": {
     "next": "Next",

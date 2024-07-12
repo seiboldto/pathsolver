@@ -58,7 +58,7 @@ export function SettingsScreen() {
         onChange={(value) => updateSettings("enableMenuTransitions", value)}
       />
       <Button icon={IconArrowLeft} onClick={navigateToHome}>
-        {t("menu.back")}
+        {t("settings.back")}
       </Button>
     </Screen>
   );
