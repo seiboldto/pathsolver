@@ -1,9 +1,4 @@
 .gameButtons {
   display: flex;
   justify-content: space-between;
-
-  > div {
-    display: flex;
-    gap: var(--spacing-xs);
-  }
 }

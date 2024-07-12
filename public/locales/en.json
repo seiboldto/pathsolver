@@ -32,7 +32,6 @@
   },
   "game": {
     "exit": "Exit",
-    "hint": "Hint",
     "restart": "Restart",
     "undo": "Undo",
     "operations": {
