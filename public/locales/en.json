@@ -9,6 +9,13 @@
     "difficulty-extreme": "Extreme",
     "difficulty-custom": "Custom"
   },
+  "stats": {
+    "games-played": "Games played",
+    "current-streak": "Current Streak",
+    "max-streak": "Max Streak",
+    "best-time": "Best Time",
+    "not-applicable": "N/A"
+  },
   "dev-mode": {
     "title": "Developer Mode",
     "print-objectives": "Print Objectives"

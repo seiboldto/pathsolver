@@ -1,0 +1,6 @@
+.difficultyStats {
+  .statItem {
+    display: flex;
+    justify-content: space-between;
+  }
+}
