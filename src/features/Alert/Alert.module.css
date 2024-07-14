@@ -1,0 +1,13 @@
+.alert {
+  display: flex;
+  gap: var(--spacing-xs);
+  align-items: center;
+  position: absolute;
+  width: var(--ui-width);
+  left: var(--side-padding);
+  bottom: var(--spacing-xl);
+
+  &[data-type="warning"] svg {
+    color: var(--error-color);
+  }
+}

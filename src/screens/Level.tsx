@@ -2,6 +2,7 @@ import { Redirect } from "wouter";
 
 import { Screen } from "~src/components";
 import {
+  Alert,
   GameBoard,
   GameButtons,
   Objectives,
@@ -21,6 +22,7 @@ export function LevelScreen(): JSX.Element {
       <Objectives />
       <GameBoard />
       <SelectedInfo />
+      <Alert />
     </Screen>
   );
 }
