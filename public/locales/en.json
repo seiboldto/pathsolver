@@ -18,7 +18,8 @@
   },
   "dev-mode": {
     "title": "Developer Mode",
-    "print-objectives": "Print Objectives"
+    "print-objectives": "Print Objectives",
+    "advance-objectives": "Advance Objectives"
   },
   "settings": {
     "title": "settings",
