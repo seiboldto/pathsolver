@@ -5,7 +5,20 @@
   position: absolute;
   width: var(--ui-width);
   left: var(--side-padding);
-  bottom: var(--spacing-xl);
+  bottom: 0%;
+
+  animation: slide-in var(--anim-duration) var(--anim-easing) forwards;
+  user-select: none;
+
+  @keyframes slide-in {
+    0% {
+      bottom: 0%;
+    }
+
+    100% {
+      bottom: var(--spacing-xl);
+    }
+  }
 
   &[data-type="warning"] svg {
     color: var(--error-color);
