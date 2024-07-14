@@ -12,10 +12,6 @@
     justify-content: center;
     user-select: none;
 
-    svg {
-      height: 130%;
-    }
-
     &[data-state="active"] {
       border-color: var(--primary-color);
     }

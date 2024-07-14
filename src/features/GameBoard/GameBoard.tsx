@@ -26,6 +26,7 @@ export function GameBoard(): JSX.Element {
     <div className={classes.board} style={cssVars({ boardSize })}>
       {edges.map((edge) => edge && <GameEdge key={edge.id} edge={edge} />)}
       {nodes.map((node) => node && <GameNode key={node.id} node={node} />)}
+      {/* TODO: SHOW LOST STATE */}
     </div>
   );
 }

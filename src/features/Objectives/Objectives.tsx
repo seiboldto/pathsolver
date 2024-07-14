@@ -1,6 +1,7 @@
 import { IconCheck } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
 
+import { Tooltip } from "~src/components";
 import { useActiveLevel } from "~src/hooks";
 
 import classes from "./Objectives.module.css";
@@ -17,20 +18,24 @@ export function Objectives(): JSX.Element {
     >
       {objectives.map((o) => {
         const state = getObjectiveState(o);
+
         return (
-          <div
+          <Tooltip
             key={o.id}
-            className={classes.objective}
-            data-state={state}
-            aria-current={state === "active" ? "step" : "false"}
-            aria-label={t("game.objectives.index", {
+            label={t("game.objectives.index", {
               count: o.index + 1,
               ordinal: true,
             })}
-            aria-description={t(`game.objectives.${state}`)}
           >
-            {state === "completed" ? <IconCheck /> : o.value}
-          </div>
+            <div
+              className={classes.objective}
+              data-state={state}
+              aria-current={state === "active" ? "step" : "false"}
+              aria-description={t(`game.objectives.${state}`)}
+            >
+              {state === "completed" ? <IconCheck /> : o.value}
+            </div>
+          </Tooltip>
         );
       })}
     </div>
