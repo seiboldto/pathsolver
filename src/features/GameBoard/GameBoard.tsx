@@ -14,7 +14,7 @@ export function GameBoard(): JSX.Element {
   const gameState = getGameState();
 
   useEffect(() => {
-    if (gameState !== "won") {
+    if (gameState === "waiting" || gameState === "playing") {
       document.addEventListener("pointerup", applySelectedNodes);
 
       return () =>

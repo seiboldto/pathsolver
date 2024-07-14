@@ -201,10 +201,12 @@ export const useActiveLevel = () => {
     return "idle";
   };
 
-  const getGameState = (): "waiting" | "playing" | "won" => {
+  const getGameState = (): "waiting" | "playing" | "lost" | "won" => {
     if (activeObjectiveIndex === 0) return "waiting";
-    if (activeObjectiveIndex === objectives.length) return "won";
-    return "playing";
+    if (activeObjectiveIndex < objectives.length) return "playing";
+
+    if (nodes.some((n) => n !== null)) return "lost";
+    return "won";
   };
 
   const restartLevel = () => {

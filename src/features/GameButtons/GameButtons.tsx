@@ -19,7 +19,7 @@ export function GameButtons(): JSX.Element {
   };
 
   const gameState = getGameState();
-  const disableRightButtons = gameState !== "playing";
+  const disableRightButtons = gameState === "waiting" || gameState === "won";
   const disableHomeButton = gameState === "won";
 
   return (
