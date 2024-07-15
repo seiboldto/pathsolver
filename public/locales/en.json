@@ -19,7 +19,11 @@
   "dev-mode": {
     "title": "Developer Mode",
     "print-objectives": "Print Objectives",
-    "advance-objectives": "Advance Objectives"
+    "advance-objectives": "Advance Objectives",
+    "print-level-seed": "Print Level Seed",
+    "load-level": "Load Level",
+    "enter-difficulty": "Enter Difficulty ($t(home.difficulty-normal)/$t(home.difficulty-hard)/$t(home.difficulty-extreme))",
+    "enter-seed": "Enter Seed"
   },
   "settings": {
     "title": "settings",

@@ -1,13 +1,24 @@
-import { IconArrowRight, IconBulb, IconCode } from "@tabler/icons-react";
+import {
+  IconBulb,
+  IconCode,
+  IconDownload,
+  IconFocus2,
+  IconUpload,
+} from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "wouter";
 
 import { Button, Tooltip } from "~src/components";
+import {
+  Difficulty,
+  generateLevelFromSeed,
+  PRESET_DIFFICULTIES,
+} from "~src/levels";
 import { useLevelStore, useUiStore } from "~src/stores";
 
 import classes from "./DevMode.module.css";
 
-const print = (...message: string[]) => {
+const print = (...message: unknown[]) => {
   console.log(message.join("\n"));
 };
 
@@ -19,7 +30,9 @@ export function DevMode() {
   const { toggleDeveloperMode } = useUiStore.use.actions();
 
   const activeLevelState = useLevelStore.use.activeLevelState();
-  const { setActiveLevelState } = useLevelStore.use.actions();
+  const { setActiveLevelState, setActiveLevel } = useLevelStore.use.actions();
+
+  const [, setLocation] = useLocation();
 
   const printObjectives = () => {
     if (!activeLevelState) return;
@@ -40,7 +53,33 @@ export function DevMode() {
     }));
   };
 
+  const printLevelSeed = () => {
+    if (!activeLevelState) return;
+    print("Seed", activeLevelState.level.seed);
+  };
+
+  const loadLevel = () => {
+    const difficulty = prompt(t("dev-mode.enter-difficulty"));
+    const selectedDifficulty = PRESET_DIFFICULTIES.find(
+      (p) => p.toLowerCase() === difficulty?.toLowerCase()
+    );
+    if (!selectedDifficulty) return;
+
+    const seed = prompt(t("dev-mode.enter-seed")) ?? "";
+    const selectedSeed = parseInt(seed);
+    if (isNaN(selectedSeed)) return;
+
+    const level = generateLevelFromSeed(
+      selectedSeed,
+      Difficulty[selectedDifficulty]()
+    );
+
+    setActiveLevel(level);
+    setLocation("/level");
+  };
+
   const disableLevelCheats = location !== "/level";
+  const disableMenuCheats = location === "/level";
 
   return (
     <>
@@ -67,7 +106,21 @@ export function DevMode() {
                 onClick={advanceObjectives}
                 disabled={disableLevelCheats}
               >
-                <IconArrowRight />
+                <IconFocus2 />
+              </Button>
+            </Tooltip>
+            <Tooltip label={t("dev-mode.print-level-seed")}>
+              <Button
+                square
+                onClick={printLevelSeed}
+                disabled={disableLevelCheats}
+              >
+                <IconDownload />
+              </Button>
+            </Tooltip>
+            <Tooltip label={t("dev-mode.load-level")}>
+              <Button square onClick={loadLevel} disabled={disableMenuCheats}>
+                <IconUpload />
               </Button>
             </Tooltip>
           </>

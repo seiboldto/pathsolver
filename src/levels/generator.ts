@@ -36,13 +36,16 @@ export function generateLevelFromDate(
  * @param difficulty - The difficulty of the level.
  * @returns A non-random level.
  */
-function generateLevelFromSeed(seed: number, difficulty: Difficulty): Level {
+export function generateLevelFromSeed(
+  seed: number,
+  difficulty: Difficulty
+): Level {
   let level: Level | null = null;
   while (!level) {
     const rng = prand.xoroshiro128plus(seed);
-    const result = Level.fromDifficulty(difficulty, rng);
+    const result = Level.fromDifficulty(difficulty, rng, seed);
     if (result instanceof Level) level = result;
-    seed++;
+    else seed++;
   }
 
   return level;

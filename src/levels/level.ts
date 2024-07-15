@@ -7,18 +7,14 @@ import { GenerationError, type GenerationResult } from "./error";
 import { Path } from "./path";
 
 export class Level {
-  /**
-   * The board of the level.
-   */
   public board: Board;
-  /**
-   * The paths of the level.
-   */
   public paths: Path[];
+  public seed: number;
 
-  constructor(board: Board, paths: Path[]) {
+  constructor(board: Board, paths: Path[], seed: number) {
     this.board = board;
     this.paths = paths;
+    this.seed = seed;
   }
 
   /**
@@ -29,7 +25,8 @@ export class Level {
    */
   public static fromDifficulty(
     difficulty: Difficulty,
-    rng: RandomGenerator
+    rng: RandomGenerator,
+    seed: number
   ): GenerationResult<Level> {
     const board = Board.fromDifficulty(difficulty, rng);
     const paths: Path[] = [];
@@ -45,7 +42,7 @@ export class Level {
       paths.push(path);
     }
 
-    return new Level(board, paths);
+    return new Level(board, paths, seed);
   }
 }
 
@@ -55,7 +52,7 @@ if (import.meta.vitest) {
   it("generates correct levels", () => {
     for (let i = 0; i < 100; i++) {
       const rng = prand.xorshift128plus(i);
-      const level = Level.fromDifficulty(Difficulty.normal(), rng);
+      const level = Level.fromDifficulty(Difficulty.normal(), rng, 0);
 
       if (level instanceof Level) {
         const board = new Board(
