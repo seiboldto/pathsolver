@@ -1,10 +1,11 @@
 .objectives {
   display: flex;
   align-items: center;
-  gap: var(--spacing-xs);
 
   .objective {
     border: 0.125rem solid var(--border-color);
+    border-left-width: 0;
+    border-right-width: 0;
     height: calc(var(--ui-size) / 2);
     flex: 1 1 0px;
     display: flex;
@@ -20,6 +21,59 @@
       border-color: var(--primary-border-color);
       background-color: var(--primary-color);
       color: white;
+    }
+
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &:first-child {
+      border-left-width: 0.125rem;
+
+      span {
+        transform: translateX(5px);
+      }
+    }
+
+    &:last-child {
+      border-right-width: 0.125rem;
+
+      span {
+        transform: translateX(-5px);
+      }
+    }
+  }
+
+  .chevron {
+    stroke: var(--border-color);
+    height: calc(var(--ui-size) / 2);
+    width: var(--ui-size);
+    fill: none;
+
+    .diagonal {
+      stroke-width: 0.0625rem;
+    }
+
+    .horizontal {
+      stroke-width: 0.125rem;
+    }
+
+    polygon {
+      stroke: none;
+    }
+
+    g[data-state="active"] {
+      stroke: var(--primary-color);
+    }
+
+    g[data-state="completed"] {
+      stroke: var(--primary-border-color);
+
+      polygon {
+        fill: var(--primary-color);
+      }
     }
   }
 }

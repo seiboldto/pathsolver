@@ -1,12 +1,7 @@
 import { useCallback } from "react";
 import { v4 as uuid } from "uuid";
 
-import {
-  type Edge,
-  type LevelState,
-  type Node,
-  type Objective,
-} from "~src/models";
+import { type Edge, type LevelState, type Node } from "~src/models";
 import { useLevelStore } from "~src/stores";
 
 const areNodesAdjacent = (n1: Node, n2: Node) => {
@@ -213,14 +208,6 @@ export const useActiveLevel = () => {
     setActiveLevel(level);
   };
 
-  const getObjectiveState = (
-    objective: Objective
-  ): "active" | "completed" | "pending" => {
-    if (objective.index === activeObjectiveIndex) return "active";
-    if (objective.index < activeObjectiveIndex) return "completed";
-    return "pending";
-  };
-
   const selection = {
     value: selectedValue,
     key: uuid(),
@@ -234,7 +221,7 @@ export const useActiveLevel = () => {
     boardSize,
     selection,
     objectives,
-    getObjectiveState,
+    activeObjectiveIndex,
     selectNode,
     getEdgeState,
     getNodeState,
