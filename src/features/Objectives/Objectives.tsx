@@ -1,4 +1,5 @@
 import { IconCheck } from "@tabler/icons-react";
+import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Tooltip } from "~src/components";
@@ -35,9 +36,8 @@ export function Objectives(): JSX.Element {
           : getObjectiveState(objectives[i + 1]);
 
         return (
-          <>
+          <Fragment key={o.id}>
             <Tooltip
-              key={o.id}
               label={t("game.objectives.index", {
                 count: o.index + 1,
                 ordinal: true,
@@ -75,7 +75,7 @@ export function Objectives(): JSX.Element {
                 </g>
               </svg>
             )}
-          </>
+          </Fragment>
         );
       })}
     </div>
