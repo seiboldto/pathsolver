@@ -14,7 +14,6 @@ export function GameButtons(): JSX.Element {
   const { restartLevel, getGameState } = useActiveLevel();
 
   const handleUndo = () => {
-    // TODO: Implement undo
     alert("Not implemented yet");
   };
 

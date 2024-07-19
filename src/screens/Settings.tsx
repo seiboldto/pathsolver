@@ -51,7 +51,6 @@ export function SettingsScreen() {
         checked={settings.enableHoverAnimations}
         onChange={(value) => updateSettings("enableHoverAnimations", value)}
       />
-      {/* TODO: Make menu transitions optional */}
       <Checkbox
         label={t("settings.menu-transitions")}
         checked={settings.enableMenuTransitions}

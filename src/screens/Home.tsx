@@ -29,7 +29,6 @@ export function HomeScreen() {
 
   const { setActiveLevel } = useLevelStore.use.actions();
   const handlePlayClick = () => {
-    // TODO: Implement custom difficulties
     if (selectedDifficulty === "custom") return alert("Not implemented yet.");
 
     const difficulty = Difficulty[selectedDifficulty]();
