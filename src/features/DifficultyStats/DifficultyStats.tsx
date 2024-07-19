@@ -28,8 +28,8 @@ export function DifficultyStats({
       <StatItem label={t("stats.max-streak")}>
         {difficultyStats.maxStreak}
       </StatItem>
-      <StatItem label={t("stats.best-time")}>
-        {difficultyStats.bestTime ?? t("stats.not-applicable")}
+      <StatItem label={t("stats.perfect-games")}>
+        {difficultyStats.perfectGames}
       </StatItem>
     </div>
   );
@@ -43,8 +43,8 @@ type StatItemProps = {
 function StatItem({ label, children }: StatItemProps): JSX.Element {
   return (
     <p className={classes.statItem}>
-      {label}
-      <span>{children}</span>
+      <span>{label}</span>
+      {children}
     </p>
   );
 }

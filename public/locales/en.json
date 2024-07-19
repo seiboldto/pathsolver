@@ -13,8 +13,7 @@
     "games-played": "Games played",
     "current-streak": "Current Streak",
     "max-streak": "Max Streak",
-    "best-time": "Best Time",
-    "not-applicable": "N/A"
+    "perfect-games": "Perfect Games"
   },
   "dev-mode": {
     "title": "Developer Mode",
