@@ -26,7 +26,6 @@
     "enter-seed": "Enter Seed"
   },
   "settings": {
-    "title": "settings",
     "language": "Language",
     "theme": "Theme",
     "theme-light": "Light",

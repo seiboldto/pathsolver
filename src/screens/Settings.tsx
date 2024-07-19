@@ -32,7 +32,7 @@ export function SettingsScreen() {
 
   return (
     <Screen>
-      <Title>{t("settings.title")}</Title>
+      <Title>{t("home.settings")}</Title>
       <Select
         label={t("settings.language")}
         data={languages}
