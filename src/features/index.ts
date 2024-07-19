@@ -1,4 +1,3 @@
-export { Alert } from "./Alert/Alert";
 export { DevMode } from "./DevMode/DevMode";
 export { DifficultyStats } from "./DifficultyStats/DifficultyStats";
 export { GameBoard } from "./GameBoard/GameBoard";

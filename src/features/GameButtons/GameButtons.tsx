@@ -19,13 +19,12 @@ export function GameButtons(): JSX.Element {
   };
 
   const gameState = getGameState();
-  const disableRightButtons = gameState === "waiting" || gameState === "won";
-  const disableHomeButton = gameState === "won";
+  const disableRightButtons = gameState !== "playing";
 
   return (
     <div className={classes.gameButtons}>
       <Tooltip label={t("game.exit")}>
-        <Button square disabled={disableHomeButton} onClick={navigateToHome}>
+        <Button square onClick={navigateToHome}>
           <IconHome />
         </Button>
       </Tooltip>

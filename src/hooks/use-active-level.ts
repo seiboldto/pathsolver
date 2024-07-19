@@ -196,11 +196,11 @@ export const useActiveLevel = () => {
     return "idle";
   };
 
-  const getGameState = (): "waiting" | "playing" | "lost" | "won" => {
+  const getGameState = (): "waiting" | "playing" | "perfect-won" | "won" => {
     if (activeObjectiveIndex === 0) return "waiting";
     if (activeObjectiveIndex < objectives.length) return "playing";
 
-    if (nodes.some((n) => n !== null)) return "lost";
+    if (nodes.some((n) => n !== null)) return "perfect-won";
     return "won";
   };
 

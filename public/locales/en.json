@@ -57,10 +57,6 @@
       "index_ordinal_two": "{{count}}nd Objective",
       "index_ordinal_few": "{{count}}rd Objective",
       "index_ordinal_other": "{{count}}th Objective"
-    },
-    "alerts": {
-      "warning": "Warning",
-      "lost": "For a level to be completed, all numbers must be used once."
     }
   }
 }
