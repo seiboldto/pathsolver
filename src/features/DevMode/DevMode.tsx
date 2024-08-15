@@ -1,10 +1,12 @@
 import {
   IconBulb,
+  IconCalendar,
   IconCode,
   IconDownload,
   IconFocus2,
   IconUpload,
 } from "@tabler/icons-react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "wouter";
 
@@ -13,10 +15,11 @@ import {
   Difficulty,
   generateLevelFromSeed,
   PRESET_DIFFICULTIES,
-} from "~src/levels";
+} from "~src/level-gen";
 import { useLevelStore, useUiStore } from "~src/stores";
 
 import classes from "./DevMode.module.css";
+import { StreakInfo } from "./StreakInfo";
 
 const print = (...message: unknown[]) => {
   console.log(message.join("\n"));
@@ -30,11 +33,15 @@ export function DevMode() {
   const { toggleDeveloperMode } = useUiStore.use.actions();
 
   const activeLevelState = useLevelStore.use.activeLevelState();
-  const { setActiveLevelState, setActiveLevel } = useLevelStore.use.actions();
+  const { setActiveLevel, advanceObjectives, checkForGameWin } =
+    useLevelStore.use.actions();
 
   const [, setLocation] = useLocation();
 
-  const printObjectives = () => {
+  const [isStreakInfoVisible, setStreakInfoVisisble] = useState(false);
+  const toggleStreakInfo = () => setStreakInfoVisisble((prev) => !prev);
+
+  const handlePrintObjectives = () => {
     if (!activeLevelState) return;
 
     const { objectives } = activeLevelState;
@@ -47,18 +54,12 @@ export function DevMode() {
     );
   };
 
-  const advanceObjectives = () => {
-    setActiveLevelState((prev) => ({
-      activeObjectiveIndex: prev.activeObjectiveIndex + 1,
-    }));
-  };
-
-  const printLevelSeed = () => {
+  const handlePrintLevelSeed = () => {
     if (!activeLevelState) return;
     print("Seed", activeLevelState.level.seed);
   };
 
-  const loadLevel = () => {
+  const handleLoadLevel = () => {
     const difficulty = prompt(t("dev-mode.enter-difficulty"));
     const selectedDifficulty = PRESET_DIFFICULTIES.find(
       (p) => p.toLowerCase() === difficulty?.toLowerCase()
@@ -78,6 +79,14 @@ export function DevMode() {
     setLocation("/level");
   };
 
+  const handleAdvanceObjectives = () => {
+    if (!activeLevelState) return;
+
+    const { nodes, edges } = activeLevelState;
+    advanceObjectives(nodes, edges);
+    checkForGameWin(activeLevelState.level.board.difficulty.options.preset);
+  };
+
   const disableLevelCheats = location !== "/level";
   const disableMenuCheats = location === "/level";
 
@@ -94,7 +103,7 @@ export function DevMode() {
             <Tooltip label={t("dev-mode.print-objectives")}>
               <Button
                 square
-                onClick={printObjectives}
+                onClick={handlePrintObjectives}
                 disabled={disableLevelCheats}
               >
                 <IconBulb />
@@ -103,7 +112,7 @@ export function DevMode() {
             <Tooltip label={t("dev-mode.advance-objectives")}>
               <Button
                 square
-                onClick={advanceObjectives}
+                onClick={handleAdvanceObjectives}
                 disabled={disableLevelCheats}
               >
                 <IconFocus2 />
@@ -112,17 +121,27 @@ export function DevMode() {
             <Tooltip label={t("dev-mode.print-level-seed")}>
               <Button
                 square
-                onClick={printLevelSeed}
+                onClick={handlePrintLevelSeed}
                 disabled={disableLevelCheats}
               >
                 <IconDownload />
               </Button>
             </Tooltip>
             <Tooltip label={t("dev-mode.load-level")}>
-              <Button square onClick={loadLevel} disabled={disableMenuCheats}>
+              <Button
+                square
+                onClick={handleLoadLevel}
+                disabled={disableMenuCheats}
+              >
                 <IconUpload />
               </Button>
             </Tooltip>
+            <Tooltip label={t("dev-mode.toggle-streak-info")}>
+              <Button square onClick={toggleStreakInfo}>
+                <IconCalendar />
+              </Button>
+            </Tooltip>
+            {isStreakInfoVisible && <StreakInfo />}
           </>
         )}
       </div>

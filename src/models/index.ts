@@ -1,12 +1,12 @@
 export type { InputProps, SelectData } from "./input";
 export {
   type Edge,
+  type GameBoard,
   type LevelState,
   type Node,
   type Objective,
-  transformEdges,
-  transformNodes,
-  transformObjectives,
+  type Selection,
+  transformLevel,
 } from "./level-state";
 export {
   type DifficultyStatistics,

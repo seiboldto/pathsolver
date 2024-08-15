@@ -1,96 +1,15 @@
 import { useCallback } from "react";
-import { v4 as uuid } from "uuid";
 
-import { type Edge, type LevelState, type Node } from "~src/models";
-import { useLevelStore } from "~src/stores";
-
-const areNodesAdjacent = (n1: Node, n2: Node) => {
-  const distance = (n1.row - n2.row) ** 2 + (n1.column - n2.column) ** 2;
-  return distance === 1;
-};
-
-const getEdgeBetweenNodes = (
-  edges: (Edge | null)[],
-  n1: Node,
-  n2: Node
-): Edge => {
-  const orientation = n1.row === n2.row ? "horizontal" : "vertical";
-  const { row, column } =
-    orientation === "horizontal"
-      ? { row: n1.row, column: Math.min(n1.column, n2.column) }
-      : { row: Math.min(n1.row, n2.row), column: n1.column };
-
-  const edge = edges.find(
-    (e) =>
-      e && e.row === row && e.column === column && e.orientation === orientation
-  );
-  return edge!;
-};
-
-const removeSelectedNodes = (state: LevelState): (Node | null)[] => {
-  const { nodes, selectedNodes } = state;
-
-  const newNodes = nodes.map((n) =>
-    n && selectedNodes.includes(n) ? null : n
-  );
-
-  const findNode = ({ row, column }: Pick<Node, "row" | "column">) =>
-    newNodes.find((n) => n && n.row === row && n.column === column);
-
-  const { boardSize } = state.level.board.difficulty.options;
-  for (let column = 0; column < boardSize; column++) {
-    for (let row = boardSize - 2; row >= 0; row--) {
-      const node = findNode({ row, column });
-      if (!node) continue;
-
-      let lowestPossibleRow = row;
-      while (!findNode({ row: lowestPossibleRow + 1, column })) {
-        if (lowestPossibleRow + 1 === boardSize) break;
-
-        lowestPossibleRow++;
-      }
-      node.row = lowestPossibleRow;
-    }
-  }
-
-  return newNodes;
-};
-
-const removeTrailingEdges = (
-  nodes: (Node | null)[],
-  state: LevelState
-): (Edge | null)[] => {
-  const { boardSize } = state.level.board.difficulty.options;
-
-  const emptyNodeIndices = new Set(
-    Array.from({ length: nodes.length }, (_, i) => i)
-  );
-  nodes.forEach(
-    (n) => n && emptyNodeIndices.delete(n.row * boardSize + n.column)
-  );
-
-  const unconnectedEdges = new Set<number>();
-  for (const index of emptyNodeIndices) {
-    const row = Math.trunc(index / boardSize);
-    const column = index % boardSize;
-
-    const edgeCount = 2 * boardSize * boardSize - 2 * boardSize;
-    const top = row !== 0 ? index + edgeCount / 2 - boardSize : null;
-    const bottom = row !== boardSize - 1 ? index + edgeCount / 2 : null;
-    const left = column !== 0 ? index - (row + 1) : null;
-    const right = column !== boardSize - 1 ? index - row : null;
-
-    [top, bottom, left, right].forEach(
-      (edge) => edge !== null && unconnectedEdges.add(edge)
-    );
-  }
-
-  return state.edges.map((e, i) => (unconnectedEdges.has(i) ? null : e));
-};
+import {
+  createLevelFunc,
+  levelAppliers,
+  levelHelpers,
+  levelState,
+} from "~src/level-state";
+import { levelStore, useLevelStore } from "~src/stores";
 
 export const useActiveLevel = () => {
   const activeLevelState = useLevelStore.use.activeLevelState();
-  const { setActiveLevelState, setActiveLevel } = useLevelStore.use.actions();
   if (activeLevelState === null)
     throw new Error("useActiveLevel may only be used on the `Level` screen.");
 
@@ -98,136 +17,81 @@ export const useActiveLevel = () => {
     nodes,
     level,
     edges,
-    selectedNodes,
-    selectedEdges,
     invalidNode,
-    selectedValue,
-    objectives,
     activeObjectiveIndex,
+    selection,
+    objectives,
   } = activeLevelState;
   const { boardSize, maxPathLength } = level.board.difficulty.options;
 
+  // As this function is used in a window event listener, it needs to be memoised.
   const applySelectedNodes = useCallback(() => {
-    setActiveLevelState((prev) => {
-      const { value } = prev.objectives[prev.activeObjectiveIndex];
-      const { selectedValue } = prev;
+    const { activeLevelState } = levelStore.getState();
 
-      if (prev.selectedNodes.length <= 1 || value !== selectedValue)
-        return { selectedNodes: [], selectedValue: null, selectedEdges: [] };
+    const { selection, objectives, activeObjectiveIndex, nodes, edges } =
+      activeLevelState!;
 
-      const nodes = removeSelectedNodes(prev);
-      const edges = removeTrailingEdges(nodes, prev);
-      return {
-        selectedNodes: [],
-        selectedValue: null,
-        selectedEdges: [],
-        nodes,
-        edges,
-        activeObjectiveIndex: prev.activeObjectiveIndex + 1,
-      };
+    return levelAppliers.applySelectedNodes({
+      nodes,
+      edges,
+      selection,
+      objectives,
+      activeObjectiveIndex,
+      boardSize,
     });
-  }, [setActiveLevelState]);
+  }, [boardSize]);
 
-  const resetInvalidNode = () =>
-    setActiveLevelState(() => ({ invalidNode: null }));
+  const canNodeBeSelected = createLevelFunc(levelHelpers.canNodeBeSelected, {
+    selectedNodes: selection.nodes,
+    maxPathLength,
+  });
 
-  const selectNode = (node: Node, type: "initial" | "sequential") => {
-    setActiveLevelState(
-      ({ selectedNodes, edges, selectedValue, selectedEdges }) => {
-        const isSelectable = canNodeBeSelected(selectedNodes, node, type);
-        if (isSelectable === "ignore") return {};
-        if (isSelectable === "not-selectable") return { invalidNode: node };
-
-        let newSelectedValue = node.value;
-        let newSelectedEdges = selectedEdges;
-        if (selectedValue !== null) {
-          const edge = getEdgeBetweenNodes(
-            edges,
-            node,
-            selectedNodes[selectedNodes.length - 1]
-          );
-          newSelectedValue = edge.operation.apply(selectedValue, node.value);
-          newSelectedEdges = [...selectedEdges, edge];
-        }
-
-        return {
-          selectedNodes: [...selectedNodes, node],
-          selectedEdges: newSelectedEdges,
-          selectedValue: newSelectedValue,
-        };
-      }
-    );
-  };
-
-  const getNodeState = (node: Node): "idle" | "selected" | "invalid" => {
-    if (invalidNode?.id === node.id) return "invalid";
-    if (selectedNodes.includes(node)) return "selected";
-    return "idle";
-  };
-
-  const canNodeBeSelected = (
-    selectedNodes: Node[],
-    node: Node,
-    type: "initial" | "sequential"
-  ): "ignore" | "not-selectable" | "selectable" => {
-    const lastNode = selectedNodes[selectedNodes.length - 1];
-
-    // Disallow node to be selected multiple times
-    if (type === "sequential" && selectedNodes.includes(node)) return "ignore";
-
-    // Disallow selection on simple hover
-    if (type === "sequential" && !lastNode) return "ignore";
-
-    // Disallow selection if max path length is reached
-    if (selectedNodes.length === maxPathLength) return "not-selectable";
-
-    // Disallow only single initial selection on mobile
-    if (type === "initial" && lastNode) return "not-selectable";
-
-    // Disallow non-adjacent selection
-    if (type === "sequential" && !areNodesAdjacent(node, lastNode))
-      return "not-selectable";
-
-    return "selectable";
-  };
-
-  const getEdgeState = (edge: Edge): "idle" | "selected" => {
-    if (selectedEdges.includes(edge)) return "selected";
-    return "idle";
-  };
-
-  const getGameState = (): "waiting" | "playing" | "perfect-won" | "won" => {
-    if (activeObjectiveIndex === 0) return "waiting";
-    if (activeObjectiveIndex < objectives.length) return "playing";
-
-    if (nodes.some((n) => n !== null)) return "perfect-won";
-    return "won";
-  };
-
-  const restartLevel = () => {
-    setActiveLevel(level);
-  };
-
-  const selection = {
-    value: selectedValue,
-    key: uuid(),
-    count: selectedNodes.length,
-    isInvalid: invalidNode !== null,
-  };
-
-  return {
-    nodes,
+  const applySelectedNode = createLevelFunc(levelAppliers.applySelectedNode, {
     edges,
-    boardSize,
     selection,
+  });
+
+  const getNodeState = createLevelFunc(levelState.getNodeState, {
+    selectedNodes: selection.nodes,
+    invalidNode,
+  });
+
+  const getEdgeState = createLevelFunc(levelState.getEdgeState, {
+    selectedEdges: selection.edges,
+  });
+
+  const gameState = levelState.getGameState({
+    activeObjectiveIndex,
+    objectivesCount: objectives.length,
+    nodes,
+  });
+
+  const objectivesState = levelState.getObjectivesState({
     objectives,
     activeObjectiveIndex,
-    selectNode,
+    objectivesCount: objectives.length,
+  });
+
+  const selectionState = levelState.getSelectionState({
+    selection,
+    invalidNode,
+  });
+
+  return {
+    level,
+    nodes,
+    edges,
+
+    boardSize,
+    selectionState,
+    objectivesState,
+    gameState,
+
+    canNodeBeSelected,
+    applySelectedNode,
+    applySelectedNodes,
+
     getEdgeState,
     getNodeState,
-    applySelectedNodes,
-    resetInvalidNode,
-    restartLevel,
-    getGameState,
   };
 };

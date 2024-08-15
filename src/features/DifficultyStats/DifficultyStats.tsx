@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-import { type PresetDifficulty } from "~src/levels";
+import { type PresetDifficulty } from "~src/level-gen";
 import { useStatisticsStore } from "~src/stores";
 
 import classes from "./DifficultyStats.module.css";

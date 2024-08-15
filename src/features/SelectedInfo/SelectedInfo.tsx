@@ -5,31 +5,31 @@ import { useActiveLevel } from "~src/hooks";
 import classes from "./SelectedInfo.module.css";
 
 export function SelectedInfo(): JSX.Element {
-  const { selection } = useActiveLevel();
+  const { selectionState, gameState } = useActiveLevel();
   const { t } = useTranslation();
 
-  const selectedValue = selection.value ?? 0;
+  const hidden = selectionState.value === null || gameState.hasWon;
 
   return (
     <div
       className={classes.selectedInfo}
-      data-hidden={selection.value === null}
-      aria-hidden={selection.value === null}
+      data-hidden={hidden}
+      aria-hidden={hidden}
     >
       <span
-        key={selectedValue}
+        key={selectionState.value}
         className={classes.value}
         aria-label={t("game.selected-value")}
         aria-live="polite"
       >
-        {selectedValue}
+        {selectionState.value}
       </span>
       <div
-        key={selection.key}
-        data-invalid={selection.isInvalid}
+        key={selectionState.key}
+        data-invalid={selectionState.isInvalid}
         className={classes.dots}
       >
-        {Array.from({ length: selection.count }).map((_, i) => (
+        {Array.from({ length: selectionState.length }).map((_, i) => (
           <div key={i} className={classes.dot} />
         ))}
       </div>

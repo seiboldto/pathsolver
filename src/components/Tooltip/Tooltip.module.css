@@ -3,6 +3,7 @@
   color: var(--tooltip-text-color);
   padding: 0.25rem 0.5rem;
   width: max-content;
+  z-index: var(--tooltip-z-index);
 
   .arrow {
     fill: var(--tooltip-color);

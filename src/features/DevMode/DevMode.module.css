@@ -6,6 +6,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
+  z-index: var(--dev-mode-z-index);
 }
 
 .devIndicator {
@@ -13,4 +14,5 @@
   border: 0.5rem solid var(--primary-color);
   pointer-events: none;
   inset: 0;
+  z-index: var(--dev-mode-z-index);
 }

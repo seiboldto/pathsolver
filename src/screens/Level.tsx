@@ -6,6 +6,7 @@ import {
   GameButtons,
   Objectives,
   SelectedInfo,
+  WinOverlay,
 } from "~src/features";
 import { useLevelStore } from "~src/stores";
 
@@ -16,11 +17,12 @@ export function LevelScreen(): JSX.Element {
   }
 
   return (
-    <Screen gap="md">
+    <Screen gap="md" key={activeLevelState.level.seed}>
       <GameButtons />
       <Objectives />
       <GameBoard />
       <SelectedInfo />
+      <WinOverlay />
     </Screen>
   );
 }

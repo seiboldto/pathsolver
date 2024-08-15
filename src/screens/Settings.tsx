@@ -11,7 +11,7 @@ import {
   ToggleInput,
 } from "~src/components";
 import { LANGUAGES } from "~src/lib";
-import { SelectData } from "~src/models";
+import { type SelectData } from "~src/models";
 import { useSettingsStore } from "~src/stores";
 
 const languages: SelectData<(typeof LANGUAGES)[number]["locale"]> =
@@ -32,13 +32,13 @@ export function SettingsScreen() {
 
   return (
     <Screen>
-      <Title>{t("home.settings")}</Title>
+      <Title>{t("navigation.settings")}</Title>
       <Select
         label={t("settings.language")}
         data={languages}
         value={i18n.language}
         onChange={(value) => i18n.changeLanguage(value)}
-      ></Select>
+      />
       <ToggleInput
         label={t("settings.theme")}
         data={themes}
@@ -57,7 +57,7 @@ export function SettingsScreen() {
         onChange={(value) => updateSettings("enableMenuTransitions", value)}
       />
       <Button icon={IconArrowLeft} onClick={navigateToHome}>
-        {t("settings.back")}
+        {t("navigation.back")}
       </Button>
     </Screen>
   );

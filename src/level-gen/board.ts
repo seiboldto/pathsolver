@@ -1,7 +1,7 @@
 import prand, { type RandomGenerator } from "pure-rand";
 
 import { Difficulty } from "./difficulty";
-import { Operation } from "./operation";
+import { Operation, OperationKind } from "./operation";
 import { Path } from "./path";
 
 export class Board {
@@ -40,15 +40,25 @@ export class Board {
     difficulty: Difficulty,
     rng: RandomGenerator
   ): Board {
-    const { boardSize } = difficulty.options;
+    const { boardSize, operationDistribution } = difficulty.options;
 
     const nodes = Array.from({ length: Math.pow(boardSize, 2) }).map(() =>
       prand.unsafeUniformIntDistribution(1, 9, rng)
     );
 
     const edgeCount = 2 * Math.pow(boardSize, 2) - 2 * boardSize;
-    const edges = Array.from({ length: edgeCount }).map(() => {
-      const op = difficulty.getRandomOperation(rng);
+    const operations = Object.keys(operationDistribution) as OperationKind[];
+    const operationIndices = new Map<number, OperationKind>();
+    for (const op of operations) {
+      let random: null | number = null;
+      while (random === null || operationIndices.has(random))
+        random = prand.unsafeUniformIntDistribution(0, edgeCount - 1, rng);
+
+      operationIndices.set(random, op);
+    }
+
+    const edges = Array.from({ length: edgeCount }, (_, i) => {
+      const op = operationIndices.get(i) || difficulty.getRandomOperation(rng);
       return new Operation(op);
     });
 
@@ -156,6 +166,30 @@ if (import.meta.vitest) {
 
     expect(board.edges).toHaveLength(12);
     expect(board.edges).not.toEqual(expect.arrayContaining(["division"]));
+  });
+
+  it("always contains at least one of each operation", () => {
+    const ITERATIONS = 100;
+
+    const difficulty = new Difficulty({
+      boardSize: 3,
+      maxPathLength: 3,
+      maxPathCount: 1,
+      operationDistribution: {
+        addition: 10000000,
+        multiplication: 1,
+      },
+    });
+
+    for (let i = 0; i < ITERATIONS; i++) {
+      const board = Board.fromDifficulty(difficulty, prand.xoroshiro128plus(i));
+
+      const multiplication = board.edges.filter(
+        (e) => e.kind === "multiplication"
+      );
+      expect(multiplication.length).toBeGreaterThanOrEqual(1);
+      expect(multiplication.length).toBeLessThanOrEqual(2);
+    }
   });
 
   it.each([

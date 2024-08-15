@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 
 import classes from "./Button.module.css";
 
-export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   icon?: React.ForwardRefExoticComponent<
     Omit<IconProps, "ref"> & React.RefAttributes<Icon>
   >;

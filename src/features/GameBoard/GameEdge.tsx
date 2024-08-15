@@ -10,7 +10,7 @@ import { type ForwardRefExoticComponent, type RefAttributes } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useActiveLevel } from "~src/hooks";
-import { OperationKind } from "~src/levels";
+import { type OperationKind } from "~src/level-gen";
 import { cssVars } from "~src/lib";
 import { type Edge } from "~src/models";
 
@@ -30,13 +30,15 @@ type GameEdgeProps = {
   edge: Edge;
 };
 
-export function GameEdge({ edge }: GameEdgeProps): JSX.Element {
+export function GameEdge({ edge }: GameEdgeProps): JSX.Element | null {
   const { id, operation, orientation, row, column } = edge;
   const { t } = useTranslation();
 
-  const Icon = OPERATION_ICONS[operation.kind];
+  const Icon = OPERATION_ICONS[operation];
   const { getEdgeState } = useActiveLevel();
-  const state = getEdgeState(edge);
+  const state = getEdgeState({ edge });
+
+  if (!edge.active) return null;
 
   return (
     <div
@@ -44,7 +46,7 @@ export function GameEdge({ edge }: GameEdgeProps): JSX.Element {
       className={classes.edge}
       data-orientation={orientation}
       style={cssVars({ row, column })}
-      aria-label={t(`game.operations.${operation.kind}`)}
+      aria-label={t(`game.operations.${operation}`)}
       data-selected={state !== "idle"}
     >
       <Icon size={18} />

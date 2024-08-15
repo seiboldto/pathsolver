@@ -12,6 +12,7 @@
     align-items: center;
     justify-content: center;
     user-select: none;
+    position: relative;
 
     &[data-state="active"] {
       border-color: var(--primary-color);
@@ -24,6 +25,10 @@
     }
 
     span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -33,7 +38,7 @@
       border-left-width: 0.125rem;
 
       span {
-        transform: translateX(5px);
+        transform: translate(calc(-50% + 5px), -50%);
       }
     }
 
@@ -41,7 +46,7 @@
       border-right-width: 0.125rem;
 
       span {
-        transform: translateX(-5px);
+        transform: translate(calc(-50% - 5px), -50%);
       }
     }
   }

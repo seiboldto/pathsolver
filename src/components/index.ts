@@ -2,6 +2,7 @@ export { Button } from "./Button/Button";
 export { Checkbox } from "./Checkbox/Checkbox";
 export { Divider } from "./Divider/Divider";
 export { Group } from "./Group/Group";
+export { Overlay } from "./Overlay/Overlay";
 export { Screen } from "./Screen/Screen";
 export { Select } from "./Select/Select";
 export { Title } from "./Title/Title";

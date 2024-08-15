@@ -2,7 +2,7 @@ import { clsx } from "clsx";
 
 import classes from "./Screen.module.css";
 
-export type ScreenProps = {
+type ScreenProps = {
   children: React.ReactNode;
   gap?: "xs" | "sm" | "md" | "lg" | "xl";
 };

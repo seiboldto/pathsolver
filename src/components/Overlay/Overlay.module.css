@@ -1,0 +1,23 @@
+.overlay {
+  position: absolute;
+  background-color: var(--overlay-color);
+  inset: 0;
+  animation: slide-in var(--anim-duration) var(--anim-easing) forwards;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  z-index: var(--overlay-z-index);
+  color: var(--overlay-text-color);
+  padding: 0 var(--side-padding);
+  gap: var(--spacing-xs);
+
+  @keyframes slide-in {
+    0% {
+      bottom: 100vh;
+    }
+
+    100% {
+      bottom: 0;
+    }
+  }
+}

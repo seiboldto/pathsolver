@@ -1,13 +1,25 @@
 {
+  "title": "pathfinder",
+  "navigation": {
+    "next": "Next",
+    "prev": "Previous",
+    "back": "Back",
+    "home": "Home",
+    "settings": "Settings"
+  },
   "home": {
-    "title": "pathfinder",
-    "play": "Play",
-    "settings": "Settings",
     "choose-difficulty": "Choose Difficulty",
     "difficulty-normal": "Normal",
     "difficulty-hard": "Hard",
     "difficulty-extreme": "Extreme",
-    "difficulty-custom": "Custom"
+    "difficulty-custom": "Custom",
+    "play": "Play"
+  },
+  "win": {
+    "title1": "Excellent!",
+    "title2": "Brilliant!",
+    "title3": "Fantastic!",
+    "play-again": "Play Again"
   },
   "stats": {
     "games-played": "Games played",
@@ -22,7 +34,8 @@
     "print-level-seed": "Print Level Seed",
     "load-level": "Load Level",
     "enter-difficulty": "Enter Difficulty ($t(home.difficulty-normal)/$t(home.difficulty-hard)/$t(home.difficulty-extreme))",
-    "enter-seed": "Enter Seed"
+    "enter-seed": "Enter Seed",
+    "toggle-streak-info": "Toggle Streak Info"
   },
   "settings": {
     "language": "Language",
@@ -30,12 +43,7 @@
     "theme-light": "Light",
     "theme-dark": "Dark",
     "hover-animations": "Hover Animations",
-    "menu-transitions": "Menu Transitions",
-    "back": "Back"
-  },
-  "ui": {
-    "next": "Next",
-    "prev": "Previous"
+    "menu-transitions": "Menu Transitions"
   },
   "game": {
     "exit": "Exit",

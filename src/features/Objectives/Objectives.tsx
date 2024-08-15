@@ -4,21 +4,12 @@ import { useTranslation } from "react-i18next";
 
 import { Tooltip } from "~src/components";
 import { useActiveLevel } from "~src/hooks";
-import { Objective } from "~src/models";
 
 import classes from "./Objectives.module.css";
 
 export function Objectives(): JSX.Element {
   const { t } = useTranslation();
-  const { objectives, activeObjectiveIndex } = useActiveLevel();
-
-  const getObjectiveState = (
-    objective: Objective
-  ): "active" | "completed" | "pending" => {
-    if (objective.index === activeObjectiveIndex) return "active";
-    if (objective.index < activeObjectiveIndex) return "completed";
-    return "pending";
-  };
+  const { objectivesState } = useActiveLevel();
 
   return (
     <div
@@ -26,14 +17,14 @@ export function Objectives(): JSX.Element {
       role="group"
       aria-label={t("game.objectives.title")}
     >
-      {objectives.map((o, i) => {
-        const state = getObjectiveState(o);
-        const isLastOne = i === objectives.length - 1;
+      {objectivesState.map((o, i) => {
+        const isLastOne = i === objectivesState.length - 1;
 
+        const { state } = o;
         const rightChevronState = state;
         const leftChevronState = isLastOne
           ? "pending"
-          : getObjectiveState(objectives[i + 1]);
+          : objectivesState[i + 1].state;
 
         return (
           <Fragment key={o.id}>

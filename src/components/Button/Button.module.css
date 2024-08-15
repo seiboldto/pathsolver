@@ -10,6 +10,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
+  color: var(--text-color);
 
   &[data-icon="false"] {
     justify-content: center;
@@ -27,8 +28,10 @@
       border-color: var(--primary-border-color);
     }
     &:not([disabled]):active {
+      color: var(--text-on-primary-color);
       border-color: var(--primary-border-color-active);
       background-color: var(--primary-border-color);
+      transform: translateY(var(--active-press));
     }
   }
 

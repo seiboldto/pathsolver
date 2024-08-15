@@ -10,9 +10,9 @@
   transition: top var(--anim-duration) var(--anim-easing);
 
   border: 0.125rem solid var(--border-color);
-  background-color: var(--background-color);
   outline: none;
   background-color: var(--background-color);
+  color: var(--text-color);
   cursor: pointer;
 
   &[data-node-state="selected"] {

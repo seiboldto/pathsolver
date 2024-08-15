@@ -8,9 +8,9 @@ import { useLocation } from "wouter";
 
 import { Button, Divider, Screen, Title, ToggleInput } from "~src/components";
 import { DifficultyStats } from "~src/features";
-import { Difficulty, generateRandomLevel } from "~src/levels";
+import { useGenerateLevel } from "~src/hooks";
 import { SELECTABLE_DIFFICULTIES } from "~src/models";
-import { useLevelStore, useUiStore } from "~src/stores";
+import { useUiStore } from "~src/stores";
 
 const difficulties = SELECTABLE_DIFFICULTIES.map((d) => ({
   value: d,
@@ -27,20 +27,15 @@ export function HomeScreen() {
   const selectedDifficulty = useUiStore.use.selectedDifficulty();
   const { selectDifficulty } = useUiStore.use.actions();
 
-  const { setActiveLevel } = useLevelStore.use.actions();
+  const { playRandomLevel } = useGenerateLevel();
   const handlePlayClick = () => {
     if (selectedDifficulty === "custom") return alert("Not implemented yet.");
-
-    const difficulty = Difficulty[selectedDifficulty]();
-    const level = generateRandomLevel(difficulty);
-
-    setActiveLevel(level);
-    setLocation("/level");
+    playRandomLevel(selectedDifficulty);
   };
 
   return (
     <Screen>
-      <Title>{t("home.title")}</Title>
+      <Title>{t("title")}</Title>
       <ToggleInput
         label={t("home.choose-difficulty")}
         data={difficulties}
@@ -56,7 +51,7 @@ export function HomeScreen() {
       </Button>
       <Divider />
       <Button icon={IconSettings} onClick={navigateToSettings}>
-        {t("home.settings")}
+        {t("navigation.settings")}
       </Button>
     </Screen>
   );

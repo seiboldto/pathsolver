@@ -5,6 +5,8 @@
   --spacing-lg: 1.25rem;
   --spacing-xl: 2rem;
 
+  --active-press: 0.0625rem;
+
   --ui-size: 2.5rem;
   --ui-size-sm: 1.75rem;
   --ui-width: min(18rem, 80vw);
@@ -12,6 +14,10 @@
 
   --anim-duration: 0.25s;
   --anim-easing: cubic-bezier(0, 0, 0, 1);
+
+  --overlay-z-index: 100;
+  --dev-mode-z-index: 150;
+  --tooltip-z-index: 200;
 }
 
 :root {
@@ -29,6 +35,9 @@
 
     --tooltip-color: hsl(216, 18%, 16%);
     --tooltip-text-color: #fff;
+
+    --overlay-color: rgba(0, 0, 0, 0.4);
+    --overlay-text-color: white;
 
     --error-color: hsl(0, 72%, 57%);
 
@@ -49,6 +58,9 @@
 
     --tooltip-color: hsl(210, 16%, 93%);
     --tooltip-text-color: black;
+
+    --overlay-color: rgba(0, 0, 0, 0.75);
+    --overlay-text-color: white;
 
     --error-color: hsl(0, 72%, 47%);
 

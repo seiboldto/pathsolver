@@ -14,23 +14,6 @@ export function generateRandomLevel(difficulty: Difficulty): Level {
 }
 
 /**
- * Generates a level from a date.
- *
- * For the same date, this function will always return the same level.
- * @param date - A specified date to generate a level for.
- * @param difficulty - The difficulty of the level.
- * @returns A non-random level.
- */
-export function generateLevelFromDate(
-  date: Date,
-  difficulty: Difficulty
-): Level {
-  const daysSinceEpoch = Math.floor(date.getTime() / 8.64e7);
-  const seed = createSeedFromNumber(daysSinceEpoch);
-  return generateLevelFromSeed(seed, difficulty);
-}
-
-/**
  * Generate a level from a seed.
  * @param seed - The seed to start generation from.
  * @param difficulty - The difficulty of the level.

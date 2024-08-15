@@ -175,9 +175,6 @@ if (import.meta.vitest) {
       maxPathCount: 1,
       operationDistribution: {
         addition: 100,
-        subtraction: 0,
-        multiplication: 0,
-        division: 0,
       },
     });
 
@@ -249,9 +246,6 @@ if (import.meta.vitest) {
       maxPathLength: 3,
       operationDistribution: {
         addition: 100,
-        subtraction: 0,
-        division: 0,
-        multiplication: 0,
       },
     });
     const board = new Board(difficulty, nodes, edges);

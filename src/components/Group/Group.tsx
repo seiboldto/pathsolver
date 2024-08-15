@@ -1,6 +1,6 @@
 import classes from "./Group.module.css";
 
-export type GroupProps = {
+type GroupProps = {
   children: React.ReactNode;
 };
 

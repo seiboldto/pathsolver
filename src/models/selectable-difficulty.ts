@@ -1,4 +1,4 @@
-import { type PresetDifficulty } from "~src/levels";
+import { type PresetDifficulty } from "~src/level-gen";
 
 export type SelectableDifficulty = PresetDifficulty | "custom";
 export const SELECTABLE_DIFFICULTIES = [

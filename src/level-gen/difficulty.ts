@@ -5,11 +5,12 @@ import { OPERATION_KINDS, type OperationKind } from "./operation";
 export const PRESET_DIFFICULTIES = ["normal", "hard", "extreme"] as const;
 export type PresetDifficulty = (typeof PRESET_DIFFICULTIES)[number];
 
-export type DifficultyOptions = {
+type DifficultyOptions = {
   boardSize: number;
-  operationDistribution: Record<OperationKind, number>;
+  operationDistribution: Partial<Record<OperationKind, number>>;
   maxPathLength: number;
   maxPathCount: number;
+  preset?: PresetDifficulty;
 };
 
 /** Defines the difficulty of a level.
@@ -25,18 +26,15 @@ export class Difficulty {
     maxPathCount,
     maxPathLength,
     operationDistribution,
+    preset,
   }: DifficultyOptions) {
     const weightsSum = Object.values(operationDistribution).reduce(
       (a, b) => a + b,
       0
     );
     const multiplier = 100 / weightsSum;
-    const normalizedDistribution: Record<OperationKind, number> = {
-      addition: 0,
-      subtraction: 0,
-      multiplication: 0,
-      division: 0,
-    };
+    const normalizedDistribution: DifficultyOptions["operationDistribution"] =
+      {};
     for (const [k, value] of Object.entries(operationDistribution)) {
       const key = k as OperationKind;
       normalizedDistribution[key] = value * multiplier;
@@ -47,6 +45,7 @@ export class Difficulty {
       maxPathCount,
       maxPathLength,
       operationDistribution: normalizedDistribution,
+      preset,
     };
   }
 
@@ -88,9 +87,8 @@ export class Difficulty {
       operationDistribution: {
         addition: 70,
         subtraction: 30,
-        division: 0,
-        multiplication: 0,
       },
+      preset: "normal",
     });
   }
 
@@ -106,8 +104,8 @@ export class Difficulty {
         addition: 50,
         subtraction: 40,
         multiplication: 10,
-        division: 0,
       },
+      preset: "hard",
     });
   }
 
@@ -125,6 +123,7 @@ export class Difficulty {
         multiplication: 10,
         division: 5,
       },
+      preset: "extreme",
     });
   }
 }
@@ -171,7 +170,7 @@ if (import.meta.vitest) {
 
       for (const kind of OPERATION_KINDS) {
         const expected =
-          difficulty.options.operationDistribution[kind] * (N / 100);
+          (difficulty.options.operationDistribution[kind] || 0) * (N / 100);
         const received = operations[kind] ?? 0;
         expect(Math.abs(received - expected)).toBeLessThan(DELTA);
       }

@@ -1,6 +1,6 @@
 import { v4 as uuid } from "uuid";
 
-import type { Board, Level, Operation, Path } from "~src/levels";
+import type { Board, Level, OperationKind, Path } from "~src/level-gen";
 
 export type Coords = {
   row: number;
@@ -9,17 +9,24 @@ export type Coords = {
 
 export type Node = {
   id: string;
+  active: boolean;
   row: number;
   column: number;
   value: number;
 };
 
+export type GameBoard = {
+  nodes: Node[];
+  edges: Edge[];
+};
+
 export type Edge = {
   id: string;
+  active: boolean;
   row: number;
   column: number;
   orientation: "horizontal" | "vertical";
-  operation: Operation;
+  operation: OperationKind;
 };
 
 export type Objective = {
@@ -29,29 +36,52 @@ export type Objective = {
   value: number;
 };
 
+export type Selection = {
+  nodes: Node[];
+  edges: Edge[];
+  value: number | null;
+};
+
 export type LevelState = {
   level: Level;
-  nodes: (Node | null)[];
-  edges: (Edge | null)[];
+  nodes: Node[];
+  edges: Edge[];
   objectives: Objective[];
   activeObjectiveIndex: number;
-  selectedNodes: Node[];
-  selectedEdges: Edge[];
-  selectedValue: number | null;
+  history: GameBoard[];
+  selection: Selection;
   invalidNode: Node | null;
 };
 
-export const transformNodes = (board: Board): Node[] => {
+export const transformLevel = (level: Level): LevelState => {
+  return {
+    level,
+    nodes: transformNodes(level.board),
+    edges: transformEdges(level.board),
+    objectives: transformObjectives(level.paths, level.board),
+    activeObjectiveIndex: 0,
+    selection: {
+      nodes: [],
+      edges: [],
+      value: null,
+    },
+    history: [],
+    invalidNode: null,
+  };
+};
+
+const transformNodes = (board: Board): Node[] => {
   const { boardSize } = board.difficulty.options;
   return board.nodes.map((n, i) => ({
     id: uuid(),
+    active: true,
     row: Math.trunc(i / boardSize),
     column: i % boardSize,
     value: n,
   }));
 };
 
-export const transformEdges = (board: Board): Edge[] => {
+const transformEdges = (board: Board): Edge[] => {
   return board.edges.map((e, i) => {
     const isHorizontal = i < board.edges.length / 2;
     const boardSize =
@@ -62,18 +92,16 @@ export const transformEdges = (board: Board): Edge[] => {
 
     return {
       id: uuid(),
+      active: true,
       row,
       column,
       orientation: isHorizontal ? "horizontal" : "vertical",
-      operation: e,
+      operation: e.kind,
     };
   });
 };
 
-export const transformObjectives = (
-  paths: Path[],
-  board: Board
-): Objective[] => {
+const transformObjectives = (paths: Path[], board: Board): Objective[] => {
   const { boardSize } = board.difficulty.options;
 
   return paths.map((p, i) => ({

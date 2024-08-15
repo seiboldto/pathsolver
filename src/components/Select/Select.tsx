@@ -13,7 +13,7 @@ type SelectProps<T> = InputProps & {
   onChange: (value: T) => void;
 };
 
-export type SelectItemProps = {
+type SelectItemProps = {
   label?: string;
 };
 
@@ -57,7 +57,7 @@ export function Select<T extends string>({
     <>
       <label id={id}>{label}</label>
       <div className={classes.select}>
-        <Tooltip label={t("ui.prev")}>
+        <Tooltip label={t("navigation.prev")}>
           <Button square onClick={handlePrev} tabIndex={-1}>
             <IconCaretLeftFilled />
           </Button>
@@ -73,7 +73,7 @@ export function Select<T extends string>({
         >
           {selectedLabel}
         </div>
-        <Tooltip label={t("ui.next")}>
+        <Tooltip label={t("navigation.next")}>
           <Button square onClick={handleNext} tabIndex={-1}>
             <IconCaretRightFilled />
           </Button>
