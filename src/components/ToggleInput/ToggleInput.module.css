@@ -21,10 +21,6 @@
     }
   }
 
-  &[data-square="true"] {
-    max-width: var(--ui-size);
-  }
-
   .toggleButton {
     border: 0.125rem solid var(--border-color);
     outline: none;

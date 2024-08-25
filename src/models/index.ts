@@ -1,5 +1,10 @@
+export {
+  type DifficultyStatistics,
+  INITIAL_DIFFICULTY_STATISTICS,
+} from "./difficulty-statistics";
 export type { InputProps, SelectData } from "./input";
 export {
+  DEFAULT_SELECTION,
   type Edge,
   type GameBoard,
   type LevelState,
@@ -8,9 +13,3 @@ export {
   type Selection,
   transformLevel,
 } from "./level-state";
-export {
-  type DifficultyStatistics,
-  INITIAL_DIFFICULTY_STATISTICS,
-  SELECTABLE_DIFFICULTIES,
-  type SelectableDifficulty,
-} from "./selectable-difficulty";

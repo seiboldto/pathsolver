@@ -176,6 +176,7 @@ if (import.meta.vitest) {
       operationDistribution: {
         addition: 100,
       },
+      preset: "normal",
     });
 
     const error = Path.getRandomPathLenghts(difficulty, rng) as GenerationError;
@@ -247,6 +248,7 @@ if (import.meta.vitest) {
       operationDistribution: {
         addition: 100,
       },
+      preset: "normal",
     });
     const board = new Board(difficulty, nodes, edges);
 

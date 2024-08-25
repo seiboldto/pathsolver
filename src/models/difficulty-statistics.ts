@@ -1,13 +1,3 @@
-import { type PresetDifficulty } from "~src/level-gen";
-
-export type SelectableDifficulty = PresetDifficulty | "custom";
-export const SELECTABLE_DIFFICULTIES = [
-  "normal",
-  "hard",
-  "extreme",
-  "custom",
-] as const satisfies SelectableDifficulty[];
-
 export type DifficultyStatistics = {
   gamesPlayed: number;
   currentStreak: number;

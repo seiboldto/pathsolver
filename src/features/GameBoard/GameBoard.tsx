@@ -9,23 +9,25 @@ import { GameEdge } from "./GameEdge";
 import { GameNode } from "./GameNode";
 
 export function GameBoard(): JSX.Element {
-  const { resetSelection, advanceObjectives, checkForGameWin } =
-    useLevelStore.use.actions();
+  const { resetSelection, updateGameBoard } = useLevelStore.use.actions();
 
-  const { nodes, edges, boardSize, gameState, applySelectedNodes, level } =
-    useActiveLevel();
+  const {
+    nodes,
+    edges,
+    boardSize,
+    gameState,
+    applySelectedNodes,
+    handleGameStep,
+  } = useActiveLevel();
 
-  const { preset } = level.board.difficulty.options;
   useEffect(() => {
     if (gameState.state === "waiting" || gameState.state === "playing") {
       const handlePointerUp = () => {
         const result = applySelectedNodes();
+        if (result === "ignore") return;
         if (result === "not-applicable") return resetSelection();
 
-        const { nodes, edges } = result;
-
-        advanceObjectives(nodes, edges);
-        checkForGameWin(preset);
+        handleGameStep(result);
         resetSelection();
       };
 
@@ -35,11 +37,10 @@ export function GameBoard(): JSX.Element {
     }
   }, [
     resetSelection,
-    advanceObjectives,
     applySelectedNodes,
-    checkForGameWin,
+    updateGameBoard,
+    handleGameStep,
     gameState.state,
-    preset,
   ]);
 
   return (

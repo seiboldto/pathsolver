@@ -3,6 +3,7 @@ import { persist } from "zustand/middleware";
 
 import { PRESET_DIFFICULTIES, type PresetDifficulty } from "~src/level-gen";
 import { statsHelpers, STREAK_TIME_IN_MILLISECONDS } from "~src/level-state";
+import { VERSIONS } from "~src/lib";
 import {
   type DifficultyStatistics,
   INITIAL_DIFFICULTY_STATISTICS,
@@ -22,7 +23,7 @@ type StatisticsStore = {
   };
 };
 
-export const statisticsStore = create(
+const statisticsStore = create(
   persist<StatisticsStore, [], [], Pick<StatisticsStore, "stats">>(
     (set, get) => ({
       stats: {
@@ -118,6 +119,7 @@ export const statisticsStore = create(
     {
       name: "statistics-store",
       partialize: (state) => ({ stats: state.stats }),
+      version: VERSIONS.STORAGE.STATISTICS,
     }
   )
 );

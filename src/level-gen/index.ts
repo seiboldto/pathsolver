@@ -1,6 +1,7 @@
 export { type Board } from "./board";
 export {
   Difficulty,
+  type DifficultyOptions,
   PRESET_DIFFICULTIES,
   type PresetDifficulty,
 } from "./difficulty";

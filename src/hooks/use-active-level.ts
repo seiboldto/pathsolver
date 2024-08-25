@@ -6,29 +6,29 @@ import {
   levelHelpers,
   levelState,
 } from "~src/level-state";
-import { levelStore, useLevelStore } from "~src/stores";
+import { type GameBoard } from "~src/models";
+import { levelStore, useLevelStore, useStatisticsStore } from "~src/stores";
+
+import { useLevel } from "./use-level";
 
 export const useActiveLevel = () => {
   const activeLevelState = useLevelStore.use.activeLevelState();
   if (activeLevelState === null)
     throw new Error("useActiveLevel may only be used on the `Level` screen.");
 
-  const {
-    nodes,
-    level,
-    edges,
-    invalidNode,
-    activeObjectiveIndex,
-    selection,
-    objectives,
-  } = activeLevelState;
-  const { boardSize, maxPathLength } = level.board.difficulty.options;
+  const { updateStats } = useStatisticsStore.use.actions();
+  const { updatePersistedLevel, deletePersistedLevel } = useLevel();
+  const selection = useLevelStore.use.selection();
 
-  // As this function is used in a window event listener, it needs to be memoised.
+  const { nodes, difficultyOptions, edges, activeObjectiveIndex, objectives } =
+    activeLevelState;
+  const { boardSize, maxPathLength, preset } = difficultyOptions;
+
+  // As these function are used in a window event listener, they need to be memoised.
   const applySelectedNodes = useCallback(() => {
-    const { activeLevelState } = levelStore.getState();
+    const { activeLevelState, selection } = levelStore.getState();
 
-    const { selection, objectives, activeObjectiveIndex, nodes, edges } =
+    const { objectives, activeObjectiveIndex, nodes, edges } =
       activeLevelState!;
 
     return levelAppliers.applySelectedNodes({
@@ -40,6 +40,32 @@ export const useActiveLevel = () => {
       boardSize,
     });
   }, [boardSize]);
+
+  const handleGameStep = useCallback(
+    (board: GameBoard) => {
+      const { actions, activeLevelState } = useLevelStore.getState();
+      const { updateGameBoard } = actions;
+      if (!activeLevelState) return;
+
+      updateGameBoard(board);
+      const { activeLevelState: newLevelState } = useLevelStore.getState();
+      if (!newLevelState) return;
+
+      const newGameState = levelState.getGameState({
+        activeObjectiveIndex: newLevelState.activeObjectiveIndex,
+        nodes: newLevelState.nodes,
+        objectivesCount: newLevelState.objectives.length,
+      });
+
+      if (newGameState.hasWon) {
+        updateStats(preset, newGameState.state === "perfect-won");
+        deletePersistedLevel();
+      } else {
+        updatePersistedLevel();
+      }
+    },
+    [updateStats, deletePersistedLevel, updatePersistedLevel, preset]
+  );
 
   const canNodeBeSelected = createLevelFunc(levelHelpers.canNodeBeSelected, {
     selectedNodes: selection.nodes,
@@ -53,7 +79,7 @@ export const useActiveLevel = () => {
 
   const getNodeState = createLevelFunc(levelState.getNodeState, {
     selectedNodes: selection.nodes,
-    invalidNode,
+    invalidNode: selection.invalidNode,
   });
 
   const getEdgeState = createLevelFunc(levelState.getEdgeState, {
@@ -74,11 +100,10 @@ export const useActiveLevel = () => {
 
   const selectionState = levelState.getSelectionState({
     selection,
-    invalidNode,
   });
 
   return {
-    level,
+    difficultyOptions,
     nodes,
     edges,
 
@@ -93,5 +118,7 @@ export const useActiveLevel = () => {
 
     getEdgeState,
     getNodeState,
+
+    handleGameStep,
   };
 };

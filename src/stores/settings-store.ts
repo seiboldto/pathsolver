@@ -1,6 +1,8 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+import { VERSIONS } from "~src/lib";
+
 import { createSelectors } from "./store-utils";
 
 type SettingsStore = {
@@ -43,6 +45,7 @@ const settingsStore = create(
     {
       name: "settings-store",
       partialize: (state) => ({ settings: state.settings }),
+      version: VERSIONS.STORAGE.SETTINGS,
     }
   )
 );

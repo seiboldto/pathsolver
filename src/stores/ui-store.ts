@@ -1,14 +1,14 @@
 import { create } from "zustand";
 
-import { type SelectableDifficulty } from "~src/models";
+import { PresetDifficulty } from "~src/level-gen";
 
 import { createSelectors } from "./store-utils";
 
 type UiStore = {
-  selectedDifficulty: SelectableDifficulty;
+  selectedDifficulty: PresetDifficulty;
   isDeveloperMode: boolean;
   actions: {
-    selectDifficulty: (difficulty: SelectableDifficulty) => void;
+    selectDifficulty: (difficulty: PresetDifficulty) => void;
     toggleDeveloperMode: () => void;
   };
 };

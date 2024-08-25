@@ -1,6 +1,12 @@
 import { v4 as uuid } from "uuid";
 
-import type { Board, Level, OperationKind, Path } from "~src/level-gen";
+import type {
+  Board,
+  DifficultyOptions,
+  Level,
+  OperationKind,
+  Path,
+} from "~src/level-gen";
 
 export type Coords = {
   row: number;
@@ -40,33 +46,36 @@ export type Selection = {
   nodes: Node[];
   edges: Edge[];
   value: number | null;
+  invalidNode: Node | null;
+};
+
+export const DEFAULT_SELECTION: Selection = {
+  nodes: [],
+  edges: [],
+  value: null,
+  invalidNode: null,
 };
 
 export type LevelState = {
-  level: Level;
+  seed: number;
+  difficultyOptions: DifficultyOptions;
   nodes: Node[];
   edges: Edge[];
   objectives: Objective[];
   activeObjectiveIndex: number;
   history: GameBoard[];
-  selection: Selection;
-  invalidNode: Node | null;
 };
 
 export const transformLevel = (level: Level): LevelState => {
   return {
-    level,
+    seed: level.seed,
+    difficultyOptions: level.board.difficulty.options,
     nodes: transformNodes(level.board),
     edges: transformEdges(level.board),
     objectives: transformObjectives(level.paths, level.board),
     activeObjectiveIndex: 0,
-    selection: {
-      nodes: [],
-      edges: [],
-      value: null,
-    },
+
     history: [],
-    invalidNode: null,
   };
 };
 

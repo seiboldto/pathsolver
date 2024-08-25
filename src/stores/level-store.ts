@@ -1,27 +1,24 @@
 import { create } from "zustand";
 
-import type { Level, PresetDifficulty } from "~src/level-gen";
-import { levelState } from "~src/level-state";
 import {
-  type Edge,
+  DEFAULT_SELECTION,
+  type GameBoard,
   type LevelState,
   type Node,
   type Selection,
-  transformLevel,
 } from "~src/models";
 
-import { statisticsStore } from "./statistics-store";
 import { createSelectors } from "./store-utils";
 
 type LevelStore = {
   activeLevelState: LevelState | null;
+  selection: Selection;
   actions: {
-    setActiveLevel: (level: Level) => void;
+    setActiveLevelState: (level: LevelState) => void;
     restartLevel: () => void;
     undoSelection: () => void;
     setInvalidNode: (node: Node | null) => void;
-    advanceObjectives: (nodes: Node[], edges: Edge[]) => void;
-    checkForGameWin: (difficulty?: PresetDifficulty) => void;
+    updateGameBoard: (board: GameBoard) => void;
     setSelection: (selection: Selection) => void;
     resetSelection: () => void;
   };
@@ -29,68 +26,62 @@ type LevelStore = {
 
 export const levelStore = create<LevelStore>((set, get) => ({
   activeLevelState: null,
+  selection: DEFAULT_SELECTION,
   actions: {
-    setActiveLevel: (level) => {
+    setActiveLevelState: (activeLevelState) => {
       set({
-        activeLevelState: transformLevel(level),
+        activeLevelState,
       });
     },
     restartLevel: () => {
-      const { level } = get().activeLevelState!;
-      const { setActiveLevel } = get().actions;
-      setActiveLevel(level);
-    },
-    setInvalidNode: (node) =>
+      const { actions, activeLevelState } = get();
+      const prev = activeLevelState!;
+
+      actions.resetSelection();
+
+      const { nodes, edges } = prev.history[0];
+
       set({
-        activeLevelState: { ...get().activeLevelState!, invalidNode: node },
-      }),
-    advanceObjectives: (nodes, edges) => {
+        activeLevelState: {
+          ...prev,
+          activeObjectiveIndex: 0,
+          nodes,
+          edges,
+          history: [],
+        },
+      });
+    },
+    setInvalidNode: (node) => {
+      const { activeLevelState, selection } = get();
+      set({
+        ...activeLevelState!,
+        selection: { ...selection, invalidNode: node },
+      });
+    },
+    updateGameBoard: ({ nodes, edges }) => {
       const prev = get().activeLevelState!;
-
-      const activeObjectiveIndex = prev.activeObjectiveIndex + 1;
-
       const history = [
         ...prev.history,
         structuredClone({ nodes: prev.nodes, edges: prev.edges }),
       ];
 
-      set({
-        activeLevelState: {
-          ...prev,
-          activeObjectiveIndex,
-          history,
-          nodes,
-          edges,
-        },
-      });
-    },
-    checkForGameWin: (difficulty) => {
-      // Don't update stats for custom difficulty games.
-      if (difficulty === undefined) return;
+      const activeObjectiveIndex = prev.activeObjectiveIndex + 1;
 
-      const { activeObjectiveIndex, objectives, nodes } =
-        get().activeLevelState!;
-      const objectivesCount = objectives.length;
-
-      const gameState = levelState.getGameState({
-        activeObjectiveIndex,
-        objectivesCount,
-        nodes,
-      });
-
-      if (gameState.hasWon) {
-        const { updateStats } = statisticsStore.getState().actions;
-        updateStats(difficulty, gameState.state === "perfect-won");
-      }
-    },
-    setSelection: (selection) =>
-      set({ activeLevelState: { ...get().activeLevelState!, selection } }),
-    resetSelection: () =>
       set({
         activeLevelState: {
           ...get().activeLevelState!,
-          selection: { edges: [], nodes: [], value: null },
+          activeObjectiveIndex,
+          nodes,
+          edges,
+          history,
         },
+      });
+    },
+
+    setSelection: (selection) => set({ selection }),
+    resetSelection: () =>
+      set({
+        selection: DEFAULT_SELECTION,
       }),
     undoSelection: () => {
       const { actions, activeLevelState } = get();

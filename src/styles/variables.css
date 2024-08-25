@@ -36,7 +36,7 @@
     --tooltip-color: hsl(216, 18%, 16%);
     --tooltip-text-color: #fff;
 
-    --overlay-color: rgba(0, 0, 0, 0.4);
+    --overlay-color: rgba(0, 0, 0, 0.5);
     --overlay-text-color: white;
 
     --error-color: hsl(0, 72%, 57%);

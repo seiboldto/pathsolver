@@ -12,8 +12,9 @@
     "difficulty-normal": "Normal",
     "difficulty-hard": "Hard",
     "difficulty-extreme": "Extreme",
-    "difficulty-custom": "Custom",
-    "play": "Play"
+    "play": "Play",
+    "resume": "Resume",
+    "play-warning": "This will overwrite your current game."
   },
   "win": {
     "title1": "Excellent!",
@@ -31,10 +32,6 @@
     "title": "Developer Mode",
     "print-objectives": "Print Objectives",
     "advance-objectives": "Advance Objectives",
-    "print-level-seed": "Print Level Seed",
-    "load-level": "Load Level",
-    "enter-difficulty": "Enter Difficulty ($t(home.difficulty-normal)/$t(home.difficulty-hard)/$t(home.difficulty-extreme))",
-    "enter-seed": "Enter Seed",
     "toggle-streak-info": "Toggle Streak Info"
   },
   "settings": {

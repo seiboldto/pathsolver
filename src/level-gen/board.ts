@@ -179,6 +179,7 @@ if (import.meta.vitest) {
         addition: 10000000,
         multiplication: 1,
       },
+      preset: "normal",
     });
 
     for (let i = 0; i < ITERATIONS; i++) {

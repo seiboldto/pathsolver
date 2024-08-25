@@ -5,7 +5,7 @@ import { useLocation } from "wouter";
 
 import { Button, Group, Overlay, Tooltip } from "~src/components";
 import { DifficultyStats } from "~src/features";
-import { useActiveLevel, useGenerateLevel } from "~src/hooks";
+import { useActiveLevel, useLevel } from "~src/hooks";
 import { getRandomInt } from "~src/lib";
 
 export function WinOverlay(): JSX.Element | null {
@@ -15,20 +15,18 @@ export function WinOverlay(): JSX.Element | null {
   const [, setLocation] = useLocation();
   const navigateToHome = () => setLocation("/");
 
-  const { playRandomLevel } = useGenerateLevel();
-  const { gameState, level } = useActiveLevel();
-  const { difficulty } = level.board;
+  const { playRandomLevel } = useLevel();
+  const { gameState, difficultyOptions } = useActiveLevel();
 
   const handlePlayAgainClick = () => {
-    playRandomLevel(difficulty);
+    playRandomLevel(difficultyOptions.preset);
   };
 
   const title = t(`win.title${titleNr}`);
-  const presetDifficulty = level.board.difficulty.options.preset;
 
   return (
     <Overlay visible={gameState.hasWon} title={title}>
-      {presetDifficulty && <DifficultyStats difficulty={presetDifficulty} />}
+      <DifficultyStats difficulty={difficultyOptions.preset} />
       <Group>
         <Button icon={IconPlayerPlay} onClick={handlePlayAgainClick}>
           {t("win.play-again")}

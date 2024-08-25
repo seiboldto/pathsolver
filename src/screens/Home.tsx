@@ -1,21 +1,24 @@
-import {
-  IconAdjustmentsHorizontal,
-  IconPlayerPlay,
-  IconSettings,
-} from "@tabler/icons-react";
+import { IconPlayerPlay, IconRepeat, IconSettings } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "wouter";
 
-import { Button, Divider, Screen, Title, ToggleInput } from "~src/components";
+import {
+  Button,
+  Divider,
+  Group,
+  Screen,
+  Title,
+  ToggleInput,
+  Tooltip,
+  Wrap,
+} from "~src/components";
 import { DifficultyStats } from "~src/features";
-import { useGenerateLevel } from "~src/hooks";
-import { SELECTABLE_DIFFICULTIES } from "~src/models";
+import { useLevel } from "~src/hooks";
+import { PRESET_DIFFICULTIES } from "~src/level-gen";
 import { useUiStore } from "~src/stores";
 
-const difficulties = SELECTABLE_DIFFICULTIES.map((d) => ({
+const difficulties = PRESET_DIFFICULTIES.map((d) => ({
   value: d,
-  label: d === "custom" ? <IconAdjustmentsHorizontal /> : undefined,
-  square: d === "custom",
 }));
 
 export function HomeScreen() {
@@ -27,11 +30,19 @@ export function HomeScreen() {
   const selectedDifficulty = useUiStore.use.selectedDifficulty();
   const { selectDifficulty } = useUiStore.use.actions();
 
-  const { playRandomLevel } = useGenerateLevel();
+  const { persistedLevelDifficulty, playPersistedLevel, playRandomLevel } =
+    useLevel();
+
   const handlePlayClick = () => {
-    if (selectedDifficulty === "custom") return alert("Not implemented yet.");
     playRandomLevel(selectedDifficulty);
   };
+
+  const handleResumeClick = () => {
+    playPersistedLevel();
+  };
+
+  const showResumeButton = persistedLevelDifficulty === selectedDifficulty;
+  const showPlayWarning = persistedLevelDifficulty !== null;
 
   return (
     <Screen>
@@ -43,12 +54,25 @@ export function HomeScreen() {
         onChange={(v) => selectDifficulty(v)}
         i18nPrefix="home.difficulty-"
       />
-      {selectedDifficulty !== "custom" && (
-        <DifficultyStats difficulty={selectedDifficulty} />
-      )}
-      <Button icon={IconPlayerPlay} onClick={handlePlayClick}>
-        {t("home.play")}
-      </Button>
+
+      <DifficultyStats difficulty={selectedDifficulty} />
+      <Group>
+        <Wrap
+          when={showPlayWarning}
+          component={(c) => (
+            <Tooltip label={t("home.play-warning")}>{c}</Tooltip>
+          )}
+        >
+          <Button icon={IconPlayerPlay} onClick={handlePlayClick}>
+            {t("home.play")}
+          </Button>
+        </Wrap>
+        {showResumeButton && (
+          <Button icon={IconRepeat} onClick={handleResumeClick}>
+            {t("home.resume")}
+          </Button>
+        )}
+      </Group>
       <Divider />
       <Button icon={IconSettings} onClick={navigateToSettings}>
         {t("navigation.settings")}

@@ -8,7 +8,6 @@ import { removeSelectedNodes } from "./nodes";
 
 type GetSelectionState = {
   selection: Selection;
-  invalidNode: Node | null;
 };
 
 type SelectionState = {
@@ -20,13 +19,12 @@ type SelectionState = {
 
 export const getSelectionState = ({
   selection,
-  invalidNode,
 }: GetSelectionState): SelectionState => {
   return {
     value: selection.value ?? 0,
     key: uuid(),
     length: selection.nodes.length,
-    isInvalid: invalidNode !== null,
+    isInvalid: selection.invalidNode !== null,
   };
 };
 type CanSelectionBeApplied = {
@@ -76,6 +74,7 @@ export const applySelectedNode = ({
     nodes: [...selection.nodes, node],
     edges: newSelectedEdges,
     value: newSelectedValue,
+    invalidNode: selection.invalidNode,
   };
 };
 
@@ -95,7 +94,9 @@ export const applySelectedNodes = ({
   objectives,
   activeObjectiveIndex,
   boardSize,
-}: ApplySelectedNodes): GameBoard | "not-applicable" => {
+}: ApplySelectedNodes): GameBoard | "not-applicable" | "ignore" => {
+  if (selection.nodes.length === 0) return "ignore";
+
   const isSelectionApplicable = canSelectionBeApplied({
     selection,
     objectives,

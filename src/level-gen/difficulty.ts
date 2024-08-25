@@ -5,12 +5,12 @@ import { OPERATION_KINDS, type OperationKind } from "./operation";
 export const PRESET_DIFFICULTIES = ["normal", "hard", "extreme"] as const;
 export type PresetDifficulty = (typeof PRESET_DIFFICULTIES)[number];
 
-type DifficultyOptions = {
+export type DifficultyOptions = {
   boardSize: number;
   operationDistribution: Partial<Record<OperationKind, number>>;
   maxPathLength: number;
   maxPathCount: number;
-  preset?: PresetDifficulty;
+  preset: PresetDifficulty;
 };
 
 /** Defines the difficulty of a level.
@@ -142,6 +142,7 @@ if (import.meta.vitest) {
         multiplication: 50,
         division: 100,
       },
+      preset: "normal",
     });
 
     expect(difficulty.options.operationDistribution).toEqual({

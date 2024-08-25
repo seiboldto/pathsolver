@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { e, n } from "~src/__tests__";
+import { DEFAULT_SELECTION } from "~src/models";
 
 import {
   applySelectedNode,
@@ -21,6 +22,7 @@ const selection = {
   nodes: [nodes[0], nodes[1]],
   edges: [e(0, 0, "h")],
   value: 5,
+  invalidNode: n(1, 1),
 };
 
 const objectives = [
@@ -38,7 +40,7 @@ const activeObjectiveIndex = 0;
 
 describe("get selection state", () => {
   it("calculates selection state", () => {
-    expect(getSelectionState({ selection, invalidNode: n(1, 1) })).toEqual({
+    expect(getSelectionState({ selection })).toEqual({
       key: expect.stringContaining(""),
       isInvalid: true,
       length: 2,
@@ -49,8 +51,7 @@ describe("get selection state", () => {
   it("sets selection value to 0 if it is null", () => {
     expect(
       getSelectionState({
-        selection: { nodes: [], edges: [], value: null },
-        invalidNode: null,
+        selection: DEFAULT_SELECTION,
       })
     ).toEqual(expect.objectContaining({ value: 0 }));
   });
@@ -94,9 +95,9 @@ describe("apply selected node", () => {
       applySelectedNode({
         node: nodes[0],
         edges,
-        selection: { edges: [], nodes: [], value: null },
+        selection: DEFAULT_SELECTION,
       })
-    ).toEqual({ edges: [], nodes: [nodes[0]], value: 1 });
+    ).toEqual({ edges: [], nodes: [nodes[0]], value: 1, invalidNode: null });
   });
 
   it("works for following nodes", () => {
@@ -104,19 +105,47 @@ describe("apply selected node", () => {
       applySelectedNode({
         node: nodes[1],
         edges,
-        selection: { edges: [], nodes: [nodes[0]], value: 1 },
+        selection: {
+          edges: [],
+          nodes: [nodes[0]],
+          value: 1,
+          invalidNode: null,
+        },
       })
-    ).toEqual({ edges: [edges[0]], nodes: [nodes[0], nodes[1]], value: 3 });
+    ).toEqual({
+      edges: [edges[0]],
+      nodes: [nodes[0], nodes[1]],
+      value: 3,
+      invalidNode: null,
+    });
   });
 });
 
 describe("apply selected nodes", () => {
+  it("is ignored on empty selection", () => {
+    expect(
+      applySelectedNodes({
+        activeObjectiveIndex,
+        objectives,
+        selection: DEFAULT_SELECTION,
+        boardSize: 2,
+        nodes,
+        edges,
+      })
+    ).toEqual("ignore");
+  });
+
   it("is not applicable in certain cases", () => {
     expect(
       applySelectedNodes({
         activeObjectiveIndex,
         objectives,
-        selection: { edges: [], nodes: [nodes[0]], value: 1 },
+        selection: {
+          edges: [],
+          nodes: [nodes[0]],
+          value: 1,
+          invalidNode: null,
+        },
         boardSize: 2,
         nodes,
         edges,
