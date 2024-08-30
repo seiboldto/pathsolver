@@ -49,6 +49,7 @@ export function Tooltip({ label, children }: TooltipProps): JSX.Element {
     <>
       {cloneElement(children, {
         ...getReferenceProps(),
+        "aria-label": label,
         ref: refs.setReference,
       })}
       {isOpen &&

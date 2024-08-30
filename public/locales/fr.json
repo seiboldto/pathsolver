@@ -1,30 +1,10 @@
 {
-  "menu": {
-    "title": "pathfinder",
-    "play": "§Play",
-    "daily": "§Daily",
-    "settings": "Paramètres",
-    "back": "Retour"
-  },
-  "difficulty": {
-    "title": "§difficulty",
-    "choose": "§Choose Difficulty",
-    "normal": "§Normal",
-    "hard": "§Hard",
-    "extreme": "§Extreme",
-    "custom": "§Custom"
-  },
-  "settings": {
-    "title": "paramètres",
-    "language": "Langue",
-    "theme": "Thème",
-    "theme-light": "Clair",
-    "theme-dark": "Sombre",
-    "hover-animations": "§Hover Animations",
-    "menu-transitions": "§Menu Transitions"
-  },
-  "ui": {
-    "next": "§Next",
-    "prev": "§Previous"
+  "title": "pathfinder",
+  "navigation": {
+    "next": "Suivant",
+    "prev": "Précédent",
+    "back": "Retour",
+    "menu": "Menu",
+    "settings": "Paramètres"
   }
 }

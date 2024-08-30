@@ -34,7 +34,7 @@ test.describe("sets default values for user settings", () => {
   });
 });
 
-test.describe("handles invalid preconfigured user settings", () => {
+test.describe("handles unknown user settings", () => {
   test.use({ locale: "xx-XX", colorScheme: "no-preference" });
 
   test("uses fallback settings", async ({ page }) => {
@@ -52,14 +52,14 @@ test.describe("handles invalid preconfigured user settings", () => {
 test("supports changing settings and persists them", async ({ page }) => {
   await page.goto("/settings");
 
-  const title = page.getByRole("heading", { name: "settings" });
+  const title = page.getByRole("heading", { name: "Settings" });
 
   const language = page.getByRole("spinbutton");
   await expect(language).toHaveText("English");
   await expect(language).toHaveAttribute("aria-valuetext", "English");
 
   await language.press("ArrowRight");
-  await expect(title).not.toBeVisible();
+  await expect(title).toBeHidden();
   await expect(language).not.toHaveText("English");
   await expect(language).not.toHaveAttribute("aria-valuetext", "English");
   await language.press("ArrowLeft");

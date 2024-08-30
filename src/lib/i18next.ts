@@ -28,3 +28,8 @@ i18next
       escapeValue: false,
     },
   });
+
+i18next.services.formatter?.add("zero-indicing", (value) => {
+  if (typeof value === "number") return value + 1;
+  return value;
+});

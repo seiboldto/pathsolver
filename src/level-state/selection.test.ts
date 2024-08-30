@@ -47,14 +47,6 @@ describe("get selection state", () => {
       value: 5,
     });
   });
-
-  it("sets selection value to 0 if it is null", () => {
-    expect(
-      getSelectionState({
-        selection: DEFAULT_SELECTION,
-      })
-    ).toEqual(expect.objectContaining({ value: 0 }));
-  });
 });
 
 describe("can selection be applied", () => {

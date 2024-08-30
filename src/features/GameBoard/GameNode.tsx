@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import { useActiveLevel } from "~src/hooks";
 import { cssVars } from "~src/lib";
 import { type Node } from "~src/models";
@@ -10,6 +12,8 @@ type GameNodeProps = {
 };
 
 export function GameNode({ node }: GameNodeProps): JSX.Element | null {
+  const { t } = useTranslation();
+
   const { value, row, column } = node;
   const { canNodeBeSelected, getNodeState, applySelectedNode } =
     useActiveLevel();
@@ -49,6 +53,7 @@ export function GameNode({ node }: GameNodeProps): JSX.Element | null {
       style={cssVars({ row, column })}
       tabIndex={-1}
       data-node-state={nodeState}
+      aria-label={t("game.node-label", { row, column })}
     >
       {value}
     </button>

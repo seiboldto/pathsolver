@@ -13,7 +13,7 @@ export function WinOverlay(): JSX.Element | null {
   const [titleNr] = useState(() => getRandomInt(1, 3));
 
   const [, setLocation] = useLocation();
-  const navigateToHome = () => setLocation("/");
+  const handleMenuNavigation = () => setLocation("/");
 
   const { playRandomLevel } = useLevel();
   const { gameState, difficultyOptions } = useActiveLevel();
@@ -31,8 +31,8 @@ export function WinOverlay(): JSX.Element | null {
         <Button icon={IconPlayerPlay} onClick={handlePlayAgainClick}>
           {t("win.play-again")}
         </Button>
-        <Tooltip label={t("navigation.home")}>
-          <Button square onClick={navigateToHome}>
+        <Tooltip label={t("navigation.menu")}>
+          <Button square onClick={handleMenuNavigation}>
             <IconHome />
           </Button>
         </Tooltip>

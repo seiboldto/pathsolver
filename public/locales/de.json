@@ -1,30 +1,10 @@
 {
-  "menu": {
-    "title": "pathfinder",
-    "play": "Spielen",
-    "daily": "Täglich",
-    "settings": "Einstellungen",
-    "back": "Zurück"
-  },
-  "difficulty": {
-    "title": "schwierigkeit",
-    "choose": "Schwierigkeit auswählen",
-    "normal": "Normal",
-    "hard": "Schwer",
-    "extreme": "Extrem",
-    "custom": "Benutzerdefiniert"
-  },
-  "settings": {
-    "title": "einstellungen",
-    "language": "Sprache",
-    "theme": "Farbschema",
-    "theme-light": "Hell",
-    "theme-dark": "Dunkel",
-    "hover-animations": "Hover-Animationen",
-    "menu-transitions": "Menü-Übergänge"
-  },
-  "ui": {
-    "next": "Weiter",
-    "prev": "Zurück"
+  "title": "pathfinder",
+  "navigation": {
+    "next": "Next",
+    "prev": "Zurück",
+    "back": "Zurück",
+    "menu": "Menü",
+    "settings": "Einstellungen"
   }
 }

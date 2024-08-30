@@ -25,7 +25,7 @@ export function SettingsScreen() {
   const { t, i18n } = useTranslation();
 
   const [, setLocation] = useLocation();
-  const navigateToHome = () => setLocation("/");
+  const handleMenuNavigation = () => setLocation("/");
 
   const settings = useSettingsStore.use.settings();
   const { updateSettings } = useSettingsStore.use.actions();
@@ -56,7 +56,7 @@ export function SettingsScreen() {
         checked={settings.enableMenuTransitions}
         onChange={(value) => updateSettings("enableMenuTransitions", value)}
       />
-      <Button icon={IconArrowLeft} onClick={navigateToHome}>
+      <Button icon={IconArrowLeft} onClick={handleMenuNavigation}>
         {t("navigation.back")}
       </Button>
     </Screen>

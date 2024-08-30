@@ -4,17 +4,18 @@
     "next": "Next",
     "prev": "Previous",
     "back": "Back",
-    "home": "Home",
+    "menu": "Menu",
     "settings": "Settings"
   },
-  "home": {
+  "menu": {
     "choose-difficulty": "Choose Difficulty",
-    "difficulty-normal": "Normal",
-    "difficulty-hard": "Hard",
-    "difficulty-extreme": "Extreme",
     "play": "Play",
-    "resume": "Resume",
-    "play-warning": "This will overwrite your current game."
+    "resume": "Resume"
+  },
+  "difficulty": {
+    "normal": "Normal",
+    "hard": "Hard",
+    "extreme": "Extreme"
   },
   "win": {
     "title1": "Excellent!",
@@ -46,12 +47,6 @@
     "exit": "Exit",
     "restart": "Restart",
     "undo": "Undo",
-    "operations": {
-      "addition": "Addition",
-      "subtraction": "Subtraction",
-      "multiplication": "Multiplication",
-      "division": "Division"
-    },
     "selected-value": "Selected Value",
     "objectives": {
       "title": "Objectives",
@@ -62,6 +57,14 @@
       "index_ordinal_two": "{{count}}nd Objective",
       "index_ordinal_few": "{{count}}rd Objective",
       "index_ordinal_other": "{{count}}th Objective"
+    },
+    "node-label": "Row {{row, zero-indicing}} / Column {{column, zero-indicing}}",
+    "edge-label": "Operation between row {{n1.row, zero-indicing}} / column {{n1.column, zero-indicing}} and row {{n2.row, zero-indicing}} / column {{n2.column, zero-indicing}}",
+    "operations": {
+      "addition": "Addition",
+      "subtraction": "Subtraction",
+      "multiplication": "Multiplication",
+      "division": "Division"
     }
   }
 }

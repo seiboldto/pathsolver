@@ -11,7 +11,7 @@ type GetSelectionState = {
 };
 
 type SelectionState = {
-  value: number;
+  value: number | null;
   key: string;
   length: number;
   isInvalid: boolean;
@@ -21,7 +21,7 @@ export const getSelectionState = ({
   selection,
 }: GetSelectionState): SelectionState => {
   return {
-    value: selection.value ?? 0,
+    value: selection.value,
     key: uuid(),
     length: selection.nodes.length,
     isInvalid: selection.invalidNode !== null,

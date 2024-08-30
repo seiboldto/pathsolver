@@ -3,7 +3,7 @@ import { Redirect, Route, Switch } from "wouter";
 
 import { DevMode } from "~src/features";
 import { useSettingsSideEffects } from "~src/hooks";
-import { Home, Level, Settings } from "~src/screens";
+import { Level, Menu, Settings } from "~src/screens";
 
 import { useStatisticsStore } from "./stores";
 
@@ -24,7 +24,7 @@ export function App() {
     <Suspense>
       <Switch>
         <Route path="/">
-          <Home />
+          <Menu />
         </Route>
         <Route path="/settings">
           <Settings />

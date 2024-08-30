@@ -4,6 +4,7 @@ import { e, n } from "~src/__tests__";
 
 import {
   getEdgeBetweenNodes,
+  getEdgeNodeCoords,
   getEdgeState,
   removeTrailingEdges,
 } from "./edges";
@@ -54,5 +55,21 @@ describe("remove trailing edges", () => {
 
     const newEdges = removeTrailingEdges({ boardSize: 2, nodes, edges });
     expect(newEdges).toEqual(edges);
+  });
+});
+
+describe("get edge node coords", () => {
+  it("supports horizontal edges", () => {
+    const edge = e(0, 0, "h");
+    const [n1, n2] = getEdgeNodeCoords({ edge });
+    expect(n1).toEqual({ row: 0, column: 0 });
+    expect(n2).toEqual({ row: 0, column: 1 });
+  });
+
+  it("supports vertical edges", () => {
+    const edge = e(0, 0, "v");
+    const [n1, n2] = getEdgeNodeCoords({ edge });
+    expect(n1).toEqual({ row: 0, column: 0 });
+    expect(n2).toEqual({ row: 1, column: 0 });
   });
 });

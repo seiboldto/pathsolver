@@ -41,7 +41,7 @@ export function StreakInfo(): JSX.Element {
     <div className={classes.streakInfo}>
       {Object.entries(streakStates).map(([d, state]) => (
         <pre key={d}>
-          {t(`home.difficulty-${d}`)} | {state.type}
+          {t(`difficulty.${d}`)} | {state.type}
           {state.type !== "idle" && ` | ${state.expiresInMs}`}
         </pre>
       ))}

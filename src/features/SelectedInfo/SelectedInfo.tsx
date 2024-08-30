@@ -22,7 +22,7 @@ export function SelectedInfo(): JSX.Element {
         aria-label={t("game.selected-value")}
         aria-live="polite"
       >
-        {selectionState.value}
+        {selectionState.value ?? 0}
       </span>
       <div
         key={selectionState.key}

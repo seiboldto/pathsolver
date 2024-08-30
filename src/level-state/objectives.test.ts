@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 
-import { Objective } from "~src/models";
+import { type Objective } from "~src/models";
 
 import { getObjectivesState } from "./objectives";
 

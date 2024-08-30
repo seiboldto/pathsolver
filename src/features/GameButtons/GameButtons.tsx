@@ -10,7 +10,7 @@ import classes from "./GameButtons.module.css";
 
 export function GameButtons(): JSX.Element {
   const [, setLocation] = useLocation();
-  const navigateToHome = () => setLocation("/");
+  const handleMenuNavigation = () => setLocation("/");
 
   const { updatePersistedLevel } = useLevel();
   const { restartLevel, undoSelection } = useLevelStore.use.actions();
@@ -27,13 +27,17 @@ export function GameButtons(): JSX.Element {
   };
 
   const disableRightButtons = gameState.state !== "playing";
-  const disableHomeButton =
+  const disableMenuButton =
     gameState.state !== "playing" && gameState.state !== "waiting";
 
   return (
     <div className={classes.gameButtons}>
       <Tooltip label={t("game.exit")}>
-        <Button square disabled={disableHomeButton} onClick={navigateToHome}>
+        <Button
+          square
+          disabled={disableMenuButton}
+          onClick={handleMenuNavigation}
+        >
           <IconHome />
         </Button>
       </Tooltip>

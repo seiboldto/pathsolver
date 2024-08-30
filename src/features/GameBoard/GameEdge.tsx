@@ -35,10 +35,12 @@ export function GameEdge({ edge }: GameEdgeProps): JSX.Element | null {
   const { t } = useTranslation();
 
   const Icon = OPERATION_ICONS[operation];
-  const { getEdgeState } = useActiveLevel();
+  const { getEdgeState, getEdgeNodeCoords } = useActiveLevel();
   const state = getEdgeState({ edge });
 
   if (!edge.active) return null;
+
+  const [n1, n2] = getEdgeNodeCoords({ edge });
 
   return (
     <div
@@ -46,7 +48,11 @@ export function GameEdge({ edge }: GameEdgeProps): JSX.Element | null {
       className={classes.edge}
       data-orientation={orientation}
       style={cssVars({ row, column })}
-      aria-label={t(`game.operations.${operation}`)}
+      aria-label={t(`game.edge-label`, {
+        n1,
+        n2,
+      })}
+      aria-description={t(`game.operations.${operation}`)}
       data-selected={state !== "idle"}
     >
       <Icon size={18} />

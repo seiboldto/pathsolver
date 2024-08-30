@@ -86,6 +86,8 @@ export const useActiveLevel = () => {
     selectedEdges: selection.edges,
   });
 
+  const getEdgeNodeCoords = createLevelFunc(levelHelpers.getEdgeNodeCoords, {});
+
   const gameState = levelState.getGameState({
     activeObjectiveIndex,
     objectivesCount: objectives.length,
@@ -116,6 +118,7 @@ export const useActiveLevel = () => {
     applySelectedNode,
     applySelectedNodes,
 
+    getEdgeNodeCoords,
     getEdgeState,
     getNodeState,
 

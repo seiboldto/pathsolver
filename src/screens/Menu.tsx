@@ -9,8 +9,6 @@ import {
   Screen,
   Title,
   ToggleInput,
-  Tooltip,
-  Wrap,
 } from "~src/components";
 import { DifficultyStats } from "~src/features";
 import { useLevel } from "~src/hooks";
@@ -21,7 +19,7 @@ const difficulties = PRESET_DIFFICULTIES.map((d) => ({
   value: d,
 }));
 
-export function HomeScreen() {
+export function MenuScreen() {
   const { t } = useTranslation();
 
   const [, setLocation] = useLocation();
@@ -42,34 +40,26 @@ export function HomeScreen() {
   };
 
   const showResumeButton = persistedLevelDifficulty === selectedDifficulty;
-  const showPlayWarning = persistedLevelDifficulty !== null;
 
   return (
     <Screen>
       <Title>{t("title")}</Title>
       <ToggleInput
-        label={t("home.choose-difficulty")}
+        label={t("menu.choose-difficulty")}
         data={difficulties}
         value={selectedDifficulty}
         onChange={(v) => selectDifficulty(v)}
-        i18nPrefix="home.difficulty-"
+        i18nPrefix="difficulty."
       />
 
       <DifficultyStats difficulty={selectedDifficulty} />
       <Group>
-        <Wrap
-          when={showPlayWarning}
-          component={(c) => (
-            <Tooltip label={t("home.play-warning")}>{c}</Tooltip>
-          )}
-        >
-          <Button icon={IconPlayerPlay} onClick={handlePlayClick}>
-            {t("home.play")}
-          </Button>
-        </Wrap>
+        <Button icon={IconPlayerPlay} onClick={handlePlayClick}>
+          {t("menu.play")}
+        </Button>
         {showResumeButton && (
           <Button icon={IconRepeat} onClick={handleResumeClick}>
-            {t("home.resume")}
+            {t("menu.resume")}
           </Button>
         )}
       </Group>

@@ -1,4 +1,4 @@
-import type { Edge, Node } from "~src/models";
+import type { Coords, Edge, Node } from "~src/models";
 
 type GetEdgeBetweenNodes = {
   edges: Edge[];
@@ -38,6 +38,29 @@ export const getEdgeState = ({
 }: GetEdgeState): EdgeState => {
   if (selectedEdges.includes(edge)) return "selected";
   return "idle";
+};
+
+type GetEdgeNodeCoords = {
+  edge: Edge;
+};
+
+type EdgeNodeCoords = [Coords, Coords];
+
+export const getEdgeNodeCoords = ({
+  edge,
+}: GetEdgeNodeCoords): EdgeNodeCoords => {
+  const { row, column } = edge;
+  if (edge.orientation === "horizontal") {
+    return [
+      { row, column },
+      { row, column: column + 1 },
+    ];
+  }
+
+  return [
+    { row, column },
+    { row: row + 1, column },
+  ];
 };
 
 type RemoveTrailingEdges = {
