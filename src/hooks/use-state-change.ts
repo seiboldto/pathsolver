@@ -1,21 +1,27 @@
 import { useState } from "react";
 
-type StateChangeArgs<T> = { curr: T; prev: T | undefined };
+type Callback<T, R> = (args: { curr: T; prev: T | undefined }) => R;
 
-export const useStateChange = <T>(
-  state: T,
-  compareFn: (args: StateChangeArgs<T>) => boolean,
-  callback: (args: StateChangeArgs<T>) => void
-): void => {
+type UseStateChange<T> = {
+  on: T;
+  when: Callback<T, boolean>;
+  run: Callback<T, void>;
+};
+
+export const useStateChange = <T>({
+  on,
+  when,
+  run,
+}: UseStateChange<T>): void => {
   const [prev, setPrev] = useState<T | undefined>(undefined);
 
-  const curr = state;
+  const curr = on;
   const args = { curr, prev };
-  if (compareFn(args)) {
-    callback(args);
+  if (when(args)) {
+    run(args);
   }
 
-  if (state !== prev) {
-    setPrev(state);
+  if (on !== prev) {
+    setPrev(on);
   }
 };

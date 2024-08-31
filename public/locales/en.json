@@ -65,6 +65,13 @@
       "subtraction": "Subtraction",
       "multiplication": "Multiplication",
       "division": "Division"
+    },
+    "tutorial": {
+      "0-start-path": "Click on a number in the grid to start a path.",
+      "1-extend-path": "Move to an adjacent number to add it to the path.",
+      "2-find-objective": "Find a path that computes to {{value}}. There may be multiple solutions.",
+      "3-release-path": "Release your mouse to advance to the next objective.",
+      "4-solve-objectives": "Solve all remaining objectives. If you're stuck, you can always restart the level."
     }
   }
 }

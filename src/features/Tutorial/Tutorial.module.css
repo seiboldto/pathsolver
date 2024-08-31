@@ -1,0 +1,14 @@
+.tutorial {
+  display: flex;
+  gap: var(--spacing-xs);
+  align-items: center;
+  position: absolute;
+  width: var(--ui-width);
+  left: var(--side-padding);
+  bottom: var(--spacing-xl);
+  user-select: none;
+
+  .icon {
+    flex-shrink: 0;
+  }
+}

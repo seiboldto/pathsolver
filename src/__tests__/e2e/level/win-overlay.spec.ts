@@ -1,6 +1,22 @@
 import { NORMAL_GAME } from "../../fixtures";
 import { expect, test } from "./level-assertions";
 
+test("has a focus trap", async ({ levelPage, page }) => {
+  await levelPage.open(NORMAL_GAME);
+  await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);
+
+  const playAgain = page.getByRole("button", { name: "Play Again" });
+  const menu = page.getByRole("button", { name: "Menu" });
+
+  const { keyboard } = page;
+  await keyboard.press("Tab");
+  await expect(menu).toBeFocused();
+  await keyboard.press("Tab");
+  await expect(playAgain).toBeFocused();
+  await keyboard.press("Tab");
+  await expect(menu).toBeFocused();
+});
+
 test("increments games played after win", async ({ levelPage, page }) => {
   await levelPage.open(NORMAL_GAME);
   await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);

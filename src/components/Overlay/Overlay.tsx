@@ -22,13 +22,13 @@ export function Overlay({
 }: OverlayProps): JSX.Element | null {
   const id = useId("overlay");
 
-  useStateChange(
-    visible,
-    ({ prev, curr }) => prev !== curr,
-    ({ curr }) => {
+  useStateChange({
+    on: visible,
+    when: ({ prev, curr }) => prev !== curr,
+    run: ({ curr }) => {
       root.ariaHidden = curr ? "true" : "false";
-    }
-  );
+    },
+  });
 
   if (!visible) return null;
   return createPortal(
