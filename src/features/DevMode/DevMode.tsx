@@ -1,9 +1,9 @@
 import { IconCalendar, IconCode } from "@tabler/icons-react";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "wouter";
 
 import { Button, Tooltip } from "~src/components";
+import { useBooleanState } from "~src/hooks";
 import { useUiStore } from "~src/stores";
 
 import classes from "./DevMode.module.css";
@@ -17,8 +17,7 @@ export function DevMode() {
   const isDeveloperMode = useUiStore.use.isDeveloperMode();
   const { toggleDeveloperMode } = useUiStore.use.actions();
 
-  const [isStreakInfoVisible, setStreakInfoVisisble] = useState(false);
-  const toggleStreakInfo = () => setStreakInfoVisisble((prev) => !prev);
+  const [isStreakInfoVisible, streakInfoHandler] = useBooleanState(false);
 
   const showLevelCheats = location === "/level";
 
@@ -34,7 +33,7 @@ export function DevMode() {
           <>
             {showLevelCheats && <LevelCheats />}
             <Tooltip label={t("dev-mode.toggle-streak-info")}>
-              <Button square onClick={toggleStreakInfo}>
+              <Button square onClick={streakInfoHandler.toggle}>
                 <IconCalendar />
               </Button>
             </Tooltip>

@@ -66,7 +66,7 @@ test("has restart and undo buttons", async ({ levelPage, page }) => {
 
   await levelPage.selectNodesByCoords(NORMAL_GAME.SELECTION_COORDS[0]);
   await levelPage.selectNodesByCoords(NORMAL_GAME.SELECTION_COORDS[1]);
-  await page.getByRole("button", { name: "Exit" }).click();
+  await page.getByRole("button", { name: "Menu" }).click();
   await page.getByRole("button", { name: "Resume" }).click();
 
   await undo.click();

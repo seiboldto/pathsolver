@@ -31,6 +31,9 @@ test.describe("increments streak if the last game was between 24h and 48h ago", 
     await levelPage.open(NORMAL_GAME);
     await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);
     await expect(page.getByText("Current Streak2")).toBeVisible();
+
+    await page.clock.fastForward("24:00:00");
+    await expect(page.getByText("Current Streak2")).toBeVisible();
   });
 
   test("without reload", async ({ levelPage, page }) => {
@@ -49,6 +52,9 @@ test.describe("increments streak if the last game was between 24h and 48h ago", 
     await page.clock.fastForward("12:00:00");
     await levelPage.open(NORMAL_GAME);
     await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);
+    await expect(page.getByText("Current Streak2")).toBeVisible();
+
+    await page.clock.fastForward("24:00:00");
     await expect(page.getByText("Current Streak2")).toBeVisible();
   });
 });

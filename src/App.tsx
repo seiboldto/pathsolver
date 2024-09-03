@@ -3,7 +3,7 @@ import { Redirect, Route, Switch } from "wouter";
 
 import { DevMode } from "~src/features";
 import { useSettingsSideEffects } from "~src/hooks";
-import { Level, Menu, Settings } from "~src/screens";
+import { Level, Menu, Settings, Share } from "~src/screens";
 
 import { useStatisticsStore } from "./stores";
 
@@ -31,6 +31,9 @@ export function App() {
         </Route>
         <Route path="/level">
           <Level />
+        </Route>
+        <Route path="/share/:encodedID">
+          {({ encodedID }) => <Share encodedID={encodedID} />}
         </Route>
         <Route>
           <Redirect to="/" replace />

@@ -4,5 +4,6 @@ export const VERSIONS = {
     SETTINGS: 0,
     STATISTICS: 0,
   },
+  GENERATOR: 1,
   APP_VERSION: __APP_VERSION__,
 } as const;

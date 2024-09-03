@@ -3,10 +3,11 @@ import { useLocation } from "wouter";
 
 import {
   Difficulty,
+  generateLevelFromSeed,
   generateRandomLevel,
   type PresetDifficulty,
 } from "~src/level-gen";
-import { transformLevel } from "~src/models";
+import { LevelState, transformLevel } from "~src/models";
 import { levelStore, useLevelStore, usePersistedLevelStore } from "~src/stores";
 
 export const useLevel = () => {
@@ -18,6 +19,7 @@ export const useLevel = () => {
   const { setPersistedLevel } = usePersistedLevelStore.use.actions();
   const persistedLevelDifficulty =
     persistedLevel?.difficultyOptions.preset || null;
+  const persistedLevelSeed = persistedLevel?.seed || null;
 
   const updatePersistedLevel = useCallback(() => {
     const { activeLevelState } = levelStore.getState();
@@ -28,28 +30,38 @@ export const useLevel = () => {
     setPersistedLevel(null);
   }, [setPersistedLevel]);
 
-  const playPersistedLevel = () => {
-    if (!persistedLevel) return;
-
-    setActiveLevelState(persistedLevel);
+  const playLevel = (level: LevelState) => {
+    setActiveLevelState(level);
     updatePersistedLevel();
     setLocation("/level");
   };
 
-  const playRandomLevel = (difficulty: PresetDifficulty) => {
-    const level = generateRandomLevel(Difficulty[difficulty]());
+  const playPersistedLevel = () => {
+    if (!persistedLevel) return;
+    playLevel(persistedLevel);
+  };
 
+  const playRandomLevel = (difficultyPreset: PresetDifficulty) => {
+    const level = generateRandomLevel(Difficulty[difficultyPreset]());
     const levelState = transformLevel(level);
+    playLevel(levelState);
+  };
 
-    setActiveLevelState(levelState);
-    updatePersistedLevel();
-    setLocation("/level");
+  const playSharedLevel = (
+    seed: number,
+    difficultyPreset: PresetDifficulty
+  ) => {
+    const level = generateLevelFromSeed(seed, Difficulty[difficultyPreset]());
+    const levelState = transformLevel(level);
+    playLevel(levelState);
   };
 
   return {
     persistedLevelDifficulty,
+    persistedLevelSeed,
     playPersistedLevel,
     playRandomLevel,
+    playSharedLevel,
     updatePersistedLevel,
     deletePersistedLevel,
   };

@@ -6,4 +6,5 @@ export type LevelFixture = {
   NODES: (number | null)[][];
   EDGES: (string | null)[][];
   SELECTION_COORDS: [number, number][][];
+  PERFECT_SELECTION_COORDS?: [number, number][][];
 };

@@ -20,8 +20,14 @@ export const useActiveLevel = () => {
   const { updatePersistedLevel, deletePersistedLevel } = useLevel();
   const selection = useLevelStore.use.selection();
 
-  const { nodes, difficultyOptions, edges, activeObjectiveIndex, objectives } =
-    activeLevelState;
+  const {
+    seed,
+    nodes,
+    difficultyOptions,
+    edges,
+    activeObjectiveIndex,
+    objectives,
+  } = activeLevelState;
   const { boardSize, maxPathLength, preset } = difficultyOptions;
 
   // As these function are used in a window event listener, they need to be memoised.
@@ -105,6 +111,7 @@ export const useActiveLevel = () => {
   });
 
   return {
+    seed,
     difficultyOptions,
     nodes,
     edges,

@@ -1,9 +1,16 @@
-import { IconArrowBack, IconHome, IconRefresh } from "@tabler/icons-react";
+import {
+  IconArrowBack,
+  IconHome,
+  IconRefresh,
+  IconShare,
+  IconX,
+} from "@tabler/icons-react";
 import { t } from "i18next";
 import { useLocation } from "wouter";
 
-import { Button, Group, Tooltip } from "~src/components";
-import { useActiveLevel, useLevel } from "~src/hooks";
+import { Button, Divider, Group, Overlay, Tooltip } from "~src/components";
+import { ShareLevel } from "~src/features";
+import { useActiveLevel, useBooleanState, useLevel } from "~src/hooks";
 import { useLevelStore } from "~src/stores";
 
 import classes from "./GameButtons.module.css";
@@ -14,7 +21,9 @@ export function GameButtons(): JSX.Element {
 
   const { updatePersistedLevel } = useLevel();
   const { restartLevel, undoSelection } = useLevelStore.use.actions();
-  const { gameState } = useActiveLevel();
+  const { gameState, seed, difficultyOptions } = useActiveLevel();
+
+  const [isShareOverlayOpen, shareOverlayHandler] = useBooleanState(false);
 
   const handleRestart = () => {
     restartLevel();
@@ -27,20 +36,30 @@ export function GameButtons(): JSX.Element {
   };
 
   const disableRightButtons = gameState.state !== "playing";
-  const disableMenuButton =
-    gameState.state !== "playing" && gameState.state !== "waiting";
+  const disableMenuButton = gameState.hasWon;
 
   return (
     <div className={classes.gameButtons}>
-      <Tooltip label={t("game.exit")}>
-        <Button
-          square
-          disabled={disableMenuButton}
-          onClick={handleMenuNavigation}
-        >
-          <IconHome />
-        </Button>
-      </Tooltip>
+      <Group>
+        <Tooltip label={t("navigation.menu")}>
+          <Button
+            square
+            disabled={disableMenuButton}
+            onClick={handleMenuNavigation}
+          >
+            <IconHome />
+          </Button>
+        </Tooltip>
+        <Tooltip label={t("game.share-level")}>
+          <Button
+            square
+            disabled={disableMenuButton}
+            onClick={shareOverlayHandler.show}
+          >
+            <IconShare />
+          </Button>
+        </Tooltip>
+      </Group>
 
       <Group>
         <Tooltip label={t("game.restart")}>
@@ -54,6 +73,14 @@ export function GameButtons(): JSX.Element {
           </Button>
         </Tooltip>
       </Group>
+
+      <Overlay visible={isShareOverlayOpen} title={t("game.share-level")}>
+        <ShareLevel seed={seed} difficultyPreset={difficultyOptions.preset} />
+        <Divider />
+        <Button onClick={shareOverlayHandler.hide} icon={IconX}>
+          {t("navigation.close")}
+        </Button>
+      </Overlay>
     </div>
   );
 }

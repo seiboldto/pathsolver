@@ -2,6 +2,7 @@ import prand, { type RandomGenerator } from "pure-rand";
 
 import { OPERATION_KINDS, type OperationKind } from "./operation";
 
+// Due to limitations with shareable ids, there must be less than 10 preset difficulties.
 export const PRESET_DIFFICULTIES = ["normal", "hard", "extreme"] as const;
 export type PresetDifficulty = (typeof PRESET_DIFFICULTIES)[number];
 

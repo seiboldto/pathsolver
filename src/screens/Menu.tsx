@@ -6,12 +6,13 @@ import {
   Button,
   Divider,
   Group,
+  Overlay,
   Screen,
   Title,
   ToggleInput,
 } from "~src/components";
-import { DifficultyStats } from "~src/features";
-import { useLevel } from "~src/hooks";
+import { DifficultyStats, OverwriteLevel } from "~src/features";
+import { useBooleanState, useLevel } from "~src/hooks";
 import { PRESET_DIFFICULTIES } from "~src/level-gen";
 import { useUiStore } from "~src/stores";
 
@@ -21,6 +22,9 @@ const difficulties = PRESET_DIFFICULTIES.map((d) => ({
 
 export function MenuScreen() {
   const { t } = useTranslation();
+
+  const [showOverwriteOverlay, overwriteOverlayHandler] =
+    useBooleanState(false);
 
   const [, setLocation] = useLocation();
   const navigateToSettings = () => setLocation("/settings");
@@ -32,6 +36,14 @@ export function MenuScreen() {
     useLevel();
 
   const handlePlayClick = () => {
+    if (persistedLevelDifficulty !== null) {
+      overwriteOverlayHandler.show();
+    } else {
+      handleNewGame();
+    }
+  };
+
+  const handleNewGame = () => {
     playRandomLevel(selectedDifficulty);
   };
 
@@ -67,6 +79,12 @@ export function MenuScreen() {
       <Button icon={IconSettings} onClick={navigateToSettings}>
         {t("navigation.settings")}
       </Button>
+      <Overlay visible={showOverwriteOverlay} title="">
+        <OverwriteLevel
+          onCancel={overwriteOverlayHandler.hide}
+          onOverwrite={handleNewGame}
+        />
+      </Overlay>
     </Screen>
   );
 }

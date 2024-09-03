@@ -25,7 +25,7 @@ test("supports selecting difficulties", async ({ page }) => {
   await expect(normalNode).toBeVisible();
   await expect(extremeNode).toBeVisible();
 
-  await page.getByRole("button", { name: "Exit" }).click();
+  await page.getByRole("button", { name: "Menu" }).click();
   await expect(extreme).toBeChecked();
   await expect(resume).toBeVisible();
 
@@ -34,6 +34,15 @@ test("supports selecting difficulties", async ({ page }) => {
   await expect(resume).toBeHidden();
 
   await play.click();
+
+  await expect(
+    page.getByRole("heading", { name: "Overwrite active level?" })
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Cancel" }).click();
+
+  await play.click();
+  await page.getByRole("button", { name: "Overwrite" }).click();
+
   await page.waitForURL("/level");
   await expect(normalNode).toBeVisible();
   await expect(extremeNode).toBeHidden();

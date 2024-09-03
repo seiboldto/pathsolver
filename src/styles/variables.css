@@ -36,10 +36,11 @@
     --tooltip-color: hsl(216, 18%, 16%);
     --tooltip-text-color: #fff;
 
-    --overlay-color: rgba(0, 0, 0, 0.5);
+    --overlay-color: rgba(0, 0, 0, 0.75);
     --overlay-text-color: white;
 
     --error-color: hsl(0, 72%, 57%);
+    --success-color: hsl(123, 54%, 32%);
 
     --focus-color: hsl(209, 77%, 43%);
   }
@@ -63,6 +64,7 @@
     --overlay-text-color: white;
 
     --error-color: hsl(0, 72%, 47%);
+    --success-color: hsl(140, 74%, 52%);
 
     --focus-color: hsl(209, 77%, 43%);
   }

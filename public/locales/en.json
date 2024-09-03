@@ -4,6 +4,8 @@
     "next": "Next",
     "prev": "Previous",
     "back": "Back",
+    "close": "Close",
+    "cancel": "Cancel",
     "menu": "Menu",
     "settings": "Settings"
   },
@@ -44,7 +46,7 @@
     "menu-transitions": "Menu Transitions"
   },
   "game": {
-    "exit": "Exit",
+    "share-level": "Share Level",
     "restart": "Restart",
     "undo": "Undo",
     "selected-value": "Selected Value",
@@ -73,5 +75,21 @@
       "3-release-path": "Release your mouse to advance to the next objective.",
       "4-solve-objectives": "Solve all remaining objectives. If you're stuck, you can always restart the level."
     }
+  },
+  "share": {
+    "copy": "Copy",
+    "copied": "Copied",
+    "link": "Share via Link",
+    "social-media": "Share via Social Media",
+    "whatsapp": "WhatsApp",
+    "email": "E-Mail",
+    "error-title": "Unable to load level.",
+    "error-invalid-generator-version": "This level has been generated in an older version and is no longer compatible.",
+    "error-unknown": "The provided level appears to be malformed. Please double-check the URL."
+  },
+  "overwrite": {
+    "title": "Overwrite active level?",
+    "warning": "You already have an active level. By continuing, all current progress will be lost.",
+    "button": "Overwrite"
   }
 }

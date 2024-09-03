@@ -14,3 +14,4 @@ export {
   type Selection,
   transformLevel,
 } from "./level-state";
+export { createShareableID, parseShareableID } from "./shareable-id";

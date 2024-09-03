@@ -1,0 +1,22 @@
+.shareLevel {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+  .shareLink {
+    display: flex;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+
+    .shareInput {
+      min-width: 0;
+      border: 0.125rem solid var(--border-color);
+      background-color: var(--background-color);
+      height: var(--ui-size);
+      color: var(--text-color);
+      outline: none;
+      padding: 0 var(--spacing-xs);
+      flex-grow: 1;
+    }
+  }
+}

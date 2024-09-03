@@ -1,0 +1,85 @@
+import { IconHome } from "@tabler/icons-react";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useLocation } from "wouter";
+
+import { Button, Screen, Title } from "~src/components";
+import { OverwriteLevel } from "~src/features";
+import { useLevel } from "~src/hooks";
+import { VERSIONS } from "~src/lib";
+import { parseShareableID } from "~src/models";
+
+type ShareScreenProps = {
+  encodedID: string;
+};
+
+const expectedGeneratorVersion = VERSIONS.GENERATOR;
+
+type ShareError = "unknown" | "invalid-generator-version";
+
+export function ShareScreen({ encodedID }: ShareScreenProps) {
+  const [shareError, setShareError] = useState<ShareError | null>(null);
+  const { t } = useTranslation();
+
+  const {
+    persistedLevelDifficulty,
+    persistedLevelSeed,
+    playPersistedLevel,
+    playSharedLevel,
+  } = useLevel();
+
+  const [, setLocation] = useLocation();
+  const handleMenuNavigation = () => setLocation("/");
+
+  if (shareError === null) {
+    const parseResult = parseShareableID({
+      encodedID,
+      expectedGeneratorVersion,
+    });
+
+    if (parseResult.status === "success") {
+      const { seed, difficultyPreset } = parseResult.sharedLevel;
+      const handlePlay = () => {
+        playSharedLevel(seed, difficultyPreset);
+      };
+
+      if (persistedLevelDifficulty !== null) {
+        if (
+          persistedLevelDifficulty === difficultyPreset &&
+          persistedLevelSeed === seed
+        ) {
+          playPersistedLevel();
+          return null;
+        }
+
+        return (
+          <Screen>
+            <OverwriteLevel
+              onCancel={handleMenuNavigation}
+              onOverwrite={handlePlay}
+            />
+          </Screen>
+        );
+      }
+
+      handlePlay();
+      return null;
+    } else if (parseResult.status === "error") {
+      const isWrongGenerator =
+        parseResult.reason === "invalid-generator-version";
+      setShareError(isWrongGenerator ? "invalid-generator-version" : "unknown");
+    }
+
+    return null;
+  }
+
+  return (
+    <Screen>
+      <Title small>{t("share.error-title")}</Title>
+      {t(`share.error-${shareError}`)}
+      <Button onClick={handleMenuNavigation} icon={IconHome}>
+        {t("navigation.menu")}
+      </Button>
+    </Screen>
+  );
+}

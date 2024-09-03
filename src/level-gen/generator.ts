@@ -9,7 +9,7 @@ import { Level } from "./level";
  * @returns A random level.
  */
 export function generateRandomLevel(difficulty: Difficulty): Level {
-  const seed = Date.now() ^ (Math.random() * 0x100000000);
+  const seed = generateRandomSeed();
   return generateLevelFromSeed(seed, difficulty);
 }
 
@@ -34,39 +34,32 @@ export function generateLevelFromSeed(
   return level;
 }
 
+export const SEED_LENGTH = 10;
+
 /**
- * Create a seed from a given number.
- *
- * Adapted from https://stackoverflow.com/a/52171480.
- * @param n - The number to create a seed from.
- * @returns A non-random seed.
+ * Create a random seed with a preconfigured length.
+ * @returns A random seed.
  */
-function createSeedFromNumber(n: number): number {
-  let h1 = 0xdeadbeef ^ 0;
-  let h2 = 0x41c6ce57 ^ 0;
+export function generateRandomSeed(): number {
+  const lowerBound = Math.pow(10, SEED_LENGTH - 1);
+  const upperBound = Math.pow(10, SEED_LENGTH) - 1;
 
-  h1 = Math.imul(h1 ^ n, 2654435761);
-  h2 = Math.imul(h2 ^ n, 1597334677);
-
-  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507);
-  h1 ^= Math.imul(h2 ^ (h2 >>> 13), 3266489909);
-  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507);
-  h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);
-
-  return 4294967296 * (2097151 & h2) + (h1 >>> 0);
+  return Math.floor(Math.random() * (upperBound - lowerBound + 1)) + lowerBound;
 }
 
 if (import.meta.vitest) {
   const { it, expect } = import.meta.vitest;
 
-  it("generates unique seed values for each day", () => {
-    const ITERATIONS = 100_000;
-    const seeds = new Set();
+  it("creates random seeds", () => {
+    const ITERATIONS = 10000;
 
     for (let i = 0; i < ITERATIONS; i++) {
-      seeds.add(createSeedFromNumber(i));
-    }
+      const seed = generateRandomSeed();
 
-    expect(seeds.size).toEqual(ITERATIONS);
+      const lowerBound = 1000000000;
+      const upperBound = 9999999999;
+      expect(seed).toBeGreaterThanOrEqual(lowerBound);
+      expect(seed).toBeLessThanOrEqual(upperBound);
+    }
   });
 }

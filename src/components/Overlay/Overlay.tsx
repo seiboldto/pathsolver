@@ -15,6 +15,8 @@ type OverlayProps = {
 const overlayRoot = document.querySelector("#overlay-root")!;
 const root = document.querySelector("#root")!;
 
+const focusTrapOptions = { initialFocus: false } as const;
+
 export function Overlay({
   visible,
   children,
@@ -32,7 +34,7 @@ export function Overlay({
 
   if (!visible) return null;
   return createPortal(
-    <FocusTrap>
+    <FocusTrap focusTrapOptions={focusTrapOptions}>
       <div className={classes.overlay} role="dialog" aria-labelledby={id}>
         <Title id={id}>{title}</Title>
         {children}
