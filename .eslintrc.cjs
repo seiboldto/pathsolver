@@ -27,7 +27,6 @@ module.exports = {
     "dist",
     ".eslintrc.cjs",
     "vite.config.ts",
-    "vite.pages-plugin.ts",
     "postcss.config.cjs",
     "playwright.config.ts",
   ],
