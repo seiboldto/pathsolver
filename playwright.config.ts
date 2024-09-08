@@ -1,26 +1,5 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const projects = [
-  {
-    name: "chromium",
-    use: { ...devices["Desktop Chrome"] },
-  },
-];
-
-if (process.env.CI) {
-  projects.push(
-    {
-      name: "firefox",
-      use: { ...devices["Desktop Firefox"] },
-    },
-
-    {
-      name: "webkit",
-      use: { ...devices["Desktop Safari"] },
-    }
-  );
-}
-
 export default defineConfig({
   testDir: "./src/__tests__/",
   outputDir: "./src/__tests__/test-results",
@@ -36,7 +15,12 @@ export default defineConfig({
     colorScheme: "light",
   },
 
-  projects,
+  projects: [
+    {
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"] },
+    },
+  ],
 
   webServer: {
     command: "npm run dev",

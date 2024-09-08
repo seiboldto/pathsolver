@@ -36,7 +36,7 @@ test("supports selecting difficulties", async ({ page }) => {
   await play.click();
 
   await expect(
-    page.getByRole("heading", { name: "Overwrite active level?" })
+    page.getByRole("heading", { name: "Overwrite active game?" })
   ).toBeVisible();
   await page.getByRole("button", { name: "Cancel" }).click();
 

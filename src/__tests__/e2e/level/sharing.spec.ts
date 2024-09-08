@@ -66,7 +66,7 @@ test("shows a confirm message if an active level already exists", async ({
 
   await page.goto(shareLink);
   await expect(
-    page.getByRole("heading", { name: "Overwrite active level?" })
+    page.getByRole("heading", { name: "Overwrite active game?" })
   ).toBeVisible();
   await page.getByRole("button", { name: "Cancel" }).click();
   await page.waitForURL("/");
