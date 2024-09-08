@@ -5,14 +5,14 @@ test("supports navigation to and from settings", async ({ page }) => {
 
   await page.getByRole("button", { name: "Settings" }).click();
 
-  const pathfinder = page.getByRole("heading", { name: "pathfinder" });
+  const title = page.getByRole("heading", { name: "pathsolver" });
   const settings = page.getByRole("heading", { name: "settings" });
-  await expect(pathfinder).not.toBeAttached();
+  await expect(title).not.toBeAttached();
   await expect(settings).toBeVisible();
   await expect(page).toHaveURL("/settings");
 
   await page.getByRole("button", { name: "Back" }).click();
-  await expect(pathfinder).toBeVisible();
+  await expect(title).toBeVisible();
   await expect(settings).not.toBeAttached();
   await expect(page).toHaveURL("/");
 });
