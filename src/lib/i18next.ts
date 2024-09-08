@@ -6,7 +6,6 @@ import { initReactI18next } from "react-i18next";
 export const LANGUAGES = [
   { name: "Deutsch", locale: "de" },
   { name: "English", locale: "en" },
-  { name: "Français", locale: "fr" },
 ] as const;
 
 const backend = new Backend(null, { loadPath: "/locales/{{lng}}.json" });
