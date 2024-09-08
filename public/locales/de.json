@@ -1,10 +1,102 @@
 {
-  "title": "pathfinder",
+  "title": "pathsolver",
   "navigation": {
-    "next": "Next",
+    "next": "Vor",
     "prev": "Zurück",
     "back": "Zurück",
+    "close": "Schließen",
+    "cancel": "Abbrechen",
     "menu": "Menü",
-    "settings": "Einstellungen"
+    "settings": "Einstellungen",
+    "about": "Über"
+  },
+  "menu": {
+    "choose-difficulty": "Schwierigkeit wählen",
+    "play": "Spielen",
+    "resume": "Aktives Spiel fortsetzen"
+  },
+  "difficulty": {
+    "normal": "Normal",
+    "hard": "Schwer",
+    "extreme": "Extrem"
+  },
+  "win": {
+    "title1": "Exzellent!",
+    "title2": "Brilliant!",
+    "title3": "Fantastisch!",
+    "play-again": "Nochmal spielen"
+  },
+  "stats": {
+    "games-played": "Gespielte Spiele",
+    "current-streak": "Aktuelle Siegesfolge",
+    "max-streak": "Länge Siegesfolge",
+    "perfect-games": "Perfekte Spiele",
+    "perfect-game-explanation": "In einem perfekten Spiel sind am Ende noch Zahlen übrig.",
+    "update": {
+      "plus-one": "+1",
+      "new-best": "Neuer Rekord"
+    }
+  },
+  "dev-mode": {
+    "title": "Developer Mode",
+    "print-objectives": "Print Objectives",
+    "advance-objectives": "Advance Objectives",
+    "toggle-streak-info": "Toggle Streak Info"
+  },
+  "settings": {
+    "language": "Sprache",
+    "theme": "Farbschema",
+    "theme-light": "Hell",
+    "theme-dark": "Dunkel",
+    "hover-animations": "Cursor-Animationen"
+  },
+  "game": {
+    "restart": "Neu starten",
+    "undo": "Rückgängig machen",
+    "selected-value": "Ausgewählter Wert",
+    "objectives": {
+      "title": "Ziele",
+      "pending": "Ausstehendes Ziel",
+      "completed": "Abgeschlossenes Ziel",
+      "active": "Aktives Ziel",
+      "index_ordinal_other": "{{count}}. Ziel"
+    },
+    "node-label": "Reihe {{row, zero-indicing}} / Spalte {{column, zero-indicing}}",
+    "edge-label": "Operation zwischen Reihe {{n1.row, zero-indicing}} / Spalte {{n1.column, zero-indicing}} und Reihe {{n2.row, zero-indicing}} / Spalte {{n2.column, zero-indicing}}",
+    "operations": {
+      "addition": "Addition",
+      "subtraction": "Subtraktion",
+      "multiplication": "Multiplikation",
+      "division": "Division"
+    },
+    "tutorial": {
+      "0-start-path": "Klicke auf eine Nummer im Gitter, um einen Pfad zu starten.",
+      "1-extend-path": "Gehe zu einer angrenzenden Nummer, um sie dem Pfad hinzuzufügen.",
+      "2-find-objective": "Finde einen Pfad, der {{value}} ergibt. Möglicherweise gibt es mehrere Lösungen.",
+      "3-release-path": "Lasse die Maus los, um zum nächsten Ziel fortzuschreiten.",
+      "4-solve-objectives": "Löse alle restlichen Ziele. Wenn du nicht weiterweißt, kannst du das Level neustarten."
+    }
+  },
+  "share": {
+    "title": "Level teilen",
+    "copy": "Kopieren",
+    "copied": "Kopiert",
+    "link": "Über Link teilen",
+    "social-media": "Über Social Media teilen",
+    "whatsapp": "WhatsApp",
+    "email": "E-Mail",
+    "error-title": "Level kann nicht geladen werden.",
+    "error-invalid-generator-version": "Dieses Level wurde in einer älteren Version generiert und ist nicht mehr kompatibel.",
+    "error-unknown": "Das angegebene Level ist fehlerhaft. Bitte überprüfe die URL."
+  },
+  "overwrite": {
+    "title": "Aktives Spiel überschreiben?",
+    "warning": "Du hast bereits ein aktives Spiel. Wenn du fortfährst, wird es gelöscht.",
+    "button": "Überschreiben"
+  },
+  "about": {
+    "made-by": "Erstellt von seiboldto",
+    "source-code": "Quellcode auf GitHub",
+    "version": "© 2024 · {{version}} · {{date}}"
   }
 }

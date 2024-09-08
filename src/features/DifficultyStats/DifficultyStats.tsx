@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { Tooltip, Wrap } from "~src/components";
 import { type PresetDifficulty } from "~src/level-gen";
-import { useStatisticsStore } from "~src/stores";
+import { useSettingsStore, useStatisticsStore } from "~src/stores";
 
 import classes from "./DifficultyStats.module.css";
 
@@ -78,11 +78,12 @@ function StatItem({
   updateType,
 }: StatItemProps): JSX.Element {
   const { t } = useTranslation();
+  const { enableHoverAnimations } = useSettingsStore.use.settings();
 
   return (
     <p className={classes.statItem}>
       <span>
-        {explanation && (
+        {explanation && enableHoverAnimations && (
           <Tooltip label={explanation}>
             <IconHelpSquare size={20} />
           </Tooltip>

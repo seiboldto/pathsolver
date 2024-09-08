@@ -82,6 +82,7 @@
     }
   },
   "share": {
+    "title": "Share Level",
     "copy": "Copy",
     "copied": "Copied",
     "link": "Share via Link",
@@ -93,8 +94,8 @@
     "error-unknown": "The provided level appears to be malformed. Please double-check the URL."
   },
   "overwrite": {
-    "title": "Overwrite active level?",
-    "warning": "You already have an active level. By continuing, all current progress will be lost.",
+    "title": "Overwrite active game?",
+    "warning": "You already have an active game. If you continue, it will be lost.",
     "button": "Overwrite"
   },
   "about": {

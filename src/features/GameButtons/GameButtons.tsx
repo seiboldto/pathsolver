@@ -53,7 +53,7 @@ export function GameButtons(): JSX.Element {
             <IconHome />
           </Button>
         </Tooltip>
-        <Tooltip label={t("game.share-level")}>
+        <Tooltip label={t("share.title")}>
           <Button
             square
             disabled={disableMenuButton}
@@ -77,7 +77,7 @@ export function GameButtons(): JSX.Element {
         </Tooltip>
       </Group>
 
-      <Overlay visible={isShareOverlayOpen} title={t("game.share-level")}>
+      <Overlay visible={isShareOverlayOpen} title={t("share.title")}>
         <ShareLevel seed={seed} difficultyPreset={difficultyOptions.preset} />
         <Divider />
         <Button onClick={shareOverlayHandler.hide} icon={IconX}>

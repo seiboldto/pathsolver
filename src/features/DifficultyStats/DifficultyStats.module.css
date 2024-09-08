@@ -49,7 +49,7 @@
     }
 
     svg {
-      color: var(--border-color);
+      color: var(--dimmed-text-color);
     }
   }
 }
