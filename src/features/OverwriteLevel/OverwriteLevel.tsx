@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-import { Button, Title } from "~src/components";
+import { Button, Text, Title } from "~src/components";
 
 type OverwriteLevelProps = {
   onCancel: () => void;
@@ -16,7 +16,7 @@ export function OverwriteLevel({
   return (
     <>
       <Title small>{t("overwrite.title")}</Title>
-      {t("overwrite.warning")}
+      <Text>{t("overwrite.warning")}</Text>
       <Button onClick={onOverwrite}>{t("overwrite.button")}</Button>
       <Button onClick={onCancel}>{t("navigation.cancel")}</Button>
     </>

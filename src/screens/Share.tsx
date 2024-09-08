@@ -2,7 +2,7 @@ import { IconHome } from "@tabler/icons-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Button, Screen, Title } from "~src/components";
+import { Button, Screen, Text, Title } from "~src/components";
 import { OverwriteLevel } from "~src/features";
 import { useLevel, useNavigation } from "~src/hooks";
 import { VERSIONS } from "~src/lib";
@@ -74,7 +74,7 @@ export function ShareScreen({ encodedID }: ShareScreenProps) {
   return (
     <Screen>
       <Title small>{t("share.error-title")}</Title>
-      {t(`share.error-${shareError}`)}
+      <Text>{t(`share.error-${shareError}`)}</Text>
       <Button onClick={handleMenuNavigation} icon={IconHome}>
         {t("navigation.menu")}
       </Button>
