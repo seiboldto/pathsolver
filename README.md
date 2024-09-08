@@ -10,6 +10,7 @@ An open-source mathematical puzzle game where you have to compute numbers in a g
 
 If you want to contribute, feel free to fork the repository and submit a PR.
 Please create an issue first for larger contributions to propose and discuss the changes.
+Translations are always welcome.
 
 ## Local Setup
 
