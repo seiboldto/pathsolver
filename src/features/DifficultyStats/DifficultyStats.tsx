@@ -83,12 +83,12 @@ function StatItem({
   return (
     <p className={classes.statItem}>
       <span>
+        {label}
         {explanation && enableHoverAnimations && (
           <Tooltip label={explanation}>
             <IconHelpSquare size={20} />
           </Tooltip>
         )}
-        {label}
       </span>
 
       <span>
