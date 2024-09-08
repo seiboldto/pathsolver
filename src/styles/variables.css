@@ -26,6 +26,7 @@
     --background-color-dark: hsl(0, 0%, 83%);
 
     --text-color: hsl(216, 18%, 16%);
+    --dimmed-text-color: hsl(217, 13%, 39%);
     --border-color: hsl(210, 14%, 83%);
 
     --primary-color: hsl(208, 80%, 52%);
@@ -51,6 +52,7 @@
     --background-color-dark: hsl(216, 18%, 6%);
 
     --text-color: hsl(0, 0%, 93%);
+    --dimmed-text-color: hsl(231, 6%, 56%);
     --border-color: hsl(215, 18%, 31%);
 
     --primary-color: hsl(208, 80%, 42%);

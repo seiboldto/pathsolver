@@ -6,4 +6,5 @@ export const VERSIONS = {
   },
   GENERATOR: 1,
   APP_VERSION: __APP_VERSION__,
+  BUILT_AT: __BUILT_AT__,
 } as const;

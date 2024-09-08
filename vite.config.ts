@@ -14,6 +14,7 @@ export default defineConfig({
   define: {
     "import.meta.vitest": undefined,
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
+    __BUILT_AT__: Date.now(),
   },
   resolve: {
     alias: {

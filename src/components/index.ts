@@ -6,6 +6,7 @@ export { Group } from "./Group/Group";
 export { Overlay } from "./Overlay/Overlay";
 export { Screen } from "./Screen/Screen";
 export { Select } from "./Select/Select";
+export { Text } from "./Text/Text";
 export { Title } from "./Title/Title";
 export { ToggleInput } from "./ToggleInput/ToggleInput";
 export { Tooltip } from "./Tooltip/Tooltip";

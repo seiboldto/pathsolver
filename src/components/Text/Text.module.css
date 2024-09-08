@@ -1,0 +1,5 @@
+.text {
+  &[data-dimmed="true"] {
+    color: var(--dimmed-text-color);
+  }
+}

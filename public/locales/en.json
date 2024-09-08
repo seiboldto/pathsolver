@@ -96,5 +96,10 @@
     "title": "Overwrite active level?",
     "warning": "You already have an active level. By continuing, all current progress will be lost.",
     "button": "Overwrite"
+  },
+  "about": {
+    "made-by": "Made by seiboldto",
+    "source-code": "Source Code on GitHub",
+    "version": "© 2024 · {{version}} · {{date}}"
   }
 }
