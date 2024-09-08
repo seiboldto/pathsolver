@@ -45,7 +45,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -61,29 +61,29 @@
        x="1.3229171"
        y="1.3229171" />
     <g
-       id="g1511"
-       transform="matrix(0.80000001,0,0,0.80000001,1.27,1.0583333)">
+       id="g856"
+       transform="matrix(1.2232143,0,0,1.2232143,-0.12284258,-1.417411)">
       <rect
          style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:10"
          id="rect1408"
-         width="1.3229154"
-         height="3.9687488"
-         x="3.0427086"
-         y="3.3072922" />
+         width="1.0583321"
+         height="5.2916656"
+         x="3.7041671"
+         y="3.7041674" />
       <rect
          style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:10"
          id="rect1408-9"
-         width="6.6145825"
-         height="1.322916"
-         x="3.0427086"
-         y="5.9531255" />
+         width="3.1749992"
+         height="1.058333"
+         x="3.7041674"
+         y="3.7041678" />
       <rect
          style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:10"
          id="rect1408-5"
-         width="1.3229154"
-         height="3.9687488"
-         x="8.3343754"
-         y="5.9531255" />
+         width="1.0583323"
+         height="3.174999"
+         x="5.8208342"
+         y="3.7041678" />
     </g>
   </g>
 </svg>
