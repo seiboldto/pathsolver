@@ -31,6 +31,7 @@
     --primary-color: hsl(208, 80%, 52%);
     --primary-border-color: hsl(208, 77%, 47%);
     --primary-border-color-active: hsl(208, 77%, 38%);
+    --primary-shine-color: white;
     --text-on-primary-color: white;
 
     --tooltip-color: hsl(216, 18%, 16%);
@@ -55,6 +56,7 @@
     --primary-color: hsl(208, 80%, 42%);
     --primary-border-color: hsl(208, 77%, 37%);
     --primary-border-color-active: hsl(208, 77%, 28%);
+    --primary-shine-color: white;
     --text-on-primary-color: white;
 
     --tooltip-color: hsl(210, 16%, 93%);
@@ -64,7 +66,7 @@
     --overlay-text-color: white;
 
     --error-color: hsl(0, 72%, 47%);
-    --success-color: hsl(140, 74%, 52%);
+    --success-color: hsl(123, 54%, 32%);
 
     --focus-color: hsl(209, 77%, 43%);
   }

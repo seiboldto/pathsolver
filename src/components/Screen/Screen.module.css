@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: absolute;
   height: 100vh;
   width: 100%;
   padding: 0 var(--side-padding);

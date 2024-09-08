@@ -1,3 +1,4 @@
+export { Anchor } from "./Anchor/Anchor";
 export { Button } from "./Button/Button";
 export { Checkbox } from "./Checkbox/Checkbox";
 export { Divider } from "./Divider/Divider";

@@ -13,6 +13,7 @@ import { createSelectors } from "./store-utils";
 type LevelStore = {
   activeLevelState: LevelState | null;
   selection: Selection;
+  forceDisableAnimationKey: number;
   actions: {
     setActiveLevelState: (level: LevelState) => void;
     restartLevel: () => void;
@@ -24,88 +25,101 @@ type LevelStore = {
   };
 };
 
-export const levelStore = create<LevelStore>((set, get) => ({
-  activeLevelState: null,
-  selection: DEFAULT_SELECTION,
-  actions: {
-    setActiveLevelState: (activeLevelState) => {
-      set({
-        activeLevelState,
-      });
-    },
-    restartLevel: () => {
-      const { actions, activeLevelState } = get();
-      const prev = activeLevelState!;
+export const levelStore = create<LevelStore>((set, get) => {
+  const getPreviousLevelState = () => {
+    const prev = get();
 
-      actions.resetSelection();
+    // This can only happen if level store is used inappropriately outside of the level screen.
+    if (!prev.activeLevelState) throw new Error("activeLevelState is not set.");
+    return prev.activeLevelState;
+  };
 
-      const { nodes, edges } = prev.history[0];
+  return {
+    activeLevelState: null,
+    forceDisableAnimationKey: 0,
+    selection: DEFAULT_SELECTION,
+    actions: {
+      setActiveLevelState: (activeLevelState) => {
+        set({
+          activeLevelState,
+        });
+      },
+      restartLevel: () => {
+        const { actions, forceDisableAnimationKey } = get();
+        const prev = getPreviousLevelState();
 
-      set({
-        activeLevelState: {
+        actions.resetSelection();
+
+        const { nodes, edges } = prev.history[0];
+
+        set({
+          forceDisableAnimationKey: forceDisableAnimationKey + 1,
+          activeLevelState: {
+            ...prev,
+            activeObjectiveIndex: 0,
+            nodes,
+            edges,
+            history: [],
+          },
+        });
+      },
+      setInvalidNode: (node) => {
+        const { selection } = get();
+        const prev = getPreviousLevelState();
+
+        set({
           ...prev,
-          activeObjectiveIndex: 0,
-          nodes,
-          edges,
-          history: [],
-        },
-      });
+          selection: { ...selection, invalidNode: node },
+        });
+      },
+      updateGameBoard: ({ nodes, edges }) => {
+        const prev = getPreviousLevelState();
+        const history = [
+          ...prev.history,
+          structuredClone({ nodes: prev.nodes, edges: prev.edges }),
+        ];
+
+        const activeObjectiveIndex = prev.activeObjectiveIndex + 1;
+
+        set({
+          activeLevelState: {
+            ...prev,
+            activeObjectiveIndex,
+            nodes,
+            edges,
+            history,
+          },
+        });
+      },
+
+      setSelection: (selection) => set({ selection }),
+      resetSelection: () =>
+        set({
+          selection: DEFAULT_SELECTION,
+        }),
+      undoSelection: () => {
+        const { actions, forceDisableAnimationKey } = get();
+        const prev = getPreviousLevelState();
+
+        actions.resetSelection();
+        const activeObjectiveIndex = prev.activeObjectiveIndex - 1;
+
+        const { nodes, edges } = prev.history[activeObjectiveIndex];
+        const history = prev.history.slice(0, -1);
+
+        set({
+          forceDisableAnimationKey: forceDisableAnimationKey + 1,
+          activeLevelState: {
+            ...prev,
+            activeObjectiveIndex,
+            nodes,
+            edges,
+            history,
+          },
+        });
+      },
     },
-    setInvalidNode: (node) => {
-      const { activeLevelState, selection } = get();
-      set({
-        ...activeLevelState!,
-        selection: { ...selection, invalidNode: node },
-      });
-    },
-    updateGameBoard: ({ nodes, edges }) => {
-      const prev = get().activeLevelState!;
-      const history = [
-        ...prev.history,
-        structuredClone({ nodes: prev.nodes, edges: prev.edges }),
-      ];
-
-      const activeObjectiveIndex = prev.activeObjectiveIndex + 1;
-
-      set({
-        activeLevelState: {
-          ...get().activeLevelState!,
-          activeObjectiveIndex,
-          nodes,
-          edges,
-          history,
-        },
-      });
-    },
-
-    setSelection: (selection) => set({ selection }),
-    resetSelection: () =>
-      set({
-        selection: DEFAULT_SELECTION,
-      }),
-    undoSelection: () => {
-      const { actions, activeLevelState } = get();
-      const prev = activeLevelState!;
-
-      actions.resetSelection();
-      const activeObjectiveIndex = prev.activeObjectiveIndex - 1;
-
-      const { nodes, edges } = prev.history[activeObjectiveIndex];
-      const history = prev.history.slice(0, -1);
-
-      set({
-        activeLevelState: {
-          ...prev,
-          activeObjectiveIndex,
-          nodes,
-          edges,
-          history,
-        },
-      });
-    },
-  },
-}));
-
-// TODO: Find solution for !
+  };
+});
 
 export const useLevelStore = createSelectors(levelStore);

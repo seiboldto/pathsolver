@@ -31,6 +31,17 @@
     border-color: var(--error-color);
   }
 
+  &[data-expand-nodes="true"]::after {
+    --scale-factor: 1.4;
+
+    content: "";
+    position: absolute;
+    inset: calc(
+      -0.125rem - 0.5 * (var(--scale-factor) * var(--node-size) -
+            var(--node-size))
+    );
+  }
+
   &:focus-visible {
     outline: 0.125rem solid var(--focus-color);
     outline-offset: 0.125rem;

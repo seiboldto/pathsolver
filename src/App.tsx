@@ -2,8 +2,8 @@ import { Suspense, useEffect } from "react";
 import { Redirect, Route, Switch } from "wouter";
 
 import { DevMode } from "~src/features";
-import { useSettingsSideEffects } from "~src/hooks";
-import { Level, Menu, Settings, Share } from "~src/screens";
+import { useNavigation, useSettingsSideEffects } from "~src/hooks";
+import { About, Level, Menu, Settings, Share } from "~src/screens";
 
 import { useStatisticsStore } from "./stores";
 
@@ -20,23 +20,28 @@ export function App() {
     };
   }, [updateStreaksOnAppLoad, invalidateAllStreakTimeouts]);
 
+  const { ROUTES } = useNavigation();
+
   return (
     <Suspense>
       <Switch>
-        <Route path="/">
+        <Route path={ROUTES.MENU}>
           <Menu />
         </Route>
-        <Route path="/settings">
+        <Route path={ROUTES.ABOUT}>
+          <About />
+        </Route>
+        <Route path={ROUTES.SETTINGS}>
           <Settings />
         </Route>
-        <Route path="/level">
+        <Route path={ROUTES.LEVEL}>
           <Level />
         </Route>
-        <Route path="/share/:encodedID">
+        <Route path={ROUTES.SHARE}>
           {({ encodedID }) => <Share encodedID={encodedID} />}
         </Route>
         <Route>
-          <Redirect to="/" replace />
+          <Redirect to={ROUTES.MENU} replace />
         </Route>
       </Switch>
       {import.meta.env.MODE === "development" && <DevMode />}

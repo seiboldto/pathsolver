@@ -106,3 +106,21 @@ test("shows selection information", async ({ levelPage, page }) => {
   await mouse.up();
   await expect(selectedValue).toBeHidden();
 });
+
+test("increases node size on touch devices", async ({ levelPage, page }) => {
+  await page.addInitScript(() => {
+    window.ontouchstart = () => {};
+  });
+
+  await levelPage.open(NORMAL_GAME);
+
+  const { x, y, width, height } = (await page
+    .getByRole("button", { name: "Row 1 / Column 1" })
+    .boundingBox())!;
+
+  const { mouse } = page;
+  await mouse.move(x + width + 3, y + height + 3);
+  await mouse.down();
+
+  await expect(page.getByLabel("Selected Value")).toHaveText("6");
+});

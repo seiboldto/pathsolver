@@ -10,6 +10,7 @@ import { GameNode } from "./GameNode";
 
 export function GameBoard(): JSX.Element {
   const { resetSelection, updateGameBoard } = useLevelStore.use.actions();
+  const forceDisableAnimationKey = useLevelStore.use.forceDisableAnimationKey();
 
   const {
     nodes,
@@ -44,7 +45,11 @@ export function GameBoard(): JSX.Element {
   ]);
 
   return (
-    <div className={classes.board} style={cssVars({ boardSize })}>
+    <div
+      className={classes.board}
+      style={cssVars({ boardSize })}
+      key={forceDisableAnimationKey}
+    >
       {edges.map((edge) => (
         <GameEdge key={edge.id} edge={edge} />
       ))}

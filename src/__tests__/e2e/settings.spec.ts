@@ -49,6 +49,25 @@ test.describe("handles unknown user settings", () => {
   });
 });
 
+test.describe("detects mobile devices and sets default values accordingly", () => {
+  test.use({ viewport: { height: 1080, width: 700 } });
+
+  test("hides hover animations and tooltips", async ({ page }) => {
+    await page.goto("/settings");
+
+    const checkbox = page.getByRole("checkbox", { name: "Hover Animations" });
+
+    await expect(checkbox).not.toBeChecked();
+
+    await page.getByRole("button", { name: "Next" }).hover();
+    await expect(page.getByText("Next")).toBeHidden();
+
+    await checkbox.check();
+    await page.getByRole("button", { name: "Next" }).hover();
+    await expect(page.getByText("Next")).toBeVisible();
+  });
+});
+
 test("supports changing settings and persists them", async ({ page }) => {
   await page.goto("/settings");
 

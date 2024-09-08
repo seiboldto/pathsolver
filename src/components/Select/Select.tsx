@@ -22,7 +22,6 @@ export function Select<T extends string>({
   data,
   value,
   onChange,
-  i18nPrefix,
 }: SelectProps<T>): JSX.Element {
   const { t } = useTranslation();
   const id = useId("select");
@@ -48,10 +47,6 @@ export function Select<T extends string>({
   };
 
   const selected = data.find((d) => d.value === value)!;
-  const selectedLabel =
-    selected.label === undefined
-      ? t(i18nPrefix + selected.value)
-      : selected.label;
 
   return (
     <>
@@ -69,9 +64,9 @@ export function Select<T extends string>({
           role="spinbutton"
           aria-labelledby={id}
           aria-valuenow={currentIndex}
-          aria-valuetext={selectedLabel}
+          aria-valuetext={selected.label}
         >
-          {selectedLabel}
+          {selected.label}
         </div>
         <Tooltip label={t("navigation.next")}>
           <Button square onClick={handleNext} tabIndex={-1}>
