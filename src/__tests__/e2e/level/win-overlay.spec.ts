@@ -5,13 +5,13 @@ test("increments games played after win", async ({ levelPage, page }) => {
   await levelPage.open(NORMAL_GAME);
   await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);
 
-  await expect(page.getByText("Games played1")).toBeVisible();
-  await expect(page.getByText("Perfect Games0")).toBeVisible();
+  await expect(page.getByText("Games played1+1")).toBeVisible();
+  await expect(page.getByText("Perfect Games0", { exact: true })).toBeVisible();
 
   await page.reload();
   await page.waitForURL("/");
 
-  await expect(page.getByText("Games played1")).toBeVisible();
+  await expect(page.getByText("Games played1", { exact: true })).toBeVisible();
 });
 
 test("increments perfect games after win", async ({ levelPage, page }) => {
@@ -21,6 +21,6 @@ test("increments perfect games after win", async ({ levelPage, page }) => {
   await levelPage.selectNodesByCoords(NORMAL_GAME.PERFECT_SELECTION_COORDS[1]);
   await levelPage.selectNodesByCoords(NORMAL_GAME.PERFECT_SELECTION_COORDS[2]);
 
-  await expect(page.getByText("Games played1")).toBeVisible();
-  await expect(page.getByText("Perfect Games1")).toBeVisible();
+  await expect(page.getByText("Games played1+1")).toBeVisible();
+  await expect(page.getByText("Perfect Games1+1")).toBeVisible();
 });

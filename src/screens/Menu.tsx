@@ -1,6 +1,10 @@
-import { IconPlayerPlay, IconRepeat, IconSettings } from "@tabler/icons-react";
+import {
+  IconInfoSmall,
+  IconPlayerPlay,
+  IconRepeat,
+  IconSettings,
+} from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "wouter";
 
 import {
   Button,
@@ -10,15 +14,12 @@ import {
   Screen,
   Title,
   ToggleInput,
+  Tooltip,
 } from "~src/components";
 import { DifficultyStats, OverwriteLevel } from "~src/features";
-import { useBooleanState, useLevel } from "~src/hooks";
+import { useBooleanState, useLevel, useNavigation } from "~src/hooks";
 import { PRESET_DIFFICULTIES } from "~src/level-gen";
 import { useUiStore } from "~src/stores";
-
-const difficulties = PRESET_DIFFICULTIES.map((d) => ({
-  value: d,
-}));
 
 export function MenuScreen() {
   const { t } = useTranslation();
@@ -26,8 +27,7 @@ export function MenuScreen() {
   const [showOverwriteOverlay, overwriteOverlayHandler] =
     useBooleanState(false);
 
-  const [, setLocation] = useLocation();
-  const navigateToSettings = () => setLocation("/settings");
+  const { handleAboutNavigation, handleSettingsNavigation } = useNavigation();
 
   const selectedDifficulty = useUiStore.use.selectedDifficulty();
   const { selectDifficulty } = useUiStore.use.actions();
@@ -51,7 +51,12 @@ export function MenuScreen() {
     playPersistedLevel();
   };
 
-  const showResumeButton = persistedLevelDifficulty === selectedDifficulty;
+  const difficulties = PRESET_DIFFICULTIES.map((d) => ({
+    value: d,
+    label: t(`difficulty.${d}`),
+  }));
+
+  const showResumeButton = persistedLevelDifficulty !== null;
 
   return (
     <Screen>
@@ -61,24 +66,28 @@ export function MenuScreen() {
         data={difficulties}
         value={selectedDifficulty}
         onChange={(v) => selectDifficulty(v)}
-        i18nPrefix="difficulty."
       />
 
       <DifficultyStats difficulty={selectedDifficulty} />
-      <Group>
-        <Button icon={IconPlayerPlay} onClick={handlePlayClick}>
-          {t("menu.play")}
-        </Button>
-        {showResumeButton && (
-          <Button icon={IconRepeat} onClick={handleResumeClick}>
-            {t("menu.resume")}
-          </Button>
-        )}
-      </Group>
-      <Divider />
-      <Button icon={IconSettings} onClick={navigateToSettings}>
-        {t("navigation.settings")}
+      <Button icon={IconPlayerPlay} onClick={handlePlayClick}>
+        {t("menu.play")}
       </Button>
+      {showResumeButton && (
+        <Button icon={IconRepeat} onClick={handleResumeClick}>
+          {t("menu.resume")}
+        </Button>
+      )}
+      <Divider />
+      <Group>
+        <Button icon={IconSettings} onClick={handleSettingsNavigation}>
+          {t("navigation.settings")}
+        </Button>
+        <Tooltip label={t("navigation.about")}>
+          <Button square onClick={handleAboutNavigation}>
+            <IconInfoSmall size={30} />
+          </Button>
+        </Tooltip>
+      </Group>
       <Overlay visible={showOverwriteOverlay} title="">
         <OverwriteLevel
           onCancel={overwriteOverlayHandler.hide}

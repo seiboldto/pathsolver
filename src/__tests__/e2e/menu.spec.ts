@@ -4,7 +4,7 @@ test("supports selecting difficulties", async ({ page }) => {
   await page.goto("/");
 
   const play = page.getByRole("button", { name: "Play" });
-  const resume = page.getByRole("button", { name: "Resume" });
+  const resume = page.getByRole("button", { name: "Resume ongoing game" });
 
   const normalNode = page.getByRole("button", { name: "Row 3 / Column 3" });
   const extremeNode = page.getByRole("button", { name: "Row 4 / Column 4" });
@@ -31,7 +31,7 @@ test("supports selecting difficulties", async ({ page }) => {
 
   await extreme.press("ArrowRight");
   await expect(normal).toBeChecked();
-  await expect(resume).toBeHidden();
+  await expect(resume).toBeVisible();
 
   await play.click();
 

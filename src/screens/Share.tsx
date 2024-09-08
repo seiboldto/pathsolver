@@ -1,11 +1,10 @@
 import { IconHome } from "@tabler/icons-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "wouter";
 
 import { Button, Screen, Title } from "~src/components";
 import { OverwriteLevel } from "~src/features";
-import { useLevel } from "~src/hooks";
+import { useLevel, useNavigation } from "~src/hooks";
 import { VERSIONS } from "~src/lib";
 import { parseShareableID } from "~src/models";
 
@@ -28,8 +27,7 @@ export function ShareScreen({ encodedID }: ShareScreenProps) {
     playSharedLevel,
   } = useLevel();
 
-  const [, setLocation] = useLocation();
-  const handleMenuNavigation = () => setLocation("/");
+  const { handleMenuNavigation } = useNavigation();
 
   if (shareError === null) {
     const parseResult = parseShareableID({

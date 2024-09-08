@@ -14,6 +14,8 @@ import {
 import { cloneElement, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
+import { useSettingsStore } from "~src/stores";
+
 import classes from "./Tooltip.module.css";
 
 const tooltipRoot = document.querySelector("#tooltip-root")!;
@@ -44,6 +46,10 @@ export function Tooltip({ label, children }: TooltipProps): JSX.Element {
     focus,
     role,
   ]);
+
+  const { enableHoverAnimations } = useSettingsStore.use.settings();
+  if (!enableHoverAnimations)
+    return cloneElement(children, { "aria-label": label });
 
   return (
     <>

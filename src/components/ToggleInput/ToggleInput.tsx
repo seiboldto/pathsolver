@@ -1,5 +1,3 @@
-import { useTranslation } from "react-i18next";
-
 import { Group } from "~src/components";
 import { useId } from "~src/hooks";
 import type { InputProps, SelectData } from "~src/models";
@@ -21,10 +19,8 @@ export function ToggleInput<T extends string>({
   data,
   value,
   onChange,
-  i18nPrefix,
 }: ToggleInputProps<T>): JSX.Element {
   const id = useId("toggle-input");
-  const { t } = useTranslation();
 
   return (
     <>
@@ -47,9 +43,7 @@ export function ToggleInput<T extends string>({
               className={classes.toggleButton}
               data-active={item.value === value}
             >
-              {item.label === undefined
-                ? t(i18nPrefix + item.value)
-                : item.label}
+              {item.label}
             </label>
           </div>
         ))}

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { VERSIONS } from "~src/lib";
+import { isMobileDevice, VERSIONS } from "~src/lib";
 
 import { createSelectors } from "./store-utils";
 
@@ -18,25 +18,25 @@ type SettingsStore = {
 type Settings = {
   theme: "light" | "dark";
   enableHoverAnimations: boolean;
-  enableMenuTransitions: boolean;
+  increasedNodeSize: boolean;
 };
 
-const getDefaultSettings = (): Pick<Settings, "theme"> => {
-  const theme = window?.matchMedia("(prefers-color-scheme: dark)")?.matches
+const getDefaultSettings = (): Settings => {
+  const theme = window.matchMedia("(prefers-color-scheme: dark)").matches
     ? "dark"
     : "light";
 
-  return { theme };
+  return {
+    theme,
+    enableHoverAnimations: !isMobileDevice(),
+    increasedNodeSize: isMobileDevice(),
+  };
 };
 
 const settingsStore = create(
   persist<SettingsStore, [], [], Pick<SettingsStore, "settings">>(
     (set, get) => ({
-      settings: {
-        ...getDefaultSettings(),
-        enableHoverAnimations: true,
-        enableMenuTransitions: true,
-      },
+      settings: getDefaultSettings(),
       actions: {
         updateSettings: (key, value) =>
           set({ settings: { ...get().settings, [key]: value } }),

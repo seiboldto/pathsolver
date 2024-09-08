@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 
 import { useActiveLevel } from "~src/hooks";
-import { cssVars } from "~src/lib";
+import { cssVars, isTouchDevice } from "~src/lib";
 import { type Node } from "~src/models";
 import { useLevelStore } from "~src/stores";
 
@@ -10,6 +10,8 @@ import classes from "./GameNode.module.css";
 type GameNodeProps = {
   node: Node;
 };
+
+const expandNodesForTouchDevices = isTouchDevice();
 
 export function GameNode({ node }: GameNodeProps): JSX.Element | null {
   const { t } = useTranslation();
@@ -54,6 +56,7 @@ export function GameNode({ node }: GameNodeProps): JSX.Element | null {
       tabIndex={-1}
       data-node-state={nodeState}
       aria-label={t("game.node-label", { row, column })}
+      data-expand-nodes={expandNodesForTouchDevices}
     >
       {value}
     </button>

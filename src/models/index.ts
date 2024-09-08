@@ -1,6 +1,7 @@
 export {
   type DifficultyStatistics,
   INITIAL_DIFFICULTY_STATISTICS,
+  type UpdatedStatistics,
 } from "./difficulty-statistics";
 export type { InputProps, SelectData } from "./input";
 export {

@@ -1,9 +1,8 @@
 import { IconCalendar, IconCode } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "wouter";
 
 import { Button, Tooltip } from "~src/components";
-import { useBooleanState } from "~src/hooks";
+import { useBooleanState, useNavigation } from "~src/hooks";
 import { useUiStore } from "~src/stores";
 
 import classes from "./DevMode.module.css";
@@ -12,14 +11,14 @@ import { StreakInfo } from "./StreakInfo";
 
 export function DevMode() {
   const { t } = useTranslation();
-  const [location] = useLocation();
+  const { isLocation } = useNavigation();
 
   const isDeveloperMode = useUiStore.use.isDeveloperMode();
   const { toggleDeveloperMode } = useUiStore.use.actions();
 
   const [isStreakInfoVisible, streakInfoHandler] = useBooleanState(false);
 
-  const showLevelCheats = location === "/level";
+  const showLevelCheats = isLocation("LEVEL");
 
   return (
     <>

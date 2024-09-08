@@ -1,15 +1,14 @@
-import { IconShare } from "@tabler/icons-react";
+import { IconBrandWhatsapp, IconMail, IconShare } from "@tabler/icons-react";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Button, Group } from "~src/components";
-import { useId } from "~src/hooks";
+import { Anchor, Button, Group } from "~src/components";
+import { useId, useNavigation } from "~src/hooks";
 import { PresetDifficulty } from "~src/level-gen";
 import { VERSIONS } from "~src/lib";
 import { createShareableID } from "~src/models";
 
 import classes from "./ShareLevel.module.css";
-import { SocialButton } from "./SocialButton";
 
 type ShareLevelProps = {
   seed: number;
@@ -18,8 +17,11 @@ type ShareLevelProps = {
 
 const generatorVersion = VERSIONS.GENERATOR;
 
-const createShareLink = (shareableID: string) =>
-  window.location.origin + "/share/" + shareableID;
+const SOCIAL_LINKS = {
+  email: (shareLink: string) => "mailto:?body=" + encodeURIComponent(shareLink),
+  whatsapp: (shareLink: string) =>
+    "https://wa.me/?text=" + encodeURIComponent(shareLink),
+};
 
 export function ShareLevel({
   seed,
@@ -28,12 +30,14 @@ export function ShareLevel({
   const { t } = useTranslation();
   const id = useId("share-link");
 
-  const shareableID = useMemo(
+  const { createLink } = useNavigation();
+
+  const encodedID = useMemo(
     () => createShareableID({ seed, difficultyPreset, generatorVersion }),
     [seed, difficultyPreset]
   );
 
-  const shareLink = createShareLink(shareableID);
+  const shareLink = createLink("SHARE", { encodedID });
 
   const [hasCopied, setHasCopied] = useState(false);
 
@@ -68,8 +72,15 @@ export function ShareLevel({
         </Button>
       ) : (
         <Group>
-          <SocialButton shareLink={shareLink} type="whatsapp" />
-          <SocialButton shareLink={shareLink} type="email" />
+          <Anchor
+            href={SOCIAL_LINKS.whatsapp(shareLink)}
+            icon={IconBrandWhatsapp}
+          >
+            {t("share.whatsapp")}
+          </Anchor>
+          <Anchor href={SOCIAL_LINKS.email(shareLink)} icon={IconMail}>
+            {t("share.email")}
+          </Anchor>
         </Group>
       )}
     </div>

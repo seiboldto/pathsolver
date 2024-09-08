@@ -7,12 +7,13 @@
     "close": "Close",
     "cancel": "Cancel",
     "menu": "Menu",
-    "settings": "Settings"
+    "settings": "Settings",
+    "about": "About"
   },
   "menu": {
     "choose-difficulty": "Choose Difficulty",
     "play": "Play",
-    "resume": "Resume"
+    "resume": "Resume ongoing game"
   },
   "difficulty": {
     "normal": "Normal",
@@ -29,7 +30,12 @@
     "games-played": "Games played",
     "current-streak": "Current Streak",
     "max-streak": "Max Streak",
-    "perfect-games": "Perfect Games"
+    "perfect-games": "Perfect Games",
+    "perfect-game-explanation": "In a perfect game, there are still unused numbers at the end.",
+    "update": {
+      "plus-one": "+1",
+      "new-best": "New Best"
+    }
   },
   "dev-mode": {
     "title": "Developer Mode",
@@ -42,8 +48,7 @@
     "theme": "Theme",
     "theme-light": "Light",
     "theme-dark": "Dark",
-    "hover-animations": "Hover Animations",
-    "menu-transitions": "Menu Transitions"
+    "hover-animations": "Hover Animations"
   },
   "game": {
     "share-level": "Share Level",

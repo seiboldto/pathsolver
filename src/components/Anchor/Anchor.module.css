@@ -1,12 +1,16 @@
-.socialButton {
+@import "../../styles/mixins.css";
+
+.anchor {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
   color: unset;
   text-decoration: none;
 
-  &:hover {
-    text-decoration: underline;
+  @mixin hoverAnimations {
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &:focus-visible {

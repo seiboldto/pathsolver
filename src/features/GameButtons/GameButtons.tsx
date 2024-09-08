@@ -6,18 +6,21 @@ import {
   IconX,
 } from "@tabler/icons-react";
 import { t } from "i18next";
-import { useLocation } from "wouter";
 
 import { Button, Divider, Group, Overlay, Tooltip } from "~src/components";
 import { ShareLevel } from "~src/features";
-import { useActiveLevel, useBooleanState, useLevel } from "~src/hooks";
+import {
+  useActiveLevel,
+  useBooleanState,
+  useLevel,
+  useNavigation,
+} from "~src/hooks";
 import { useLevelStore } from "~src/stores";
 
 import classes from "./GameButtons.module.css";
 
 export function GameButtons(): JSX.Element {
-  const [, setLocation] = useLocation();
-  const handleMenuNavigation = () => setLocation("/");
+  const { handleMenuNavigation } = useNavigation();
 
   const { updatePersistedLevel } = useLevel();
   const { restartLevel, undoSelection } = useLevelStore.use.actions();

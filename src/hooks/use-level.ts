@@ -1,5 +1,4 @@
 import { useCallback } from "react";
-import { useLocation } from "wouter";
 
 import {
   Difficulty,
@@ -10,10 +9,12 @@ import {
 import { LevelState, transformLevel } from "~src/models";
 import { levelStore, useLevelStore, usePersistedLevelStore } from "~src/stores";
 
-export const useLevel = () => {
-  const [, setLocation] = useLocation();
+import { useNavigation } from "./use-navigation";
 
+export const useLevel = () => {
   const { setActiveLevelState } = useLevelStore.use.actions();
+
+  const { handleLevelNavigation } = useNavigation();
 
   const persistedLevel = usePersistedLevelStore.use.persistedLevel();
   const { setPersistedLevel } = usePersistedLevelStore.use.actions();
@@ -33,7 +34,7 @@ export const useLevel = () => {
   const playLevel = (level: LevelState) => {
     setActiveLevelState(level);
     updatePersistedLevel();
-    setLocation("/level");
+    handleLevelNavigation();
   };
 
   const playPersistedLevel = () => {

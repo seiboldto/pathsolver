@@ -7,12 +7,14 @@ import { VERSIONS } from "~src/lib";
 import {
   type DifficultyStatistics,
   INITIAL_DIFFICULTY_STATISTICS,
+  type UpdatedStatistics,
 } from "~src/models";
 
 import { createSelectors } from "./store-utils";
 
 type StatisticsStore = {
   stats: Record<PresetDifficulty, DifficultyStatistics>;
+  updatedStats: UpdatedStatistics | null;
   streakTimeouts: Map<PresetDifficulty, NodeJS.Timeout>;
   actions: {
     updateStreaksOnAppLoad: () => void;
@@ -31,6 +33,7 @@ const statisticsStore = create(
         hard: INITIAL_DIFFICULTY_STATISTICS,
         extreme: INITIAL_DIFFICULTY_STATISTICS,
       },
+      updatedStats: null,
       streakTimeouts: new Map(),
       actions: {
         updateStreaksOnAppLoad: () => {
@@ -62,19 +65,28 @@ const statisticsStore = create(
         },
 
         updateStats: (difficulty, isPerfectGame) => {
-          const { stats, actions } = get();
+          const prev = get();
+          const { actions } = prev;
+          const stats = prev.stats[difficulty];
 
           const timestamp = Date.now();
           const updatedStats = statsHelpers.updateStats({
-            stats: stats[difficulty],
+            stats,
             timestamp,
             isPerfectGame,
           });
 
           set({
             stats: {
-              ...stats,
+              ...prev.stats,
               [difficulty]: updatedStats,
+            },
+            updatedStats: {
+              difficulty,
+              gamesPlayed: true,
+              perfectGames: isPerfectGame,
+              currentStreak: stats.currentStreak !== updatedStats.currentStreak,
+              maxStreak: stats.maxStreak !== updatedStats.maxStreak,
             },
           });
 
@@ -83,13 +95,17 @@ const statisticsStore = create(
         },
 
         resetStreak: (difficulty) => {
-          const { stats } = get();
+          const { stats, updatedStats } = get();
+
+          const newUpdatedStats =
+            difficulty === updatedStats?.difficulty ? null : updatedStats;
 
           set({
             stats: {
               ...stats,
               [difficulty]: { ...stats[difficulty], currentStreak: 0 },
             },
+            updatedStats: newUpdatedStats,
           });
         },
 
