@@ -12,16 +12,19 @@ import {
 import { useLevel, useNavigation } from "~src/hooks";
 import { useLevelStore } from "~src/stores";
 
-export function LevelScreen(): JSX.Element {
+export function LevelScreen(): JSX.Element | null {
   const activeLevelState = useLevelStore.use.activeLevelState();
-  const { playPersistedLevel } = useLevel();
+  const { persistedLevelSeed, playPersistedLevel } = useLevel();
 
   const { ROUTES } = useNavigation();
 
   if (activeLevelState === null) {
-    playPersistedLevel();
-
-    return <Redirect to={ROUTES.MENU} replace />;
+    if (persistedLevelSeed) {
+      playPersistedLevel();
+      return null;
+    } else {
+      return <Redirect to={ROUTES.MENU} replace />;
+    }
   }
 
   return (
