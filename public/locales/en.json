@@ -31,7 +31,6 @@
     "current-streak": "Current Streak",
     "max-streak": "Max Streak",
     "perfect-games": "Perfect Games",
-    "perfect-game-explanation": "In a perfect game, there are still unused numbers at the end.",
     "update": {
       "plus-one": "+1",
       "new-best": "New Best"
@@ -78,7 +77,8 @@
       "1-extend-path": "Move to an adjacent number to add it to the path.",
       "2-find-objective": "Find a path that computes to {{value}}. There may be multiple solutions.",
       "3-release-path": "Release your mouse to advance to the next objective.",
-      "4-solve-objectives": "Solve all remaining objectives. If you're stuck, you can always restart the level."
+      "4-solve-objectives": "Solve all remaining objectives. If you're stuck, you can always restart the level.",
+      "5-perfect-game": "Try to get a perfect game by having numbers left over at the end. This may not always be possible."
     }
   },
   "share": {

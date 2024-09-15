@@ -111,7 +111,7 @@ export const useActiveLevel = () => {
   });
 
   const tutorialState = levelState.getTutorialState({
-    hasCompletedFirstObjective: activeObjectiveIndex > 0,
+    activeObjectiveIndex,
     objectives,
     selectionLength: selectionState.length,
     selectionValue: selection.value,

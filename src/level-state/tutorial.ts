@@ -1,10 +1,10 @@
 import type { Objective } from "~src/models";
 
 type GetTutorialState = {
+  activeObjectiveIndex: number;
   selectionLength: number;
   selectionValue: number | null;
   objectives: Objective[];
-  hasCompletedFirstObjective: boolean;
 };
 
 type TutorialState = {
@@ -28,15 +28,17 @@ const steps: Step[] = [
   },
   { id: "3-release-path" },
   { id: "4-solve-objectives" },
+  { id: "5-perfect-game" },
 ];
 
 const getTutorialStepIndex = ({
+  activeObjectiveIndex,
   objectives,
   selectionLength,
   selectionValue,
-  hasCompletedFirstObjective,
 }: GetTutorialState): number => {
-  if (hasCompletedFirstObjective) return 4;
+  if (activeObjectiveIndex > 1) return 5;
+  if (activeObjectiveIndex === 1) return 4;
   if (objectives[0].value === selectionValue && selectionLength > 1) return 3;
   if (selectionLength > 1) return 2;
   if (selectionLength === 1) return 1;

@@ -48,7 +48,7 @@ test("shows tutorial in the first game", async ({ levelPage, page }) => {
 
   await levelPage.selectNodesByCoords(NORMAL_GAME.PERFECT_SELECTION_COORDS[1]);
   await expect(status).toHaveText(
-    "Solve all remaining objectives. If you're stuck, you can always restart the level."
+    "Try to get a perfect game by having numbers left over at the end. This may not always be possible."
   );
 
   await levelPage.selectNodesByCoords(NORMAL_GAME.PERFECT_SELECTION_COORDS[2]);

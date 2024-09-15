@@ -1,9 +1,9 @@
-import { IconFlame, IconHelpSquare } from "@tabler/icons-react";
+import { IconFlame } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
 
 import { Tooltip, Wrap } from "~src/components";
 import { type PresetDifficulty } from "~src/level-gen";
-import { useSettingsStore, useStatisticsStore } from "~src/stores";
+import { useStatisticsStore } from "~src/stores";
 
 import classes from "./DifficultyStats.module.css";
 
@@ -52,7 +52,6 @@ export function DifficultyStats({
       </StatItem>
       <StatItem
         label={t("stats.perfect-games")}
-        explanation={t("stats.perfect-game-explanation")}
         updateType="plus-one"
         showUpdate={showUpdate && updatedStats.perfectGames}
       >
@@ -65,7 +64,6 @@ export function DifficultyStats({
 type StatItemProps = {
   label: string;
   children: React.ReactNode;
-  explanation?: string;
   showUpdate: boolean;
   updateType: "new-best" | "plus-one";
 };
@@ -73,23 +71,14 @@ type StatItemProps = {
 function StatItem({
   label,
   children,
-  explanation,
   showUpdate,
   updateType,
 }: StatItemProps): JSX.Element {
   const { t } = useTranslation();
-  const { enableHoverAnimations } = useSettingsStore.use.settings();
 
   return (
     <p className={classes.statItem}>
-      <span>
-        {label}
-        {explanation && enableHoverAnimations && (
-          <Tooltip label={explanation}>
-            <IconHelpSquare size={20} />
-          </Tooltip>
-        )}
-      </span>
+      {label}
 
       <span>
         {children}

@@ -31,7 +31,6 @@
     "current-streak": "Aktuelle Siegesfolge",
     "max-streak": "Länge Siegesfolge",
     "perfect-games": "Perfekte Spiele",
-    "perfect-game-explanation": "In einem perfekten Spiel sind am Ende noch Zahlen übrig.",
     "update": {
       "plus-one": "+1",
       "new-best": "Neuer Rekord"
@@ -74,7 +73,8 @@
       "1-extend-path": "Gehe zu einer angrenzenden Nummer, um sie dem Pfad hinzuzufügen.",
       "2-find-objective": "Finde einen Pfad, der {{value}} ergibt. Möglicherweise gibt es mehrere Lösungen.",
       "3-release-path": "Lasse die Maus los, um zum nächsten Ziel fortzuschreiten.",
-      "4-solve-objectives": "Löse alle restlichen Ziele. Wenn du nicht weiterweißt, kannst du das Level neustarten."
+      "4-solve-objectives": "Löse alle restlichen Ziele. Wenn du nicht weiterweißt, kannst du das Level neustarten.",
+      "5-perfect-game": "Versuche, ein perfektes Spiel zu erreichen, indem am Ende noch Zahlen übrig sind. Dies ist nicht immer möglich."
     }
   },
   "share": {
