@@ -3,14 +3,14 @@
   align-items: center;
   justify-content: space-between;
 
-  &[data-hidden="true"] {
-    visibility: hidden;
-  }
-
   .value {
     transform: scale(1.5);
     animation: value var(--anim-duration) var(--anim-easing) forwards;
     user-select: none;
+
+    &[data-hidden="true"] {
+      visibility: hidden;
+    }
 
     @keyframes value {
       0% {
@@ -31,14 +31,18 @@
     .dot {
       width: 0.5rem;
       height: 0.5rem;
-      background-color: var(--primary-color);
+      background-color: var(--border-color);
       border-radius: 50%;
+
+      &[data-active="true"] {
+        background-color: var(--primary-color);
+      }
     }
 
     &[data-invalid="true"] {
       animation: shake var(--anim-duration) var(--anim-easing);
 
-      .dot {
+      .dot[data-active="true"] {
         background-color: var(--error-color);
       }
     }

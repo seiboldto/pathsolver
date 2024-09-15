@@ -88,13 +88,13 @@ test("shows selection information", async ({ levelPage, page }) => {
   const fourthNode = page.getByRole("button", { name: "Row 2 / Column 1" });
 
   const selectedValue = page.getByLabel("Selected Value");
-  await expect(selectedValue).toBeHidden();
+  await expect(selectedValue).toHaveText("0");
 
   await firstNode.hover();
   await mouse.down();
   await expect(selectedValue).toHaveText("6");
   await mouse.up();
-  await expect(selectedValue).toBeHidden();
+  await expect(selectedValue).toHaveText("0");
 
   await firstNode.hover();
   await mouse.down();
@@ -104,7 +104,7 @@ test("shows selection information", async ({ levelPage, page }) => {
   await fourthNode.hover();
   await expect(selectedValue).toHaveText("10");
   await mouse.up();
-  await expect(selectedValue).toBeHidden();
+  await expect(selectedValue).toHaveText("0");
 });
 
 test("increases node size on touch devices", async ({ levelPage, page }) => {

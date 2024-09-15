@@ -5,17 +5,11 @@ import { useActiveLevel } from "~src/hooks";
 import classes from "./SelectedInfo.module.css";
 
 export function SelectedInfo(): JSX.Element {
-  const { selectionState, gameState } = useActiveLevel();
+  const { selectionState, difficultyOptions } = useActiveLevel();
   const { t } = useTranslation();
 
-  const hidden = selectionState.value === null || gameState.hasWon;
-
   return (
-    <div
-      className={classes.selectedInfo}
-      data-hidden={hidden}
-      aria-hidden={hidden}
-    >
+    <div className={classes.selectedInfo}>
       <span
         key={selectionState.value}
         className={classes.value}
@@ -29,8 +23,12 @@ export function SelectedInfo(): JSX.Element {
         data-invalid={selectionState.isInvalid}
         className={classes.dots}
       >
-        {Array.from({ length: selectionState.length }).map((_, i) => (
-          <div key={i} className={classes.dot} />
+        {Array.from({ length: difficultyOptions.maxPathLength }).map((_, i) => (
+          <div
+            key={i}
+            className={classes.dot}
+            data-active={i < selectionState.length}
+          />
         ))}
       </div>
     </div>
