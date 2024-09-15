@@ -5,6 +5,7 @@ An open-source mathematical puzzle game where you have to compute numbers in a g
 ## Links
 
 - [pathsolver](https://pathsolver.io)
+- [Changelog](./CHANGELOG.md)
 
 ## Contributing
 
