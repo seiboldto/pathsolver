@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { isMobileDevice, VERSIONS } from "~src/lib";
+import { isDarkThemeDevice, isTouchDevice, VERSIONS } from "~src/lib";
 
 import { createSelectors } from "./store-utils";
 
@@ -22,14 +22,13 @@ type Settings = {
 };
 
 const getDefaultSettings = (): Settings => {
-  const theme = window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+  const theme = isDarkThemeDevice() ? "dark" : "light";
+  const touchDevice = isTouchDevice();
 
   return {
     theme,
-    enableHoverAnimations: !isMobileDevice(),
-    increasedNodeSize: isMobileDevice(),
+    enableHoverAnimations: !touchDevice,
+    increasedNodeSize: touchDevice,
   };
 };
 

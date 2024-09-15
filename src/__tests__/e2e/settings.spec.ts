@@ -49,8 +49,8 @@ test.describe("handles unknown user settings", () => {
   });
 });
 
-test.describe("detects mobile devices and sets default values accordingly", () => {
-  test.use({ viewport: { height: 1080, width: 700 } });
+test.describe("detects touch devices and sets default values accordingly", () => {
+  test.use({ hasTouch: true });
 
   test("hides hover animations and tooltips", async ({ page }) => {
     await page.goto("/settings");
