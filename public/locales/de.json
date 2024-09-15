@@ -70,7 +70,7 @@
       "division": "Division"
     },
     "tutorial": {
-      "0-start-path": "Klicke auf eine Nummer im Gitter, um einen Pfad zu starten.",
+      "0-start-path": "Klicke und halte eine Nummer im Gitter, um einen Pfad zu starten.",
       "1-extend-path": "Gehe zu einer angrenzenden Nummer, um sie dem Pfad hinzuzufügen.",
       "2-find-objective": "Finde einen Pfad, der {{value}} ergibt. Möglicherweise gibt es mehrere Lösungen.",
       "3-release-path": "Lasse die Maus los, um zum nächsten Ziel fortzuschreiten.",

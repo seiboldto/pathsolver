@@ -26,7 +26,7 @@ const getTutorialStepIndex = ({
   hasCompletedFirstObjective,
 }: TutorialStepArgs): number => {
   if (hasCompletedFirstObjective) return 4;
-  if (objectives[0].value === selectionValue) return 3;
+  if (objectives[0].value === selectionValue && selectionLength > 1) return 3;
   if (selectionLength > 1) return 2;
   if (selectionLength === 1) return 1;
   return 0;
