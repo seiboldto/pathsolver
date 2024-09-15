@@ -54,6 +54,8 @@
     "restart": "Restart",
     "undo": "Undo",
     "selected-value": "Selected Value",
+    "selected-path-length": "{{length}} of up to {{max}} numbers selected",
+    "selected-path-error": "Invalid Selection",
     "objectives": {
       "title": "Objectives",
       "pending": "Pending Objective",

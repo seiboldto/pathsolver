@@ -53,6 +53,8 @@
     "restart": "Neu starten",
     "undo": "Rückgängig machen",
     "selected-value": "Ausgewählter Wert",
+    "selected-path-length": "{{length}} von maximal {{max}} Nummern ausgewählt",
+    "selected-path-error": "Ungültige Auswahl",
     "objectives": {
       "title": "Ziele",
       "pending": "Ausstehendes Ziel",

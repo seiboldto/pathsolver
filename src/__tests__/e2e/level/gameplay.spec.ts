@@ -88,23 +88,38 @@ test("shows selection information", async ({ levelPage, page }) => {
   const fourthNode = page.getByRole("button", { name: "Row 2 / Column 1" });
 
   const selectedValue = page.getByLabel("Selected Value");
+  const invalidSelection = page.getByLabel("Invalid Selection");
+
   await expect(selectedValue).toHaveText("0");
+  await expect(invalidSelection).toBeHidden();
+  await expect(page.getByLabel("0 of up to 4 numbers selected")).toBeVisible();
 
   await firstNode.hover();
   await mouse.down();
   await expect(selectedValue).toHaveText("6");
+  await expect(invalidSelection).toBeHidden();
+  await expect(page.getByLabel("1 of up to 4 numbers selected")).toBeVisible();
+
   await mouse.up();
   await expect(selectedValue).toHaveText("0");
+  await expect(invalidSelection).toBeHidden();
+  await expect(page.getByLabel("0 of up to 4 numbers selected")).toBeVisible();
 
   await firstNode.hover();
   await mouse.down();
   await secondNode.hover();
   await expect(selectedValue).toHaveText("10");
+  await expect(invalidSelection).toBeHidden();
+  await expect(page.getByLabel("2 of up to 4 numbers selected")).toBeVisible();
 
   await fourthNode.hover();
   await expect(selectedValue).toHaveText("10");
+  await expect(invalidSelection).toBeVisible();
+
   await mouse.up();
   await expect(selectedValue).toHaveText("0");
+  await expect(invalidSelection).toBeHidden();
+  await expect(page.getByLabel("0 of up to 4 numbers selected")).toBeVisible();
 });
 
 test.describe("supports touch devices", () => {
