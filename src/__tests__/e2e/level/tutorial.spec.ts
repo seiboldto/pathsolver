@@ -13,7 +13,7 @@ test("shows tutorial in the first game", async ({ levelPage, page }) => {
   const sixthNode = page.getByRole("button", { name: "Row 2 / Column 3" });
 
   await expect(status).toHaveText(
-    "Click on a number in the grid to start a path."
+    "Click and hold a number in the grid to start a path."
   );
 
   await sixthNode.hover();
@@ -34,7 +34,7 @@ test("shows tutorial in the first game", async ({ levelPage, page }) => {
 
   await mouse.up();
   await expect(status).toHaveText(
-    "Click on a number in the grid to start a path."
+    "Click and hold a number in the grid to start a path."
   );
 
   await sixthNode.hover();

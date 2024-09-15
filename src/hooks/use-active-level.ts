@@ -110,6 +110,13 @@ export const useActiveLevel = () => {
     selection,
   });
 
+  const tutorialState = levelState.getTutorialState({
+    hasCompletedFirstObjective: activeObjectiveIndex > 0,
+    objectives,
+    selectionLength: selectionState.length,
+    selectionValue: selection.value,
+  });
+
   return {
     seed,
     difficultyOptions,
@@ -120,6 +127,7 @@ export const useActiveLevel = () => {
     selectionState,
     objectivesState,
     gameState,
+    tutorialState,
 
     canNodeBeSelected,
     applySelectedNode,

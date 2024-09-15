@@ -14,6 +14,7 @@ import {
   getSelectionState,
 } from "./selection";
 import { getStreakState, updateStats } from "./stats";
+import { getTutorialState } from "./tutorial";
 export { STREAK_TIME_IN_MILLISECONDS } from "./stats";
 
 export function createLevelFunc<
@@ -33,6 +34,7 @@ export const levelState = {
   getEdgeState,
   getNodeState,
   getSelectionState,
+  getTutorialState,
 };
 
 export const levelHelpers = {
