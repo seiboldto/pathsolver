@@ -101,6 +101,6 @@
   "about": {
     "made-by": "Made by seiboldto",
     "source-code": "Source Code on GitHub",
-    "version": "© 2024 · {{version}} · {{date}}"
+    "version": "© 2024 · v{{version}} · {{date}}"
   }
 }
