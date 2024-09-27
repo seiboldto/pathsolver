@@ -5,7 +5,7 @@
   position: absolute;
   width: var(--ui-width);
   left: var(--side-padding);
-  bottom: var(--spacing-xl);
+  top: var(--spacing-xl);
   user-select: none;
 
   .icon {
