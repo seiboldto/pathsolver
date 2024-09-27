@@ -15,3 +15,9 @@
 - Added maximum path length display to make invalid selections clearer
 - Moved explanation of perfect games in the tutorial instead of the difficulty statistics
 - Fixed a tutorial text being shown too early
+
+## v1.0.3 - 2024-09-27
+
+- Moved the tutorial text to the top of the screen to prevent overlapping the number grid on small devices
+- Improved touch device detection on initial load
+- Added accessible labels to the selection length display
