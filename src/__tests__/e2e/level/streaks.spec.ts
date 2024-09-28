@@ -23,8 +23,8 @@ test("increments and resets streaks with inbetween reloads", async ({
     page.getByText("Current Streak1", { exact: true })
   ).toBeVisible();
 
-  // Forward to 06:00:00 on 2020-01-02
-  await page.clock.fastForward("12:00:00");
+  // Forward to 01:00:00 on 2020-01-02
+  await page.clock.fastForward("07:00:00");
   await page.reload();
 
   // Solving a game on a new day updates the streak
@@ -33,7 +33,7 @@ test("increments and resets streaks with inbetween reloads", async ({
   await expect(page.getByText("Current Streak2+1")).toBeVisible();
 
   // Forward to 23:00:00 on 2020-01-3
-  await page.clock.fastForward("41:00:00");
+  await page.clock.fastForward("46:00:00");
   await page.reload();
 
   await expect(
@@ -70,8 +70,8 @@ test("increments and resets streaks without inbetween reloads", async ({
     page.getByText("Current Streak1", { exact: true })
   ).toBeVisible();
 
-  // Forward to 06:00:00 on 2020-01-02
-  await page.clock.fastForward("12:00:00");
+  // Forward to 01:00:00 on 2020-01-02
+  await page.clock.fastForward("07:00:00");
 
   // Solving a game on a new day updates the streak
   await levelPage.open(NORMAL_GAME);
@@ -79,7 +79,7 @@ test("increments and resets streaks without inbetween reloads", async ({
   await expect(page.getByText("Current Streak2+1")).toBeVisible();
 
   // Forward to 23:00:00 on 2020-01-3
-  await page.clock.fastForward("41:00:00");
+  await page.clock.fastForward("46:00:00");
 
   await expect(page.getByText("Current Streak2+1")).toBeVisible();
 
