@@ -15,7 +15,6 @@ import {
 } from "./selection";
 import { getStreakState, updateStats } from "./stats";
 import { getTutorialState } from "./tutorial";
-export { STREAK_TIME_IN_MILLISECONDS } from "./stats";
 
 export function createLevelFunc<
   F extends (params: Parameters<F>[0]) => ReturnType<F>,

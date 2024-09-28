@@ -13,6 +13,7 @@ export default defineConfig({
     trace: "on-first-retry",
     locale: "en-GB",
     colorScheme: "light",
+    timezoneId: "Europe/Berlin",
   },
 
   projects: [

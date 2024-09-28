@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 import { PRESET_DIFFICULTIES, type PresetDifficulty } from "~src/level-gen";
-import { statsHelpers, STREAK_TIME_IN_MILLISECONDS } from "~src/level-state";
+import { statsHelpers } from "~src/level-state";
 import { VERSIONS } from "~src/lib";
 import {
   type DifficultyStatistics,
@@ -18,7 +18,10 @@ type StatisticsStore = {
   streakTimeouts: Map<PresetDifficulty, NodeJS.Timeout>;
   actions: {
     updateStreaksOnAppLoad: () => void;
-    invalidateStreakTimeout: (difficulty: PresetDifficulty) => void;
+    invalidateStreakTimeout: (
+      difficulty: PresetDifficulty,
+      expiresIn: number
+    ) => void;
     invalidateAllStreakTimeouts: () => void;
     updateStats: (difficulty: PresetDifficulty, isPerfectGame: boolean) => void;
     resetStreak: (difficulty: PresetDifficulty) => void;
@@ -90,8 +93,20 @@ const statisticsStore = create(
             },
           });
 
-          if (updatedStats.lastPlayedTimestamp === timestamp)
-            actions.invalidateStreakTimeout(difficulty);
+          if (updatedStats.lastPlayedTimestamp === timestamp) {
+            const streakState = statsHelpers.getStreakState({
+              lastPlayedTimestamp: updatedStats.lastPlayedTimestamp,
+              timestamp,
+              currentStreak: updatedStats.currentStreak,
+            });
+
+            if ("expiresInMs" in streakState) {
+              actions.invalidateStreakTimeout(
+                difficulty,
+                streakState.expiresInMs
+              );
+            }
+          }
         },
 
         resetStreak: (difficulty) => {
@@ -109,7 +124,7 @@ const statisticsStore = create(
           });
         },
 
-        invalidateStreakTimeout: (difficulty) => {
+        invalidateStreakTimeout: (difficulty, expiresIn) => {
           const { streakTimeouts, actions } = get();
           const timeout = streakTimeouts.get(difficulty);
           if (timeout) clearInterval(timeout);
@@ -117,7 +132,7 @@ const statisticsStore = create(
           const newTimeout = setTimeout(() => {
             streakTimeouts.delete(difficulty);
             actions.resetStreak(difficulty);
-          }, STREAK_TIME_IN_MILLISECONDS);
+          }, expiresIn);
           streakTimeouts.set(difficulty, newTimeout);
         },
 

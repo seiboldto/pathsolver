@@ -21,65 +21,64 @@ describe("get streak state", () => {
     ).toEqual({ type: "idle" });
   });
 
-  it("has advanced if game happened just now", () => {
+  it("is advanced if game happened just now", () => {
+    const lastPlayedTimestamp = new Date("2020-01-01T12:00:00.000").valueOf();
+    const timestamp = lastPlayedTimestamp;
+
     expect(
       getStreakState({
-        timestamp: 0,
-        lastPlayedTimestamp: 0,
+        timestamp,
+        lastPlayedTimestamp,
         currentStreak: 1,
       })
     ).toEqual({
       type: "advanced",
-      expiresInMs: DAY_IN_MILLISECONDS * 2,
+      expiresInMs: DAY_IN_MILLISECONDS / 2 + DAY_IN_MILLISECONDS,
     });
   });
 
-  it("has advanced if last game was less than 24h ago", () => {
+  it("is advanced if game happened today", () => {
+    const lastPlayedTimestamp = new Date("2020-01-01T12:00:00.000").valueOf();
+    const timestamp = new Date("2020-01-01T18:00:00.000").valueOf();
+
     expect(
-      getStreakState({
-        timestamp: DAY_IN_MILLISECONDS - 1,
-        lastPlayedTimestamp: 0,
-        currentStreak: 1,
-      })
+      getStreakState({ timestamp, lastPlayedTimestamp, currentStreak: 1 })
     ).toEqual({
       type: "advanced",
-      expiresInMs: DAY_IN_MILLISECONDS + 1,
+      expiresInMs: DAY_IN_MILLISECONDS / 4 + DAY_IN_MILLISECONDS,
     });
   });
 
-  it("is active if last game was exactly 24h ago", () => {
+  it("is advanced if last game happened exactly at midnight today", () => {
+    const lastPlayedTimestamp = new Date("2020-01-01T00:00:00.000").valueOf();
+    const timestamp = new Date("2020-01-01T00:00:05.000").valueOf();
+
     expect(
-      getStreakState({
-        timestamp: DAY_IN_MILLISECONDS,
-        lastPlayedTimestamp: 0,
-        currentStreak: 1,
-      })
+      getStreakState({ timestamp, lastPlayedTimestamp, currentStreak: 1 })
+    ).toEqual({
+      type: "advanced",
+      expiresInMs: 2 * DAY_IN_MILLISECONDS - 5000,
+    });
+  });
+
+  it("is active if last game happened yesterday", () => {
+    const lastPlayedTimestamp = new Date("2020-01-01T12:00:00.000").valueOf();
+    const timestamp = new Date("2020-01-02T06:00:00.000").valueOf();
+
+    expect(
+      getStreakState({ timestamp, lastPlayedTimestamp, currentStreak: 1 })
     ).toEqual({
       type: "active",
-      expiresInMs: DAY_IN_MILLISECONDS,
+      expiresInMs: (3 * DAY_IN_MILLISECONDS) / 4,
     });
   });
 
-  it("is active if last game was between 24h and 48h ago", () => {
-    expect(
-      getStreakState({
-        timestamp: 2 * DAY_IN_MILLISECONDS - 1,
-        lastPlayedTimestamp: 0,
-        currentStreak: 1,
-      })
-    ).toEqual({
-      type: "active",
-      expiresInMs: 1,
-    });
-  });
+  it("expires immediately if last game happened the day before yesterday", () => {
+    const lastPlayedTimestamp = new Date("2020-01-01T12:00:00.000").valueOf();
+    const timestamp = new Date("2020-01-03T00:00:00.000").valueOf();
 
-  it("expires immediately if last game was more than 48h ago", () => {
     expect(
-      getStreakState({
-        timestamp: 2 * DAY_IN_MILLISECONDS,
-        lastPlayedTimestamp: 0,
-        currentStreak: 1,
-      })
+      getStreakState({ timestamp, lastPlayedTimestamp, currentStreak: 1 })
     ).toEqual({
       type: "active",
       expiresInMs: 0,
@@ -143,7 +142,7 @@ describe("update stats", () => {
   });
 
   it("does not increment the current streak if it is already advanced", () => {
-    const timestamp = DAY_IN_MILLISECONDS - 1;
+    const timestamp = DAY_IN_MILLISECONDS / 2;
 
     const stats = updateStats({
       stats: {

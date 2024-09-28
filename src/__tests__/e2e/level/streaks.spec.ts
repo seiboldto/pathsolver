@@ -1,120 +1,94 @@
 import { NORMAL_GAME } from "../../fixtures";
 import { expect, test } from "./level-assertions";
 
-test("increments streak if there is no last game or it was more than 48h ago", async ({
+test("increments and resets streaks with inbetween reloads", async ({
   levelPage,
   page,
 }) => {
+  await page.clock.install({ time: new Date("2020-01-01T06:00:00") });
+
+  // Solve a game
   await levelPage.open(NORMAL_GAME);
   await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);
-
   await expect(page.getByText("Current Streak1+1")).toBeVisible();
+
+  // Forward to 18:00:00 on 2020-01-01
+  await page.clock.fastForward("12:00:00");
+  await page.reload();
+
+  // Solving another game on the same day doesn't update the streak
+  await levelPage.open(NORMAL_GAME);
+  await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);
+  await expect(
+    page.getByText("Current Streak1", { exact: true })
+  ).toBeVisible();
+
+  // Forward to 06:00:00 on 2020-01-02
+  await page.clock.fastForward("12:00:00");
+  await page.reload();
+
+  // Solving a game on a new day updates the streak
+  await levelPage.open(NORMAL_GAME);
+  await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);
+  await expect(page.getByText("Current Streak2+1")).toBeVisible();
+
+  // Forward to 23:00:00 on 2020-01-3
+  await page.clock.fastForward("41:00:00");
+  await page.reload();
+
+  await expect(
+    page.getByText("Current Streak2", { exact: true })
+  ).toBeVisible();
+
+  // Forward to 01:00:00 on 2020-01-04
+  await page.clock.fastForward("02:00:00");
+  await page.reload();
+
+  await expect(
+    page.getByText("Current Streak0", { exact: true })
+  ).toBeVisible();
 });
 
-test.describe("increments streak if the last game was between 24h and 48h ago", () => {
-  test("with reload", async ({ levelPage, page }) => {
-    await page.clock.install();
+test("increments and resets streaks without inbetween reloads", async ({
+  levelPage,
+  page,
+}) => {
+  await page.clock.install({ time: new Date("2020-01-01T06:00:00") });
 
-    await levelPage.open(NORMAL_GAME);
-    await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);
-    await expect(page.getByText("Current Streak1+1")).toBeVisible();
+  // Solve a game
+  await levelPage.open(NORMAL_GAME);
+  await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);
+  await expect(page.getByText("Current Streak1+1")).toBeVisible();
 
-    await page.reload();
-    await page.clock.fastForward("12:00:00");
+  // Forward to 18:00:00 on 2020-01-01
+  await page.clock.fastForward("12:00:00");
 
-    await levelPage.open(NORMAL_GAME);
-    await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);
-    await expect(
-      page.getByText("Current Streak1", { exact: true })
-    ).toBeVisible();
+  // Solving another game on the same day doesn't update the streak
+  await levelPage.open(NORMAL_GAME);
+  await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);
+  await expect(
+    page.getByText("Current Streak1", { exact: true })
+  ).toBeVisible();
 
-    await page.reload();
-    await page.clock.fastForward("12:00:00");
-    await levelPage.open(NORMAL_GAME);
-    await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);
-    await expect(page.getByText("Current Streak2+1")).toBeVisible();
+  // Forward to 06:00:00 on 2020-01-02
+  await page.clock.fastForward("12:00:00");
 
-    await page.clock.fastForward("24:00:00");
-    await expect(page.getByText("Current Streak2+1")).toBeVisible();
-  });
+  // Solving a game on a new day updates the streak
+  await levelPage.open(NORMAL_GAME);
+  await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);
+  await expect(page.getByText("Current Streak2+1")).toBeVisible();
 
-  test("without reload", async ({ levelPage, page }) => {
-    await page.clock.install();
+  // Forward to 23:00:00 on 2020-01-3
+  await page.clock.fastForward("41:00:00");
 
-    await levelPage.open(NORMAL_GAME);
-    await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);
-    await expect(page.getByText("Current Streak1+1")).toBeVisible();
+  await expect(page.getByText("Current Streak2+1")).toBeVisible();
 
-    await page.clock.fastForward("12:00:00");
+  // Forward to 01:00:00 on 2020-01-04
+  await page.clock.fastForward("02:00:00");
 
-    await levelPage.open(NORMAL_GAME);
-    await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);
-    await expect(
-      page.getByText("Current Streak1", { exact: true })
-    ).toBeVisible();
-
-    await page.clock.fastForward("12:00:00");
-    await levelPage.open(NORMAL_GAME);
-    await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);
-    await expect(page.getByText("Current Streak2+1")).toBeVisible();
-
-    await page.clock.fastForward("24:00:00");
-    await expect(page.getByText("Current Streak2+1")).toBeVisible();
-  });
-});
-
-test.describe("resets streak after 24h of inactivity and allows for new streak", () => {
-  test("with reload", async ({ levelPage, page }) => {
-    await page.clock.install();
-
-    await levelPage.open(NORMAL_GAME);
-    await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);
-    await expect(page.getByText("Current Streak1+1")).toBeVisible();
-
-    await page.reload();
-    await page.clock.fastForward("12:00:00");
-
-    await levelPage.open(NORMAL_GAME);
-    await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);
-    await expect(
-      page.getByText("Current Streak1", { exact: true })
-    ).toBeVisible();
-
-    await page.reload();
-    await page.clock.fastForward("36:00:00");
-    await expect(
-      page.getByText("Current Streak0", { exact: true })
-    ).toBeVisible();
-
-    await levelPage.open(NORMAL_GAME);
-    await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);
-    await expect(page.getByText("Current Streak1+1")).toBeVisible();
-  });
-
-  test("without reload", async ({ levelPage, page }) => {
-    await page.clock.install();
-
-    await levelPage.open(NORMAL_GAME);
-    await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);
-    await expect(page.getByText("Current Streak1+1")).toBeVisible();
-
-    await page.clock.fastForward("12:00:00");
-
-    await levelPage.open(NORMAL_GAME);
-    await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);
-    await expect(
-      page.getByText("Current Streak1", { exact: true })
-    ).toBeVisible();
-
-    await page.clock.fastForward("36:00:00");
-    await expect(
-      page.getByText("Current Streak0", { exact: true })
-    ).toBeVisible();
-
-    await levelPage.open(NORMAL_GAME);
-    await levelPage.solve(NORMAL_GAME.SELECTION_COORDS);
-    await expect(page.getByText("Current Streak1+1")).toBeVisible();
-  });
+  await expect(
+    page.getByText("Current Streak0", { exact: true })
+  ).toBeVisible();
 });
 
 test("increments max streak accordingly", async ({ levelPage, page }) => {
