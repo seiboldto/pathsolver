@@ -21,3 +21,7 @@
 - Moved the tutorial text to the top of the screen to prevent overlapping the number grid on small devices
 - Improved touch device detection on initial load
 - Added accessible labels to the selection length display
+
+## v1.0.4 - 2024-09-28
+
+- Reworked the streak system: To keep up a streak, it is now necessary to play a game each day. When this game is played does not matter anymore - it is now possible to get a streak of two by playing at 23:59 and then at 00:01 the following day even though these are only two minutes apart.
