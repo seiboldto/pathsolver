@@ -65,7 +65,8 @@ export const useActiveLevel = () => {
       });
 
       if (newGameState.hasWon) {
-        updateStats(preset, newGameState.state === "perfect-won");
+        if (!newLevelState.hint)
+          updateStats(preset, newGameState.state === "perfect-won");
         deletePersistedLevel();
       } else {
         updatePersistedLevel();

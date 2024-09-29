@@ -86,6 +86,7 @@
   "hints": {
     "title": "Get a Hint",
     "warning": "This level will not count towards your statistics if solved with a hint.",
+    "no-stats": "This level does not count towards the statistics as it was solved with a hint.",
     "button": "Get a hint for the active objective"
   },
   "share": {
