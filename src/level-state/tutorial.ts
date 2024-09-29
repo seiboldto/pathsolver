@@ -9,7 +9,7 @@ type GetTutorialState = {
 
 type TutorialState = {
   step: {
-    id: string;
+    id: StepID;
     i18n: Record<string, unknown>;
   };
 };
@@ -19,7 +19,7 @@ type Step = {
   i18n?: (args: GetTutorialState) => Record<string, unknown>;
 };
 
-const steps: Step[] = [
+const steps = [
   { id: "0-start-path" },
   { id: "1-extend-path" },
   {
@@ -29,7 +29,9 @@ const steps: Step[] = [
   { id: "3-release-path" },
   { id: "4-solve-objectives" },
   { id: "5-perfect-game" },
-];
+] as const satisfies Step[];
+
+type StepID = (typeof steps)[number]["id"];
 
 const getTutorialStepIndex = ({
   activeObjectiveIndex,
@@ -52,7 +54,7 @@ export const getTutorialState = (args: GetTutorialState): TutorialState => {
   return {
     step: {
       id: step.id,
-      i18n: step.i18n ? step.i18n(args) : {},
+      i18n: "i18n" in step ? step.i18n(args) : {},
     },
   };
 };

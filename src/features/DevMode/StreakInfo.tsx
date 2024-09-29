@@ -1,20 +1,13 @@
 import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 
-import { PRESET_DIFFICULTIES, type PresetDifficulty } from "~src/level-gen";
+import { PRESET_DIFFICULTIES } from "~src/level-gen";
 import { statsHelpers } from "~src/level-state";
 import { useStatisticsStore } from "~src/stores";
 
 import classes from "./StreakInfo.module.css";
 
-type StreakStates = Partial<
-  Record<PresetDifficulty, ReturnType<(typeof statsHelpers)["getStreakState"]>>
->;
-
 export function StreakInfo(): JSX.Element {
-  const { t } = useTranslation();
-
-  const [streakStates, setStreakStates] = useState<StreakStates>({});
+  const [streakStates, setStreakStates] = useState<string[][]>([]);
 
   const stats = useStatisticsStore.use.stats();
 
@@ -22,14 +15,16 @@ export function StreakInfo(): JSX.Element {
     const interval = setInterval(() => {
       const timestamp = Date.now();
 
-      const streakStates: StreakStates = {};
-      PRESET_DIFFICULTIES.forEach((d) => {
+      const streakStates = PRESET_DIFFICULTIES.map((d) => {
         const { lastPlayedTimestamp, currentStreak } = stats[d];
-        streakStates[d] = statsHelpers.getStreakState({
+        const streakState = statsHelpers.getStreakState({
           lastPlayedTimestamp,
           currentStreak,
           timestamp,
         });
+
+        if (streakState.type === "idle") return [d, streakState.type];
+        return [d, streakState.type, streakState.expiresInMs.toString()];
       });
 
       setStreakStates(streakStates);
@@ -39,11 +34,8 @@ export function StreakInfo(): JSX.Element {
 
   return (
     <div className={classes.streakInfo}>
-      {Object.entries(streakStates).map(([d, state]) => (
-        <pre key={d}>
-          {t(`difficulty.${d}`)} | {state.type}
-          {state.type !== "idle" && ` | ${state.expiresInMs}`}
-        </pre>
+      {streakStates.map((values, i) => (
+        <pre key={i}>{values.join(" | ")}</pre>
       ))}
     </div>
   );

@@ -9,7 +9,7 @@ import { getRandomInt } from "~src/lib";
 
 export function WinOverlay(): JSX.Element | null {
   const { t } = useTranslation();
-  const [titleNr] = useState(() => getRandomInt(1, 3));
+  const [titleNr] = useState(() => getRandomInt(1, 3) as 1 | 2 | 3);
 
   const { handleMenuNavigation } = useNavigation();
 

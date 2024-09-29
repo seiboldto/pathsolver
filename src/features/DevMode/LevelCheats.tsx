@@ -1,5 +1,5 @@
 import { IconBulb, IconFocus2 } from "@tabler/icons-react";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 import { Button, Tooltip } from "~src/components";
 import { useActiveLevel } from "~src/hooks";
@@ -10,6 +10,8 @@ const print = (...message: unknown[]) => {
 };
 
 export function LevelCheats() {
+  const { t } = useTranslation();
+
   const activeLevelState = useLevelStore.use.activeLevelState();
   const { handleGameStep } = useActiveLevel();
 

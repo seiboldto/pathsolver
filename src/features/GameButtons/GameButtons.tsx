@@ -6,7 +6,7 @@ import {
   IconShare,
   IconX,
 } from "@tabler/icons-react";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 import { Button, Divider, Group, Overlay, Tooltip } from "~src/components";
 import { ShareLevel } from "~src/features";
@@ -21,6 +21,8 @@ import { useLevelStore } from "~src/stores";
 import classes from "./GameButtons.module.css";
 
 export function GameButtons(): JSX.Element {
+  const { t } = useTranslation();
+
   const { handleMenuNavigation } = useNavigation();
 
   const { updatePersistedLevel } = useLevel();
