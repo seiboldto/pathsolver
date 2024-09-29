@@ -83,6 +83,9 @@
       "5-perfect-game": "Try to get a perfect game by having numbers left over at the end. This may not always be possible."
     }
   },
+  "hints": {
+    "title": "Get a Hint"
+  },
   "share": {
     "title": "Share Level",
     "copy": "Copy",

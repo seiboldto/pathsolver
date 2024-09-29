@@ -1,5 +1,6 @@
 import {
   IconArrowBack,
+  IconBulb,
   IconHome,
   IconRefresh,
   IconShare,
@@ -27,6 +28,7 @@ export function GameButtons(): JSX.Element {
   const { gameState, seed, difficultyOptions } = useActiveLevel();
 
   const [isShareOverlayOpen, shareOverlayHandler] = useBooleanState(false);
+  const [isHintsOverlayOpen, hintsOverlayHander] = useBooleanState(false);
 
   const handleRestart = () => {
     restartLevel();
@@ -62,6 +64,15 @@ export function GameButtons(): JSX.Element {
             <IconShare />
           </Button>
         </Tooltip>
+        <Tooltip label={t("hints.title")}>
+          <Button
+            square
+            disabled={disableMenuButton}
+            onClick={hintsOverlayHander.show}
+          >
+            <IconBulb />
+          </Button>
+        </Tooltip>
       </Group>
 
       <Group>
@@ -81,6 +92,12 @@ export function GameButtons(): JSX.Element {
         <ShareLevel seed={seed} difficultyPreset={difficultyOptions.preset} />
         <Divider />
         <Button onClick={shareOverlayHandler.hide} icon={IconX}>
+          {t("navigation.close")}
+        </Button>
+      </Overlay>
+
+      <Overlay visible={isHintsOverlayOpen} title={t("hints.title")}>
+        <Button onClick={hintsOverlayHander.hide} icon={IconX}>
           {t("navigation.close")}
         </Button>
       </Overlay>
