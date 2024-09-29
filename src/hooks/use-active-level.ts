@@ -27,6 +27,7 @@ export const useActiveLevel = () => {
     edges,
     activeObjectiveIndex,
     objectives,
+    hint,
   } = activeLevelState;
   const { boardSize, maxPathLength, preset } = difficultyOptions;
 
@@ -122,6 +123,7 @@ export const useActiveLevel = () => {
     difficultyOptions,
     nodes,
     edges,
+    hint,
 
     boardSize,
     selectionState,

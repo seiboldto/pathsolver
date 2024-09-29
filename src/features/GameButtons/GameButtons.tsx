@@ -33,8 +33,9 @@ export function GameButtons(): JSX.Element {
   const { handleMenuNavigation } = useNavigation();
 
   const { updatePersistedLevel } = useLevel();
-  const { restartLevel, undoSelection } = useLevelStore.use.actions();
-  const { gameState, seed, difficultyOptions } = useActiveLevel();
+  const { restartLevel, undoSelection, setHint } = useLevelStore.use.actions();
+  const { hint, objectivesState, gameState, seed, difficultyOptions } =
+    useActiveLevel();
 
   const [isShareOverlayOpen, shareOverlayHandler] = useBooleanState(false);
   const [isHintsOverlayOpen, hintsOverlayHander] = useBooleanState(false);
@@ -47,6 +48,15 @@ export function GameButtons(): JSX.Element {
   const handleUndo = () => {
     undoSelection();
     updatePersistedLevel();
+  };
+
+  const handleHint = () => {
+    setHint({
+      objectiveIndex: objectivesState.findIndex((o) => o.state === "active"),
+      pathLength: 3,
+    });
+    updatePersistedLevel();
+    hintsOverlayHander.hide();
   };
 
   const disableRightButtons = gameState.state !== "playing";
@@ -73,15 +83,17 @@ export function GameButtons(): JSX.Element {
             <IconShare />
           </Button>
         </Tooltip>
-        <Tooltip label={t("hints.title")}>
-          <Button
-            square
-            disabled={disableMenuButton}
-            onClick={hintsOverlayHander.show}
-          >
-            <IconBulb />
-          </Button>
-        </Tooltip>
+        {!hint && (
+          <Tooltip label={t("hints.title")}>
+            <Button
+              square
+              disabled={disableMenuButton}
+              onClick={hintsOverlayHander.show}
+            >
+              <IconBulb />
+            </Button>
+          </Tooltip>
+        )}
       </Group>
 
       <Group>
@@ -107,9 +119,10 @@ export function GameButtons(): JSX.Element {
 
       <Overlay visible={isHintsOverlayOpen} title={t("hints.title")}>
         <Text>{t("hints.warning")}</Text>
-        <Button onClick={hintsOverlayHander.hide} icon={IconBulb}>
+        <Button onClick={handleHint} icon={IconBulb}>
           {t("hints.title")}
         </Button>
+        <Divider />
         <Button onClick={hintsOverlayHander.hide} icon={IconX}>
           {t("navigation.close")}
         </Button>

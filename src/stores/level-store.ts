@@ -3,6 +3,7 @@ import { create } from "zustand";
 import {
   DEFAULT_SELECTION,
   type GameBoard,
+  type Hint,
   type LevelState,
   type Node,
   type Selection,
@@ -18,6 +19,7 @@ type LevelStore = {
     setActiveLevelState: (level: LevelState) => void;
     restartLevel: () => void;
     undoSelection: () => void;
+    setHint: (hint: Hint) => void;
     setInvalidNode: (node: Node | null) => void;
     updateGameBoard: (board: GameBoard) => void;
     setSelection: (selection: Selection) => void;
@@ -63,12 +65,14 @@ export const levelStore = create<LevelStore>((set, get) => {
           },
         });
       },
+      setHint: (hint) => {
+        const prev = getPreviousLevelState();
+        set({ activeLevelState: { ...prev, hint } });
+      },
       setInvalidNode: (node) => {
         const { selection } = get();
-        const prev = getPreviousLevelState();
 
         set({
-          ...prev,
           selection: { ...selection, invalidNode: node },
         });
       },

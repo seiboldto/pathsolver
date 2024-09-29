@@ -9,6 +9,7 @@ export {
   DEFAULT_SELECTION,
   type Edge,
   type GameBoard,
+  type Hint,
   type LevelState,
   type Node,
   type Objective,

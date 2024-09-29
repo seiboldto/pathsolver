@@ -49,6 +49,11 @@ export type Selection = {
   invalidNode: Node | null;
 };
 
+export type Hint = {
+  objectiveIndex: number;
+  pathLength: number;
+};
+
 export const DEFAULT_SELECTION: Selection = {
   nodes: [],
   edges: [],
@@ -64,6 +69,7 @@ export type LevelState = {
   objectives: Objective[];
   activeObjectiveIndex: number;
   history: GameBoard[];
+  hint: Hint | null;
 };
 
 export const transformLevel = (level: Level): LevelState => {
@@ -74,8 +80,8 @@ export const transformLevel = (level: Level): LevelState => {
     edges: transformEdges(level.board),
     objectives: transformObjectives(level.paths, level.board),
     activeObjectiveIndex: 0,
-
     history: [],
+    hint: null,
   };
 };
 
