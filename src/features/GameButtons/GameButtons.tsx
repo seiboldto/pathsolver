@@ -120,7 +120,7 @@ export function GameButtons(): JSX.Element {
       <Overlay visible={isHintsOverlayOpen} title={t("hints.title")}>
         <Text>{t("hints.warning")}</Text>
         <Button onClick={handleHint} icon={IconBulb}>
-          {t("hints.title")}
+          {t("hints.button")}
         </Button>
         <Divider />
         <Button onClick={hintsOverlayHander.hide} icon={IconX}>
