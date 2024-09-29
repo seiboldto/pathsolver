@@ -8,7 +8,14 @@ import {
 } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
 
-import { Button, Divider, Group, Overlay, Tooltip } from "~src/components";
+import {
+  Button,
+  Divider,
+  Group,
+  Overlay,
+  Text,
+  Tooltip,
+} from "~src/components";
 import { ShareLevel } from "~src/features";
 import {
   useActiveLevel,
@@ -99,6 +106,10 @@ export function GameButtons(): JSX.Element {
       </Overlay>
 
       <Overlay visible={isHintsOverlayOpen} title={t("hints.title")}>
+        <Text>{t("hints.warning")}</Text>
+        <Button onClick={hintsOverlayHander.hide} icon={IconBulb}>
+          {t("hints.title")}
+        </Button>
         <Button onClick={hintsOverlayHander.hide} icon={IconX}>
           {t("navigation.close")}
         </Button>

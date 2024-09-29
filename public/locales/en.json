@@ -84,7 +84,8 @@
     }
   },
   "hints": {
-    "title": "Get a Hint"
+    "title": "Get a Hint",
+    "warning": "This level will not count towards your statistics if solved with a hint."
   },
   "share": {
     "title": "Share Level",
