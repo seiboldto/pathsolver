@@ -1,3 +1,5 @@
 User-Agent:*
 Disallow: /level
 Disallow: /share/*
+Disallow: /settings
+Disallow: /about

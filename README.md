@@ -1,6 +1,6 @@
 # pathsolver
 
-An open-source mathematical puzzle game where you have to compute numbers in a grid!
+Find ways to compute a number in this open-source mathematical puzzle game.
 
 ## Links
 
