@@ -30,7 +30,7 @@ type EdgeState = "idle" | "selected" | "highlighted";
 type GetEdgeState = {
   edge: Edge;
   selectedEdges: Edge[];
-  activeObjectiveID: string;
+  activeObjectiveID?: string;
   hint: Hint | null;
 };
 

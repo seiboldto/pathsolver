@@ -92,7 +92,7 @@ export const useActiveLevel = () => {
 
   const getEdgeState = createLevelFunc(levelState.getEdgeState, {
     selectedEdges: selection.edges,
-    activeObjectiveID: objectives[activeObjectiveIndex].id,
+    activeObjectiveID: objectives[activeObjectiveIndex]?.id,
     hint,
   });
 
