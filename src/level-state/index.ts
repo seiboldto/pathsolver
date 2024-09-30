@@ -5,6 +5,7 @@ import {
   removeTrailingEdges,
 } from "./edges";
 import { getGameState } from "./game";
+import { getHint } from "./hints";
 import { canNodeBeSelected, getNodeState, removeSelectedNodes } from "./nodes";
 import { getObjectivesState } from "./objectives";
 import {
@@ -53,4 +54,8 @@ export const levelAppliers = {
 export const statsHelpers = {
   getStreakState,
   updateStats,
+};
+
+export const hintHelpers = {
+  getHint,
 };
