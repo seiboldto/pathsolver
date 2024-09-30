@@ -1,5 +1,5 @@
 import {
-  getEdgeBetweenNodes,
+  getEdgeBetweenCoords,
   getEdgeNodeCoords,
   getEdgeState,
   removeTrailingEdges,
@@ -40,7 +40,7 @@ export const levelHelpers = {
   canNodeBeSelected,
   canSelectionBeApplied,
   getEdgeNodeCoords,
-  getEdgeBetweenNodes,
+  getEdgeBetweenCoords,
   removeTrailingEdges,
   removeSelectedNodes,
 };

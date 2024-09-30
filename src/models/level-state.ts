@@ -50,7 +50,8 @@ export type Selection = {
 };
 
 export type Hint = {
-  objectiveIndex: number;
+  objectiveID: string;
+  highlightedEdgeID: string;
   pathLength: number;
 };
 

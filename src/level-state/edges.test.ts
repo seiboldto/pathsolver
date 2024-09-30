@@ -1,20 +1,20 @@
 import { describe, expect, it } from "vitest";
 
-import { e, n } from "~src/__tests__";
+import { c, e, n } from "~src/__tests__";
 
 import {
-  getEdgeBetweenNodes,
+  getEdgeBetweenCoords,
   getEdgeNodeCoords,
   getEdgeState,
   removeTrailingEdges,
 } from "./edges";
 
-describe("get edge between nodes", () => {
+describe("get edge between coords", () => {
   it("returns the correct horizontal edge", () => {
     const edge = e(0, 0, "h");
 
     expect(
-      getEdgeBetweenNodes({ edges: [edge], n1: n(0, 0), n2: n(0, 1) })
+      getEdgeBetweenCoords({ edges: [edge], c1: c(0, 0), c2: c(0, 1) })
     ).toEqual(edge);
   });
 
@@ -22,13 +22,13 @@ describe("get edge between nodes", () => {
     const edge = e(0, 0, "v");
 
     expect(
-      getEdgeBetweenNodes({ edges: [edge], n1: n(0, 0), n2: n(1, 0) })
+      getEdgeBetweenCoords({ edges: [edge], c1: c(0, 0), c2: c(1, 0) })
     ).toEqual(edge);
   });
 
   it("throws an error if no edge is found", () => {
     expect(() =>
-      getEdgeBetweenNodes({ edges: [], n1: n(0, 0), n2: n(0, 1) })
+      getEdgeBetweenCoords({ edges: [], c1: c(0, 0), c2: c(0, 1) })
     ).toThrow();
   });
 });

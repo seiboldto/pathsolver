@@ -3,7 +3,7 @@ import { v4 as uuid } from "uuid";
 import { Operation } from "~src/level-gen";
 import type { Edge, GameBoard, Node, Objective, Selection } from "~src/models";
 
-import { getEdgeBetweenNodes, removeTrailingEdges } from "./edges";
+import { getEdgeBetweenCoords, removeTrailingEdges } from "./edges";
 import { removeSelectedNodes } from "./nodes";
 
 type GetSelectionState = {
@@ -59,10 +59,10 @@ export const applySelectedNode = ({
   let newSelectedValue = node.value;
   let newSelectedEdges = selection.edges;
   if (selection.value !== null) {
-    const edge = getEdgeBetweenNodes({
+    const edge = getEdgeBetweenCoords({
       edges,
-      n1: node,
-      n2: selection.nodes[selection.nodes.length - 1],
+      c1: node,
+      c2: selection.nodes[selection.nodes.length - 1],
     });
 
     const operation = new Operation(edge.operation);

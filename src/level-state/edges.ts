@@ -1,21 +1,21 @@
 import type { Coords, Edge, Node } from "~src/models";
 
-type GetEdgeBetweenNodes = {
+type GetEdgeBetweenCoords = {
   edges: Edge[];
-  n1: Node;
-  n2: Node;
+  c1: Coords;
+  c2: Coords;
 };
 
-export const getEdgeBetweenNodes = ({
+export const getEdgeBetweenCoords = ({
   edges,
-  n1,
-  n2,
-}: GetEdgeBetweenNodes): Edge => {
-  const orientation = n1.row === n2.row ? "horizontal" : "vertical";
+  c1,
+  c2,
+}: GetEdgeBetweenCoords): Edge => {
+  const orientation = c1.row === c2.row ? "horizontal" : "vertical";
   const { row, column } =
     orientation === "horizontal"
-      ? { row: n1.row, column: Math.min(n1.column, n2.column) }
-      : { row: Math.min(n1.row, n2.row), column: n1.column };
+      ? { row: c1.row, column: Math.min(c1.column, c2.column) }
+      : { row: Math.min(c1.row, c2.row), column: c1.column };
 
   const edge = edges.find(
     (e) => e.row === row && e.column === column && e.orientation === orientation

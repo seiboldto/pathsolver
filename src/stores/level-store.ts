@@ -1,5 +1,6 @@
 import { create } from "zustand";
 
+import { levelHelpers } from "~src/level-state";
 import {
   DEFAULT_SELECTION,
   type GameBoard,
@@ -19,7 +20,7 @@ type LevelStore = {
     setActiveLevelState: (level: LevelState) => void;
     restartLevel: () => void;
     undoSelection: () => void;
-    setHint: (hint: Hint) => void;
+    createHint: () => void;
     setInvalidNode: (node: Node | null) => void;
     updateGameBoard: (board: GameBoard) => void;
     setSelection: (selection: Selection) => void;
@@ -65,8 +66,33 @@ export const levelStore = create<LevelStore>((set, get) => {
           },
         });
       },
-      setHint: (hint) => {
+      createHint: () => {
         const prev = getPreviousLevelState();
+        const objective = prev.objectives[prev.activeObjectiveIndex];
+
+        // TODO: Move this out of here
+        const pathLength = objective.path.length;
+        const edgeCount = pathLength - 1;
+        const edgeIndex =
+          ((objective.value % edgeCount) + edgeCount) % edgeCount;
+
+        const n1 = objective.path[edgeIndex];
+        const n2 = objective.path[edgeIndex + 1];
+
+        const highlightedEdge = levelHelpers.getEdgeBetweenCoords({
+          edges: prev.edges,
+          c1: n1,
+          c2: n2,
+        });
+
+        const hint: Hint = {
+          objectiveID: objective.id,
+          pathLength,
+          highlightedEdgeID: highlightedEdge.id,
+        };
+
+        console.log(hint);
+
         set({ activeLevelState: { ...prev, hint } });
       },
       setInvalidNode: (node) => {

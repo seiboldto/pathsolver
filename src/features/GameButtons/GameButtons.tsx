@@ -33,9 +33,9 @@ export function GameButtons(): JSX.Element {
   const { handleMenuNavigation } = useNavigation();
 
   const { updatePersistedLevel } = useLevel();
-  const { restartLevel, undoSelection, setHint } = useLevelStore.use.actions();
-  const { hint, objectivesState, gameState, seed, difficultyOptions } =
-    useActiveLevel();
+  const { restartLevel, undoSelection, createHint } =
+    useLevelStore.use.actions();
+  const { hint, gameState, seed, difficultyOptions } = useActiveLevel();
 
   const [isShareOverlayOpen, shareOverlayHandler] = useBooleanState(false);
   const [isHintsOverlayOpen, hintsOverlayHander] = useBooleanState(false);
@@ -51,10 +51,7 @@ export function GameButtons(): JSX.Element {
   };
 
   const handleHint = () => {
-    setHint({
-      objectiveIndex: objectivesState.findIndex((o) => o.state === "active"),
-      pathLength: 3,
-    });
+    createHint();
     updatePersistedLevel();
     hintsOverlayHander.hide();
   };

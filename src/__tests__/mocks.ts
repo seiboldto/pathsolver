@@ -1,4 +1,8 @@
-import type { Edge, Node } from "~src/models";
+import type { Coords, Edge, Node } from "~src/models";
+
+export const c = (row: number, column: number): Coords => {
+  return { row, column };
+};
 
 export const n = (row: number, column: number, active = true): Node => {
   return { row, column, active, id: "", value: 0 };
