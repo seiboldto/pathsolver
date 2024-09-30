@@ -33,11 +33,75 @@ describe("get edge between coords", () => {
   });
 });
 
-it("calculates edge state", () => {
+describe("get edge state", () => {
   const edge = e(0, 0, "h");
 
-  expect(getEdgeState({ edge, selectedEdges: [] })).toEqual("idle");
-  expect(getEdgeState({ edge, selectedEdges: [edge] })).toEqual("selected");
+  it("is idle by default", () => {
+    expect(
+      getEdgeState({
+        edge,
+        selectedEdges: [],
+        activeObjectiveID: "",
+        hint: null,
+      })
+    ).toEqual("idle");
+  });
+
+  it("is selected if applicable", () => {
+    expect(
+      getEdgeState({
+        edge,
+        selectedEdges: [edge],
+        activeObjectiveID: "",
+        hint: null,
+      })
+    ).toEqual("selected");
+  });
+
+  it("is not highlighted if the hint does not use the edge", () => {
+    expect(
+      getEdgeState({
+        edge,
+        selectedEdges: [],
+        activeObjectiveID: "id",
+        hint: {
+          highlightedEdgeID: "different",
+          objectiveID: "id",
+          pathLength: 3,
+        },
+      })
+    ).toEqual("idle");
+  });
+
+  it("is not highlighted if the objective doesn't match", () => {
+    expect(
+      getEdgeState({
+        edge,
+        selectedEdges: [],
+        activeObjectiveID: "id",
+        hint: {
+          highlightedEdgeID: "",
+          objectiveID: "different",
+          pathLength: 3,
+        },
+      })
+    ).toEqual("idle");
+  });
+
+  it("is highlighted if the hint uses the edge", () => {
+    expect(
+      getEdgeState({
+        edge,
+        selectedEdges: [],
+        activeObjectiveID: "id",
+        hint: {
+          highlightedEdgeID: "",
+          objectiveID: "id",
+          pathLength: 3,
+        },
+      })
+    ).toEqual("highlighted");
+  });
 });
 
 describe("remove trailing edges", () => {

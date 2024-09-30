@@ -1,4 +1,4 @@
-import type { Coords, Edge, Node } from "~src/models";
+import type { Coords, Edge, Hint, Node } from "~src/models";
 
 type GetEdgeBetweenCoords = {
   edges: Edge[];
@@ -25,18 +25,30 @@ export const getEdgeBetweenCoords = ({
   return edge;
 };
 
-type EdgeState = "idle" | "selected";
+type EdgeState = "idle" | "selected" | "highlighted";
 
 type GetEdgeState = {
   edge: Edge;
   selectedEdges: Edge[];
+  activeObjectiveID: string;
+  hint: Hint | null;
 };
 
 export const getEdgeState = ({
   edge,
   selectedEdges,
+  activeObjectiveID,
+  hint,
 }: GetEdgeState): EdgeState => {
   if (selectedEdges.includes(edge)) return "selected";
+
+  if (
+    hint &&
+    hint.objectiveID === activeObjectiveID &&
+    hint.highlightedEdgeID === edge.id
+  )
+    return "highlighted";
+
   return "idle";
 };
 

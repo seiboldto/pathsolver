@@ -53,7 +53,7 @@ export function GameEdge({ edge }: GameEdgeProps): JSX.Element | null {
         n2,
       })}
       aria-description={t(`game.operations.${operation}`)}
-      data-selected={state !== "idle"}
+      data-state={state}
     >
       <Icon size={18} />
     </div>

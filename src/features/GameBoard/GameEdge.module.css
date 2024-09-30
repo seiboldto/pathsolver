@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: center;
 
-  &[data-selected="true"] {
+  &[data-state="selected"] {
     background-color: var(--primary-color);
     color: var(--text-on-primary-color);
   }
