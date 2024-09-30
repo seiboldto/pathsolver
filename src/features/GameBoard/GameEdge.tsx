@@ -56,6 +56,7 @@ export function GameEdge({ edge }: GameEdgeProps): JSX.Element | null {
       data-state={state}
     >
       <Icon size={18} />
+      {state === "highlighted" && <div className={classes.highlighter} />}
     </div>
   );
 }

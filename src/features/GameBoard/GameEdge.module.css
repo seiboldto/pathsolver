@@ -12,6 +12,10 @@
     color: var(--text-on-primary-color);
   }
 
+  &[data-state="highlighted"] {
+    background-color: var(--border-color);
+  }
+
   &[data-orientation="horizontal"] {
     width: calc(var(--node-size) + var(--node-gap));
     height: var(--node-size);
