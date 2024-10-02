@@ -10,8 +10,9 @@ import {
   Text,
   Tooltip,
 } from "~src/components";
-import { DifficultyStats, ShareLevel } from "~src/features";
+import { DifficultyStats } from "~src/features";
 import { useActiveLevel, useLevel, useNavigation } from "~src/hooks";
+import { ShareLevel } from "~src/level-features";
 import { getRandomInt } from "~src/lib";
 
 export function WinOverlay(): JSX.Element | null {

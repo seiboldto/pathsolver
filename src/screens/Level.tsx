@@ -1,6 +1,7 @@
 import { Redirect } from "wouter";
 
 import { Screen } from "~src/components";
+import { useLevel, useNavigation } from "~src/hooks";
 import {
   GameBoard,
   GameButtons,
@@ -8,8 +9,7 @@ import {
   SelectedInfo,
   Tutorial,
   WinOverlay,
-} from "~src/features";
-import { useLevel, useNavigation } from "~src/hooks";
+} from "~src/level-features";
 import { useLevelStore } from "~src/stores";
 
 export function LevelScreen(): JSX.Element | null {

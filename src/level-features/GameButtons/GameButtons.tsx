@@ -16,7 +16,7 @@ import {
   Text,
   Tooltip,
 } from "~src/components";
-import { ShareLevel } from "~src/features";
+import { ShareLevel } from "~src/level-features";
 import {
   useActiveLevel,
   useBooleanState,
