@@ -70,12 +70,11 @@ export const expect = baseExpect.extend({
 
     for (const { expectedValue, n1, n2 } of edges) {
       const edge = levelPage.page.getByLabel(
-        `Operation between row ${n1.row} / column ${n1.column} and row ${n2.row} / column ${n2.column}`
+        `${expectedValue} between row ${n1.row} / column ${n1.column} and row ${n2.row} / column ${n2.column}`
       );
 
       if (expectedValue !== null) {
         await expect(edge).toBeVisible();
-        await expect(edge).toHaveAccessibleDescription(expectedValue);
       } else {
         await expect(edge).toBeHidden();
       }

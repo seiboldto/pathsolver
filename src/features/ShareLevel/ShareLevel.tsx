@@ -54,7 +54,7 @@ export function ShareLevel({
 
   return (
     <div className={classes.shareLevel}>
-      <label htmlFor={id}>{t("share.link")}</label>
+      <label htmlFor={id}>{t("level.share.link")}</label>
       <div className={classes.shareLink}>
         <input
           id={id}
@@ -63,12 +63,14 @@ export function ShareLevel({
           value={shareLink}
         />
         <Button onClick={handleCopyClick}>
-          {t(hasCopied ? "share.copied" : "share.copy")}
+          {t(
+            hasCopied ? "level.share.copied-button" : "level.share.copy-button"
+          )}
         </Button>
       </div>
       {isNativeShareSupported ? (
         <Button icon={IconShare} onClick={handleNativeShare}>
-          {t("share.social-media")}
+          {t("level.share.social-media")}
         </Button>
       ) : (
         <Group>
@@ -76,10 +78,10 @@ export function ShareLevel({
             href={SOCIAL_LINKS.whatsapp(shareLink)}
             icon={IconBrandWhatsapp}
           >
-            {t("share.whatsapp")}
+            {t("level.share.whatsapp")}
           </Anchor>
           <Anchor href={SOCIAL_LINKS.email(shareLink)} icon={IconMail}>
-            {t("share.email")}
+            {t("level.share.email")}
           </Anchor>
         </Group>
       )}

@@ -15,7 +15,7 @@ export function Objectives(): JSX.Element {
     <div
       className={classes.objectives}
       role="group"
-      aria-label={t("game.objectives.title")}
+      aria-label={t("level.objective.objectives")}
     >
       {objectivesState.map((o, i) => {
         const isLastOne = i === objectivesState.length - 1;
@@ -29,7 +29,7 @@ export function Objectives(): JSX.Element {
         return (
           <Fragment key={o.id}>
             <Tooltip
-              label={t("game.objectives.index", {
+              label={t("level.objective.index", {
                 count: o.index + 1,
                 ordinal: true,
               })}
@@ -38,7 +38,7 @@ export function Objectives(): JSX.Element {
                 className={classes.objective}
                 data-state={state}
                 aria-current={state === "active" ? "step" : "false"}
-                aria-description={t(`game.objectives.${state}`)}
+                aria-description={t(`level.objective.${state}`)}
               >
                 <span>{state === "completed" ? <IconCheck /> : o.value}</span>
                 {hint && hint.objectiveIndex === i && (

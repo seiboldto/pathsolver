@@ -1,69 +1,80 @@
 {
   "title": "pathsolver",
-  "navigation": {
+  "buttons": {
     "next": "Vor",
     "prev": "Zurück",
     "back": "Zurück",
     "close": "Schließen",
-    "cancel": "Abbrechen",
+    "cancel": "Abbrechen"
+  },
+  "pages": {
     "menu": "Menü",
     "settings": "Einstellungen",
     "about": "Über"
   },
+  "features": {
+    "stats": {
+      "games-played": "Gespielte Spiele",
+      "current-streak": "Aktuelle Siegesfolge",
+      "max-streak": "Länge Siegesfolge",
+      "perfect-games": "Perfekte Spiele",
+      "update": {
+        "plus-one": "+1",
+        "new-best": "Neuer Rekord"
+      }
+    },
+    "overwrite-level": {
+      "title": "Aktives Spiel überschreiben?",
+      "warning": "Du hast bereits ein aktives Spiel. Wenn du fortfährst, wird es gelöscht.",
+      "button": "Überschreiben"
+    }
+  },
   "menu": {
     "choose-difficulty": "Schwierigkeit wählen",
+    "difficulty": {
+      "normal": "Normal",
+      "hard": "Schwer",
+      "extreme": "Extrem"
+    },
     "play": "Spielen",
     "resume": "Aktives Spiel fortsetzen"
   },
-  "difficulty": {
-    "normal": "Normal",
-    "hard": "Schwer",
-    "extreme": "Extrem"
-  },
-  "win": {
-    "title1": "Exzellent!",
-    "title2": "Brilliant!",
-    "title3": "Fantastisch!",
-    "play-again": "Nochmal spielen"
-  },
-  "stats": {
-    "games-played": "Gespielte Spiele",
-    "current-streak": "Aktuelle Siegesfolge",
-    "max-streak": "Länge Siegesfolge",
-    "perfect-games": "Perfekte Spiele",
-    "update": {
-      "plus-one": "+1",
-      "new-best": "Neuer Rekord"
-    }
-  },
-  "dev-mode": {
-    "title": "Developer Mode",
-    "print-objectives": "Print Objectives",
-    "advance-objectives": "Advance Objectives",
-    "toggle-streak-info": "Toggle Streak Info"
+  "about": {
+    "made-by": "Erstellt von seiboldto",
+    "source-code": "Quellcode auf GitHub",
+    "version": "© 2024 · v{{version}} · {{date}}"
   },
   "settings": {
     "language": "Sprache",
     "theme": "Farbschema",
     "theme-light": "Hell",
     "theme-dark": "Dunkel",
-    "hover-animations": "Cursor-Animationen"
+    "hover-animations": "Hover-Animationen"
   },
-  "game": {
-    "restart": "Neu starten",
-    "undo": "Rückgängig machen",
-    "selected-value": "Ausgewählter Wert",
-    "selected-path-length": "{{length}} von maximal {{max}} Nummern ausgewählt",
-    "selected-path-error": "Ungültige Auswahl",
-    "objectives": {
-      "title": "Ziele",
+  "level": {
+    "buttons": {
+      "restart": "Neu starten",
+      "undo": "Rückgängig machen"
+    },
+    "selection": {
+      "selected-value": "Ausgewählter Wert",
+      "path-length": "{{length}} von maximal {{max}} Nummern ausgewählt",
+      "invalid": "Ungültige Auswahl"
+    },
+    "objective": {
+      "objectives": "Ziele",
       "pending": "Ausstehendes Ziel",
       "completed": "Abgeschlossenes Ziel",
       "active": "Aktives Ziel",
       "index_ordinal_other": "{{count}}. Ziel"
     },
-    "node-label": "Reihe {{row, zero-indicing}} / Spalte {{column, zero-indicing}}",
-    "edge-label": "Operation zwischen Reihe {{n1.row, zero-indicing}} / Spalte {{n1.column, zero-indicing}} und Reihe {{n2.row, zero-indicing}} / Spalte {{n2.column, zero-indicing}}",
+    "nodes": {
+      "label": "Reihe {{row, zero-indicing}} / Spalte {{column, zero-indicing}}"
+    },
+    "edges": {
+      "label": "{{operation}} zwischen Reihe {{n1.row, zero-indicing}} / Spalte {{n1.column, zero-indicing}} und Reihe {{n2.row, zero-indicing}} / Spalte {{n2.column, zero-indicing}}",
+      "used-by-hint_ordinal_other": "Hinweis: Von dem {{count}}. Ziel genutzt"
+    },
     "operations": {
       "addition": "Addition",
       "subtraction": "Subtraktion",
@@ -77,28 +88,32 @@
       "3-release-path": "Lasse die Maus los, um zum nächsten Ziel fortzuschreiten.",
       "4-solve-objectives": "Löse alle restlichen Ziele. Wenn du nicht weiterweißt, kannst du das Level neustarten.",
       "5-perfect-game": "Versuche, ein perfektes Spiel zu erreichen, indem am Ende noch Zahlen übrig sind. Dies ist nicht immer möglich."
+    },
+    "win-overlay": {
+      "title1": "Exzellent!",
+      "title2": "Brilliant!",
+      "title3": "Fantastisch!",
+      "play-again": "Nochmal spielen",
+      "used-hint-warning": "Dieses Level wird nicht zu der Statistik gezählt, da es mit einem Hinweis gelöst wurde."
+    },
+    "hints": {
+      "title": "Hinweis erhalten",
+      "statistics-warning": "Dieses Level wird nicht zu der Statistik zählen, wenn es mit einem Hinweis gelöst wird.",
+      "button": "Hinweis für das aktive Ziel erhalten"
+    },
+    "share": {
+      "title": "Level teilen",
+      "link": "Über Link teilen",
+      "social-media": "Über Social Media teilen",
+      "whatsapp": "WhatsApp",
+      "email": "E-Mail",
+      "copy-button": "Kopieren",
+      "copied-button": "Kopiert",
+      "load-errors": {
+        "title": "Level kann nicht geladen werden.",
+        "invalid-generator-version": "Dieses Level wurde in einer älteren Version generiert und ist nicht mehr kompatibel.",
+        "unknown": "Das angegebene Level ist fehlerhaft. Bitte überprüfe die URL."
+      }
     }
-  },
-  "share": {
-    "title": "Level teilen",
-    "copy": "Kopieren",
-    "copied": "Kopiert",
-    "link": "Über Link teilen",
-    "social-media": "Über Social Media teilen",
-    "whatsapp": "WhatsApp",
-    "email": "E-Mail",
-    "error-title": "Level kann nicht geladen werden.",
-    "error-invalid-generator-version": "Dieses Level wurde in einer älteren Version generiert und ist nicht mehr kompatibel.",
-    "error-unknown": "Das angegebene Level ist fehlerhaft. Bitte überprüfe die URL."
-  },
-  "overwrite": {
-    "title": "Aktives Spiel überschreiben?",
-    "warning": "Du hast bereits ein aktives Spiel. Wenn du fortfährst, wird es gelöscht.",
-    "button": "Überschreiben"
-  },
-  "about": {
-    "made-by": "Erstellt von seiboldto",
-    "source-code": "Quellcode auf GitHub",
-    "version": "© 2024 · v{{version}} · {{date}}"
   }
 }

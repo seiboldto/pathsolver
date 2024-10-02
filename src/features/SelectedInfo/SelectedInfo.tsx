@@ -13,7 +13,7 @@ export function SelectedInfo(): JSX.Element {
       <span
         key={selectionState.value}
         className={classes.value}
-        aria-label={t("game.selected-value")}
+        aria-label={t("level.selection.selected-value")}
         aria-live="polite"
       >
         {selectionState.value ?? 0}
@@ -24,8 +24,8 @@ export function SelectedInfo(): JSX.Element {
         className={classes.dots}
         aria-label={
           selectionState.isInvalid
-            ? t("game.selected-path-error")
-            : t("game.selected-path-length", {
+            ? t("level.selection.invalid")
+            : t("level.selection.path-length", {
                 length: selectionState.length,
                 max: difficultyOptions.maxPathLength,
               })

@@ -45,7 +45,7 @@ export function GameEdge({ edge }: GameEdgeProps): JSX.Element | null {
 
   const description =
     hint && (state === "highlighted" || state === "subtle-highlighted")
-      ? t("game.edge-descriptions.used-by", {
+      ? t("level.edges.used-by-hint", {
           count: hint.objectiveIndex + 1,
           ordinal: true,
         })
@@ -57,10 +57,10 @@ export function GameEdge({ edge }: GameEdgeProps): JSX.Element | null {
       className={classes.edge}
       data-orientation={orientation}
       style={cssVars({ row, column })}
-      aria-label={t(`game.edge-label`, {
+      aria-label={t(`level.edges.label`, {
         n1,
         n2,
-        operation: t(`game.operations.${operation}`),
+        operation: t(`level.operations.${operation}`),
       })}
       aria-description={description}
       data-state={state}

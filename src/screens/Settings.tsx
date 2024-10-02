@@ -27,12 +27,12 @@ export function SettingsScreen() {
 
   const themes: SelectData<"light" | "dark"> = [
     { value: "light", label: t("settings.theme-light") },
-    { value: "dark", label: t(`settings.theme-dark`) },
+    { value: "dark", label: t("settings.theme-dark") },
   ];
 
   return (
     <Screen>
-      <Title>{t("navigation.settings")}</Title>
+      <Title>{t("pages.settings")}</Title>
       <Select
         label={t("settings.language")}
         data={languages}
@@ -51,7 +51,7 @@ export function SettingsScreen() {
         onChange={(value) => updateSettings("enableHoverAnimations", value)}
       />
       <Button icon={IconArrowLeft} onClick={handleMenuNavigation}>
-        {t("navigation.back")}
+        {t("buttons.back")}
       </Button>
     </Screen>
   );

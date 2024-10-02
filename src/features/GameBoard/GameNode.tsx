@@ -55,7 +55,7 @@ export function GameNode({ node }: GameNodeProps): JSX.Element | null {
       style={cssVars({ row, column })}
       tabIndex={-1}
       data-node-state={nodeState}
-      aria-label={t("game.node-label", { row, column })}
+      aria-label={t("level.nodes.label", { row, column })}
       data-expand-nodes={increasedNodeSize}
     >
       {value}

@@ -18,7 +18,7 @@ export function AboutScreen(): JSX.Element {
 
   return (
     <Screen>
-      <Title>{t("navigation.about")}</Title>
+      <Title>{t("pages.about")}</Title>
       <Text>{t("about.made-by")}</Text>
       <Anchor href={LINKS.GITHUB} icon={IconBrandGithub}>
         {t("about.source-code")}
@@ -30,7 +30,7 @@ export function AboutScreen(): JSX.Element {
         })}
       </Text>
       <Button icon={IconArrowLeft} onClick={handleMenuNavigation}>
-        {t("navigation.back")}
+        {t("buttons.back")}
       </Button>
     </Screen>
   );

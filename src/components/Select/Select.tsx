@@ -52,7 +52,7 @@ export function Select<T extends string>({
     <>
       <label id={id}>{label}</label>
       <div className={classes.select}>
-        <Tooltip label={t("navigation.prev")}>
+        <Tooltip label={t("buttons.prev")}>
           <Button square onClick={handlePrev} tabIndex={-1}>
             <IconCaretLeftFilled />
           </Button>
@@ -68,7 +68,7 @@ export function Select<T extends string>({
         >
           {selected.label}
         </div>
-        <Tooltip label={t("navigation.next")}>
+        <Tooltip label={t("buttons.next")}>
           <Button square onClick={handleNext} tabIndex={-1}>
             <IconCaretRightFilled />
           </Button>

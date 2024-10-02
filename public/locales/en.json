@@ -1,46 +1,54 @@
 {
   "title": "pathsolver",
-  "navigation": {
+  "buttons": {
     "next": "Next",
     "prev": "Previous",
     "back": "Back",
     "close": "Close",
-    "cancel": "Cancel",
+    "cancel": "Cancel"
+  },
+  "pages": {
     "menu": "Menu",
     "settings": "Settings",
     "about": "About"
   },
+  "features": {
+    "stats": {
+      "games-played": "Games played",
+      "current-streak": "Current Streak",
+      "max-streak": "Max Streak",
+      "perfect-games": "Perfect Games",
+      "update": {
+        "plus-one": "+1",
+        "new-best": "New Best"
+      }
+    },
+    "dev-mode": {
+      "title": "Developer Mode",
+      "print-objectives": "Print Objectives",
+      "advance-objectives": "Advance Objectives",
+      "toggle-streak-info": "Toggle Streak Info"
+    },
+    "overwrite-level": {
+      "title": "Overwrite active game?",
+      "warning": "You already have an active game. If you continue, it will be lost.",
+      "button": "Overwrite"
+    }
+  },
   "menu": {
     "choose-difficulty": "Choose Difficulty",
+    "difficulty": {
+      "normal": "Normal",
+      "hard": "Hard",
+      "extreme": "Extreme"
+    },
     "play": "Play",
     "resume": "Resume ongoing game"
   },
-  "difficulty": {
-    "normal": "Normal",
-    "hard": "Hard",
-    "extreme": "Extreme"
-  },
-  "win": {
-    "title1": "Excellent!",
-    "title2": "Brilliant!",
-    "title3": "Fantastic!",
-    "play-again": "Play Again"
-  },
-  "stats": {
-    "games-played": "Games played",
-    "current-streak": "Current Streak",
-    "max-streak": "Max Streak",
-    "perfect-games": "Perfect Games",
-    "update": {
-      "plus-one": "+1",
-      "new-best": "New Best"
-    }
-  },
-  "dev-mode": {
-    "title": "Developer Mode",
-    "print-objectives": "Print Objectives",
-    "advance-objectives": "Advance Objectives",
-    "toggle-streak-info": "Toggle Streak Info"
+  "about": {
+    "made-by": "Made by seiboldto",
+    "source-code": "Source Code on GitHub",
+    "version": "© 2024 · v{{version}} · {{date}}"
   },
   "settings": {
     "language": "Language",
@@ -49,15 +57,18 @@
     "theme-dark": "Dark",
     "hover-animations": "Hover Animations"
   },
-  "game": {
-    "share-level": "Share Level",
-    "restart": "Restart",
-    "undo": "Undo",
-    "selected-value": "Selected Value",
-    "selected-path-length": "{{length}} of up to {{max}} numbers selected",
-    "selected-path-error": "Invalid Selection",
-    "objectives": {
-      "title": "Objectives",
+  "level": {
+    "buttons": {
+      "restart": "Restart",
+      "undo": "Undo"
+    },
+    "selection": {
+      "selected-value": "Selected Value",
+      "path-length": "{{length}} of up to {{max}} numbers selected",
+      "invalid": "Invalid Selection"
+    },
+    "objective": {
+      "objectives": "Objectives",
       "pending": "Pending Objective",
       "completed": "Completed Objective",
       "active": "Active Objective",
@@ -66,13 +77,15 @@
       "index_ordinal_few": "{{count}}rd Objective",
       "index_ordinal_other": "{{count}}th Objective"
     },
-    "node-label": "Row {{row, zero-indicing}} / Column {{column, zero-indicing}}",
-    "edge-label": "{{operation}} between row {{n1.row, zero-indicing}} / column {{n1.column, zero-indicing}} and row {{n2.row, zero-indicing}} / column {{n2.column, zero-indicing}}",
-    "edge-descriptions": {
-      "used-by_ordinal_one": "Used by {{count}}st objective",
-      "used-by_ordinal_two": "Used by {{count}}nd objective",
-      "used-by_ordinal_few": "Used by {{count}}rd objective",
-      "used-by_ordinal_other": "Used by {{count}}th objective"
+    "nodes": {
+      "label": "Row {{row, zero-indicing}} / Column {{column, zero-indicing}}"
+    },
+    "edges": {
+      "label": "{{operation}} between row {{n1.row, zero-indicing}} / column {{n1.column, zero-indicing}} and row {{n2.row, zero-indicing}} / column {{n2.column, zero-indicing}}",
+      "used-by-hint_ordinal_one": "Hint: Used by {{count}}st objective",
+      "used-by-hint_ordinal_two": "Hint: Used by {{count}}nd objective",
+      "used-by-hint_ordinal_few": "Hint: Used by {{count}}rd objective",
+      "used-by-hint_ordinal_other": "Hint: Used by {{count}}th objective"
     },
     "operations": {
       "addition": "Addition",
@@ -87,34 +100,32 @@
       "3-release-path": "Release your mouse to advance to the next objective.",
       "4-solve-objectives": "Solve all remaining objectives. If you're stuck, you can always restart the level.",
       "5-perfect-game": "Try to get a perfect game by having numbers left over at the end. This may not always be possible."
+    },
+    "win-overlay": {
+      "title1": "Excellent!",
+      "title2": "Brilliant!",
+      "title3": "Fantastic!",
+      "play-again": "Play Again",
+      "used-hint-warning": "This level does not count towards the statistics as it was solved with a hint."
+    },
+    "hints": {
+      "title": "Get a Hint",
+      "statistics-warning": "This level will not count towards your statistics if solved with a hint.",
+      "button": "Get a hint for the active objective"
+    },
+    "share": {
+      "title": "Share Level",
+      "link": "Share via Link",
+      "social-media": "Share via Social Media",
+      "whatsapp": "WhatsApp",
+      "email": "E-Mail",
+      "copy-button": "Copy",
+      "copied-button": "Copied",
+      "load-errors": {
+        "title": "Unable to load level.",
+        "invalid-generator-version": "This level has been generated in an older version and is no longer compatible.",
+        "unknown": "The provided level appears to be malformed. Please double-check the URL."
+      }
     }
-  },
-  "hints": {
-    "title": "Get a Hint",
-    "warning": "This level will not count towards your statistics if solved with a hint.",
-    "no-stats": "This level does not count towards the statistics as it was solved with a hint.",
-    "button": "Get a hint for the active objective"
-  },
-  "share": {
-    "title": "Share Level",
-    "copy": "Copy",
-    "copied": "Copied",
-    "link": "Share via Link",
-    "social-media": "Share via Social Media",
-    "whatsapp": "WhatsApp",
-    "email": "E-Mail",
-    "error-title": "Unable to load level.",
-    "error-invalid-generator-version": "This level has been generated in an older version and is no longer compatible.",
-    "error-unknown": "The provided level appears to be malformed. Please double-check the URL."
-  },
-  "overwrite": {
-    "title": "Overwrite active game?",
-    "warning": "You already have an active game. If you continue, it will be lost.",
-    "button": "Overwrite"
-  },
-  "about": {
-    "made-by": "Made by seiboldto",
-    "source-code": "Source Code on GitHub",
-    "version": "© 2024 · v{{version}} · {{date}}"
   }
 }

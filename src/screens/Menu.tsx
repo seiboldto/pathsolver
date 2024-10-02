@@ -53,7 +53,7 @@ export function MenuScreen() {
 
   const difficulties = PRESET_DIFFICULTIES.map((d) => ({
     value: d,
-    label: t(`difficulty.${d}`),
+    label: t(`menu.difficulty.${d}`),
   }));
 
   const showResumeButton = persistedLevelDifficulty !== null;
@@ -80,9 +80,9 @@ export function MenuScreen() {
       <Divider />
       <Group>
         <Button icon={IconSettings} onClick={handleSettingsNavigation}>
-          {t("navigation.settings")}
+          {t("pages.settings")}
         </Button>
-        <Tooltip label={t("navigation.about")}>
+        <Tooltip label={t("pages.about")}>
           <Button square onClick={handleAboutNavigation}>
             <IconInfoSmall size={30} />
           </Button>

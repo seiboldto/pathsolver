@@ -73,10 +73,10 @@ export function ShareScreen({ encodedID }: ShareScreenProps) {
 
   return (
     <Screen>
-      <Title small>{t("share.error-title")}</Title>
-      <Text>{t(`share.error-${shareError}`)}</Text>
+      <Title small>{t("level.share.load-errors.title")}</Title>
+      <Text>{t(`level.share.load-errors.${shareError}`)}</Text>
       <Button onClick={handleMenuNavigation} icon={IconHome}>
-        {t("navigation.menu")}
+        {t("pages.menu")}
       </Button>
     </Screen>
   );

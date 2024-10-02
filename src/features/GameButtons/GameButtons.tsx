@@ -62,7 +62,7 @@ export function GameButtons(): JSX.Element {
   return (
     <div className={classes.gameButtons}>
       <Group>
-        <Tooltip label={t("navigation.menu")}>
+        <Tooltip label={t("pages.menu")}>
           <Button
             square
             disabled={disableMenuButton}
@@ -71,7 +71,7 @@ export function GameButtons(): JSX.Element {
             <IconHome />
           </Button>
         </Tooltip>
-        <Tooltip label={t("share.title")}>
+        <Tooltip label={t("level.share.title")}>
           <Button
             square
             disabled={disableMenuButton}
@@ -81,7 +81,7 @@ export function GameButtons(): JSX.Element {
           </Button>
         </Tooltip>
         {!hint && (
-          <Tooltip label={t("hints.title")}>
+          <Tooltip label={t("level.hints.title")}>
             <Button
               square
               disabled={disableMenuButton}
@@ -94,34 +94,34 @@ export function GameButtons(): JSX.Element {
       </Group>
 
       <Group>
-        <Tooltip label={t("game.restart")}>
+        <Tooltip label={t("level.buttons.restart")}>
           <Button square disabled={disableRightButtons} onClick={handleRestart}>
             <IconRefresh />
           </Button>
         </Tooltip>
-        <Tooltip label={t("game.undo")}>
+        <Tooltip label={t("level.buttons.undo")}>
           <Button square disabled={disableRightButtons} onClick={handleUndo}>
             <IconArrowBack />
           </Button>
         </Tooltip>
       </Group>
 
-      <Overlay visible={isShareOverlayOpen} title={t("share.title")}>
+      <Overlay visible={isShareOverlayOpen} title={t("level.share.title")}>
         <ShareLevel seed={seed} difficultyPreset={difficultyOptions.preset} />
         <Divider />
         <Button onClick={shareOverlayHandler.hide} icon={IconX}>
-          {t("navigation.close")}
+          {t("buttons.close")}
         </Button>
       </Overlay>
 
-      <Overlay visible={isHintsOverlayOpen} title={t("hints.title")}>
-        <Text>{t("hints.warning")}</Text>
+      <Overlay visible={isHintsOverlayOpen} title={t("level.hints.title")}>
+        <Text>{t("level.hints.statistics-warning")}</Text>
         <Button onClick={handleHint} icon={IconBulb}>
-          {t("hints.button")}
+          {t("level.hints.button")}
         </Button>
         <Divider />
         <Button onClick={hintsOverlayHander.hide} icon={IconX}>
-          {t("navigation.close")}
+          {t("buttons.close")}
         </Button>
       </Overlay>
     </div>

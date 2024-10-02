@@ -37,13 +37,13 @@ export function LevelCheats() {
 
   return (
     <>
-      <Tooltip label={t("dev-mode.print-objectives")}>
+      <Tooltip label={t("features.dev-mode.print-objectives")}>
         <Button square onClick={handlePrintObjectives}>
           <IconBulb />
         </Button>
       </Tooltip>
 
-      <Tooltip label={t("dev-mode.advance-objectives")}>
+      <Tooltip label={t("features.dev-mode.advance-objectives")}>
         <Button square onClick={handleAdvanceObjectives}>
           <IconFocus2 />
         </Button>

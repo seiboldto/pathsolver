@@ -23,7 +23,7 @@ export function DevMode() {
   return (
     <>
       <div className={classes.devBar}>
-        <Tooltip label={t("dev-mode.title")}>
+        <Tooltip label={t("features.dev-mode.title")}>
           <Button square onClick={toggleDeveloperMode}>
             <IconCode />
           </Button>
@@ -31,7 +31,7 @@ export function DevMode() {
         {isDeveloperMode && (
           <>
             {showLevelCheats && <LevelCheats />}
-            <Tooltip label={t("dev-mode.toggle-streak-info")}>
+            <Tooltip label={t("features.dev-mode.toggle-streak-info")}>
               <Button square onClick={streakInfoHandler.toggle}>
                 <IconCalendar />
               </Button>

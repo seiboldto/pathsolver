@@ -30,28 +30,28 @@ export function DifficultyStats({
   return (
     <div className={classes.difficultyStats}>
       <StatItem
-        label={t("stats.games-played")}
+        label={t("features.stats.games-played")}
         updateType="plus-one"
         showUpdate={showUpdate && updatedStats.gamesPlayed}
       >
         {difficultyStats.gamesPlayed}
       </StatItem>
       <StatItem
-        label={t("stats.current-streak")}
+        label={t("features.stats.current-streak")}
         updateType="plus-one"
         showUpdate={showUpdate && updatedStats.currentStreak}
       >
         {difficultyStats.currentStreak}
       </StatItem>
       <StatItem
-        label={t("stats.max-streak")}
+        label={t("features.stats.max-streak")}
         updateType="new-best"
         showUpdate={showUpdate && updatedStats.maxStreak}
       >
         {difficultyStats.maxStreak}
       </StatItem>
       <StatItem
-        label={t("stats.perfect-games")}
+        label={t("features.stats.perfect-games")}
         updateType="plus-one"
         showUpdate={showUpdate && updatedStats.perfectGames}
       >
@@ -85,7 +85,7 @@ function StatItem({
         {showUpdate && (
           <Wrap
             component={(c) => (
-              <Tooltip label={t("stats.update.new-best")}>{c}</Tooltip>
+              <Tooltip label={t("features.stats.update.new-best")}>{c}</Tooltip>
             )}
             when={updateType === "new-best"}
           >
@@ -94,7 +94,7 @@ function StatItem({
               data-shiny={updateType === "new-best"}
             >
               {updateType === "new-best" && <IconFlame size={16} />}
-              {updateType === "plus-one" && t("stats.update.plus-one")}
+              {updateType === "plus-one" && t("features.stats.update.plus-one")}
             </span>
           </Wrap>
         )}

@@ -15,10 +15,12 @@ export function OverwriteLevel({
 
   return (
     <>
-      <Title small>{t("overwrite.title")}</Title>
-      <Text>{t("overwrite.warning")}</Text>
-      <Button onClick={onOverwrite}>{t("overwrite.button")}</Button>
-      <Button onClick={onCancel}>{t("navigation.cancel")}</Button>
+      <Title small>{t("features.overwrite-level.title")}</Title>
+      <Text>{t("features.overwrite-level.warning")}</Text>
+      <Button onClick={onOverwrite}>
+        {t("features.overwrite-level.button")}
+      </Button>
+      <Button onClick={onCancel}>{t("buttons.cancel")}</Button>
     </>
   );
 }

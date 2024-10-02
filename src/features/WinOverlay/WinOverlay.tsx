@@ -27,14 +27,15 @@ export function WinOverlay(): JSX.Element | null {
     playRandomLevel(difficultyOptions.preset);
   };
 
-  const title = t(`win.title${titleNr}`);
-
   return (
-    <Overlay visible={gameState.hasWon} title={title}>
+    <Overlay
+      visible={gameState.hasWon}
+      title={t(`level.win-overlay.title${titleNr}`)}
+    >
       <ShareLevel seed={seed} difficultyPreset={difficultyOptions.preset} />
       <Divider />
       {hint ? (
-        <Text>{t("hints.no-stats")}</Text>
+        <Text>{t("level.win-overlay.used-hint-warning")}</Text>
       ) : (
         <DifficultyStats
           difficulty={difficultyOptions.preset}
@@ -44,9 +45,9 @@ export function WinOverlay(): JSX.Element | null {
       <Divider />
       <Group>
         <Button icon={IconPlayerPlay} onClick={handlePlayAgainClick}>
-          {t("win.play-again")}
+          {t("level.win-overlay.play-again")}
         </Button>
-        <Tooltip label={t("navigation.menu")}>
+        <Tooltip label={t("pages.menu")}>
           <Button square onClick={handleMenuNavigation}>
             <IconHome />
           </Button>

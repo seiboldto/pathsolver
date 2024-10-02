@@ -22,7 +22,7 @@ export function Tutorial(): JSX.Element | null {
   return (
     <div className={classes.tutorial} role="status">
       <IconInfoSquare className={classes.icon} />
-      {t(`game.tutorial.${tutorialState.step.id}`, tutorialState.step.i18n)}
+      {t(`level.tutorial.${tutorialState.step.id}`, tutorialState.step.i18n)}
     </div>
   );
 }
