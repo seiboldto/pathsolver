@@ -38,7 +38,8 @@ export function GameEdge({ edge }: GameEdgeProps): JSX.Element | null {
   const { getEdgeState, getEdgeNodeCoords } = useActiveLevel();
   const state = getEdgeState({ edge });
 
-  if (!edge.active) return null;
+  if (!edge.active && state !== "highlighted" && state !== "subtle-highlighted")
+    return null;
 
   const [n1, n2] = getEdgeNodeCoords({ edge });
 
@@ -56,7 +57,6 @@ export function GameEdge({ edge }: GameEdgeProps): JSX.Element | null {
       data-state={state}
     >
       <Icon size={18} />
-      {state === "highlighted" && <div className={classes.highlighter} />}
     </div>
   );
 }

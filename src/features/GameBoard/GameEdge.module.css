@@ -12,12 +12,16 @@
     color: var(--text-on-primary-color);
   }
 
+  &[data-state="subtle-highlighted"] {
+    border: 0.125rem solid var(--border-color);
+  }
+
   &[data-state="highlighted"] {
     background-color: var(--border-color);
   }
 
   &[data-orientation="horizontal"] {
-    width: calc(var(--node-size) + var(--node-gap));
+    width: var(--node-gap);
     height: var(--node-size);
     left: calc(
       var(--node-size) + var(--node-gap) / 2 + var(--column) *
@@ -30,7 +34,7 @@
 
   &[data-orientation="vertical"] {
     width: var(--node-size);
-    height: calc(var(--node-size) + var(--node-gap));
+    height: var(--node-gap);
 
     top: calc(
       var(--node-size) + var(--node-gap) / 2 + var(--row) *
