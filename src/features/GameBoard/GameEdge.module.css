@@ -19,7 +19,7 @@
   }
 
   &[data-orientation="horizontal"] {
-    width: var(--node-gap);
+    width: calc(var(--node-gap) + 2 * 0.125rem);
     height: var(--node-size);
     left: calc(
       var(--node-size) + var(--node-gap) / 2 + var(--column) *
@@ -37,7 +37,7 @@
 
   &[data-orientation="vertical"] {
     width: var(--node-size);
-    height: var(--node-gap);
+    height: calc(var(--node-gap) + 2 * 0.125rem);
 
     top: calc(
       var(--node-size) + var(--node-gap) / 2 + var(--row) *
