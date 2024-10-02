@@ -4,21 +4,28 @@
   justify-content: space-between;
 
   .value {
-    transform: scale(1.5);
-    animation: value var(--anim-duration) var(--anim-easing) forwards;
     user-select: none;
 
-    &[data-hidden="true"] {
-      visibility: hidden;
+    &[data-invalid="true"] {
+      animation: shake var(--anim-duration) var(--anim-easing);
     }
 
-    @keyframes value {
+    --shake-intensity: 0.25rem;
+    @keyframes shake {
       0% {
-        transform: scale(1.5);
+        transform: translateX(0);
+      }
+
+      33% {
+        transform: translateX(var(--shake-intensity));
+      }
+
+      66% {
+        transform: translateX(calc(var(--shake-intensity) * -1));
       }
 
       100% {
-        transform: scale(1);
+        transform: translateX(0);
       }
     }
   }

@@ -62,7 +62,10 @@
       "restart": "Restart",
       "undo": "Undo"
     },
-    "selected-value": "Selected Value",
+    "selection": {
+      "selected-value": "Selected Value",
+      "invalid": "Invalid Selection"
+    },
     "objective": {
       "objectives": "Objectives",
       "pending": "Pending Objective",

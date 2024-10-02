@@ -56,7 +56,10 @@
       "restart": "Neu starten",
       "undo": "Rückgängig machen"
     },
-    "selected-value": "Ausgewählter Wert",
+    "selection": {
+      "selected-value": "Ausgewählter Wert",
+      "invalid": "Ungültige Auswahl"
+    },
     "objective": {
       "objectives": "Ziele",
       "pending": "Ausstehendes Ziel",

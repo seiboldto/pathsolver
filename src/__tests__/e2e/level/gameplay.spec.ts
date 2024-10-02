@@ -88,26 +88,33 @@ test("shows selection information", async ({ levelPage, page }) => {
   const fourthNode = page.getByRole("button", { name: "Row 2 / Column 1" });
 
   const selectedValue = page.getByLabel("Selected Value");
+  const invalidSelection = "Invalid Selection";
 
   await expect(selectedValue).toHaveText("0");
+  await expect(selectedValue).not.toHaveAccessibleDescription(invalidSelection);
 
   await firstNode.hover();
   await mouse.down();
   await expect(selectedValue).toHaveText("6");
+  await expect(selectedValue).not.toHaveAccessibleDescription(invalidSelection);
 
   await mouse.up();
   await expect(selectedValue).toHaveText("0");
+  await expect(selectedValue).not.toHaveAccessibleDescription(invalidSelection);
 
   await firstNode.hover();
   await mouse.down();
   await secondNode.hover();
   await expect(selectedValue).toHaveText("10");
+  await expect(selectedValue).not.toHaveAccessibleDescription(invalidSelection);
 
   await fourthNode.hover();
   await expect(selectedValue).toHaveText("10");
+  await expect(selectedValue).toHaveAccessibleDescription(invalidSelection);
 
   await mouse.up();
   await expect(selectedValue).toHaveText("0");
+  await expect(selectedValue).not.toHaveAccessibleDescription(invalidSelection);
 });
 
 test.describe("supports touch devices", () => {

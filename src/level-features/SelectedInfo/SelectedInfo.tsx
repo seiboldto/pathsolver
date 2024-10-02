@@ -11,10 +11,13 @@ export function SelectedInfo(): JSX.Element {
   return (
     <div className={classes.selectedInfo}>
       <span
-        key={selectionState.value}
         className={classes.value}
-        aria-label={t("level.selected-value")}
         aria-live="polite"
+        aria-label={t("level.selection.selected-value")}
+        aria-description={
+          selectionState.isInvalid ? t("level.selection.invalid") : undefined
+        }
+        data-invalid={selectionState.isInvalid}
       >
         {selectionState.value ?? 0}
       </span>
