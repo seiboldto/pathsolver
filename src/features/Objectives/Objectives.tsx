@@ -42,7 +42,7 @@ export function Objectives(): JSX.Element {
               >
                 <span>{state === "completed" ? <IconCheck /> : o.value}</span>
                 {hint && hint.objectiveIndex === i && (
-                  <IconBulb className={classes.hintIndicator} size={18} />
+                  <IconBulb className={classes.hintIndicator} size={16} />
                 )}
               </div>
             </Tooltip>
