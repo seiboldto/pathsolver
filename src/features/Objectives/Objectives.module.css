@@ -34,11 +34,23 @@
       justify-content: center;
     }
 
+    .hintIndicator {
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 0.125rem);
+      pointer-events: none;
+      color: var(--text-color);
+    }
+
     &:first-child {
       border-left-width: 0.125rem;
 
       span {
         transform: translate(calc(-50% + 5px), -50%);
+      }
+
+      .hintIndicator {
+        transform: translateX(calc(-50% + 5px));
       }
     }
 
@@ -47,6 +59,10 @@
 
       span {
         transform: translate(calc(-50% - 5px), -50%);
+      }
+
+      .hintIndicator {
+        transform: translateX(calc(-50% - 5px));
       }
     }
   }

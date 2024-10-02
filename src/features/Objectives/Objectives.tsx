@@ -1,4 +1,4 @@
-import { IconCheck } from "@tabler/icons-react";
+import { IconBulb, IconCheck } from "@tabler/icons-react";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -9,7 +9,7 @@ import classes from "./Objectives.module.css";
 
 export function Objectives(): JSX.Element {
   const { t } = useTranslation();
-  const { objectivesState } = useActiveLevel();
+  const { objectivesState, hint } = useActiveLevel();
 
   return (
     <div
@@ -41,6 +41,9 @@ export function Objectives(): JSX.Element {
                 aria-description={t(`game.objectives.${state}`)}
               >
                 <span>{state === "completed" ? <IconCheck /> : o.value}</span>
+                {hint && hint.objectiveIndex === i && (
+                  <IconBulb className={classes.hintIndicator} size={18} />
+                )}
               </div>
             </Tooltip>
             {!isLastOne && (
