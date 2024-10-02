@@ -67,7 +67,13 @@
       "index_ordinal_other": "{{count}}th Objective"
     },
     "node-label": "Row {{row, zero-indicing}} / Column {{column, zero-indicing}}",
-    "edge-label": "Operation between row {{n1.row, zero-indicing}} / column {{n1.column, zero-indicing}} and row {{n2.row, zero-indicing}} / column {{n2.column, zero-indicing}}",
+    "edge-label": "{{operation}} between row {{n1.row, zero-indicing}} / column {{n1.column, zero-indicing}} and row {{n2.row, zero-indicing}} / column {{n2.column, zero-indicing}}",
+    "edge-descriptions": {
+      "used-by_ordinal_one": "Used by {{count}}st objective",
+      "used-by_ordinal_two": "Used by {{count}}nd objective",
+      "used-by_ordinal_few": "Used by {{count}}rd objective",
+      "used-by_ordinal_other": "Used by {{count}}th objective"
+    },
     "operations": {
       "addition": "Addition",
       "subtraction": "Subtraction",
