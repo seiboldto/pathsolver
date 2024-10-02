@@ -56,11 +56,7 @@
       "restart": "Neu starten",
       "undo": "Rückgängig machen"
     },
-    "selection": {
-      "selected-value": "Ausgewählter Wert",
-      "path-length": "{{length}} von maximal {{max}} Nummern ausgewählt",
-      "invalid": "Ungültige Auswahl"
-    },
+    "selected-value": "Ausgewählter Wert",
     "objective": {
       "objectives": "Ziele",
       "pending": "Ausstehendes Ziel",
@@ -72,8 +68,7 @@
       "label": "Reihe {{row, zero-indicing}} / Spalte {{column, zero-indicing}}"
     },
     "edges": {
-      "label": "{{operation}} zwischen Reihe {{n1.row, zero-indicing}} / Spalte {{n1.column, zero-indicing}} und Reihe {{n2.row, zero-indicing}} / Spalte {{n2.column, zero-indicing}}",
-      "used-by-hint_ordinal_other": "Hinweis: Von dem {{count}}. Ziel genutzt"
+      "label": "{{operation}} zwischen Reihe {{n1.row, zero-indicing}} / Spalte {{n1.column, zero-indicing}} und Reihe {{n2.row, zero-indicing}} / Spalte {{n2.column, zero-indicing}}"
     },
     "operations": {
       "addition": "Addition",
@@ -99,7 +94,9 @@
     "hints": {
       "title": "Hinweis erhalten",
       "statistics-warning": "Dieses Level wird nicht zu der Statistik zählen, wenn es mit einem Hinweis gelöst wird.",
-      "button": "Hinweis für das aktive Ziel erhalten"
+      "button": "Hinweis für das aktive Ziel erhalten",
+      "selection-length-hint": "Hinweis: {{length}} von {{max}} Nummenr ausgewählt",
+      "edge-hint_ordinal_other": "Hinweis: Von dem {{count}}. Ziel genutzt"
     },
     "share": {
       "title": "Level teilen",

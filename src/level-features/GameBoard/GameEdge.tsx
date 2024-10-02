@@ -45,7 +45,7 @@ export function GameEdge({ edge }: GameEdgeProps): JSX.Element | null {
 
   const description =
     hint && (state === "highlighted" || state === "subtle-highlighted")
-      ? t("level.edges.used-by-hint", {
+      ? t("level.hints.edge-hint", {
           count: hint.objectiveIndex + 1,
           ordinal: true,
         })

@@ -22,48 +22,4 @@
       }
     }
   }
-
-  .dots {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-xs);
-
-    .dot {
-      width: 0.5rem;
-      height: 0.5rem;
-      background-color: var(--border-color);
-      border-radius: 50%;
-
-      &[data-active="true"] {
-        background-color: var(--primary-color);
-      }
-    }
-
-    &[data-invalid="true"] {
-      animation: shake var(--anim-duration) var(--anim-easing);
-
-      .dot[data-active="true"] {
-        background-color: var(--error-color);
-      }
-    }
-
-    --shake-intensity: 0.25rem;
-    @keyframes shake {
-      0% {
-        transform: translateX(0);
-      }
-
-      33% {
-        transform: translateX(var(--shake-intensity));
-      }
-
-      66% {
-        transform: translateX(calc(var(--shake-intensity) * -1));
-      }
-
-      100% {
-        transform: translateX(0);
-      }
-    }
-  }
 }
