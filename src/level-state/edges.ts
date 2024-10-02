@@ -30,21 +30,21 @@ type EdgeState = "idle" | "selected" | "highlighted";
 type GetEdgeState = {
   edge: Edge;
   selectedEdges: Edge[];
-  activeObjectiveID?: string;
+  activeObjectiveIndex: number;
   hint: Hint | null;
 };
 
 export const getEdgeState = ({
   edge,
   selectedEdges,
-  activeObjectiveID,
+  activeObjectiveIndex,
   hint,
 }: GetEdgeState): EdgeState => {
   if (selectedEdges.includes(edge)) return "selected";
 
   if (
     hint &&
-    hint.objectiveID === activeObjectiveID &&
+    activeObjectiveIndex <= hint.objectiveIndex &&
     hint.highlightedEdgeID === edge.id
   )
     return "highlighted";

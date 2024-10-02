@@ -22,7 +22,7 @@ export const getHint = ({ objective, edges }: GetHint): Hint => {
   });
 
   return {
-    objectiveID: objective.id,
+    objectiveIndex: objective.index,
     pathLength,
     highlightedEdgeID: highlightedEdge.id,
   };

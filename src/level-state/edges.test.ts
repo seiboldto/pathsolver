@@ -41,7 +41,7 @@ describe("get edge state", () => {
       getEdgeState({
         edge,
         selectedEdges: [],
-        activeObjectiveID: "",
+        activeObjectiveIndex: 0,
         hint: null,
       })
     ).toEqual("idle");
@@ -52,7 +52,7 @@ describe("get edge state", () => {
       getEdgeState({
         edge,
         selectedEdges: [edge],
-        activeObjectiveID: "",
+        activeObjectiveIndex: 0,
         hint: null,
       })
     ).toEqual("selected");
@@ -63,10 +63,10 @@ describe("get edge state", () => {
       getEdgeState({
         edge,
         selectedEdges: [],
-        activeObjectiveID: "id",
+        activeObjectiveIndex: 0,
         hint: {
           highlightedEdgeID: "different",
-          objectiveID: "id",
+          objectiveIndex: 0,
           pathLength: 3,
         },
       })
@@ -78,10 +78,10 @@ describe("get edge state", () => {
       getEdgeState({
         edge,
         selectedEdges: [],
-        activeObjectiveID: "id",
+        activeObjectiveIndex: 1,
         hint: {
           highlightedEdgeID: "",
-          objectiveID: "different",
+          objectiveIndex: 0,
           pathLength: 3,
         },
       })
@@ -93,10 +93,10 @@ describe("get edge state", () => {
       getEdgeState({
         edge,
         selectedEdges: [],
-        activeObjectiveID: "id",
+        activeObjectiveIndex: 0,
         hint: {
           highlightedEdgeID: "",
-          objectiveID: "id",
+          objectiveIndex: 1,
           pathLength: 3,
         },
       })

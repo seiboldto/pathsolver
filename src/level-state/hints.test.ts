@@ -29,7 +29,7 @@ describe("get hint", () => {
 
       const hint = getHint({ objective, edges });
       expect(hint).toEqual({
-        objectiveID: "id",
+        objectiveIndex: 0,
         pathLength: 4,
         highlightedEdgeID,
       });
