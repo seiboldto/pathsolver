@@ -98,7 +98,7 @@
       "title": "Hinweis erhalten",
       "statistics-warning": "Dieses Level wird nicht zu der Statistik zählen, wenn es mit einem Hinweis gelöst wird.",
       "button": "Hinweis für das aktive Ziel erhalten",
-      "selection-length-hint": "Hinweis: {{length}} von {{max}} Nummenr ausgewählt",
+      "selection-length-hint": "Hinweis: {{length}} von {{max}} Nummern ausgewählt",
       "edge-hint_ordinal_other": "Hinweis: Von dem {{count}}. Ziel genutzt"
     },
     "share": {

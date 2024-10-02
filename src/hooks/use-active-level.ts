@@ -129,6 +129,7 @@ export const useActiveLevel = () => {
 
     boardSize,
     selectionState,
+    activeObjectiveIndex,
     objectivesState,
     gameState,
     tutorialState,

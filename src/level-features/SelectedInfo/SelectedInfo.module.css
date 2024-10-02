@@ -29,4 +29,21 @@
       }
     }
   }
+
+  .dots {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+
+    .dot {
+      width: 0.5rem;
+      height: 0.5rem;
+      background-color: var(--border-color);
+      border-radius: 50%;
+
+      &[data-active="true"] {
+        background-color: var(--primary-color);
+      }
+    }
+  }
 }
