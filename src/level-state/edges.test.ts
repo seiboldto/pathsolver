@@ -88,12 +88,27 @@ describe("get edge state", () => {
     ).toEqual("idle");
   });
 
-  it("is highlighted if the hint uses the edge", () => {
+  it("is subtle highlighted if the hint uses the edge and the active objective is infront", () => {
     expect(
       getEdgeState({
         edge,
         selectedEdges: [],
         activeObjectiveIndex: 0,
+        hint: {
+          highlightedEdgeID: "",
+          objectiveIndex: 1,
+          pathLength: 3,
+        },
+      })
+    ).toEqual("subtle-highlighted");
+  });
+
+  it("is highlighted if the hint uses the edge and the active objective matches", () => {
+    expect(
+      getEdgeState({
+        edge,
+        selectedEdges: [],
+        activeObjectiveIndex: 1,
         hint: {
           highlightedEdgeID: "",
           objectiveIndex: 1,
