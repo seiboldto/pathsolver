@@ -1,3 +1,5 @@
+@import "../../styles/mixins.css";
+
 .difficultyStats {
   .statItem {
     display: flex;
@@ -14,7 +16,6 @@
         padding: 0 var(--spacing-xs);
         height: calc(var(--ui-size) / 2);
         position: relative;
-        overflow: hidden;
         color: var(--text-color);
 
         svg {
@@ -23,28 +24,7 @@
 
         &[data-shiny="true"] {
           background-color: var(--primary-color);
-        }
-
-        &[data-shiny="true"]::before {
-          content: "";
-          position: absolute;
-          width: 2.5rem;
-          height: 0.5rem;
-          transform: rotate(135deg);
-          background-color: var(--primary-shine-color);
-          animation: shiny calc(var(--anim-duration) * 20) var(--anim-easing)
-            forwards infinite;
-        }
-
-        @keyframes shiny {
-          0%,
-          70% {
-            left: -100%;
-          }
-
-          100% {
-            left: 100%;
-          }
+          @mixin shinyAnimationHorizontal;
         }
       }
     }

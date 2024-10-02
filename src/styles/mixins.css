@@ -3,3 +3,54 @@
     @mixin-content;
   }
 }
+
+@define-mixin shinyAnimationBase {
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: calc(var(--ui-size) * 2);
+    height: 0.5rem;
+    transform: rotate(135deg);
+    background-color: var(--primary-shine-color);
+  }
+}
+
+@define-mixin shinyAnimationVertical {
+  @mixin shinyAnimationBase;
+
+  &::before {
+    animation: shinyVertical calc(var(--anim-duration) * 20) var(--anim-easing)
+      forwards infinite;
+  }
+
+  @keyframes shinyVertical {
+    0% {
+      top: -200%;
+    }
+
+    100% {
+      top: 300%;
+    }
+  }
+}
+
+@define-mixin shinyAnimationHorizontal {
+  @mixin shinyAnimationBase;
+
+  &::before {
+    animation: shinyHorizontal calc(var(--anim-duration) * 20)
+      var(--anim-easing) forwards infinite;
+  }
+
+  @keyframes shinyHorizontal {
+    0% {
+      left: -200%;
+    }
+
+    100% {
+      left: 300%;
+    }
+  }
+}

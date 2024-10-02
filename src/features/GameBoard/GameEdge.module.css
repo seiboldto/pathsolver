@@ -1,3 +1,5 @@
+@import "../../styles/mixins.css";
+
 .edge {
   position: absolute;
   display: flex;
@@ -16,10 +18,6 @@
     border: 0.125rem solid var(--border-color);
   }
 
-  &[data-state="highlighted"] {
-    background-color: var(--border-color);
-  }
-
   &[data-orientation="horizontal"] {
     width: var(--node-gap);
     height: var(--node-size);
@@ -30,6 +28,11 @@
     top: calc(
       var(--node-size) / 2 + var(--row) * (var(--node-gap) + var(--node-size))
     );
+
+    &[data-state="highlighted"] {
+      background-color: var(--border-color);
+      @mixin shinyAnimationHorizontal;
+    }
   }
 
   &[data-orientation="vertical"] {
@@ -44,5 +47,10 @@
       var(--node-size) / 2 + var(--column) *
         (var(--node-gap) + var(--node-size))
     );
+
+    &[data-state="highlighted"] {
+      background-color: var(--border-color);
+      @mixin shinyAnimationVertical;
+    }
   }
 }
