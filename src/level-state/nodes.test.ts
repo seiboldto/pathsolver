@@ -16,8 +16,6 @@ it("determines wheter nodes are adjacent", () => {
 });
 
 describe("can node be selected", () => {
-  const maxPathLength = 2;
-
   it("is ignored if the node is already selected", () => {
     const node = n(0, 0);
 
@@ -26,7 +24,6 @@ describe("can node be selected", () => {
         node,
         selectedNodes: [node],
         type: "click",
-        maxPathLength,
       })
     ).toEqual("ignore");
   });
@@ -37,20 +34,8 @@ describe("can node be selected", () => {
         node: n(0, 0),
         selectedNodes: [],
         type: "hover",
-        maxPathLength,
       })
     ).toEqual("ignore");
-  });
-
-  it("is not selectable if max path length is reached", () => {
-    expect(
-      canNodeBeSelected({
-        node: n(0, 0),
-        selectedNodes: [n(1, 1), n(1, 2)],
-        type: "hover",
-        maxPathLength,
-      })
-    ).toEqual("not-selectable");
   });
 
   it("is not selectable if there is already a selection elsewhere", () => {
@@ -59,7 +44,6 @@ describe("can node be selected", () => {
         node: n(1, 1),
         selectedNodes: [n(0, 0)],
         type: "click",
-        maxPathLength,
       })
     ).toEqual("not-selectable");
   });
@@ -70,7 +54,6 @@ describe("can node be selected", () => {
         node: n(1, 1),
         selectedNodes: [n(0, 0)],
         type: "hover",
-        maxPathLength,
       })
     ).toEqual("not-selectable");
   });
@@ -81,7 +64,6 @@ describe("can node be selected", () => {
         node: n(1, 1),
         selectedNodes: [],
         type: "click",
-        maxPathLength,
       })
     ).toEqual("selectable");
   });
@@ -92,7 +74,6 @@ describe("can node be selected", () => {
         node: n(0, 1),
         selectedNodes: [n(0, 0)],
         type: "hover",
-        maxPathLength,
       })
     ).toEqual("selectable");
   });

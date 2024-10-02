@@ -11,14 +11,12 @@ type CanNodeBeSelected = {
   selectedNodes: Node[];
   node: Node;
   type: "click" | "hover";
-  maxPathLength: number;
 };
 
 export const canNodeBeSelected = ({
   selectedNodes,
   node,
   type,
-  maxPathLength,
 }: CanNodeBeSelected): NodeSelectableState => {
   const lastNode = selectedNodes[selectedNodes.length - 1];
 
@@ -27,9 +25,6 @@ export const canNodeBeSelected = ({
 
   // Disallow selection on simple hover
   if (type === "hover" && !lastNode) return "ignore";
-
-  // Disallow selection if max path length is reached
-  if (selectedNodes.length === maxPathLength) return "not-selectable";
 
   // Disallow only single initial selection on mobile
   if (type === "click" && lastNode) return "not-selectable";

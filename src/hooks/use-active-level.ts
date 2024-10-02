@@ -29,7 +29,7 @@ export const useActiveLevel = () => {
     objectives,
     hint,
   } = activeLevelState;
-  const { boardSize, maxPathLength, preset } = difficultyOptions;
+  const { boardSize, preset } = difficultyOptions;
 
   // As these function are used in a window event listener, they need to be memoised.
   const applySelectedNodes = useCallback(() => {
@@ -77,7 +77,6 @@ export const useActiveLevel = () => {
 
   const canNodeBeSelected = createLevelFunc(levelHelpers.canNodeBeSelected, {
     selectedNodes: selection.nodes,
-    maxPathLength,
   });
 
   const applySelectedNode = createLevelFunc(levelAppliers.applySelectedNode, {
