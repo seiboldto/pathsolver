@@ -35,21 +35,13 @@ export function GameEdge({ edge }: GameEdgeProps): JSX.Element | null {
   const { t } = useTranslation();
 
   const Icon = OPERATION_ICONS[operation];
-  const { hint, getEdgeState, getEdgeNodeCoords } = useActiveLevel();
+  const { getEdgeState, getEdgeNodeCoords } = useActiveLevel();
   const state = getEdgeState({ edge });
 
   if (!edge.active && state !== "highlighted" && state !== "subtle-highlighted")
     return null;
 
   const [n1, n2] = getEdgeNodeCoords({ edge });
-
-  const description =
-    hint && (state === "highlighted" || state === "subtle-highlighted")
-      ? t("level.hints.edge-hint", {
-          count: hint.objectiveIndex + 1,
-          ordinal: true,
-        })
-      : undefined;
 
   return (
     <div
@@ -62,7 +54,6 @@ export function GameEdge({ edge }: GameEdgeProps): JSX.Element | null {
         n2,
         operation: t(`level.operations.${operation}`),
       })}
-      aria-description={description}
       data-state={state}
     >
       <Icon size={18} />

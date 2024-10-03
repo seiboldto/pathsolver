@@ -22,13 +22,7 @@ export function SelectedInfo(): JSX.Element {
         {selectionState.value ?? 0}
       </span>
       {hint && activeObjectiveIndex === hint.objectiveIndex && (
-        <div
-          className={classes.dots}
-          aria-label={t("level.hints.selection-length-hint", {
-            length: selectionState.length,
-            max: hint.pathLength,
-          })}
-        >
+        <div className={classes.dots}>
           {Array.from({ length: hint.pathLength }).map((_, i) => (
             <div
               key={i}

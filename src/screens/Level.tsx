@@ -5,6 +5,7 @@ import { useLevel, useNavigation } from "~src/hooks";
 import {
   GameBoard,
   GameButtons,
+  Hint,
   Objectives,
   SelectedInfo,
   Tutorial,
@@ -34,6 +35,7 @@ export function LevelScreen(): JSX.Element | null {
       <GameBoard />
       <SelectedInfo />
       <Tutorial />
+      <Hint />
       <WinOverlay />
     </Screen>
   );

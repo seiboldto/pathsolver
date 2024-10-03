@@ -107,11 +107,10 @@
       "title": "Get a Hint",
       "statistics-warning": "This level will not count towards your statistics if solved with a hint.",
       "button": "Get a hint for the active objective",
-      "selection-length-hint": "Hint: {{length}} of {{max}} numbers selected",
-      "edge-hint_ordinal_one": "Hint: Used by {{count}}st objective",
-      "edge-hint_ordinal_two": "Hint: Used by {{count}}nd objective",
-      "edge-hint_ordinal_few": "Hint: Used by {{count}}rd objective",
-      "edge-hint_ordinal_other": "Hint: Used by {{count}}th objective"
+      "hint_ordinal_one": "The {{count}}st objective uses {{length}} numbers and the highlighted operation.",
+      "hint_ordinal_two": "The {{count}}nd objective uses {{length}} numbers and the highlighted operation.",
+      "hint_ordinal_few": "The {{count}}rd objective uses {{length}} numbers and the highlighted operation.",
+      "hint_ordinal_other": "The {{count}}th objective uses {{length}} numbers and the highlighted operation."
     },
     "share": {
       "title": "Share Level",
