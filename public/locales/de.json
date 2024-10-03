@@ -80,8 +80,8 @@
       "division": "Division"
     },
     "tutorial": {
-      "0-start-path": "Klicke und halte eine Nummer im Gitter, um einen Pfad zu starten.",
-      "1-extend-path": "Gehe zu einer angrenzenden Nummer, um sie dem Pfad hinzuzufügen.",
+      "0-start-path": "Klicke und halte eine Zahl im Gitter, um einen Pfad zu starten.",
+      "1-extend-path": "Gehe zu einer angrenzenden Zahl, um sie dem Pfad hinzuzufügen.",
       "2-find-objective": "Finde einen Pfad, der {{value}} ergibt. Möglicherweise gibt es mehrere Lösungen.",
       "3-release-path": "Lasse die Maus los, um zum nächsten Ziel fortzuschreiten.",
       "4-solve-objectives": "Löse alle restlichen Ziele. Wenn du nicht weiterweißt, kannst du das Level neustarten.",
@@ -98,7 +98,7 @@
       "title": "Hinweis erhalten",
       "statistics-warning": "Dieses Level wird nicht zu der Statistik zählen, wenn es mit einem Hinweis gelöst wird.",
       "button": "Hinweis für das aktive Ziel erhalten",
-      "hint_ordinal_other": "Das {{count}}. Ziel nutzt {{length}} Nummern und die markierte Operation."
+      "hint_ordinal_other": "Das {{count}}. Ziel nutzt {{length}} Zahlen und die markierte Operation."
     },
     "share": {
       "title": "Level teilen",
