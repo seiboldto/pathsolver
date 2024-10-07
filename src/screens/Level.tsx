@@ -3,12 +3,11 @@ import { Redirect } from "wouter";
 import { Screen } from "~src/components";
 import { useLevel, useNavigation } from "~src/hooks";
 import {
+  Alerts,
   GameBoard,
   GameButtons,
-  Hint,
   Objectives,
   SelectedInfo,
-  Tutorial,
   WinOverlay,
 } from "~src/level-features";
 import { useLevelStore } from "~src/stores";
@@ -34,8 +33,7 @@ export function LevelScreen(): JSX.Element | null {
       <Objectives />
       <GameBoard />
       <SelectedInfo />
-      <Tutorial />
-      <Hint />
+      <Alerts />
       <WinOverlay />
     </Screen>
   );
