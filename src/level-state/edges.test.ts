@@ -88,7 +88,7 @@ describe("get edge state", () => {
     ).toEqual("idle");
   });
 
-  it("is subtle highlighted if the hint uses the edge and the active objective is infront", () => {
+  it("is highlighted if the hint uses the edge and the active objective is infront", () => {
     expect(
       getEdgeState({
         edge,
@@ -100,7 +100,7 @@ describe("get edge state", () => {
           pathLength: 3,
         },
       })
-    ).toEqual("subtle-highlighted");
+    ).toEqual("highlighted");
   });
 
   it("is highlighted if the hint uses the edge and the active objective matches", () => {

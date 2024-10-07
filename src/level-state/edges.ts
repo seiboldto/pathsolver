@@ -25,7 +25,7 @@ export const getEdgeBetweenCoords = ({
   return edge;
 };
 
-type EdgeState = "idle" | "selected" | "subtle-highlighted" | "highlighted";
+type EdgeState = "idle" | "selected" | "highlighted";
 
 type GetEdgeState = {
   edge: Edge;
@@ -42,9 +42,12 @@ export const getEdgeState = ({
 }: GetEdgeState): EdgeState => {
   if (selectedEdges.includes(edge)) return "selected";
 
-  if (hint && hint.highlightedEdgeID === edge.id)
-    if (activeObjectiveIndex < hint.objectiveIndex) return "subtle-highlighted";
-    else if (activeObjectiveIndex === hint.objectiveIndex) return "highlighted";
+  if (
+    hint &&
+    hint.highlightedEdgeID === edge.id &&
+    activeObjectiveIndex <= hint.objectiveIndex
+  )
+    return "highlighted";
 
   return "idle";
 };

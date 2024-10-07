@@ -38,8 +38,7 @@ export function GameEdge({ edge }: GameEdgeProps): JSX.Element | null {
   const { getEdgeState, getEdgeNodeCoords } = useActiveLevel();
   const state = getEdgeState({ edge });
 
-  if (!edge.active && state !== "highlighted" && state !== "subtle-highlighted")
-    return null;
+  if (!edge.active && state !== "highlighted") return null;
 
   const [n1, n2] = getEdgeNodeCoords({ edge });
 
