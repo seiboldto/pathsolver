@@ -25,3 +25,8 @@
 ## v1.0.4 - 2024-09-28
 
 - Reworked the streak system: To keep up a streak, it is now necessary to play a game each day. When this game is played does not matter anymore - it is now possible to get a streak of two by playing at 23:59 and then at 00:01 the following day even though these are only two minutes apart.
+
+## v1.1.0 - 2024-10-07
+
+- Added hints which reveal one operation used in active objective and its length. Levels where a hint was used will not count towards the statistics.
+- Removed the maximum selection length.
