@@ -1,8 +1,8 @@
 import { type LevelFixture } from ".";
-import normalLevel from "./normal-level.json" assert { type: "json" };
+import { NORMAL_LEVEL } from "./normal-level.ts";
 
 export const NORMAL_GAME = {
-  LEVEL: JSON.stringify(normalLevel),
+  LEVEL: JSON.stringify(NORMAL_LEVEL),
   OBJECTIVES: [12, 5, -5],
   NODES: [
     [6, 4, 1, 6, 8, 4, 3, 4, 6],

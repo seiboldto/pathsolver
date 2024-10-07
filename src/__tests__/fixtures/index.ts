@@ -1,3 +1,4 @@
+export { HINT_GAME } from "./hint-game.ts";
 export { NORMAL_GAME } from "./normal-game.ts";
 
 export type LevelFixture = {
