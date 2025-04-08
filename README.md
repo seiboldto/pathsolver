@@ -10,7 +10,7 @@ Find ways to compute a number in this open-source mathematical puzzle game.
 ## Contributing
 
 If you want to contribute, feel free to fork the repository and submit a PR.
-Please create an issue first for larger contributions to propose and discuss the changes.
+Please create an issue for larger contributions to propose and discuss the changes.
 Translations are always welcome.
 
 ## Local Setup
