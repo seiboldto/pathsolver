@@ -42,7 +42,7 @@
   "about": {
     "made-by": "Erstellt von seiboldto",
     "source-code": "Quellcode auf GitHub",
-    "version": "© 2024 · v{{version}} · {{date}}"
+    "version": "© {{year}} · v{{version}} · {{date}}"
   },
   "settings": {
     "language": "Sprache",

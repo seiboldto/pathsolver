@@ -30,3 +30,7 @@
 
 - Added hints which reveal one operation used in active objective and its length. Levels where a hint was used will not count towards the statistics.
 - Removed the maximum selection length.
+
+## v1.1.1 - 2025-06-09
+
+- Fixed the copyright year being hardcoded.

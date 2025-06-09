@@ -1,4 +1,5 @@
 import { IconArrowLeft, IconBrandGithub } from "@tabler/icons-react";
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Anchor, Button, Screen, Text, Title } from "~src/components";
@@ -16,6 +17,8 @@ export function AboutScreen(): JSX.Element {
 
   const { handleMenuNavigation } = useNavigation();
 
+  const YEAR = useMemo(() => new Date().toISOString().slice(0, 4), [])
+
   return (
     <Screen>
       <Title>{t("pages.about")}</Title>
@@ -25,6 +28,7 @@ export function AboutScreen(): JSX.Element {
       </Anchor>
       <Text dimmed>
         {t("about.version", {
+          year: YEAR,
           version: VERSIONS.APP_VERSION,
           date: BUILT_AT,
         })}

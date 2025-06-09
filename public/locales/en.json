@@ -48,7 +48,7 @@
   "about": {
     "made-by": "Made by seiboldto",
     "source-code": "Source Code on GitHub",
-    "version": "© 2024 · v{{version}} · {{date}}"
+    "version": "© {{year}} · v{{version}} · {{date}}"
   },
   "settings": {
     "language": "Language",
