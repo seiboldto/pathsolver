@@ -17,8 +17,8 @@ Translations are always welcome.
 
 1. Install Node v20.10.0 (or higher).
 2. Fork the repository and clone your fork.
-3. Install dependencies with `npm run install`.
-4. Start the project wiht `npm run dev`.
+3. Install dependencies with `npm install`.
+4. Start the project with `npm run dev`.
 5. Run unit tests: `npm run test:unit` or `npm run test:unit:ui` for a UI.
 6. Run end-to-end tests: `npm run test:e2e` or `npm run test:e2e:ui` for a UI.
 
