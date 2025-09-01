@@ -15,8 +15,8 @@
   "features": {
     "stats": {
       "games-played": "Gespielte Spiele",
-      "current-streak": "Aktuelle Siegesfolge",
-      "max-streak": "Länge Siegesfolge",
+      "current-streak": "Aktuelle Tagesfolge",
+      "max-streak": "Längste Tagesfolge",
       "perfect-games": "Perfekte Spiele",
       "update": {
         "plus-one": "+1",
